@@ -1,0 +1,13 @@
+{
+  "devDependencies": {
+    "@types/core-js": "^0.9.35",
+    "ts-loader": "^1.3.3",
+    "ts-node": "^2.1.0",
+    "typescript": "^2.1.5",
+    "webpack": "^1.14.0"
+  },
+  "scripts": {
+    "build": "webpack",
+    "test": "ts-node dev/tests/test"
+  }
+}
