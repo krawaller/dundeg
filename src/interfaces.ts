@@ -1,3 +1,4 @@
+import { World } from './world'
 
 export type skillId = 'foekiller' | 'something';
 
@@ -22,6 +23,13 @@ export interface StartingHero {
   stats: Stats
 }
 
+export interface MonsterDefinition {
+  name: string
+  stats: any
+  traits: any
+  targets: string
+}
+
 export interface Hero {
   id: string,
   name: string,
@@ -39,11 +47,14 @@ export interface Hero {
 
 export type hookId = 'calculate_stat' | 'something_else'
 
-export type entityType = 'item' | 'state' | 'skill'
+export type entityType = string; // 'item' | 'state' | 'skill' | 'hero' | 'monster'
 
 export interface Entity {
-  id: string,
-  type: entityType,
+  id?: string
+  type: entityType
+  name: string
+  props?: Object
+  state?: Object
   hooks: {
     [p: string]: promiseMaker
   }
@@ -53,4 +64,4 @@ export interface EntityCollection {
   [key: string]: Entity
 }
 
-export type promiseMaker = (hook: hookId) => Promise<any> | undefined
+export type promiseMaker = (e: any, w: World) => any

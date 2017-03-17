@@ -24,3 +24,7 @@ queryer function
 
 
 
+
+
+test(id, stat, success, fail)
+  
