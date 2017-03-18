@@ -52,12 +52,12 @@ export class World {
     if (this.pending){
       throw new Error("Already a pending question!");
     }
-    return new Promise((resolve,reject)=>{
+    return new Promise((resolve)=>{
       this.pending = {
         options: opts,
         reply: (optName)=>{
           delete this.pending;
-          opts[optName](this).then(result=>{
+          Promise.resolve(opts[optName](this)).then(result=>{
             resolve([optName, result]);
           });
         }
@@ -73,17 +73,22 @@ export class World {
     this.pending.reply(optName);
   }
   sendEvent(name, event):Promise<any> {
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve)=>{
       let promises = Object.keys(this.hooks[name] || {}).map(id=>{
-        return Promise.resolve(this.hooks[name][id](event, this));
+        let res = this.hooks[name][id](event, this);
+        return res && res.then ? res : Promise.resolve(res);
       });
+      if (event.debug){
+        console.log("Debug event prior to promiseAll thing", promises)
+      }
       Promise.all(promises).then(inputArr => {
+        if (event.debug){
+          console.log("Debug event all promises resolved, here's what we have", inputArr)
+        }
         inputArr = inputArr.filter(i=>i !== undefined).sort((a1,a2) => {
           return a1.prio === undefined || a1.prio < a2.prio ? -1 : 1;
         });
         switch(event.type){
-          case 'collect':
-            return resolve( inputArr );
           case 'build':
             inputArr.push(last => ({operation: 'final', value: last.value}));
             let final = inputArr.reduce( (mem,mutator,idx)=> {
@@ -94,8 +99,9 @@ export class World {
               newCalc.history = history.concat(mem);
               return newCalc;
             }, {value: event.start || 0, history: [], operation: 'start'});
+            final.event = event;
             return resolve( final );
-          default: throw 'Unknown event type: '+event.type
+          default: return resolve( inputArr );
         }
       });
     });

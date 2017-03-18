@@ -18,8 +18,8 @@ export interface Stats {
 export interface StartingHero {
   id: string,
   name: string,
-  startingSkills: skillId[],
-  startingItems: itemId[],
+  startingSkills: string[],
+  startingItems: string[],
   stats: Stats
 }
 

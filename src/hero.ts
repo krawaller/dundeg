@@ -17,6 +17,21 @@ export const bloodbrawl:StartingHero = {
   }
 };
 
+export const hinterlander:StartingHero = {
+  id: 'hinterlander',
+  name: 'HinterLander',
+  startingItems: ['huntingbow','trailration'],
+  startingSkills: ['fieldcraft'],
+  stats: {
+    AGI: 8,
+    CON: 8,
+    MAG: 7,
+    MRL: 6,
+    PER: 9,
+    STR: 7
+  }
+}
+
 export class Hero implements Entity {
   props: any = {}
   state: any = {}
@@ -31,6 +46,16 @@ export class Hero implements Entity {
     calculate_hero_stat(e) {
       if (e.hero === this){
         return add(this.props.stats[e.stat], this.name);
+      }
+    },
+    get_hero_battle_stance(e, w) {
+      if (e.hero === this){
+        return w.askUser("Select battle stance for "+this.name,{
+          attack: (w)=> 'attack',
+          defend: (w)=> 'defend'
+        }).then(([opt,res])=>{
+          return e.hero.state.stance = opt;
+        });
       }
     }
   }
