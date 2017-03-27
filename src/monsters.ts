@@ -48,6 +48,7 @@ export const backAlleyBruiser: MonsterDefinition = {
 };
 
 export class Monster implements Entity {
+  id: any
   props: any
   type = 'monster'
   name: string
@@ -66,7 +67,7 @@ export class Monster implements Entity {
         return add(this.props[e.stat], this.name);
       }
     },
-    get_monster_target(e,world){
+    assign_monster_target(e,world){
       let lookForProp = this.props.targets.substr(0,3); // TODO - move
       let lookForHighest = this.props.targets[3] === '+';
       if (e.monster === this){

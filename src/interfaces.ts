@@ -55,6 +55,7 @@ export interface Entity {
   name: string
   props?: Object
   state?: Object
+  world?: World
   hooks: {
     [p: string]: promiseMaker
   }

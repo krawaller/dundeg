@@ -22,7 +22,7 @@ test("The Skinning Knife", t=> {
     using: knife,
     hero: hero
   }).then(result => {
-    t.equal(result.value, slitherFish.stats.ARM - 1);
+    t.equal(result.value, slitherFish.stats.ARM - 1, 'skinning knife ignores 1 armour versus filth');
     t.end();
   });
 });

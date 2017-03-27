@@ -1,6 +1,10 @@
 import { StartingHero, Entity } from './interfaces';
 
-import { add } from './utils';
+import { Monster } from './monsters';
+
+import { World } from './world'
+
+import { add, concat } from './utils';
 
 export const bloodbrawl:StartingHero = {
   id: 'bloodbrawl',
@@ -56,6 +60,48 @@ export class Hero implements Entity {
         }).then(([opt,res])=>{
           return e.hero.state.stance = opt;
         });
+      }
+    },
+    assign_hero_target(e, w){
+      if (e.hero === this){
+        return new Promise(resolve => {
+          let available = w.sendEvent('find_available_targets_for_hero',{
+            type: 'build',
+            start: [],
+            hero: this
+          }).then( res => {
+            let opts = res.value;
+            if (opts.length === 1){
+              resolve(opts[0]);
+            } else if (opts.length > 1){
+              let monsterOpts = opts.reduce((opts,hero)=>{
+                opts[hero.id] = (w)=> hero;
+                return opts;
+              },{});
+              w.askUser("Who shall "+this.name+" target?", monsterOpts).then(([opt,res])=> {
+                resolve(res);
+              });
+            } else {
+              // TODO - also cover case when length is 0!
+              throw new Error("Not yet implemented");
+            }
+          });
+        });
+      }
+    },
+    find_available_targets_for_hero(e, w){ // TODO - filter out monsters that are knocked out?
+      if (e.hero === this){
+        let monsters = w.getAllEntities().reduce((mem,entity)=>{
+          if (entity.type === 'monster'){
+            mem[entity.state.target === this ? 'targettingMe' : 'others'].push(entity);
+          }
+          return mem;
+        }, {targettingMe: [], others: []} );
+        if (monsters.targettingMe.length){
+          return concat(monsters.targettingMe, 'can only attack targetting monsters');
+        } else {
+          return concat(monsters.others, 'can attack all monsters since no one targetting hero');
+        }
       }
     }
   }

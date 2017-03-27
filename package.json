@@ -13,6 +13,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "test": "ts-node node_modules/tape/bin/tape dev/tests/**/*.ts | node_modules/.bin/tap-spec"
+    "test_old": "ts-node node_modules/tape/bin/tape dev/tests/**/*.ts | node_modules/.bin/tap-spec",
+    "test": "ts-node node_modules/tape/bin/tape take2/tests/**/*.ts | node_modules/.bin/tap-spec"
   }
 }

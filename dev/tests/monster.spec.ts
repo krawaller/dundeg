@@ -28,6 +28,21 @@ test("monster returns base stat when asked for", t => {
   });
 });
 
+/*
+test("Monster correctly says target hero needs defending", t=> {
+  let world = new World();
+  let brawlerHero = new Hero(bloodbrawl);
+  let landerHero = new Hero(hinterlander);
+  let bruiserMonster = new Monster(backAlleyBruiser);
+  world.addEntity(brawlerHero);
+  world.addEntity(landerHero);
+  world.addEntity(bruiserMonster);
+  bruiserMonster.state.target = brawlerHero;
+  world.sendEvent('query_hero_dice_needs', t=> {
+
+  });
+});
+*/
 
 test("Monster picks correct target", t=> {
   let world = new World();
@@ -40,21 +55,21 @@ test("Monster picks correct target", t=> {
   world.addEntity(bruiserMonster);
   world.addEntity(maaMonster);
   t.plan(4);
-  world.sendEvent('get_monster_target',{
+  world.sendEvent('assign_monster_target',{
     monster: bruiserMonster,
     chooseFrom: [brawlerHero, landerHero]
   }).then(([result]) => {
     t.equal(bruiserMonster.state.target, landerHero, 'bruiser is now targeting the Lander');
     t.equal(result, landerHero, 'Lander was also bubbled as result');
   });
-  world.sendEvent('get_monster_target',{
+  world.sendEvent('assign_monster_target',{
     monster: maaMonster,
     chooseFrom: [brawlerHero, landerHero]
   }).then(([result]) => {
-    t.equal(maaMonster.state.target, brawlerHero, 'bruiser is now targeting the Brawler');
-    t.equal(result, brawlerHero, 'Lander was also bubbled as result');
+    t.equal(maaMonster.state.target, brawlerHero, 'manatarms is now targeting the Brawler');
+    t.equal(result, brawlerHero, 'brawler was also bubbled as result');
   });
   setTimeout(()=> {
-    world.answer(brawlerHero.id)
+    world.answer(brawlerHero.id);
   }, 10);
 });

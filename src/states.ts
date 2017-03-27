@@ -6,7 +6,7 @@ export class Dazed implements Entity {
   name = 'dazed'
   hooks = {
     calculate_monster_stat(e){
-      if (e.monster.id === this.attachedTo){
+      if (e.monster.id === this.attachedTo && e.stat === 'ATK'){
         return divide(2, 'dazed', true);
       }
     },

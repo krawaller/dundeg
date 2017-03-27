@@ -14,6 +14,7 @@ export class World {
       this.hooks[hook][newId] = entity.hooks[hook].bind(entity);
     });
     entity.id = newId;
+    entity.world = this;
     if (targetEntity){
       this.connectEntity(entity, targetEntity);
     }

@@ -20,19 +20,26 @@ test("Dazed state", t => {
     monster: fish
   }).then(result => {
     t.equal(result.value, Math.floor(slitherFish.stats.ATK/2), 'dazed halves attack rounding down');
-  }).then(()=> {
-    world.sendEvent('battle_round_end',{
-      type: 'collect',
-      battleId: 'WRONGBATTLE'
-    }).then(()=>{
-      t.ok(world.exists(dazed), 'Dazed isnt removed by roundend in other battle');
-    }).then(()=>{
+    world.sendEvent('calculate_monster_stat', {
+      type: 'build',
+      stat: 'ARM',
+      monster: fish
+    }).then(result => {
+      t.equal(result.value, Math.floor(slitherFish.stats.ARM), 'dazed doesnt affect non-ATK stat');
+    }).then(()=> {
       world.sendEvent('battle_round_end',{
         type: 'collect',
-        battleId: 'THISBATTLE'
+        battleId: 'WRONGBATTLE'
       }).then(()=>{
-        t.ok(!world.exists(dazed), 'Dazed was removed by round end');
-        t.end();
+        t.ok(world.exists(dazed), 'Dazed isnt removed by roundend in other battle');
+      }).then(()=>{
+        world.sendEvent('battle_round_end',{
+          type: 'collect',
+          battleId: 'THISBATTLE'
+        }).then(()=>{
+          t.ok(!world.exists(dazed), 'Dazed was removed by round end');
+          t.end();
+        });
       });
     });
   });
