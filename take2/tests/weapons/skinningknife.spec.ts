@@ -1,10 +1,8 @@
 import * as test from "tape";
 
 import { BattleState } from '../../src/interfaces';
-
 import { monsters } from '../../src/monsters';
-
-import { calc } from '../../src/modes';
+import { calc } from '../../src/calculate';
 
 test('skinning knife', t => {
   const battle: BattleState = {
@@ -24,13 +22,13 @@ test('skinning knife', t => {
 
   t.plan(3);
 
-  const armourForNonFilth = calc.calc_monster_armour(battle, {id: 'nonfilth', using: 'skinningKnife'});
+  const armourForNonFilth = calc.calc_monster_armour(battle, {monsterId: 'nonfilth', using: 'skinningKnife'});
   t.equal(armourForNonFilth.value, monsters[battle.monsters.nonfilth.blueprint].stats.ARM, 'just normal base value');
 
-  const armourForFilth = calc.calc_monster_armour(battle, {id: 'filth', using: 'skinningKnife'});
+  const armourForFilth = calc.calc_monster_armour(battle, {monsterId: 'filth', using: 'skinningKnife'});
   t.equal(armourForFilth.value, monsters[battle.monsters.filth.blueprint].stats.ARM - 1, 'deducts 1 ARM versus filth');
 
-  const attacks = calc.calc_hero_attack_options(battle, {id: 'wielder'});
+  const attacks = calc.calc_hero_attack_options(battle, {heroId: 'wielder'});
   t.deepEqual(attacks.skinningKnife, {
     using: 'skinningKnife',
     type: 'meelee',

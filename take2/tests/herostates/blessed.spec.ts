@@ -1,11 +1,8 @@
 import * as test from "tape";
 
 import { BattleState } from '../../src/interfaces';
-
-import { monsters } from '../../src/monsters';
 import { heroes } from '../../src/heroes';
-
-import { calc } from '../../src/modes';
+import { calc } from '../../src/calculate';
 
 test('blessed heroes', t => {
   const battle: BattleState = {
@@ -22,7 +19,7 @@ test('blessed heroes', t => {
 
   t.plan(1);
 
-  const res1 = calc.calc_hero_stat(battle, {id: 'id1', stat: 'MRL'});
+  const res1 = calc.calc_hero_stat(battle, {heroId: 'id1', stat: 'MRL'});
   t.deepEqual(res1.value, heroes[battle.heroes.id1.blueprint].stats.MRL + 1, 'blessed means 1 extra MRL');
 
 });

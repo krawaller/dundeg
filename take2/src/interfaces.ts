@@ -12,6 +12,7 @@ export interface MonsterDefinition {
     [idx:string]: true
   }
   targets: string
+  value: number
 }
 
 export interface HeroStats {
@@ -43,26 +44,38 @@ export interface BattleState {
 }
 
 export interface HeroVars {
-  stance?: 'assault' | 'defence'
+  stance?: 'assault' | 'defence',
+  ATK?: number,
+  POW?: number,
+  attackDice?: number[],
+  defenceDice?: number[],
+  failedDefence?: true,
+  usePowForDefence?: true
 }
 
 export interface HeroState {
-  blueprint: HeroBase
-  vars: HeroVars
-  states: {
+  blueprint?: HeroBase
+  vars?: HeroVars
+  states?: {
     [idx: string]: true
   }
-  items: {
+  items?: {
+    [idx: string]: true
+  }
+  skills?: {
     [idx: string]: true
   }
 }
 
 export interface MonsterState {
-  blueprint: MonsterBase
-  vars: {
+  blueprint?: MonsterBase
+  vars?: {
     [idx: string]: number | string
   }
-  states: {
+  states?: {
+    [idx: string]: true
+  }
+  skills?: {
     [idx: string]: true
   }
 }

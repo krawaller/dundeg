@@ -1,10 +1,7 @@
 import * as test from "tape";
 
 import { BattleState } from '../../src/interfaces';
-
-import { heroes } from '../../src/heroes';
-
-import { calc } from '../../src/modes';
+import { calc } from '../../src/calculate';
 
 test('spiked gauntlets', t => {
   const battle: BattleState = {
@@ -27,14 +24,14 @@ test('spiked gauntlets', t => {
 
   t.plan(2);
 
-  const res1 = calc.calc_hero_attack_options(battle, {id: 'assaulter'});
+  const res1 = calc.calc_hero_attack_options(battle, {heroId: 'assaulter'});
   t.deepEqual(res1.spikedGauntlet, {
     using: 'spikedGauntlet',
     type: 'meelee',
     stat: 'STR'
   }, 'STR attack in assault mode');
 
-  const res2 = calc.calc_hero_attack_options(battle, {id: 'defender'});
+  const res2 = calc.calc_hero_attack_options(battle, {heroId: 'defender'});
   t.deepEqual(res2.spikedGauntlet, {
     using: 'spikedGauntlet',
     type: 'meelee',

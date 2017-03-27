@@ -12,7 +12,8 @@ export const monsters: MonsterBook = {
       ARM: 0,
       HP: 4
     },
-    targets: 'STR-'
+    targets: 'STR-',
+    value: 1
   },
   manAtArms: {
     name: 'Man-At-Arms',
@@ -22,7 +23,8 @@ export const monsters: MonsterBook = {
       ARM: 2,
       HP: 4
     },
-    targets: 'AGI+'
+    targets: 'AGI+',
+    value: 1
   },
   slitherFish: {
     name: 'Slither Fish',
@@ -32,7 +34,8 @@ export const monsters: MonsterBook = {
       ARM: 2,
       HP: 3
     },
-    targets: 'CON+'
+    targets: 'CON+',
+    value: 1
   },
   swampTroll: {
     name: 'Swamp Troll',
@@ -42,6 +45,18 @@ export const monsters: MonsterBook = {
       ARM: 0,
       HP: 12
     },
-    targets: 'STR+'
+    targets: 'STR+',
+    value: 2
+  },
+  shambler: {
+    name: 'Shambler',
+    traits: {filth: true},
+    stats: {
+      ATK: 6,
+      ARM: 0,
+      HP: 12
+    },
+    targets: 'PER+',
+    value: 3
   }
 }

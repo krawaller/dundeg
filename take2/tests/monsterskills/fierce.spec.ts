@@ -1,10 +1,8 @@
 import * as test from "tape";
 
 import { BattleState } from '../../src/interfaces';
-
 import { monsters } from '../../src/monsters';
-
-import { calc } from '../../src/modes';
+import { calc } from '../../src/calculate';
 
 test('monster fierce state', t => {
   const battle: BattleState = {
@@ -33,10 +31,10 @@ test('monster fierce state', t => {
 
   t.plan(2);
 
-  const vsAssaulter = calc.calc_monster_attack(battle, {id: 'fierce', heroId: 'assaulter'});
+  const vsAssaulter = calc.calc_monster_attack(battle, {monsterId: 'fierce', heroId: 'assaulter'});
   t.equal(vsAssaulter.value, monsters[battle.monsters.fierce.blueprint].stats.ATK, 'Fierce makes no difference versus assaulting hero');
 
-  const vsDefender = calc.calc_monster_attack(battle, {id: 'fierce', heroId: 'defender'});
+  const vsDefender = calc.calc_monster_attack(battle, {monsterId: 'fierce', heroId: 'defender'});
   t.equal(vsDefender.value, monsters[battle.monsters.fierce.blueprint].stats.ATK + 2, 'Fierce gives 2 extra atk versus defending hero');
 
 });
