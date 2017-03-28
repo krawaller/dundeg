@@ -10,13 +10,13 @@ test('spiked gauntlets', t => {
         blueprint: 'bloodsportBrawler',
         vars: { stance: 'assault'},
         states: {},
-        items: { spikedGauntlet: true }
+        items: { spikedGauntlet: 1 }
       },
       defender: {
         blueprint: 'bloodsportBrawler',
         vars: { stance: 'defence' },
         states: {},
-        items: { spikedGauntlet: true }
+        items: { spikedGauntlet: 1 }
       }
     },
     monsters: {}

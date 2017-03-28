@@ -11,19 +11,19 @@ test('Nasty Cleaver', t => {
         blueprint: 'bloodsportBrawler',
         vars: { stance: 'assault', POW: 6 },
         states: {}, skills: {},
-        items: { nastyCleaver: true }
+        items: { nastyCleaver: 1 }
       },
       assaultingWeakWielder: {
         blueprint: 'bloodsportBrawler',
         vars: { stance: 'assault', POW: 5 },
         states: {}, skills: {},
-        items: { nastyCleaver: true }
+        items: { nastyCleaver: 1 }
       },
       defendingWielder: {
         blueprint: 'bloodsportBrawler',
         vars: { stance: 'defence', POW: 6 },
         states: {}, skills: {},
-        items: { nastyCleaver: true }
+        items: { nastyCleaver: 1 }
       }
     },
     monsters: {

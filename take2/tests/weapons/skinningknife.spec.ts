@@ -12,7 +12,7 @@ test('skinning knife', t => {
         blueprint: 'bloodsportBrawler',
         vars: {},
         states: {},
-        items: { skinningKnife: true }
+        items: { skinningKnife: 1 }
       }
     },
     monsters: {

@@ -32,7 +32,7 @@ test('the Exterminator hero skill', t => {
     heroId: 'rager',
     heroATK: {value: 6, history:[]},
     monsterARM: {value: 4, history:[]},
-    attack: <Attack>{stat: 'STR', using:'foo', type: 'meelee'}
+    attack: <Attack>{stat: 'STR', using: 'nastyCleaver', type: 'meelee'}
   }
   const result1 = calculate_damage_vs_monster(battle, input1);
   t.equal(result1.value, 3, 'rage gives 1 additional damage in assault');
@@ -42,7 +42,7 @@ test('the Exterminator hero skill', t => {
     heroId: 'rager',
     heroATK: {value: 6, history:[]},
     monsterARM: {value: 4, history:[]},
-    attack: <Attack>{stat: 'AGI', using:'foo', type: 'meelee'}
+    attack: <Attack>{stat: 'AGI', using:'nastyCleaver', type: 'meelee'}
   }
   const result2 = calculate_damage_vs_monster(battle, input2);
   t.equal(result2.value, 2, 'rage has no effect when attack isnt using STR');
@@ -52,7 +52,7 @@ test('the Exterminator hero skill', t => {
     heroId: 'rager',
     heroATK: {value: 4, history:[]},
     monsterARM: {value: 4, history:[]},
-    attack: <Attack>{stat: 'STR', using:'foo', type: 'meelee'}
+    attack: <Attack>{stat: 'STR', using:'nastyCleaver', type: 'meelee'}
   }
   const result3 = calculate_damage_vs_monster(battle, input3);
 
@@ -63,7 +63,7 @@ test('the Exterminator hero skill', t => {
     heroId: 'defendingRager',
     heroATK: {value: 6, history:[]},
     monsterARM: {value: 4, history:[]},
-    attack: <Attack>{stat: 'STR', using:'foo', type: 'meelee'}
+    attack: <Attack>{stat: 'STR', using:'nastyCleaver', type: 'meelee'}
   }
   const result4 = calculate_damage_vs_monster(battle, input4);
 

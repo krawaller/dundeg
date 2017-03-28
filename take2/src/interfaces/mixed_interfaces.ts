@@ -1,5 +1,6 @@
-import { HeroStatName, HeroState } from './hero';
-import { MonsterState } from './monster';
+import { HeroStatName, HeroState } from './hero_interfaces';
+import { MonsterState } from './monster_interfaces';
+import { ItemName } from './item_interfaces';
 
 export interface CalculationResult {
   value: any,
@@ -12,7 +13,7 @@ export interface AttackOptions {
 
 export interface Attack {
   type: 'meelee' | 'ranged',
-  using: string,
+  using: ItemName,
   stat: HeroStatName
 }
 
@@ -24,5 +25,3 @@ export interface BattleState {
     [idx: string]: MonsterState
   }
 }
-
-export type ItemName = 'skinningKnife' | 'spikedGauntlet';

@@ -1,3 +1,4 @@
+import { Inventory } from './item_interfaces';
 
 export interface HeroStats {
   AGI: number,
@@ -32,13 +33,9 @@ export interface HeroVars {
 export interface HeroState {
   blueprint?: HeroBase
   vars?: HeroVars
-  states?: HeroSkills
-  items?: {
-    [idx: string]: true
-  }
-  skills?: {
-    [idx: string]: true
-  }
+  states?: HeroStates
+  items?: Inventory
+  skills?: HeroSkills
 }
 
 export type HeroBase = 'bloodsportBrawler' | 'hinterLander';
@@ -46,4 +43,10 @@ export type HeroBase = 'bloodsportBrawler' | 'hinterLander';
 export interface HeroSkills {
   exterminator?: true,
   rage?: true
+}
+
+export interface HeroStates {
+  blessed?: true
+  exalted?: true
+  poisoned?: true
 }
