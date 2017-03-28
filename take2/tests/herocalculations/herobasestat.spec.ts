@@ -25,9 +25,9 @@ test('calc basic hero stats', t => {
 
   t.plan(2);
 
-  const res1 = calculate_hero_stat(battle, {heroId: 'id1', stat: 'CON'});
-  t.deepEqual(res1.value, heroes[battle.heroes.id1.blueprint].stats.CON, 'reads base CON stat correctly');
+  let result = calculate_hero_stat(battle, {heroId: 'id1', stat: 'CON'});
+  t.deepEqual(result.value, heroes[battle.heroes.id1.blueprint].stats.CON, 'reads base CON stat correctly');
 
-  const res2 = calculate_hero_stat(battle, {heroId: 'id2', stat: 'AGI'});
-  t.deepEqual(res2.value, heroes[battle.heroes.id2.blueprint].stats.AGI, 'reads base AGI stat correctly');
+  result = calculate_hero_stat(battle, {heroId: 'id2', stat: 'AGI'});
+  t.deepEqual(result.value, heroes[battle.heroes.id2.blueprint].stats.AGI, 'reads base AGI stat correctly');
 });

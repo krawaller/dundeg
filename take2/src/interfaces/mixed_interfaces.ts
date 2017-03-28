@@ -24,4 +24,14 @@ export interface BattleState {
   monsters?: {
     [idx: string]: MonsterState
   }
+  log?: LogMessage[]
+}
+
+export type LogMessagePart = string | LogMessageMonsterRef | LogMessageHeroRef | CalculationResult
+export type LogMessage = LogMessagePart[]
+export interface LogMessageMonsterRef {
+  monsterRef: string
+}
+export interface LogMessageHeroRef {
+  heroRef: string
 }

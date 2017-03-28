@@ -1,6 +1,7 @@
 import * as test from "tape";
+import { lastLogHasStr } from '../testutils';
 
-import { BattleState } from '../../src/interfaces';
+import { BattleState, LogMessagePart } from '../../src/interfaces';
 import { apply_damage_to_hero } from '../../src/apply/apply_damage_to_hero';
 
 test('apply damage to hero', t => {
@@ -17,19 +18,27 @@ test('apply damage to hero', t => {
         vars: {},
         states: {}
       }
-    }
+    },
+    log: [
+      ['foo'],
+      ['bar']
+    ]
   };
-  const instr = {
-    heroId: 'hero',
-    monsterId: 'monster',
-    heroDMG: {value: 4, history: []}
-  }
+  const blow = { heroId: 'hero', monsterId: 'monster', heroDMG: {value: 4, history: []} }
+  const failedBlow = { heroId: 'hero', monsterId: 'monster', heroDMG: {value: 0, history: []} }
 
-  t.plan(2);
+  t.plan(6);
 
-  const result = apply_damage_to_hero(battle, instr);
+  let result = apply_damage_to_hero(battle, failedBlow);
+  t.equal(result.heroes.hero.vars.HP, 7, 'failed blow deals no damage to hero HP');
+  t.ok(lastLogHasStr(result, 'but'), 'got fail msg');
+
+  result = apply_damage_to_hero(battle, blow);
   t.equal(result.heroes.hero.vars.HP, 3, 'dmg was deducted from HP');
+  t.ok(lastLogHasStr(result, 'dealt'), 'we now have correct new log message with "dealt" part');
 
-  const result2 = apply_damage_to_hero(result, instr);
-  t.equal(result2.heroes.hero.vars.HP, 0, 'HP was floored at 0');
+  result = apply_damage_to_hero(result, blow);
+  t.equal(result.heroes.hero.vars.HP, 0, 'HP was floored at 0');
+  t.ok(lastLogHasStr(result, 'knocked'), 'msg acknowledges that hero was knocked out');
 });
+

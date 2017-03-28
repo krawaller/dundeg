@@ -36,12 +36,12 @@ test('calculate hero attack', t => {
 
   t.plan(3);
 
-  const res1 = calculate_hero_attack(battle, {heroId: 'attackerHiPow'});
-  t.deepEqual(res1.value, 4, 'assaulting heroes use power if higher');
+  let result = calculate_hero_attack(battle, {heroId: 'attackerHiPow'});
+  t.deepEqual(result.value, 4, 'assaulting heroes use power if higher');
 
-  const res2 = calculate_hero_attack(battle, {heroId: 'attackerLoPow'});
-  t.deepEqual(res2.value, 3, 'assaulting heroes ignore power if lower');
+  result = calculate_hero_attack(battle, {heroId: 'attackerLoPow'});
+  t.deepEqual(result.value, 3, 'assaulting heroes ignore power if lower');
 
-  const res3 = calculate_hero_attack(battle, {heroId: 'defender'});
-  t.deepEqual(res3.value, 5, 'defending heroes ignore power ');
+  result = calculate_hero_attack(battle, {heroId: 'defender'});
+  t.deepEqual(result.value, 5, 'defending heroes ignore power ');
 });

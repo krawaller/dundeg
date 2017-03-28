@@ -1,6 +1,6 @@
 import { BattleState, Attack, ItemName, CalculationResult } from '../interfaces';
-
 import { monsters } from '../library';
+import { isMonsterAlive } from '../utils/helpers';
 
 interface InstrMonsterWithHeroDetails { monsterId: string, because?: string, using?: ItemName, heroId?: string, attack?: Attack }
 
@@ -22,7 +22,7 @@ export const calculate_monster_attack = (battle: BattleState, instr: InstrMonste
   if (blueprint.skills.horde){
     let others = Object.keys(battle.monsters).reduce((list,otherId) => {
       let other = battle.monsters[otherId];
-      if (otherId !== instr.monsterId && monsters[other.blueprint].traits[blueprint.skills.horde] && !other.vars.killedBy){
+      if (otherId !== instr.monsterId && monsters[other.blueprint].traits[blueprint.skills.horde] && isMonsterAlive(other)){
         list.push(otherId);
       }
       return list;

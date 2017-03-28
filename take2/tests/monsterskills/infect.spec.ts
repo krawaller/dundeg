@@ -1,4 +1,5 @@
 import * as test from "tape";
+import { lastLogHasStr } from '../testutils';
 
 import { BattleState } from '../../src/interfaces';
 import { apply_damage_to_hero } from '../../src/apply/apply_damage_to_hero';
@@ -8,7 +9,7 @@ test('apply damage to hero', t => {
     heroes: {
       hero: {
         blueprint: 'bloodsportBrawler',
-        vars: { HP: 7 },
+        vars: { HP: 20 },
         states: {}
       }
     },
@@ -23,29 +24,38 @@ test('apply damage to hero', t => {
         vars: {},
         states: {}
       }
-    }
+    },
+    log: []
   };
 
-  t.plan(3);
+  t.plan(5);
 
-  const result = apply_damage_to_hero(battle, {
+  let result = apply_damage_to_hero(battle, {
     heroId: 'hero',
     monsterId: 'infecter',
     heroDMG: {value: 0, history: []}
   });
   t.ok(!result.heroes.hero.states.infected, 'No infection caused if there was no damage');
 
-  const result2 = apply_damage_to_hero(result, {
+  result = apply_damage_to_hero(result, {
     heroId: 'hero',
     monsterId: 'noninfecter',
     heroDMG: {value: 4, history: []}
   });
-  t.ok(!result2.heroes.hero.states.infected, 'no infection if monster doesnt have infect');
+  t.ok(!result.heroes.hero.states.infected, 'no infection if monster doesnt have infect');
 
-  const result3 = apply_damage_to_hero(result, {
+  result = apply_damage_to_hero(result, {
     heroId: 'hero',
     monsterId: 'infecter',
     heroDMG: {value: 4, history: []}
   });
-  t.ok(result3.heroes.hero.states.infected, 'if infecter did dmg then hero gets infected');
+  t.ok(result.heroes.hero.states.infected, 'if infecter did dmg then hero gets infected');
+  t.ok(lastLogHasStr(result, 'infected'), 'infection message added to log');
+
+  result = apply_damage_to_hero(result, {
+    heroId: 'hero',
+    monsterId: 'infecter',
+    heroDMG: {value: 4, history: []}
+  });
+  t.ok(!lastLogHasStr(result, 'infected'), 'no extra infection msg when hero was already infected');
 });
