@@ -1,7 +1,7 @@
 import * as test from "tape";
 
 import { BattleState } from '../../src/interfaces';
-import { calc } from '../../src/calculate';
+import { calculate_hero_defence } from '../../src/calculate/calculate_hero_defence';
 
 test('calculate hero defence', t => {
   const battle: BattleState = {
@@ -48,19 +48,19 @@ test('calculate hero defence', t => {
 
   t.plan(5);
 
-  const res1 = calc.calc_hero_defence(battle, {heroId: 'defenderHiPow'});
+  const res1 = calculate_hero_defence(battle, {heroId: 'defenderHiPow'});
   t.deepEqual(res1.value, 4, 'defending heroes use power if higher');
 
-  const res2 = calc.calc_hero_defence(battle, {heroId: 'defenderLoPow'});
+  const res2 = calculate_hero_defence(battle, {heroId: 'defenderLoPow'});
   t.deepEqual(res2.value, 3, 'defending heroes ignore power if lower');
 
-  const res3 = calc.calc_hero_defence(battle, {heroId: 'assaulter'});
+  const res3 = calculate_hero_defence(battle, {heroId: 'assaulter'});
   t.deepEqual(res3.value, 5, 'assaulting heroes ignore power ');
 
-  const res4 = calc.calc_hero_defence(battle, {heroId: 'failedDefenderNoPick'});
+  const res4 = calculate_hero_defence(battle, {heroId: 'failedDefenderNoPick'});
   t.deepEqual(res4.value, 0, 'failed defenders have no defence');
 
-  const res5 = calc.calc_hero_defence(battle, {heroId: 'failedDefenderPick'});
+  const res5 = calculate_hero_defence(battle, {heroId: 'failedDefenderPick'});
   t.deepEqual(res5.value, 2, 'failed defenders can choose to use power dice once');
 });
 

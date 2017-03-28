@@ -4,7 +4,7 @@ import { BattleState } from '../../src/interfaces';
 
 import { monsters } from '../../src/monsters';
 
-import { calc } from '../../src/calculate';
+import { calculate_damage_vs_monster } from '../../src/calculate/calculate_damage_vs_monster';
 
 
 
@@ -42,7 +42,7 @@ test('the Exterminator hero skill', t => {
     heroATK: {value: 6, history:[]},
     monsterARM: {value: 4, history:[]}
   }
-  const result1 = calc.calc_damage_vs_monster(battle, input1);
+  const result1 = calculate_damage_vs_monster(battle, input1);
   t.equal(result1.value, 3, 'exterminator gives 1 additional damage vs vermin');
 
   const input2 = {
@@ -51,7 +51,7 @@ test('the Exterminator hero skill', t => {
     heroATK: {value: 4, history:[]},
     monsterARM: {value: 4, history:[]}
   }
-  const result2 = calc.calc_damage_vs_monster(battle, input2);
+  const result2 = calculate_damage_vs_monster(battle, input2);
   t.equal(result2.value, 0, 'exterminator has no effect if didnt do damage');
 
   const input3 = {
@@ -60,7 +60,7 @@ test('the Exterminator hero skill', t => {
     heroATK: {value: 6, history:[]},
     monsterARM: {value: 4, history:[]}
   }
-  const result3 = calc.calc_damage_vs_monster(battle, input3);
+  const result3 = calculate_damage_vs_monster(battle, input3);
 
   t.equal(result3.value, 2, 'exterminator has no effect against non-vermin');
 
@@ -70,7 +70,7 @@ test('the Exterminator hero skill', t => {
     heroATK: {value: 6, history:[]},
     monsterARM: {value: 4, history:[]}
   }
-  const result4 = calc.calc_damage_vs_monster(battle, input4);
+  const result4 = calculate_damage_vs_monster(battle, input4);
 
   t.equal(result4.value, 2, 'defending exterminator has no effect');
 });

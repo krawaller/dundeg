@@ -2,9 +2,9 @@ import * as test from "tape";
 
 import { BattleState } from '../../src/interfaces';
 import { monsters } from '../../src/monsters';
-import { calc } from '../../src/calculate';
+import { calculate_monster_attack } from '../../src/calculate/calculate_monster_attack';
 
-test('calculating monster armour', t => {
+test('calculating monster attack', t => {
   const battle: BattleState = {
     heroes: {},
     monsters: {
@@ -18,7 +18,8 @@ test('calculating monster armour', t => {
 
   t.plan(1);
 
-  const res1 = calc.calc_monster_armour(battle, {monsterId: 'id1'});
-  t.equal(res1.value, monsters.slitherFish.stats.ARM, 'just normal base armour value');
+  const res1 = calculate_monster_attack(battle, {monsterId: 'id1'});
+  t.equal(res1.value, monsters.slitherFish.stats.ATK, 'just normal base attack value');
 
 });
+

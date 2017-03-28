@@ -1,7 +1,7 @@
 import * as test from "tape";
 
 import { BattleState } from '../../src/interfaces';
-import { calc } from '../../src/calculate';
+import { calculate_damage_vs_monster } from '../../src/calculate/calculate_damage_vs_monster';
 
 test('calculating damage vs monster', t => {
   const battle: BattleState = {
@@ -25,7 +25,7 @@ test('calculating damage vs monster', t => {
     monsterARM: {value: 4, history:[]},
     heroId: 'hero'
   }
-  const result = calc.calc_damage_vs_monster(battle, input);
+  const result = calculate_damage_vs_monster(battle, input);
 
   t.plan(1);
   t.equal(result.value, 2, 'by default it is ATK - ARM');

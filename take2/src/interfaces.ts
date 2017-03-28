@@ -1,4 +1,9 @@
 
+export interface CalculationResult {
+  value: any,
+  history: any[]
+}
+
 export interface MonsterStats {
   ATK: number
   HP: number
@@ -12,7 +17,10 @@ export interface MonsterDefinition {
     [idx:string]: true
   }
   targets: string
-  value: number
+  value: number,
+  skills?: {
+    [idx:string]: true
+  }
 }
 
 export interface HeroStats {
@@ -50,7 +58,9 @@ export interface HeroVars {
   attackDice?: number[],
   defenceDice?: number[],
   failedDefence?: true,
-  usePowForDefence?: true
+  usePowForDefence?: true,
+  HP?: number,
+  gold?: number
 }
 
 export interface HeroState {
@@ -75,16 +85,13 @@ export interface MonsterState {
   states?: {
     [idx: string]: true
   }
-  skills?: {
-    [idx: string]: true
-  }
 }
 
 export type ItemName = 'skinningKnife' | 'spikedGauntlet';
 
 export type HeroBase = 'bloodsportBrawler' | 'hinterLander';
 
-export type MonsterBase = 'manAtArms' | 'swampTroll' | 'slitherFish' | 'backAlleyBruiser';
+export type MonsterBase = '_fierceTestMonster' | 'manAtArms' | 'ratThing' | 'swampTroll' | 'slitherFish' | 'backAlleyBruiser';
 
 export interface AttackOptions {
   [idx: string]: Attack

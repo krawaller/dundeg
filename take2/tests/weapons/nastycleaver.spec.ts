@@ -2,7 +2,8 @@ import * as test from "tape";
 
 import { BattleState } from '../../src/interfaces';
 import { monsters } from '../../src/monsters';
-import { calc } from '../../src/calculate';
+import { calculate_damage_vs_monster } from '../../src/calculate/calculate_damage_vs_monster';
+import { calculate_hero_attack_options } from '../../src/calculate/calculate_hero_attack_options';
 
 test('Nasty Cleaver', t => {
   const battle: BattleState = {
@@ -33,7 +34,7 @@ test('Nasty Cleaver', t => {
 
   t.plan(4);
 
-  const attacks = calc.calc_hero_attack_options(battle, {heroId: 'assaultingStrongWielder'});
+  const attacks = calculate_hero_attack_options(battle, {heroId: 'assaultingStrongWielder'});
   t.deepEqual(attacks.nastyCleaver, {
     using: 'nastyCleaver',
     type: 'meelee',
@@ -48,7 +49,7 @@ test('Nasty Cleaver', t => {
     monsterARM: {value: 4, history:[]},
     using: 'nastyCleaver'
   }
-  const result1 = calc.calc_damage_vs_monster(battle, input1);
+  const result1 = calculate_damage_vs_monster(battle, input1);
   t.equal(result1.value, 3, 'nasty cleaver gives +1 damage when power die is 6');
 
   const input2 = {
@@ -58,7 +59,7 @@ test('Nasty Cleaver', t => {
     monsterARM: {value: 4, history:[]},
     using: 'nastyCleaver',
   }
-  const result2 = calc.calc_damage_vs_monster(battle, input2);
+  const result2 = calculate_damage_vs_monster(battle, input2);
   t.equal(result2.value, 2, 'nasty cleaver has no effect when power die isnt 6');
 
   const input3 = {
@@ -68,6 +69,6 @@ test('Nasty Cleaver', t => {
     monsterARM: {value: 4, history:[]},
     using: 'nastyCleaver'
   }
-  const result3 = calc.calc_damage_vs_monster(battle, input3);
+  const result3 = calculate_damage_vs_monster(battle, input3);
   t.equal(result3.value, 2, 'nasty cleaver has no effect when not assaulting');
 });

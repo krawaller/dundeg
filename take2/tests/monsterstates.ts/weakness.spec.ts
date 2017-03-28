@@ -2,7 +2,7 @@ import * as test from "tape";
 
 import { BattleState } from '../../src/interfaces';
 import { monsters } from '../../src/monsters';
-import { calc } from '../../src/calculate';
+import { calculate_damage_vs_monster } from '../../src/calculate/calculate_damage_vs_monster';
 
 test('the Weakness state caused by Find Weakness skill', t => {
   const battle: BattleState = {
@@ -29,7 +29,7 @@ test('the Weakness state caused by Find Weakness skill', t => {
     monsterARM: {value: 4, history:[]},
     heroId: 'hero'
   }
-  const result1 = calc.calc_damage_vs_monster(battle, input1);
+  const result1 = calculate_damage_vs_monster(battle, input1);
 
   t.equal(result1.value, 3, 'weakness gives 1 additional damage');
 
@@ -39,7 +39,7 @@ test('the Weakness state caused by Find Weakness skill', t => {
     monsterARM: {value: 4, history:[]},
     heroId: 'hero'
   }
-  const result2 = calc.calc_damage_vs_monster(battle, input2);
+  const result2 = calculate_damage_vs_monster(battle, input2);
 
   t.equal(result2.value, 0, 'weakness has no effect if didnt do damage');
 

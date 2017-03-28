@@ -1,7 +1,7 @@
 import * as test from "tape";
 
 import { BattleState } from '../../src/interfaces';
-import { calc } from '../../src/calculate';
+import { calculate_hero_armour } from '../../src/calculate/calculate_hero_armour';
 
 test('calc hero ARM', t => {
   const battle: BattleState = {
@@ -18,6 +18,6 @@ test('calc hero ARM', t => {
 
   t.plan(1);
 
-  const result = calc.calc_hero_armour(battle, {heroId: 'hero'});
+  const result = calculate_hero_armour(battle, {heroId: 'hero'});
   t.deepEqual(result.value, 0, 'heroes have no natural armour');
 });
