@@ -42,7 +42,7 @@ export const apply_damage_to_hero = (battle: BattleState, {heroId,monsterId,hero
       }
       if (blueprint.skills.drain){
         ret.monsters[monsterId].vars.drained = (monster.vars.drained || 0) + dealt;
-        ret.log.push( [monRef, 'has drain and will recover wounds at the end of round'] );
+        ret.log.push( [monRef, 'has drain and will recover as many wounds at the end of round'] );
       }
       if (blueprint.skills.infect && !target.states.infected){
         target.states.infected = true;

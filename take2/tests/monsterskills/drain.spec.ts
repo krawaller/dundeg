@@ -3,6 +3,7 @@ import { lastLogHasStr } from '../testutils';
 
 import { BattleState } from '../../src/interfaces';
 import { apply_damage_to_hero } from '../../src/apply/apply_damage_to_hero';
+import { apply_end_of_round_to_monster } from '../../src/apply/apply_end_of_round_to_monster';
 
 test('the drain monster skill', t => {
   const battle: BattleState = {
@@ -15,7 +16,7 @@ test('the drain monster skill', t => {
     monsters: {
       drainer: {
         blueprint: 'ghoulTroll', // has drain
-        vars: { drained: 2 },
+        vars: { drained: 2, HP: 7 }, // HP 10 is natural max
         states: {}
       }
     },
@@ -27,10 +28,15 @@ test('the drain monster skill', t => {
     heroDMG: {value: 4, history: []}
   }
 
-  t.plan(2);
+  t.plan(5);
 
-  const result = apply_damage_to_hero(battle, instr);
+  let result = apply_damage_to_hero(battle, instr);
   t.equal(result.monsters.drainer.vars.drained, 5, 'the 3 dealt dmg was added to drained');
-  t.ok(lastLogHasStr(result, 'recover'), 'drain msg shown');
+  t.ok(lastLogHasStr(result, 'drain'), 'drain msg shown');
+
+  result = apply_end_of_round_to_monster(battle, {monsterId: 'drainer'});
+  t.equal(result.monsters.drainer.vars.drained, undefined, 'drain count was removed');
+  t.equal(result.monsters.drainer.vars.HP, 10, 'HP was increased (hit max)');
+  t.ok(lastLogHasStr(result, 'drain'), 'drain recover msg shown');
 
 });
