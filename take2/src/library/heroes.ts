@@ -1,4 +1,4 @@
-import { HeroDefinition } from './interfaces';
+import { HeroDefinition } from '../interfaces';
 
 interface HeroBook { [idx: string]: HeroDefinition }
 

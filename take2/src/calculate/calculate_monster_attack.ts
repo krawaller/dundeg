@@ -1,7 +1,6 @@
 import { BattleState, Attack, ItemName, CalculationResult } from '../interfaces';
 
-import { monsters } from '../monsters';
-import { heroes } from '../heroes';
+import { monsters } from '../library';
 
 interface InstrMonsterWithHeroDetails { monsterId: string, because?: string, using?: ItemName, heroId?: string, attack?: Attack }
 

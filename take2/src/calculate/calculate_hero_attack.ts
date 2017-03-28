@@ -1,8 +1,5 @@
 import { BattleState, CalculationResult } from '../interfaces';
 
-import { monsters } from '../monsters';
-import { heroes } from '../heroes';
-
 interface InstrJustHeroId { heroId: string }
 
 export const calculate_hero_attack = (battle: BattleState, instr: InstrJustHeroId): CalculationResult => {

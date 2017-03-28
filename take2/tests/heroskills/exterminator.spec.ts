@@ -2,7 +2,7 @@ import * as test from "tape";
 
 import { BattleState } from '../../src/interfaces';
 
-import { monsters } from '../../src/monsters';
+import { monsters } from '../../src/library';
 
 import { calculate_damage_vs_monster } from '../../src/calculate/calculate_damage_vs_monster';
 

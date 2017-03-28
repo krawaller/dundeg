@@ -1,6 +1,6 @@
 import { BattleState, Attack, CalculationResult } from '../interfaces';
 
-import { monsters } from '../monsters';
+import { monsters } from '../library';
 
 interface InstrDamageVsMonster {
   monsterId: string,

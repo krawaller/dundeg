@@ -1,5 +1,5 @@
 
-import { MonsterDefinition } from './interfaces';
+import { MonsterDefinition } from '../interfaces';
 
 interface MonsterBook { [idx: string]: MonsterDefinition }
 

@@ -1,6 +1,6 @@
 import { BattleState, HeroStatName, Attack, AttackOptions, ItemName, CalculationResult } from '../interfaces';
 
-import { heroes } from '../heroes';
+import { heroes } from '../library';
 
 interface InstrHeroStat { heroId: string, stat: HeroStatName, because?: string }
 

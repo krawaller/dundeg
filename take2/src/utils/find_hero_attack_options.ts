@@ -1,8 +1,5 @@
 import { BattleState, HeroStatName, Attack, AttackOptions, ItemName, CalculationResult } from '../interfaces';
 
-import { monsters } from '../monsters';
-import { heroes } from '../heroes';
-
 interface InstrJustHeroId { heroId: string }
 
 export const find_hero_attack_options = (battle: BattleState, instr: InstrJustHeroId) => {

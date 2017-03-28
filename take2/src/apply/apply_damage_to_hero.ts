@@ -1,7 +1,6 @@
 import { BattleState, HeroStatName, Attack, AttackOptions, ItemName, CalculationResult } from '../interfaces';
 
-import { monsters } from '../monsters';
-import { heroes } from '../heroes';
+import { monsters, heroes } from '../library';
 
 interface ApplyDamageToHeroInstr {
   heroId: string,

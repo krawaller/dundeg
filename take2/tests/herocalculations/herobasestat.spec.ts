@@ -1,7 +1,7 @@
 import * as test from "tape";
 
 import { BattleState } from '../../src/interfaces';
-import { heroes } from '../../src/heroes';
+import { heroes } from '../../src/library';
 import { calculate_hero_stat } from '../../src/calculate/calculate_hero_stat';
 
 test('calc basic hero stats', t => {

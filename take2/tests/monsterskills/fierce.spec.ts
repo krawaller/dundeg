@@ -1,7 +1,7 @@
 import * as test from "tape";
 
 import { BattleState } from '../../src/interfaces';
-import { monsters } from '../../src/monsters';
+import { monsters } from '../../src/library';
 import { calculate_monster_attack } from '../../src/calculate/calculate_monster_attack';
 
 test('monster fierce state', t => {

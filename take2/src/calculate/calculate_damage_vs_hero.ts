@@ -1,8 +1,5 @@
 import { BattleState, CalculationResult } from '../interfaces';
 
-import { monsters } from '../monsters';
-import { heroes } from '../heroes';
-
 interface InstrDamageVsHero {
   monsterId: string,
   heroId?: string,

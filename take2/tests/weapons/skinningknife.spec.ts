@@ -1,7 +1,7 @@
 import * as test from "tape";
 
 import { BattleState } from '../../src/interfaces';
-import { monsters } from '../../src/monsters';
+import { monsters } from '../../src/library';
 import { calculate_monster_armour } from '../../src/calculate/calculate_monster_armour';
 import { find_hero_attack_options } from '../../src/utils/find_hero_attack_options';
 
