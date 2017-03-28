@@ -20,6 +20,7 @@ export interface MonsterVars {
 }
 
 export interface MonsterState {
+  name?: string
   blueprint?: MonsterBase
   vars?: MonsterVars
   states?: MonsterStates
