@@ -50,4 +50,5 @@ export interface HeroStates {
   exalted?: true
   poisoned?: true
   infected?: true
+  stunned?: true
 }

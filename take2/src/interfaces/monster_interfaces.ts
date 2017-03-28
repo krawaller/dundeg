@@ -28,6 +28,7 @@ export interface MonsterState {
 export interface MonsterStates {
   corroded?: true
   weakness?: true
+  dazed?: true
 }
 
 export type MonsterBase = '_fierceTestMonster' | 'backAlleyBruiser' | 'ghoulTroll' | 'manAtArms' | 'megaRat' | 'nachtDrekSlicer' | 'ratThing' | 'slimeCorpse' | 'swampTroll' | 'slitherFish';

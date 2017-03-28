@@ -33,5 +33,10 @@ export const calculate_monster_attack = (battle: BattleState, instr: InstrMonste
     }
   }
 
+  if (monster.states.dazed){
+    val.history.push( ['When dazed attack is halved, rounding down', '/2' ] );
+    val.value = Math.floor( val.value / 2 );
+  }
+
   return val;
 };
