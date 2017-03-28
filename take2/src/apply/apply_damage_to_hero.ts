@@ -8,6 +8,8 @@ interface ApplyDamageToHeroInstr {
   heroDMG: CalculationResult
 }
 
+// TODO - log messages!
+
 export const apply_damage_to_hero = (battle: BattleState, instr: ApplyDamageToHeroInstr): BattleState => {
   let ret = battle; // TODO - copy;
   let monster = battle.monsters[instr.monsterId]
@@ -19,6 +21,9 @@ export const apply_damage_to_hero = (battle: BattleState, instr: ApplyDamageToHe
     ret.heroes[instr.heroId].vars.HP -= dealt;
     if (blueprint.skills.drain){
       ret.monsters[instr.monsterId].vars.drained = (monster.vars.drained || 0) + dealt;
+    }
+    if (dealt && blueprint.skills.infect){
+      ret.heroes[instr.heroId].states.infected = true;
     }
   }
   return ret;

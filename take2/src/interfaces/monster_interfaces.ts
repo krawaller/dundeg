@@ -14,8 +14,9 @@ export interface MonsterDefinition {
 }
 
 export interface MonsterVars {
-  HP?: number,
-  drained?: number 
+  HP?: number
+  drained?: number
+  killedBy?: string
 }
 
 export interface MonsterState {
@@ -29,14 +30,20 @@ export interface MonsterStates {
   weakness?: true
 }
 
-export type MonsterBase = '_fierceTestMonster' | 'backAlleyBruiser' | 'ghoulTroll' | 'manAtArms' | 'ratThing' | 'swampTroll' | 'slitherFish';
+export type MonsterBase = '_fierceTestMonster' | 'backAlleyBruiser' | 'ghoulTroll' | 'manAtArms' | 'megaRat' | 'nachtDrekSlicer' | 'ratThing' | 'slimeCorpse' | 'swampTroll' | 'slitherFish';
 
 export interface MonsterSkills {
-  drain?: true,
-  fierce?: true,
-  horde?: true,
-  thief?: true,
+  ambush?: true
+  drain?: true
   fear?: true
+  fierce?: true
+  horde?: MonsterTraitName
+  infect?: true
+  pain?: true
+  regenerate?: true
+  skirmish?: true
+  slime?: true
+  thief?: true
 }
 
 export type MonsterTraitName = 'bandit' | 'construct' | 'cult' | 'daemon' | 'filth' | 'fishoid' | 'goblin' | 'human' | 'hunter' | 'law' | 'militant' | 'ooze' | 'puritan' | 'reptilian' | 'undead' | 'vermin' | 'weird' | 'witch'

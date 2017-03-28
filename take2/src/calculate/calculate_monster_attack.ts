@@ -19,5 +19,19 @@ export const calculate_monster_attack = (battle: BattleState, instr: InstrMonste
     val.value += 2;
   }
 
+  if (blueprint.skills.horde){
+    let others = Object.keys(battle.monsters).reduce((list,otherId) => {
+      let other = battle.monsters[otherId];
+      if (otherId !== instr.monsterId && monsters[other.blueprint].traits[blueprint.skills.horde] && !other.vars.killedBy){
+        list.push(otherId);
+      }
+      return list;
+    },[]);
+    if (others.length){
+      val.history.push( ['Horde('+blueprint.skills.horde+') gave bonus since there were other monsters with that trait', '+1'] );
+      val.value += 1;
+    }
+  }
+
   return val;
 };

@@ -7,25 +7,15 @@ export const monsters: MonsterBook = {
   _fierceTestMonster: {
     name: 'Debug monster - fierce',
     traits: {},
-    stats: {
-      ATK: 3,
-      ARM: 3,
-      HP: 3
-    },
+    stats: { ATK: 3, ARM: 3, HP: 3 },
     targets: 'CON+',
     value: 1,
-    skills: {
-      fierce: true
-    }
+    skills: { fierce: true }
   },
   backAlleyBruiser: {
     name: 'Back Alley Bruiser',
     traits: { bandit: true },
-    stats: {
-      ATK: 4,
-      ARM: 0,
-      HP: 4
-    },
+    stats: { ATK: 4, ARM: 0, HP: 4 },
     targets: 'STR-',
     value: 1,
     skills: {}
@@ -41,61 +31,65 @@ export const monsters: MonsterBook = {
   manAtArms: {
     name: 'Man-At-Arms',
     traits: { human: true, law: true, militant: true },
-    stats: {
-      ATK: 4,
-      ARM: 2,
-      HP: 4
-    },
+    stats: { ATK: 4, ARM: 2, HP: 4 },
     targets: 'AGI+',
     value: 1,
-    skills: {}
+    skills: { horde: 'militant' }
+  },
+  megaRat: {
+    name: 'MegaRat',
+    traits: {filth: true, vermin: true},
+    stats: {ATK:5, ARM:0, HP:5},
+    targets: 'AGI+',
+    value: 1,
+    skills: { infect: true }
+  },
+  nachtDrekSlicer: {
+    name: 'Nacht Drek Slicer',
+    traits: { weird: true },
+    stats: { ATK: 4, ARM: 1, HP: 4 },
+    targets: 'STR+',
+    value: 1,
+    skills: { horde: 'weird' }
   },
   ratThing: {
     name: 'Rat Thing',
-    traits: {filth: true, vermin: true, weird: true},
-    stats: {
-      ATK: 4,
-      ARM: 0,
-      HP: 3
-    },
+    traits: { filth: true, vermin: true, weird: true },
+    stats: { ATK: 4, ARM: 0, HP: 3 },
     value: 1,
     targets: 'AGI-',
-    skills: { thief: true}
+    skills: { thief: true, skirmish: true }
+  },
+  slimeCorpse: {
+    name: 'Slime Corpse',
+    traits: { filth: true, ooze: true, undead: true },
+    stats: { ATK: 4, ARM: 1, HP: 8 },
+    targets: 'CON+',
+    value: 1,
+    skills: { horde: 'ooze', slime: true }
   },
   slitherFish: {
     name: 'Slither Fish',
-    traits: {filth: true, fishoid: true, vermin: true},
-    stats: {
-      ATK: 3,
-      ARM: 2,
-      HP: 3
-    },
+    traits: { filth: true, fishoid: true, vermin: true },
+    stats: { ATK: 3, ARM: 2, HP: 3 },
     targets: 'CON+',
     value: 1,
-    skills: {}
+    skills: { pain: true }
   },
   shambler: {
     name: 'Shambler',
-    traits: {filth: true},
-    stats: {
-      ATK: 6,
-      ARM: 0,
-      HP: 12
-    },
+    traits: { filth: true },
+    stats: { ATK: 6, ARM: 0, HP: 12 },
     targets: 'PER+',
     value: 3,
-    skills: {}
+    skills: { slime: true, ambush: true }
   },
   swampTroll: {
     name: 'Swamp Troll',
-    traits: {filth: true},
-    stats: {
-      ATK: 6,
-      ARM: 0,
-      HP: 12
-    },
+    traits: { filth: true },
+    stats: { ATK: 6, ARM: 0, HP: 12 },
     targets: 'STR+',
     value: 2,
-    skills: {}
+    skills: { regenerate: true }
   }
 }
