@@ -4,7 +4,7 @@ import { heroes } from '../library';
 
 interface InstrHeroStat { heroId: string, stat: HeroStatName, because?: string }
 
-export const calculate_hero_stat = (battle: BattleState, instr: InstrHeroStat) => {
+export function calculate_hero_stat (battle: BattleState, instr: InstrHeroStat) {
   let hero = battle.heroes[instr.heroId];
   let blueprint = heroes[hero.blueprint];
   let val = {
@@ -24,4 +24,4 @@ export const calculate_hero_stat = (battle: BattleState, instr: InstrHeroStat) =
     val.value--;
   }
   return val;
-};
+}

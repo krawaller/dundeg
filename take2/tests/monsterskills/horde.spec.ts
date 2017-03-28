@@ -14,9 +14,9 @@ test('horde monster skill', t => {
     }
   };
 
-  t.plan(3);
+  t.plan(4);
 
-  const res1 = calculate_monster_attack(battle, {monsterId: 'nacht'});
+  let res1 = calculate_monster_attack(battle, {monsterId: 'nacht'});
   t.equal(res1.value, monsters.nachtDrekSlicer.stats.ATK + 1, 'got 1 extra since ratThing is weird');
 
   battle.monsters.rat.vars.killedBy = 'foo';
@@ -24,10 +24,16 @@ test('horde monster skill', t => {
   const res2 = calculate_monster_attack(battle, {monsterId: 'nacht'});
   t.equal(res2.value, monsters.nachtDrekSlicer.stats.ATK, 'no extra for dead monster');
 
-  delete battle.monsters.rat;
+  delete battle.monsters.rat.vars.killedBy;
+  battle.monsters.rat.vars.escaped = true;
 
   const res3 = calculate_monster_attack(battle, {monsterId: 'nacht'});
-  t.equal(res3.value, monsters.nachtDrekSlicer.stats.ATK, 'no extra when no other weirdo');
+  t.equal(res3.value, monsters.nachtDrekSlicer.stats.ATK, 'no extra for escaped monster');
+
+  delete battle.monsters.rat;
+
+  const res4 = calculate_monster_attack(battle, {monsterId: 'nacht'});
+  t.equal(res4.value, monsters.nachtDrekSlicer.stats.ATK, 'no extra when no other weirdo');
 
 });
 

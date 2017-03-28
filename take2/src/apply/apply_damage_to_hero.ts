@@ -10,7 +10,7 @@ interface ApplyDamageToHeroInstr {
   heroDMG: CalculationResult
 }
 
-export const apply_damage_to_hero = (battle: BattleState, {heroId,monsterId,heroDMG}: ApplyDamageToHeroInstr): BattleState => {
+export function apply_damage_to_hero (battle: BattleState, {heroId,monsterId,heroDMG}: ApplyDamageToHeroInstr): BattleState {
   let ret = deepCopy(battle);
   let monster = ret.monsters[monsterId];
   let target = ret.heroes[heroId];
@@ -53,4 +53,4 @@ export const apply_damage_to_hero = (battle: BattleState, {heroId,monsterId,hero
     }
   }
   return ret;
-};
+}

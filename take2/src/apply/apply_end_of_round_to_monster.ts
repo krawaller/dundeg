@@ -6,7 +6,7 @@ interface EndOfRoundInstr {
   monsterId: string
 }
 
-export const apply_end_of_round_to_monster = (battle: BattleState, {monsterId}: EndOfRoundInstr):BattleState => {
+export function apply_end_of_round_to_monster (battle: BattleState, {monsterId}: EndOfRoundInstr):BattleState {
   let ret = deepCopy(battle);
   let monster = ret.monsters[monsterId];
   let blueprint = monsters[monster.blueprint];
@@ -19,6 +19,10 @@ export const apply_end_of_round_to_monster = (battle: BattleState, {monsterId}: 
   if (monster.states.dazed){
     delete monster.states.dazed;
     ret.log.push( [monRef, 'is no longer dazed'] );
+  }
+  if (blueprint.skills.skirmish){
+    ret.log.push( [monRef, 'is a skirmisher and now escapes the battle'] );
+    monster.vars.escaped = true;
   }
   return ret;
 }

@@ -4,7 +4,7 @@ import { isMonsterAlive } from '../utils/helpers';
 
 interface InstrMonsterWithHeroDetails { monsterId: string, because?: string, using?: ItemName, heroId?: string, attack?: Attack }
 
-export const calculate_monster_attack = (battle: BattleState, instr: InstrMonsterWithHeroDetails) :CalculationResult => {
+export function calculate_monster_attack (battle: BattleState, instr: InstrMonsterWithHeroDetails) :CalculationResult {
   let monster = battle.monsters[instr.monsterId];
   let blueprint = monsters[monster.blueprint];
   let hero = instr.heroId && battle.heroes[instr.heroId];
@@ -39,4 +39,4 @@ export const calculate_monster_attack = (battle: BattleState, instr: InstrMonste
   }
 
   return val;
-};
+}

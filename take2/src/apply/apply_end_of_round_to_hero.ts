@@ -5,7 +5,7 @@ interface EndOfRoundInstr {
   heroId: string
 }
 
-export const apply_end_of_round_to_hero = (battle: BattleState, {heroId}: EndOfRoundInstr):BattleState => {
+export function apply_end_of_round_to_hero (battle: BattleState, {heroId}: EndOfRoundInstr):BattleState {
   let ret = deepCopy(battle);
   let hero = ret.heroes.hero;
   if (hero.states.stunned){

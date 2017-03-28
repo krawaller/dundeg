@@ -26,7 +26,7 @@ test('apply damage to hero', t => {
   t.equal(result.heroes.hero.vars.HP, 7, 'failed blow deals no damage to hero HP');
   t.ok(lastLogHasStr(result, 'but'), 'got fail msg');
 
-  result = apply_damage_to_hero(battle, blow);
+  result = apply_damage_to_hero(result, blow);
   t.equal(result.heroes.hero.vars.HP, 3, 'dmg was deducted from HP');
   t.ok(lastLogHasStr(result, 'dealt'), 'we now have correct new log message with "dealt" part');
 

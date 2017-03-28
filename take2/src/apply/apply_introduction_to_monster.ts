@@ -7,7 +7,7 @@ interface ApplyIntroductionToMonsterInstr {
   monsterType: MonsterBase
 }
 
-export const apply_introduction_to_monster = (battle: BattleState, {monsterId, monsterType}: ApplyIntroductionToMonsterInstr):BattleState => {
+export function apply_introduction_to_monster(battle: BattleState, {monsterId, monsterType}: ApplyIntroductionToMonsterInstr):BattleState {
   if (battle.monsters[monsterId]){
     throw 'Already a monster existing with that Id';
   }

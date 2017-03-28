@@ -17,6 +17,7 @@ export interface MonsterVars {
   HP?: number
   drained?: number
   killedBy?: string
+  escaped?: true
 }
 
 export interface MonsterState {

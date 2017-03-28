@@ -7,7 +7,7 @@ interface ApplyDamageToMonsterInstr {
   monsterDMG: CalculationResult
 }
 
-export const apply_damage_to_monster = (battle:BattleState, {monsterId,heroId,monsterDMG}: ApplyDamageToMonsterInstr): BattleState => {
+export function apply_damage_to_monster (battle:BattleState, {monsterId,heroId,monsterDMG}: ApplyDamageToMonsterInstr): BattleState {
   const ret = deepCopy(battle);
   let target = ret.monsters[monsterId];
   let dealt = Math.min(target.vars.HP, monsterDMG.value);

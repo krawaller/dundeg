@@ -12,7 +12,7 @@ interface InstrDamageVsMonster {
   powerDie?: number
 }
 
-export const calculate_damage_vs_monster = (battle: BattleState, instr: InstrDamageVsMonster): CalculationResult => {
+export function calculate_damage_vs_monster (battle: BattleState, instr: InstrDamageVsMonster): CalculationResult {
   let monster = battle.monsters[instr.monsterId];
   let hero = battle.heroes[instr.heroId];
   let val = {
@@ -41,4 +41,4 @@ export const calculate_damage_vs_monster = (battle: BattleState, instr: InstrDam
     }
   }
   return val;
-};
+}
