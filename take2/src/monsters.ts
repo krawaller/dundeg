@@ -30,6 +30,14 @@ export const monsters: MonsterBook = {
     value: 1,
     skills: {}
   },
+  ghoulTroll: {
+    name: 'Ghoul Troll',
+    traits: { undead: true },
+    stats: { ATK: 6, ARM: 0, HP: 10 },
+    targets: 'CON+',
+    value: 2,
+    skills: { drain: true, fear: true }
+  },
   manAtArms: {
     name: 'Man-At-Arms',
     traits: { human: true, law: true, militant: true },
