@@ -4,7 +4,7 @@ import { lastLogHasStr, makeHero, makeMonster } from '../testutils';
 import { BattleState } from '../../src/interfaces';
 import { apply_damage_to_hero } from '../../src/apply/apply_damage_to_hero';
 
-test('the thief skill', t => {
+test('the monster thief skill', t => {
   const battle: BattleState = {
     heroes: {
       hero: makeHero('bloodsportBrawler',{HP: 7, gold: 7})

@@ -3,7 +3,7 @@ import { makeMonster, makeHero } from '../testutils';
 import { BattleState, Attack } from '../../src/interfaces';
 import { calculate_damage_vs_monster } from '../../src/calculate/calculate_damage_vs_monster';
 
-test('the Exterminator hero skill', t => {
+test('the rage hero skill', t => {
   const battle: BattleState = {
     heroes: {
       rager: makeHero('bloodsportBrawler',{stance:'assault'},{},{rage: true}),
