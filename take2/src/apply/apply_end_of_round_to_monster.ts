@@ -1,5 +1,5 @@
 import { BattleState } from '../interfaces';
-
+import { deepCopy } from '../utils/helpers';
 import { monsters } from '../library'
 
 interface EndOfRoundInstr {
@@ -7,7 +7,7 @@ interface EndOfRoundInstr {
 }
 
 export const apply_end_of_round_to_monster = (battle: BattleState, {monsterId}: EndOfRoundInstr):BattleState => {
-  let ret = battle; // TODO - copy
+  let ret = deepCopy(battle);
   let monster = ret.monsters[monsterId];
   let blueprint = monsters[monster.blueprint];
   if (monster.vars.drained){

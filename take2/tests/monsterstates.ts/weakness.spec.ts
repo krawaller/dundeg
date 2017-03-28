@@ -1,22 +1,15 @@
 import * as test from "tape";
-
+import { makeMonster, makeHero } from '../testutils';
 import { BattleState } from '../../src/interfaces';
 import { calculate_damage_vs_monster } from '../../src/calculate/calculate_damage_vs_monster';
 
 test('the Weakness state caused by Find Weakness skill', t => {
   const battle: BattleState = {
     heroes: {
-      hero: {
-        blueprint: 'bloodsportBrawler',
-        skills: {}, vars: {}, items: {}
-      }
+      hero: makeHero('bloodsportBrawler')
     },
     monsters: {
-      weakness: {
-        blueprint: 'slitherFish',
-        vars: {},
-        states: {weakness: true}
-      }
+      weakness: makeMonster('slitherFish',{},{weakness:true})
     }
   };
 

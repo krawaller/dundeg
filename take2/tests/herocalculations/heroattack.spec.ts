@@ -1,36 +1,17 @@
 import * as test from "tape";
-
+import { makeHero, makeMonster } from '../testutils';
 import { BattleState } from '../../src/interfaces';
 import { calculate_hero_attack } from '../../src/calculate/calculate_hero_attack';
 
 test('calculate hero attack', t => {
   const battle: BattleState = {
     heroes: {
-      attackerHiPow: {
-        blueprint: 'bloodsportBrawler',
-        vars: { stance: 'assault', POW: 4, attackDice: [1,3] },
-        states: {},
-        items: {}
-      },
-      attackerLoPow: {
-        blueprint: 'bloodsportBrawler',
-        vars: { stance: 'assault', POW: 2, attackDice: [1,3] },
-        states: {},
-        items: {}
-      },
-      defender: {
-        blueprint: 'hinterLander',
-        vars: { stance: 'defence', POW: 6, attackDice: [5,2] },
-        states: {},
-        items: {}
-      }
+      attackerHiPow: makeHero('bloodsportBrawler',{ stance: 'assault', POW: 4, attackDice: [1,3] }),
+      attackerLoPow: makeHero('bloodsportBrawler',{ stance: 'assault', POW: 2, attackDice: [1,3] }),
+      defender: makeHero('hinterLander',{ stance: 'defence', POW: 6, attackDice: [5,2] })
     },
     monsters: {
-      monster: {
-        blueprint: 'slitherFish',
-        vars: {},
-        states: {}
-      }
+      monster: makeMonster('slitherFish')
     }
   };
 

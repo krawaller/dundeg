@@ -1,27 +1,16 @@
 import * as test from "tape";
-
+import { makeMonster, makeHero } from '../testutils';
 import { BattleState, Attack } from '../../src/interfaces';
 import { calculate_damage_vs_monster } from '../../src/calculate/calculate_damage_vs_monster';
 
 test('the Exterminator hero skill', t => {
   const battle: BattleState = {
     heroes: {
-      rager: {
-        blueprint: 'bloodsportBrawler',
-        skills: { rage: true },
-        vars: { stance: 'assault' }
-      },
-      defendingRager: {
-        blueprint: 'bloodsportBrawler',
-        skills: { rage: true },
-        vars: { stance: 'defence' }
-      }
+      rager: makeHero('bloodsportBrawler',{stance:'assault'},{},{rage: true}),
+      defendingRager: makeHero('bloodsportBrawler',{stance:'defence'},{},{rage: true}),
     },
     monsters: {
-      monster: {
-        blueprint: 'slitherFish',
-        states: {},
-      }
+      monster: makeMonster('slitherFish')
     }
   };
 

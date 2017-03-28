@@ -1,5 +1,5 @@
 import * as test from "tape";
-import { lastLogHasStr } from '../testutils';
+import { lastLogHasStr, makeMonster, makeHero } from '../testutils';
 
 import { BattleState } from '../../src/interfaces';
 import { apply_damage_to_hero } from '../../src/apply/apply_damage_to_hero';
@@ -8,17 +8,10 @@ import { apply_end_of_round_to_monster } from '../../src/apply/apply_end_of_roun
 test('the drain monster skill', t => {
   const battle: BattleState = {
     heroes: {
-      hero: {
-        blueprint: 'bloodsportBrawler',
-        vars: { HP: 3 }
-      }
+      hero: makeHero('bloodsportBrawler', {HP: 3})
     },
     monsters: {
-      drainer: {
-        blueprint: 'ghoulTroll', // has drain
-        vars: { drained: 2, HP: 7 }, // HP 10 is natural max
-        states: {}
-      }
+      drainer: makeMonster('ghoulTroll',{drained: 2, HP: 9})
     },
     log: []
   };

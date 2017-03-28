@@ -1,5 +1,5 @@
 import * as test from "tape";
-
+import { makeMonster } from '../testutils';
 import { BattleState } from '../../src/interfaces';
 import { monsters } from '../../src/library';
 import { calculate_monster_attack } from '../../src/calculate/calculate_monster_attack';
@@ -8,21 +8,9 @@ test('horde monster skill', t => {
   const battle: BattleState = {
     heroes: {},
     monsters: {
-      nacht: {
-        blueprint: 'nachtDrekSlicer', // has horde(weird)
-        vars: {},
-        states: {}
-      },
-      rat: {
-        blueprint: 'ratThing', // has weird
-        vars: {},
-        states: {}
-      },
-      slither: {
-        blueprint: 'slitherFish', // no weird
-        vars: {},
-        states: {}
-      }
+      nacht: makeMonster('nachtDrekSlicer'),
+      rat: makeMonster('ratThing'),
+      slither: makeMonster('slitherFish')
     }
   };
 

@@ -1,5 +1,5 @@
 import * as test from "tape";
-
+import { makeHero } from '../testutils';
 import { BattleState } from '../../src/interfaces';
 import { heroes } from '../../src/library';
 import { calculate_hero_stat } from '../../src/calculate/calculate_hero_stat';
@@ -7,12 +7,7 @@ import { calculate_hero_stat } from '../../src/calculate/calculate_hero_stat';
 test('exalted heroes', t => {
   const battle: BattleState = {
     heroes: {
-      id1: {
-        blueprint: 'bloodsportBrawler',
-        vars: {},
-        states: { exalted: true },
-        items: {}
-      }
+      id1: makeHero('bloodsportBrawler',{},{exalted:true})
     },
     monsters: {}
   };

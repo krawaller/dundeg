@@ -1,5 +1,5 @@
 import * as test from "tape";
-import { lastLogHasStr } from '../testutils';
+import { lastLogHasStr, makeHero, makeMonster } from '../testutils';
 
 import { BattleState } from '../../src/interfaces';
 import { apply_damage_to_hero } from '../../src/apply/apply_damage_to_hero';
@@ -7,17 +7,10 @@ import { apply_damage_to_hero } from '../../src/apply/apply_damage_to_hero';
 test('the thief skill', t => {
   const battle: BattleState = {
     heroes: {
-      hero: {
-        blueprint: 'bloodsportBrawler',
-        vars: { HP: 7, gold: 7 }
-      }
+      hero: makeHero('bloodsportBrawler',{HP: 7, gold: 7})
     },
     monsters: {
-      monster: {
-        blueprint: 'ratThing', // has thief
-        vars: {},
-        states: {}
-      }
+      monster: makeMonster('ratThing') // has thief
     },
     log: []
   };

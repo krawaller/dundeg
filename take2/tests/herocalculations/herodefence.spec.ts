@@ -1,48 +1,19 @@
 import * as test from "tape";
-
+import { makeHero, makeMonster } from '../testutils';
 import { BattleState } from '../../src/interfaces';
 import { calculate_hero_defence } from '../../src/calculate/calculate_hero_defence';
 
 test('calculate hero defence', t => {
   const battle: BattleState = {
     heroes: {
-      defenderHiPow: {
-        blueprint: 'bloodsportBrawler',
-        vars: { stance: 'defence', POW: 4, defenceDice: [1,3] },
-        states: {},
-        items: {}
-      },
-      defenderLoPow: {
-        blueprint: 'bloodsportBrawler',
-        vars: { stance: 'defence', POW: 2, defenceDice: [1,3] },
-        states: {},
-        items: {}
-      },
-      failedDefenderNoPick: {
-        blueprint: 'bloodsportBrawler',
-        vars: { stance: 'defence', POW: 4, defenceDice: [1,3], failedDefence: true },
-        states: {},
-        items: {}
-      },
-      failedDefenderPick: {
-        blueprint: 'bloodsportBrawler',
-        vars: { stance: 'defence', POW: 2, defenceDice: [1,3], failedDefence: true, usePowForDefence: true },
-        states: {},
-        items: {}
-      },
-      assaulter: {
-        blueprint: 'hinterLander',
-        vars: { stance: 'assault', POW: 6, defenceDice: [5,2] },
-        states: {},
-        items: {}
-      }
+      defenderHiPow: makeHero('bloodsportBrawler',{stance: 'defence', POW: 4, defenceDice: [1,3]}),
+      defenderLoPow: makeHero('bloodsportBrawler',{stance: 'defence', POW: 2, defenceDice: [1,3]}),
+      failedDefenderNoPick: makeHero('bloodsportBrawler',{stance: 'defence', POW: 4, defenceDice: [1,3], failedDefence: true}),
+      failedDefenderPick: makeHero('bloodsportBrawler',{stance: 'defence', POW: 2, defenceDice: [1,3], failedDefence: true, usePowForDefence: true}),
+      assaulter: makeHero('bloodsportBrawler',{stance: 'assault', POW: 6, defenceDice: [5,2]}),
     },
     monsters: {
-      monster: {
-        blueprint: 'slitherFish',
-        vars: {},
-        states: {}
-      }
+      monster: makeMonster('slitherFish')
     }
   };
 

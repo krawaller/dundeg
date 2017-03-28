@@ -2,6 +2,8 @@ import { BattleState, HeroStatName, Attack, AttackOptions, ItemName, Calculation
 
 import { monsters, heroes } from '../library';
 
+import { deepCopy } from '../utils/helpers';
+
 interface ApplyDamageToHeroInstr {
   heroId: string,
   monsterId: string,
@@ -11,7 +13,7 @@ interface ApplyDamageToHeroInstr {
 // TODO - log messages!
 
 export const apply_damage_to_hero = (battle: BattleState, {heroId,monsterId,heroDMG}: ApplyDamageToHeroInstr): BattleState => {
-  let ret = battle; // TODO - copy;
+  let ret = deepCopy(battle);
   let monster = ret.monsters[monsterId];
   let target = ret.heroes[heroId];
   let blueprint = monsters[monster.blueprint];

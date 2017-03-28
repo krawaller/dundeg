@@ -1,5 +1,5 @@
 import * as test from "tape";
-import { lastLogHasStr } from '../testutils';
+import { lastLogHasStr, makeHero, makeMonster } from '../testutils';
 
 import { BattleState } from '../../src/interfaces';
 import { apply_damage_to_hero } from '../../src/apply/apply_damage_to_hero';
@@ -7,23 +7,11 @@ import { apply_damage_to_hero } from '../../src/apply/apply_damage_to_hero';
 test('apply damage to hero', t => {
   const battle: BattleState = {
     heroes: {
-      hero: {
-        blueprint: 'bloodsportBrawler',
-        vars: { HP: 20 },
-        states: {}
-      }
+      hero: makeHero('bloodsportBrawler', {HP: 20})
     },
     monsters: {
-      infecter: {
-        blueprint: 'megaRat',
-        vars: {},
-        states: {}
-      },
-      noninfecter: {
-        blueprint: 'manAtArms',
-        vars: {},
-        states: {}
-      }
+      infecter: makeMonster('megaRat'),
+      noninfecter: makeMonster('manAtArms')
     },
     log: []
   };

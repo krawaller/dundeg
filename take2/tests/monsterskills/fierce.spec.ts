@@ -1,5 +1,5 @@
 import * as test from "tape";
-
+import { makeMonster, makeHero } from '../testutils';
 import { BattleState } from '../../src/interfaces';
 import { monsters } from '../../src/library';
 import { calculate_monster_attack } from '../../src/calculate/calculate_monster_attack';
@@ -7,24 +7,11 @@ import { calculate_monster_attack } from '../../src/calculate/calculate_monster_
 test('monster fierce state', t => {
   const battle: BattleState = {
     heroes: {
-      assaulter: {
-        blueprint: 'bloodsportBrawler',
-        vars: { stance: 'assault'},
-        states: {},
-        items: {}
-      },
-      defender: {
-        blueprint: 'bloodsportBrawler',
-        vars: { stance: 'defence' },
-        states: {},
-        items: {}
-      }
+      assaulter: makeHero('bloodsportBrawler',{stance:'assault'}),
+      defender: makeHero('bloodsportBrawler',{stance:'defence'})
     },
     monsters: {
-      fierce: {
-        blueprint: '_fierceTestMonster',
-        vars: {}
-      }
+      fierce: makeMonster('_fierceTestMonster')
     }
   };
 

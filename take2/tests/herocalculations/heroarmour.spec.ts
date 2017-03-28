@@ -1,4 +1,5 @@
 import * as test from "tape";
+import { makeHero } from '../testutils';
 
 import { BattleState } from '../../src/interfaces';
 import { calculate_hero_armour } from '../../src/calculate/calculate_hero_armour';
@@ -6,12 +7,7 @@ import { calculate_hero_armour } from '../../src/calculate/calculate_hero_armour
 test('calc hero ARM', t => {
   const battle: BattleState = {
     heroes: {
-      hero: {
-        blueprint: 'bloodsportBrawler',
-        vars: {},
-        states: {},
-        items: {}
-      }
+      hero: makeHero('bloodsportBrawler')
     },
     monsters: {}
   };

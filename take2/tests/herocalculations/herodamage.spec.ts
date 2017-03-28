@@ -1,22 +1,15 @@
 import * as test from "tape";
-
+import { makeHero, makeMonster } from '../testutils';
 import { BattleState } from '../../src/interfaces';
 import { calculate_damage_vs_hero } from '../../src/calculate/calculate_damage_vs_hero';
 
 test('calculating damage vs hero', t => {
   const battle: BattleState = {
     heroes: {
-      hero: {
-        blueprint: 'bloodsportBrawler',
-        skills: {}, items: {}, vars: {}
-      }
+      hero: makeHero('bloodsportBrawler')
     },
     monsters: {
-      monster: {
-        blueprint: 'slitherFish',
-        vars: {},
-        states: {}
-      }
+      monster: makeMonster('slitherFish')
     }
   };
   const input = {
