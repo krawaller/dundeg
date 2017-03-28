@@ -32,9 +32,7 @@ export interface HeroVars {
 export interface HeroState {
   blueprint?: HeroBase
   vars?: HeroVars
-  states?: {
-    [idx: string]: true
-  }
+  states?: HeroSkills
   items?: {
     [idx: string]: true
   }
@@ -44,3 +42,8 @@ export interface HeroState {
 }
 
 export type HeroBase = 'bloodsportBrawler' | 'hinterLander';
+
+export interface HeroSkills {
+  exterminator?: true,
+  rage?: true
+}

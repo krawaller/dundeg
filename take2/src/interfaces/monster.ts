@@ -12,9 +12,7 @@ export interface MonsterDefinition {
   }
   targets: string
   value: number,
-  skills?: {
-    [idx:string]: true
-  }
+  skills?: MonsterSkills
 }
 
 export interface MonsterVars {
@@ -32,3 +30,9 @@ export interface MonsterState {
 
 export type MonsterBase = '_fierceTestMonster' | 'backAlleyBruiser' | 'ghoulTroll' | 'manAtArms' | 'ratThing' | 'swampTroll' | 'slitherFish';
 
+export interface MonsterSkills {
+  drain?: true,
+  fierce?: true,
+  horde?: true,
+  thief?: true
+}
