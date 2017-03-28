@@ -3,7 +3,7 @@ import * as test from "tape";
 import { BattleState } from '../../src/interfaces';
 import { monsters } from '../../src/monsters';
 import { calculate_monster_armour } from '../../src/calculate/calculate_monster_armour';
-import { calculate_hero_attack_options } from '../../src/calculate/calculate_hero_attack_options';
+import { find_hero_attack_options } from '../../src/utils/find_hero_attack_options';
 
 test('skinning knife', t => {
   const battle: BattleState = {
@@ -29,7 +29,7 @@ test('skinning knife', t => {
   const armourForFilth = calculate_monster_armour(battle, {monsterId: 'filth', using: 'skinningKnife'});
   t.equal(armourForFilth.value, monsters[battle.monsters.filth.blueprint].stats.ARM - 1, 'deducts 1 ARM versus filth');
 
-  const attacks = calculate_hero_attack_options(battle, {heroId: 'wielder'});
+  const attacks = find_hero_attack_options(battle, {heroId: 'wielder'});
   t.deepEqual(attacks.skinningKnife, {
     using: 'skinningKnife',
     type: 'meelee',

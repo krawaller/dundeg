@@ -5,7 +5,7 @@ import { heroes } from '../heroes';
 
 interface InstrJustHeroId { heroId: string }
 
-export const calculate_hero_attack_options = (battle: BattleState, instr: InstrJustHeroId) => {
+export const find_hero_attack_options = (battle: BattleState, instr: InstrJustHeroId) => {
   let ret: AttackOptions = {};
   let hero = battle.heroes[instr.heroId];
   if (hero.items.spikedGauntlet){

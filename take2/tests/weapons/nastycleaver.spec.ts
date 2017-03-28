@@ -3,7 +3,7 @@ import * as test from "tape";
 import { BattleState } from '../../src/interfaces';
 import { monsters } from '../../src/monsters';
 import { calculate_damage_vs_monster } from '../../src/calculate/calculate_damage_vs_monster';
-import { calculate_hero_attack_options } from '../../src/calculate/calculate_hero_attack_options';
+import { find_hero_attack_options } from '../../src/utils/find_hero_attack_options';
 
 test('Nasty Cleaver', t => {
   const battle: BattleState = {
@@ -34,7 +34,7 @@ test('Nasty Cleaver', t => {
 
   t.plan(4);
 
-  const attacks = calculate_hero_attack_options(battle, {heroId: 'assaultingStrongWielder'});
+  const attacks = find_hero_attack_options(battle, {heroId: 'assaultingStrongWielder'});
   t.deepEqual(attacks.nastyCleaver, {
     using: 'nastyCleaver',
     type: 'meelee',
