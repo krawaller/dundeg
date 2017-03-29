@@ -5,7 +5,7 @@ import { BattleState } from '../../src/interfaces';
 import { apply_damage_to_hero } from '../../src/apply/apply_damage_to_hero';
 
 test('the monster thief skill', t => {
-  const battle: BattleState = {
+  let battle: BattleState = {
     heroes: {
       hero: makeHero('bloodsportBrawler',{HP: 7, gold: 7})
     },
@@ -17,21 +17,21 @@ test('the monster thief skill', t => {
   const blow = { heroId: 'hero', monsterId: 'monster', heroDMG: {value: 4, history: []} }
   const failedBlow = { heroId: 'hero', monsterId: 'monster', heroDMG: {value: 0, history: []} }
 
-  t.plan(8);
+  battle = apply_damage_to_hero(battle, blow);
+  t.equal(battle.heroes.hero.vars.HP, 7, 'dmg was NOT deducted from HP');
+  t.equal(battle.heroes.hero.vars.gold, 3, 'dmg was deducted from gold instead');
+  t.ok( lastLogHasStr(battle, 'stole') );
 
-  let result = apply_damage_to_hero(battle, blow);
-  t.equal(result.heroes.hero.vars.HP, 7, 'dmg was NOT deducted from HP');
-  t.equal(result.heroes.hero.vars.gold, 3, 'dmg was deducted from gold instead');
-  t.ok( lastLogHasStr(result, 'stole') );
+  battle = apply_damage_to_hero(battle, failedBlow);
+  t.ok( lastLogHasStr(battle, 'but') );
 
-  result = apply_damage_to_hero(result, failedBlow);
-  t.ok( lastLogHasStr(result, 'but') );
+  battle = apply_damage_to_hero(battle, blow);
+  t.equal(battle.heroes.hero.vars.gold, 0, 'gp dmg was floored at 0');
+  t.ok( lastLogHasStr(battle, 'broke') );
 
-  result = apply_damage_to_hero(result, blow);
-  t.equal(result.heroes.hero.vars.gold, 0, 'gp dmg was floored at 0');
-  t.ok( lastLogHasStr(result, 'broke') );
+  battle = apply_damage_to_hero(battle, blow);
+  t.equal(battle.heroes.hero.vars.gold, 0, 'gp still 0');
+  t.ok( lastLogHasStr(battle, 'already broke') );
 
-  result = apply_damage_to_hero(result, blow);
-  t.equal(result.heroes.hero.vars.gold, 0, 'gp still 0');
-  t.ok( lastLogHasStr(result, 'already broke') );
+  t.end();
 });

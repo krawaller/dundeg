@@ -22,19 +22,17 @@ test('spiked gauntlets', t => {
     monsters: {}
   };
 
-  t.plan(2);
+  t.deepEqual(
+    find_hero_attack_options(battle, {heroId: 'assaulter'}).spikedGauntlet,
+    { using: 'spikedGauntlet', type: 'meelee', stat: 'STR' },
+    'STR attack in assault mode'
+  );
 
-  const res1 = find_hero_attack_options(battle, {heroId: 'assaulter'});
-  t.deepEqual(res1.spikedGauntlet, {
-    using: 'spikedGauntlet',
-    type: 'meelee',
-    stat: 'STR'
-  }, 'STR attack in assault mode');
+  t.deepEqual(
+    find_hero_attack_options(battle, {heroId: 'defender'}).spikedGauntlet,
+    { using: 'spikedGauntlet', type: 'meelee', stat: 'AGI' },
+    'AGI attack in defence mode'
+  );
 
-  const res2 = find_hero_attack_options(battle, {heroId: 'defender'});
-  t.deepEqual(res2.spikedGauntlet, {
-    using: 'spikedGauntlet',
-    type: 'meelee',
-    stat: 'AGI'
-  }, 'AGI attack in defence mode');
+  t.end();
 });

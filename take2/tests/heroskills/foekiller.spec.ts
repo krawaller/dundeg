@@ -14,8 +14,6 @@ test('the foekiller hero skill', t => {
     }
   };
 
-  t.plan(4);
-
   t.equal(
     calculate_damage_vs_monster(battle, {
       monsterId: 'hasVal3',
@@ -62,4 +60,5 @@ test('the foekiller hero skill', t => {
     'foeKiller has no effect when not in assault mode'
   );
 
+  t.end();
 });

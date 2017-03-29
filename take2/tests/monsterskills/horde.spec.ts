@@ -8,32 +8,41 @@ test('horde monster skill', t => {
   const battle: BattleState = {
     heroes: {},
     monsters: {
-      nacht: makeMonster('nachtDrekSlicer'),
+      nacht: makeMonster('nachtDrekSlicer'), // Has horde(weird)
       rat: makeMonster('ratThing'),
       slither: makeMonster('slitherFish')
     }
   };
 
-  t.plan(4);
-
-  let res1 = calculate_monster_attack(battle, {monsterId: 'nacht'});
-  t.equal(res1.value, monsters.nachtDrekSlicer.stats.ATK + 1, 'got 1 extra since ratThing is weird');
+  t.equal(
+    calculate_monster_attack(battle, {monsterId: 'nacht'}).value,
+    monsters.nachtDrekSlicer.stats.ATK + 1,
+    'got 1 extra since ratThing is weird'
+  );
 
   battle.monsters.rat.vars.killedBy = 'foo';
-
-  const res2 = calculate_monster_attack(battle, {monsterId: 'nacht'});
-  t.equal(res2.value, monsters.nachtDrekSlicer.stats.ATK, 'no extra for dead monster');
+  t.equal(
+    calculate_monster_attack(battle, {monsterId: 'nacht'}).value,
+    monsters.nachtDrekSlicer.stats.ATK,
+    'no extra for dead monster'
+  );
 
   delete battle.monsters.rat.vars.killedBy;
   battle.monsters.rat.vars.escaped = true;
-
-  const res3 = calculate_monster_attack(battle, {monsterId: 'nacht'});
-  t.equal(res3.value, monsters.nachtDrekSlicer.stats.ATK, 'no extra for escaped monster');
+  t.equal(
+    calculate_monster_attack(battle, {monsterId: 'nacht'}).value,
+    monsters.nachtDrekSlicer.stats.ATK,
+    'no extra for escaped monster'
+  );
 
   delete battle.monsters.rat;
+  t.equal(
+    calculate_monster_attack(battle, {monsterId: 'nacht'}).value,
+    monsters.nachtDrekSlicer.stats.ATK,
+    'no extra when no other weirdo'
+  );
 
-  const res4 = calculate_monster_attack(battle, {monsterId: 'nacht'});
-  t.equal(res4.value, monsters.nachtDrekSlicer.stats.ATK, 'no extra when no other weirdo');
+  t.end();
 
 });
 

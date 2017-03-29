@@ -12,14 +12,17 @@ test('calculating damage vs monster', t => {
       monster: makeMonster('slitherFish')
     }
   };
-  const input = {
-    monsterId: 'monster',
-    heroATK: {value: 6, history:[]},
-    monsterARM: {value: 4, history:[]},
-    heroId: 'hero'
-  }
-  const result = calculate_damage_vs_monster(battle, input);
 
-  t.plan(1);
-  t.equal(result.value, 2, 'by default it is ATK - ARM');
+  t.equal(
+    calculate_damage_vs_monster(battle, {
+      monsterId: 'monster',
+      heroATK: {value: 6, history:[]},
+      monsterARM: {value: 4, history:[]},
+      heroId: 'hero'
+    }).value,
+    2,
+    'by default it is ATK - ARM'
+  );
+
+  t.end();
 });

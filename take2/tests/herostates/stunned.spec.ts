@@ -5,7 +5,7 @@ import { BattleState } from '../../src/interfaces';
 import { apply_end_of_round_to_hero } from '../../src/apply/apply_end_of_round_to_hero';
 
 test('the stunned hero state', t => {
-  const battle: BattleState = {
+  let battle: BattleState = {
     heroes: {
       hero: makeHero('bloodsportBrawler', {}, {stunned: true})
     },
@@ -13,9 +13,9 @@ test('the stunned hero state', t => {
     log: []
   };
 
-  let result = apply_end_of_round_to_hero(battle, {heroId: 'hero'});
-  t.ok(!result.heroes.hero.states.stunned, 'stunned was removed')
-  t.ok(lastLogHasStr(result, 'stunned'), 'message announced stun removal');
+  battle = apply_end_of_round_to_hero(battle, {heroId: 'hero'});
+  t.ok(!battle.heroes.hero.states.stunned, 'stunned was removed')
+  t.ok(lastLogHasStr(battle, 'stunned'), 'message announced stun removal');
 
   t.end();
 });

@@ -8,13 +8,16 @@ test('calculating monster armour', t => {
   const battle: BattleState = {
     heroes: {},
     monsters: {
-      id1: makeMonster('slitherFish')
+      monster: makeMonster('slitherFish')
     }
   };
 
-  t.plan(1);
+  t.equal(
+    calculate_monster_armour(battle, {monsterId: 'monster'}).value,
+    monsters.slitherFish.stats.ARM,
+    'just normal base armour value'
+  );
 
-  const res1 = calculate_monster_armour(battle, {monsterId: 'id1'});
-  t.equal(res1.value, monsters.slitherFish.stats.ARM, 'just normal base armour value');
+  t.end();
 
 });

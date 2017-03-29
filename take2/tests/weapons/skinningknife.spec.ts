@@ -21,18 +21,23 @@ test('skinning knife', t => {
     }
   };
 
-  t.plan(3);
+  t.equal(
+    calculate_monster_armour(battle, {monsterId: 'nonfilth', using: 'skinningKnife'}).value,
+    monsters[battle.monsters.nonfilth.blueprint].stats.ARM,
+    'just normal base value since wasnt filth'
+  );
 
-  const armourForNonFilth = calculate_monster_armour(battle, {monsterId: 'nonfilth', using: 'skinningKnife'});
-  t.equal(armourForNonFilth.value, monsters[battle.monsters.nonfilth.blueprint].stats.ARM, 'just normal base value');
+  t.equal(
+    calculate_monster_armour(battle, {monsterId: 'filth', using: 'skinningKnife'}).value,
+    monsters[battle.monsters.filth.blueprint].stats.ARM - 1,
+    'deducts 1 ARM versus filth'
+  );
 
-  const armourForFilth = calculate_monster_armour(battle, {monsterId: 'filth', using: 'skinningKnife'});
-  t.equal(armourForFilth.value, monsters[battle.monsters.filth.blueprint].stats.ARM - 1, 'deducts 1 ARM versus filth');
+  t.deepEqual(
+    find_hero_attack_options(battle, {heroId: 'wielder'}).skinningKnife,
+    { using: 'skinningKnife', type: 'meelee', stat: 'AGI' },
+    'skinning knife offers AGI attack'
+  );
 
-  const attacks = find_hero_attack_options(battle, {heroId: 'wielder'});
-  t.deepEqual(attacks.skinningKnife, {
-    using: 'skinningKnife',
-    type: 'meelee',
-    stat: 'AGI'
-  }, 'skinning knife offers AGI attack');
+  t.end();
 });

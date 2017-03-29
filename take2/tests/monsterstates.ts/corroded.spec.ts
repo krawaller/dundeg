@@ -12,9 +12,12 @@ test('corroded monsters', t => {
     }
   };
 
-  t.plan(2);
+  t.equal(
+    calculate_monster_armour(battle, {monsterId: 'corroded'}).value,
+    0, 'corroded means arm is 0'
+  );
 
-  const res2 = calculate_monster_armour(battle, {monsterId: 'corroded'});
-  t.equal(res2.value, 0, 'corroded means arm is 0');
   t.ok( monsters[battle.monsters.corroded.blueprint].stats.ARM, 'monster would have had armour otherwise' );
+
+  t.end();
 });
