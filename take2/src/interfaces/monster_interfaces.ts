@@ -1,3 +1,5 @@
+import { HeroId } from './hero_interfaces';
+
 export type MonsterId = string;
 
 export interface MonsterStats {
@@ -32,11 +34,12 @@ export interface MonsterState {
 
 export interface MonsterStates {
   corroded?: true
-  weakness?: true
+  weakness?: HeroId
   dazed?: true
+  bloodCurse?: HeroId
 }
 
-export type MonsterBase = '_fierceTestMonster' | 'backAlleyBruiser' | 'ghoulTroll' | 'manAtArms' | 'megaRat' | 'nachtDrekSlicer' | 'ratThing' | 'slimeCorpse' | 'swampTroll' | 'slitherFish';
+export type MonsterBase = '_fierceTestMonster' | 'backAlleyBruiser' | 'ghoulTroll' | 'manAtArms' | 'megaRat' | 'nachtDrekSlicer' | 'ratThing' | 'slimeCorpse' | 'shambler' | 'swampTroll' | 'slitherFish';
 
 export interface MonsterSkills {
   ambush?: true

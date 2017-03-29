@@ -50,4 +50,4 @@ export interface PartyStatCheckOrderedPart {
   heroes: HeroId[]
 }
 
-export type StatCheckReason = '_testReason' | 'ambush';
+export type StatCheckReason = '_testReason' | 'ambush' | 'monsterTargetAcquisition' | 'bloodCurse' | 'weakness' ;

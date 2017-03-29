@@ -1,8 +1,9 @@
 import { BattleState, HeroStatName, Attack, AttackOptions, ItemName, CalculationResult } from '../interfaces';
 
 import { monsters, heroes } from '../library';
-
-import { deepCopy } from '../utils/helpers';
+import { find_standing_monsters } from '../find/find_standing_monsters';
+import { deepCopy, isMonsterAlive } from '../utils/helpers';
+import { apply_damage_to_monster } from './apply_damage_to_monster';
 
 interface ApplyDamageToHeroInstr {
   heroId: string,
@@ -48,8 +49,17 @@ export function apply_damage_to_hero (battle: BattleState, {heroId,monsterId,her
         target.states.infected = true;
         ret.log.push( [monRef, 'infected', heroRef, 'preventing HP recovery during next rest'] );
       }
+      if (target.vars.bloodCurseLink){
+        let monsterVictim = battle.monsters[target.vars.bloodCurseLink];
+        if (monsterVictim && isMonsterAlive(monsterVictim)){
+          let monsterDMG = {
+            value: dealt, history: [['Blood curse passes wounds on',dealt]]
+          };
+          ret = apply_damage_to_monster(ret, {monsterId: target.vars.bloodCurseLink, monsterDMG, heroId, wasBloodCurse: true });
+        }
+      }
     } else {
-      ret.log.push( [monRef, 'attacked', heroRef, 'but damage was', heroDMG] ); // 0 damage, stil lwant to expose calculation
+      ret.log.push( [monRef, 'attacked', heroRef, 'but damage was', heroDMG] ); // 0 damage, still want to expose calculation
     }
   }
   return ret;

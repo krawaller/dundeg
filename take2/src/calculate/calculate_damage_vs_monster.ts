@@ -14,6 +14,7 @@ interface CalculateMonsterDamageInstr {
 
 export function calculate_damage_vs_monster (battle: BattleState, instr: CalculateMonsterDamageInstr): CalculationResult {
   let monster = battle.monsters[instr.monsterId];
+  let monsterBlueprint = monsters[monster.blueprint];
   let hero = battle.heroes[instr.heroId];
   let val = {
     history: [
@@ -31,12 +32,16 @@ export function calculate_damage_vs_monster (battle: BattleState, instr: Calcula
       val.history.push(['Found Weakness means 1 followup damage', '+1']);
       val.value++;
     }
-    if (hero.skills.exterminator && hero.vars.stance === 'assault' && monsters[monster.blueprint].traits.vermin){
+    if (hero.skills.exterminator && hero.vars.stance === 'assault' && monsterBlueprint.traits.vermin){
       val.history.push(['Exterminator deals 1 followup damage vs Vermin when assaulting', '+1']);
       val.value++;
     }
     if (hero.skills.rage && hero.vars.stance === 'assault' && instr.attack.stat === 'STR'){
       val.history.push(['Rage deals 1 followup damage when assaulting', '+1']);
+      val.value++;
+    }
+    if (hero.skills.foeKiller && hero.vars.stance === 'assault' && monsterBlueprint.value >= 3){
+      val.history.push(['Foekiller deals 1 followup damage versus value 3+ enemies', '+1']);
       val.value++;
     }
   }

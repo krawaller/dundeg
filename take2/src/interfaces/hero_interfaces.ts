@@ -20,8 +20,10 @@ export interface HeroDefinition {
   stats: HeroStats
 }
 
+export type HeroStance = 'assault' | 'defence';
+
 export interface HeroVars {
-  stance?: 'assault' | 'defence'
+  stance?: HeroStance
   ATK?: number
   POW?: number
   attackDice?: number[]
@@ -32,6 +34,8 @@ export interface HeroVars {
   escaped?: true
   HP?: number
   gold?: number
+  bloodCurseLink?: MonsterId
+  target?: MonsterId
 }
 
 export interface HeroState {
@@ -44,16 +48,19 @@ export interface HeroState {
 
 export type HeroBase = 'angelOfDeath' | 'bloodsportBrawler' | 'carnivalDrifter' | 'hinterLander' | 'infamousButcher' | 'soldierOfFortune';
 
-export type HeroSkillName = 'exterminator' | 'fieldCraft' | 'foeKiller' |  'gourmet' | 'martialDiscipline' | 'performance' | 'rage' | 'sneakAttack';
+export type HeroSkillName =  'bloodCurse' | 'exterminator' | 'fieldCraft' | 'findWeakness' | 'foeKiller' |  'gourmet' | 'martialDiscipline' | 'performance' | 'rage' | 'sixthSense' | 'sneakAttack';
 
 export interface HeroSkills {
+  bloodCurse?: true
   exterminator?: true
   fieldCraft?: true
+  findWeakness?: true
   foeKiller?: true
   gourmet?: true
   martialDiscipline?: true
   performance?: true
   rage?: true
+  sixthSense?: true
   sneakAttack?: true
 }
 
