@@ -1,5 +1,6 @@
 import * as test from "tape";
-import { makeMonster, makeHero } from '../testutils';
+import { makeMonster, makeHero, calcRes } from '../testutils';
+
 import { BattleState } from '../../src/interfaces';
 import { calculate_damage_vs_monster } from '../../src/calculate/calculate_damage_vs_monster';
 
@@ -18,8 +19,8 @@ test('the foekiller hero skill', t => {
     calculate_damage_vs_monster(battle, {
       monsterId: 'hasVal3',
       heroId: 'foekiller',
-      heroATK: {value: 6, history:[]},
-      monsterARM: {value: 4, history:[]}
+      heroATK: calcRes(6),
+      monsterARM: calcRes(4)
     }).value,
     3,
     'foeKiller gives 1 additional damage against biggie in assault'
@@ -29,8 +30,8 @@ test('the foekiller hero skill', t => {
     calculate_damage_vs_monster(battle, {
       monsterId: 'hasVal3',
       heroId: 'foekiller',
-      heroATK: {value: 4, history:[]},
-      monsterARM: {value: 4, history:[]}
+      heroATK: calcRes(4),
+      monsterARM: calcRes(4)
     }).value,
     0,
     'foeKiller has no effect when we didnt do any damage'
@@ -40,8 +41,8 @@ test('the foekiller hero skill', t => {
     calculate_damage_vs_monster(battle, {
       monsterId: 'puny',
       heroId: 'foekiller',
-      heroATK: {value: 6, history:[]},
-      monsterARM: {value: 4, history:[]},
+      heroATK: calcRes(6),
+      monsterARM: calcRes(4),
     }).value,
     2,
     'no extra against puny enemy'
@@ -53,8 +54,8 @@ test('the foekiller hero skill', t => {
     calculate_damage_vs_monster(battle, {
       monsterId: 'hasVal3',
       heroId: 'foekiller',
-      heroATK: {value: 6, history:[]},
-      monsterARM: {value: 4, history:[]}
+      heroATK: calcRes(6),
+      monsterARM: calcRes(4)
     }).value,
     2,
     'foeKiller has no effect when not in assault mode'

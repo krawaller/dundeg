@@ -7,12 +7,8 @@ import { apply_end_of_round_to_monster } from '../../src/apply/apply_end_of_roun
 
 test('the drain monster skill', t => {
   let battle: BattleState = {
-    heroes: {
-      hero: makeHero('bloodsportBrawler', {HP: 3})
-    },
-    monsters: {
-      drainer: makeMonster('ghoulTroll',{drained: 2, HP: 9})
-    },
+    heroes: { hero: makeHero('bloodsportBrawler', {HP: 3}) },
+    monsters: { drainer: makeMonster('ghoulTroll',{drained: 2, HP: 9}) },
     log: []
   };
 

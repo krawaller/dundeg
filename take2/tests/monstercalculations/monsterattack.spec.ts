@@ -7,9 +7,7 @@ import { calculate_monster_attack } from '../../src/calculate/calculate_monster_
 test('calculating monster attack', t => {
   const battle: BattleState = {
     heroes: {},
-    monsters: {
-      monster: makeMonster('slitherFish')
-    }
+    monsters: { monster: makeMonster('slitherFish') }
   };
 
   t.equal(

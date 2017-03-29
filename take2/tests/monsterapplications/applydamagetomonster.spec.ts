@@ -6,12 +6,8 @@ import { apply_damage_to_monster } from '../../src/apply/apply_damage_to_monster
 
 test('apply damage to monster', t => {
   let battle: BattleState = {
-    heroes: {
-      hero: makeHero('bloodsportBrawler')
-    },
-    monsters: {
-      monster: makeMonster('slitherFish',{HP: 7})
-    },
+    heroes: { hero: makeHero('bloodsportBrawler') },
+    monsters: { monster: makeMonster('slitherFish',{HP: 7}) },
     log: []
   };
   const blow = { heroId: 'hero', monsterId: 'monster', monsterDMG: {value: 4, history: []} }

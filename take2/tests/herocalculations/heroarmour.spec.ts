@@ -6,14 +6,14 @@ import { calculate_hero_armour } from '../../src/calculate/calculate_hero_armour
 
 test('calc hero ARM', t => {
   const battle: BattleState = {
-    heroes: {
-      hero: makeHero('bloodsportBrawler')
-    },
+    heroes: { hero: makeHero('bloodsportBrawler') },
     monsters: {}
   };
 
-  t.plan(1);
+  t.equal(
+    calculate_hero_armour(battle, {heroId: 'hero'}).value,
+    0, 'heroes have no natural armour'
+  );
 
-  const result = calculate_hero_armour(battle, {heroId: 'hero'});
-  t.deepEqual(result.value, 0, 'heroes have no natural armour');
+  t.end();
 });

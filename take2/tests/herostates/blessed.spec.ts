@@ -1,14 +1,13 @@
 import * as test from "tape";
 import { makeHero } from '../testutils';
+
 import { BattleState } from '../../src/interfaces';
 import { heroes } from '../../src/library';
 import { calculate_hero_stat } from '../../src/calculate/calculate_hero_stat';
 
-test('blessed heroes', t => {
+test('blessed hero state', t => {
   const battle: BattleState = {
-    heroes: {
-      hero: makeHero('bloodsportBrawler',{},{blessed: true})
-    },
+    heroes: { hero: makeHero('bloodsportBrawler',{},{blessed: true}) },
     monsters: {}
   };
 

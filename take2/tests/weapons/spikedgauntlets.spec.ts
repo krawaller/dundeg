@@ -1,35 +1,26 @@
 import * as test from "tape";
+import { makeHero } from '../testutils';
 
 import { BattleState } from '../../src/interfaces';
 import { find_hero_attack_options } from '../../src/find/find_hero_attack_options';
 
 test('spiked gauntlets', t => {
-  const battle: BattleState = {
+  let battle: BattleState = {
     heroes: {
-      assaulter: {
-        blueprint: 'bloodsportBrawler',
-        vars: { stance: 'assault'},
-        states: {},
-        items: { spikedGauntlet: 1 }
-      },
-      defender: {
-        blueprint: 'bloodsportBrawler',
-        vars: { stance: 'defence' },
-        states: {},
-        items: { spikedGauntlet: 1 }
-      }
+      hero: makeHero('bloodsportBrawler', {stance:'assault'}, {}, {}, ['spikedGauntlet'])
     },
     monsters: {}
   };
 
   t.deepEqual(
-    find_hero_attack_options(battle, {heroId: 'assaulter'}).spikedGauntlet,
+    find_hero_attack_options(battle, {heroId: 'hero'}).spikedGauntlet,
     { using: 'spikedGauntlet', type: 'meelee', stat: 'STR' },
     'STR attack in assault mode'
   );
 
+  battle.heroes.hero.vars.stance = 'defence';
   t.deepEqual(
-    find_hero_attack_options(battle, {heroId: 'defender'}).spikedGauntlet,
+    find_hero_attack_options(battle, {heroId: 'hero'}).spikedGauntlet,
     { using: 'spikedGauntlet', type: 'meelee', stat: 'AGI' },
     'AGI attack in defence mode'
   );

@@ -6,9 +6,7 @@ import { apply_end_of_round_to_hero } from '../../src/apply/apply_end_of_round_t
 
 test('the stunned hero state', t => {
   let battle: BattleState = {
-    heroes: {
-      hero: makeHero('bloodsportBrawler', {}, {stunned: true})
-    },
+    heroes: { hero: makeHero('bloodsportBrawler', {}, {stunned: true}) },
     monsters: {},
     log: []
   };

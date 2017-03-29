@@ -5,12 +5,8 @@ import { calculate_damage_vs_monster } from '../../src/calculate/calculate_damag
 
 test('calculating damage vs monster', t => {
   const battle: BattleState = {
-    heroes: {
-      hero: makeHero('bloodsportBrawler')
-    },
-    monsters: {
-      monster: makeMonster('slitherFish')
-    }
+    heroes: { hero: makeHero('bloodsportBrawler') },
+    monsters: { monster: makeMonster('slitherFish') }
   };
 
   t.equal(

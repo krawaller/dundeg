@@ -6,9 +6,7 @@ import { apply_introduction_to_monster } from '../../src/apply/apply_introductio
 
 test('the apply introduction to monster method', t => {
   let battle: BattleState = {
-    monsters: {
-      firstRat: makeMonster('megaRat')
-    },
+    monsters: { firstRat: makeMonster('megaRat') },
     heroes: {},
     log: []
   };

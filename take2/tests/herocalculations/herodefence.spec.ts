@@ -17,21 +17,31 @@ test('calculate hero defence', t => {
     }
   };
 
-  t.plan(5);
+  t.equal(
+    calculate_hero_defence(battle, {heroId: 'defenderHiPow'}).value,
+    4, 'defending heroes use power if higher'
+  );
 
-  const res1 = calculate_hero_defence(battle, {heroId: 'defenderHiPow'});
-  t.deepEqual(res1.value, 4, 'defending heroes use power if higher');
+  t.equal(
+    calculate_hero_defence(battle, {heroId: 'defenderLoPow'}).value,
+    3, 'defending heroes ignore power if lower'
+  );
+  
+  t.equal(
+    calculate_hero_defence(battle, {heroId: 'assaulter'}).value,
+    5, 'assaulting heroes ignore power'
+  );
 
-  const res2 = calculate_hero_defence(battle, {heroId: 'defenderLoPow'});
-  t.deepEqual(res2.value, 3, 'defending heroes ignore power if lower');
+  t.equal(
+    calculate_hero_defence(battle, {heroId: 'failedDefenderNoPick'}).value,
+    0, 'failed defenders have no defence'
+  );
 
-  const res3 = calculate_hero_defence(battle, {heroId: 'assaulter'});
-  t.deepEqual(res3.value, 5, 'assaulting heroes ignore power ');
+  t.equal(
+    calculate_hero_defence(battle, {heroId: 'failedDefenderPick'}).value,
+    2, 'failed defenders can choose to use power dice once'
+  );
 
-  const res4 = calculate_hero_defence(battle, {heroId: 'failedDefenderNoPick'});
-  t.deepEqual(res4.value, 0, 'failed defenders have no defence');
-
-  const res5 = calculate_hero_defence(battle, {heroId: 'failedDefenderPick'});
-  t.deepEqual(res5.value, 2, 'failed defenders can choose to use power dice once');
+  t.end();
 });
 

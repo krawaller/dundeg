@@ -6,12 +6,8 @@ import { apply_target_selection_to_monster } from '../../src/apply/apply_target_
 
 test('apply target selection to monster', t => {
   let battle: BattleState = {
-    heroes: {
-      hero: makeHero('bloodsportBrawler')
-    },
-    monsters: {
-      monster: makeMonster('slitherFish')
-    },
+    heroes: { hero: makeHero('bloodsportBrawler') },
+    monsters: { monster: makeMonster('slitherFish') },
     log: []
   };
 

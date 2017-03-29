@@ -1,4 +1,5 @@
 import * as test from "tape";
+import { makeHero, makeMonster } from '../testutils';
 
 import { BattleState } from '../../src/interfaces';
 import { monsters } from '../../src/library';
@@ -8,16 +9,11 @@ import { find_hero_attack_options } from '../../src/find/find_hero_attack_option
 test('skinning knife', t => {
   const battle: BattleState = {
     heroes: {
-      wielder: {
-        blueprint: 'bloodsportBrawler',
-        vars: {},
-        states: {},
-        items: { skinningKnife: 1 }
-      }
+      wielder: makeHero('bloodsportBrawler',{},{},{},['skinningKnife'])
     },
     monsters: {
-      nonfilth: { blueprint: 'manAtArms', states: {}, vars: {} },
-      filth: { blueprint: 'slitherFish', states: {}, vars: {} }
+      nonfilth: makeMonster('manAtArms'),
+      filth: makeMonster('slitherFish')
     }
   };
 

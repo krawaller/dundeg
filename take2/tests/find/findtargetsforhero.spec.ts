@@ -3,7 +3,7 @@ import { makeHero, makeMonster } from '../testutils';
 import { BattleState } from '../../src/interfaces';
 import { find_targets_for_hero } from '../../src/find/find_targets_for_hero';
 
-test('find hero options', t => {
+test('find targets for hero', t => {
   const battle: BattleState = {
     heroes: {
       disturbed: makeHero('bloodsportBrawler'),
@@ -18,11 +18,18 @@ test('find hero options', t => {
     }
   };
 
-  t.plan(2);
+  t.deepEqual(
+    find_targets_for_hero(battle, {heroId: 'disturbed'}),
+    ['disturbing','alsoDisturbing'],
+    'disturbed hero can choose between those attacking her'
+  );
 
-  let result = find_targets_for_hero(battle, {heroId: 'disturbed'});
-  t.deepEqual(result, ['disturbing','alsoDisturbing'], 'disturbed hero can choose between those attacking her');
+  t.deepEqual(
+    find_targets_for_hero(battle, {heroId: 'undisturbed'}),
+    ['disturbing','alsoDisturbing','notDisturbing'],
+    'undisturbed hero can pick whoever'
+  );
 
-  result = find_targets_for_hero(battle, {heroId: 'undisturbed'});
-  t.deepEqual(result, ['disturbing','alsoDisturbing','notDisturbing'], 'undisturbed hero can pick whoever');
+  t.end();
+
 });

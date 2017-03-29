@@ -1,20 +1,19 @@
 import * as test from "tape";
 import { makeHero } from '../testutils';
+
 import { BattleState } from '../../src/interfaces';
 import { heroes } from '../../src/library';
 import { calculate_hero_stat } from '../../src/calculate/calculate_hero_stat';
 
-test('exalted heroes', t => {
+test('exalted hero state', t => {
   const battle: BattleState = {
-    heroes: {
-      id1: makeHero('bloodsportBrawler',{},{exalted:true})
-    },
+    heroes: { hero: makeHero('bloodsportBrawler',{},{exalted:true}) },
     monsters: {}
   };
 
   t.equal(
-    calculate_hero_stat(battle, {heroId: 'id1', stat: 'MAG', reason: '_testReason'}).value,
-    heroes[battle.heroes.id1.blueprint].stats.MAG + 1,
+    calculate_hero_stat(battle, {heroId: 'hero', stat: 'MAG', reason: '_testReason'}).value,
+    heroes[battle.heroes.hero.blueprint].stats.MAG + 1,
     'exalted means 1 extra MAG'
   );
 

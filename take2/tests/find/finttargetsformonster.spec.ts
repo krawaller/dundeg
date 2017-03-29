@@ -3,7 +3,7 @@ import { makeHero, makeMonster } from '../testutils';
 import { BattleState } from '../../src/interfaces';
 import { find_targets_for_monster } from '../../src/find/find_targets_for_monster';
 
-test('find party stat', t => {
+test('find targets for monsters', t => {
   const battle: BattleState = {
     heroes: {
       has8agi: makeHero('hinterLander'),

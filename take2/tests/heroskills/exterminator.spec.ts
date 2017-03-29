@@ -1,12 +1,9 @@
 import * as test from "tape";
-import { makeHero, makeMonster } from '../testutils';
+import { makeHero, makeMonster, calcRes } from '../testutils';
+
 import { BattleState } from '../../src/interfaces';
-
 import { monsters } from '../../src/library';
-
 import { calculate_damage_vs_monster } from '../../src/calculate/calculate_damage_vs_monster';
-
-
 
 test('the Exterminator hero skill', t => {
   const battle: BattleState = {
@@ -24,8 +21,8 @@ test('the Exterminator hero skill', t => {
     calculate_damage_vs_monster(battle, {
       monsterId: 'vermin',
       heroId: 'exterminator',
-      heroATK: {value: 6, history:[]},
-      monsterARM: {value: 4, history:[]}
+      heroATK: calcRes(6),
+      monsterARM: calcRes(4)
     }).value,
     3,
     'exterminator gives 1 additional damage vs vermin'
@@ -35,8 +32,8 @@ test('the Exterminator hero skill', t => {
     calculate_damage_vs_monster(battle, {
       monsterId: 'vermin',
       heroId: 'exterminator',
-      heroATK: {value: 4, history:[]},
-      monsterARM: {value: 4, history:[]}
+      heroATK: calcRes(4),
+      monsterARM: calcRes(4)
     }).value,
     0,
     'exterminator has no effect if didnt do damage'
@@ -46,8 +43,8 @@ test('the Exterminator hero skill', t => {
     calculate_damage_vs_monster(battle, {
       monsterId: 'nonvermin',
       heroId: 'exterminator',
-      heroATK: {value: 6, history:[]},
-      monsterARM: {value: 4, history:[]}
+      heroATK: calcRes(6),
+      monsterARM: calcRes(4)
     }).value,
     2,
     'exterminator has no effect against non-vermin'
@@ -57,8 +54,8 @@ test('the Exterminator hero skill', t => {
     calculate_damage_vs_monster(battle, {
       monsterId: 'vermin',
       heroId: 'defendingExterminator',
-      heroATK: {value: 6, history:[]},
-      monsterARM: {value: 4, history:[]}
+      heroATK: calcRes(6),
+      monsterARM: calcRes(4)
     }).value,
     2,
     'defending exterminator has no effect'

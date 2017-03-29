@@ -1,6 +1,7 @@
 import {
   BattleState, MonsterBase, MonsterState, MonsterVars, MonsterStates,
-  HeroBase, HeroState, HeroStates, HeroVars, HeroSkills
+  HeroBase, HeroState, HeroStates, HeroVars, HeroSkills,
+  CalculationResult, ItemName
 } from '../src/interfaces';
 
 export function lastLogHasStr(battle: BattleState, str: string){
@@ -19,12 +20,22 @@ export function makeMonster(monsterName: MonsterBase, vars?:MonsterVars, states?
   };
 }
 
-export function makeHero(heroName: HeroBase, vars?:HeroVars, states?: HeroStates, skills?: HeroSkills): HeroState {
+export function makeHero(heroName: HeroBase, vars?:HeroVars, states?: HeroStates, skills?: HeroSkills, items?: ItemName[]): HeroState {
   return {
     blueprint: heroName,
     vars: vars || {},
     states: states || {},
-    skills: skills || {}
+    skills: skills || {},
+    items: (items||[]).reduce((mem,item)=>{
+      mem[item] = 1;
+      return mem;
+    },{})
   };
 }
 
+export function calcRes(val: any): CalculationResult {
+  return {
+    value: val,
+    history: []
+  };
+}

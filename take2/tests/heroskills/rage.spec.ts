@@ -1,5 +1,6 @@
 import * as test from "tape";
-import { makeMonster, makeHero } from '../testutils';
+import { makeMonster, makeHero, calcRes } from '../testutils';
+
 import { BattleState, Attack } from '../../src/interfaces';
 import { calculate_damage_vs_monster } from '../../src/calculate/calculate_damage_vs_monster';
 
@@ -18,8 +19,8 @@ test('the rage hero skill', t => {
     calculate_damage_vs_monster(battle, {
       monsterId: 'monster',
       heroId: 'rager',
-      heroATK: {value: 6, history:[]},
-      monsterARM: {value: 4, history:[]},
+      heroATK: calcRes(6),
+      monsterARM: calcRes(4),
       attack: <Attack>{stat: 'STR', using: 'nastyCleaver', type: 'meelee'}
     }).value,
     3,
@@ -30,8 +31,8 @@ test('the rage hero skill', t => {
     calculate_damage_vs_monster(battle, {
       monsterId: 'monster',
       heroId: 'rager',
-      heroATK: {value: 6, history:[]},
-      monsterARM: {value: 4, history:[]},
+      heroATK: calcRes(6),
+      monsterARM: calcRes(4),
       attack: <Attack>{stat: 'AGI', using:'nastyCleaver', type: 'meelee'}
     }).value,
     2,
@@ -42,8 +43,8 @@ test('the rage hero skill', t => {
     calculate_damage_vs_monster(battle, {
       monsterId: 'monster',
       heroId: 'rager',
-      heroATK: {value: 4, history:[]},
-      monsterARM: {value: 4, history:[]},
+      heroATK: calcRes(4),
+      monsterARM: calcRes(4),
       attack: <Attack>{stat: 'STR', using:'nastyCleaver', type: 'meelee'}
     }).value,
     0,
@@ -54,8 +55,8 @@ test('the rage hero skill', t => {
     calculate_damage_vs_monster(battle, {
       monsterId: 'monster',
       heroId: 'defendingRager',
-      heroATK: {value: 6, history:[]},
-      monsterARM: {value: 4, history:[]},
+      heroATK: calcRes(6),
+      monsterARM: calcRes(4),
       attack: <Attack>{stat: 'STR', using:'nastyCleaver', type: 'meelee'}
     }).value,
     2,

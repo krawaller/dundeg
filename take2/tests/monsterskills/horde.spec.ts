@@ -1,5 +1,6 @@
 import * as test from "tape";
 import { makeMonster } from '../testutils';
+
 import { BattleState } from '../../src/interfaces';
 import { monsters } from '../../src/library';
 import { calculate_monster_attack } from '../../src/calculate/calculate_monster_attack';
@@ -9,8 +10,8 @@ test('horde monster skill', t => {
     heroes: {},
     monsters: {
       nacht: makeMonster('nachtDrekSlicer'), // Has horde(weird)
-      rat: makeMonster('ratThing'),
-      slither: makeMonster('slitherFish')
+      rat: makeMonster('ratThing'), // has weird
+      slither: makeMonster('slitherFish') // doesnt have weird
     }
   };
 
