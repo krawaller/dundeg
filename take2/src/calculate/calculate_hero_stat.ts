@@ -1,10 +1,10 @@
-import { BattleState, HeroStatName, Attack, AttackOptions, ItemName, CalculationResult } from '../interfaces';
+import { BattleState, HeroStatName, CalculationResult, StatCheckReason } from '../interfaces';
 
 import { heroes } from '../library';
 
-interface InstrHeroStat { heroId: string, stat: HeroStatName, because?: string }
+interface CalculateHeroStatInstr { heroId: string, stat: HeroStatName, reason: StatCheckReason }
 
-export function calculate_hero_stat (battle: BattleState, instr: InstrHeroStat) {
+export function calculate_hero_stat (battle: BattleState, instr: CalculateHeroStatInstr): CalculationResult {
   let hero = battle.heroes[instr.heroId];
   let blueprint = heroes[hero.blueprint];
   let val = {

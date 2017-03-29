@@ -1,8 +1,8 @@
 import { BattleState, CalculationResult } from '../interfaces';
 
-interface InstrJustHeroId { heroId: string }
+interface CalculateHeroDefenceInstr { heroId: string }
 
-export function calculate_hero_defence (battle: BattleState, instr: InstrJustHeroId): CalculationResult {
+export function calculate_hero_defence (battle: BattleState, instr: CalculateHeroDefenceInstr): CalculationResult {
   let hero = battle.heroes[instr.heroId];
   let highest = Math.max.apply(Math,hero.vars.defenceDice);
   let val = {

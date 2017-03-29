@@ -14,7 +14,7 @@ test('exalted heroes', t => {
 
   t.plan(1);
 
-  const res1 = calculate_hero_stat(battle, {heroId: 'id1', stat: 'MAG'});
+  const res1 = calculate_hero_stat(battle, {heroId: 'id1', stat: 'MAG', reason: '_testReason'});
   t.deepEqual(res1.value, heroes[battle.heroes.id1.blueprint].stats.MAG + 1, 'exalted means 1 extra MAG');
 
 });

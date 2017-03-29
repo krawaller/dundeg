@@ -1,4 +1,4 @@
-import { HeroStatName, HeroState } from './hero_interfaces';
+import { HeroStatName, HeroState, HeroId } from './hero_interfaces';
 import { MonsterState } from './monster_interfaces';
 import { ItemName } from './item_interfaces';
 
@@ -35,3 +35,19 @@ export interface LogMessageMonsterRef {
 export interface LogMessageHeroRef {
   heroRef: string
 }
+
+export interface PartyStatCheck {
+  stat: HeroStatName
+  individual: {
+    [idx: string]: CalculationResult
+  },
+  ordered: PartyStatCheckOrderedPart[]
+  reason: StatCheckReason
+}
+
+export interface PartyStatCheckOrderedPart {
+  value: number
+  heroes: HeroId[]
+}
+
+export type StatCheckReason = '_testReason' | 'ambush';

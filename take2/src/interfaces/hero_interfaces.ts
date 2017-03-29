@@ -1,4 +1,6 @@
-import { Inventory } from './item_interfaces';
+import { Inventory, ItemName } from './item_interfaces';
+
+import { MonsterId } from './monster_interfaces';
 
 export interface HeroStats {
   AGI: number,
@@ -13,20 +15,22 @@ export type HeroStatName = 'AGI' | 'CON' | 'MAG' | 'MRL' | 'PER' | 'STR';
 
 export interface HeroDefinition {
   name: string,
-  skills: string[],
-  items: string[],
+  skills: HeroSkillName[],
+  items: ItemName[],
   stats: HeroStats
 }
 
 export interface HeroVars {
-  stance?: 'assault' | 'defence',
-  ATK?: number,
-  POW?: number,
-  attackDice?: number[],
-  defenceDice?: number[],
-  failedDefence?: true,
-  usePowForDefence?: true,
-  HP?: number,
+  stance?: 'assault' | 'defence'
+  ATK?: number
+  POW?: number
+  attackDice?: number[]
+  defenceDice?: number[]
+  failedDefence?: true
+  usePowForDefence?: true
+  knockedOutBy?: MonsterId
+  escaped?: true
+  HP?: number
   gold?: number
 }
 
@@ -38,11 +42,19 @@ export interface HeroState {
   skills?: HeroSkills
 }
 
-export type HeroBase = 'bloodsportBrawler' | 'hinterLander';
+export type HeroBase = 'angelOfDeath' | 'bloodsportBrawler' | 'carnivalDrifter' | 'hinterLander' | 'infamousButcher' | 'soldierOfFortune';
+
+export type HeroSkillName = 'exterminator' | 'fieldCraft' | 'foeKiller' |  'gourmet' | 'martialDiscipline' | 'performance' | 'rage' | 'sneakAttack';
 
 export interface HeroSkills {
-  exterminator?: true,
+  exterminator?: true
+  fieldCraft?: true
+  foeKiller?: true
+  gourmet?: true
+  martialDiscipline?: true
+  performance?: true
   rage?: true
+  sneakAttack?: true
 }
 
 export interface HeroStates {
@@ -52,3 +64,5 @@ export interface HeroStates {
   infected?: true
   stunned?: true
 }
+
+export type HeroId = string;

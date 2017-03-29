@@ -2,7 +2,7 @@ import { BattleState, Attack, CalculationResult } from '../interfaces';
 
 import { monsters } from '../library';
 
-interface InstrDamageVsMonster {
+interface CalculateMonsterDamageInstr {
   monsterId: string,
   heroId?: string,
   attack?: Attack,
@@ -12,7 +12,7 @@ interface InstrDamageVsMonster {
   powerDie?: number
 }
 
-export function calculate_damage_vs_monster (battle: BattleState, instr: InstrDamageVsMonster): CalculationResult {
+export function calculate_damage_vs_monster (battle: BattleState, instr: CalculateMonsterDamageInstr): CalculationResult {
   let monster = battle.monsters[instr.monsterId];
   let hero = battle.heroes[instr.heroId];
   let val = {

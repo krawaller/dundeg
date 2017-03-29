@@ -2,6 +2,11 @@ import { BattleState, HeroStatName, Attack, AttackOptions, ItemName, Calculation
 
 interface InstrJustHeroId { heroId: string }
 
+export const staticAttacks = {
+  skinningKnife: { type: 'meelee', stat: 'AGI' },
+  nastyCleaver: { type: 'meelee', stat: 'STR' }
+};
+
 export const find_hero_attack_options = (battle: BattleState, instr: InstrJustHeroId) => {
   let ret: AttackOptions = {};
   let hero = battle.heroes[instr.heroId];
@@ -12,19 +17,10 @@ export const find_hero_attack_options = (battle: BattleState, instr: InstrJustHe
       stat: hero.vars.stance === 'assault' ? 'STR' : 'AGI'
     };
   }
-  if (hero.items.skinningKnife){
-    ret['skinningKnife'] = {
-      using: 'skinningKnife',
-      type: 'meelee',
-      stat: 'AGI'
-    };
-  }
-  if (hero.items.nastyCleaver){
-    ret['nastyCleaver'] = {
-      using: 'nastyCleaver',
-      type: 'meelee',
-      stat: 'STR'
-    };
-  }
+  Object.keys(staticAttacks).forEach(item => {
+    if (hero.items[item]){
+      ret[item] = Object.assign(staticAttacks[item], {using: item});
+    }
+  });
   return ret;
 }

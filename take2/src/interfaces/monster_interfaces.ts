@@ -1,3 +1,5 @@
+export type MonsterId = string;
+
 export interface MonsterStats {
   ATK: number
   HP: number
@@ -18,6 +20,7 @@ export interface MonsterVars {
   drained?: number
   killedBy?: string
   escaped?: true
+  target?: string
 }
 
 export interface MonsterState {

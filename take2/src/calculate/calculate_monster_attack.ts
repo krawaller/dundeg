@@ -2,9 +2,9 @@ import { BattleState, Attack, ItemName, CalculationResult } from '../interfaces'
 import { monsters } from '../library';
 import { isMonsterAlive } from '../utils/helpers';
 
-interface InstrMonsterWithHeroDetails { monsterId: string, because?: string, using?: ItemName, heroId?: string, attack?: Attack }
+interface CalculateMonsterAttackInstr { monsterId: string, heroId?: string }
 
-export function calculate_monster_attack (battle: BattleState, instr: InstrMonsterWithHeroDetails) :CalculationResult {
+export function calculate_monster_attack (battle: BattleState, instr: CalculateMonsterAttackInstr) :CalculationResult {
   let monster = battle.monsters[instr.monsterId];
   let blueprint = monsters[monster.blueprint];
   let hero = instr.heroId && battle.heroes[instr.heroId];

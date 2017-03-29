@@ -14,7 +14,7 @@ test('blessed heroes', t => {
 
   t.plan(1);
 
-  const res1 = calculate_hero_stat(battle, {heroId: 'id1', stat: 'MRL'});
+  const res1 = calculate_hero_stat(battle, {heroId: 'id1', stat: 'MRL', reason: '_testReason'});
   t.deepEqual(res1.value, heroes[battle.heroes.id1.blueprint].stats.MRL + 1, 'blessed means 1 extra MRL');
 
 });

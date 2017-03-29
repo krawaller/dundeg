@@ -1,6 +1,6 @@
 import { BattleState, CalculationResult } from '../interfaces';
 
-interface InstrDamageVsHero {
+interface CalculateHeroDamageInstr {
   monsterId: string,
   heroId?: string,
   monsterATK: CalculationResult,
@@ -8,7 +8,7 @@ interface InstrDamageVsHero {
   heroDEF: CalculationResult
 }
 
-export function calculate_damage_vs_hero (battle: BattleState, instr: InstrDamageVsHero): CalculationResult {
+export function calculate_damage_vs_hero (battle: BattleState, instr: CalculateHeroDamageInstr): CalculationResult {
   let val = {
     history: [
       ['Base damage is monster ATK',instr.monsterATK.value, instr.monsterATK.history],

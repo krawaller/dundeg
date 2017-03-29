@@ -1,7 +1,7 @@
 import * as test from "tape";
 
 import { BattleState } from '../../src/interfaces';
-import { find_hero_attack_options } from '../../src/utils/find_hero_attack_options';
+import { find_hero_attack_options } from '../../src/find/find_hero_attack_options';
 
 test('spiked gauntlets', t => {
   const battle: BattleState = {
