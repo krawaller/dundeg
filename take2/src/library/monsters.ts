@@ -20,6 +20,14 @@ export const monsters: MonsterBook = {
     value: 1,
     skills: {}
   },
+  chickenWitch: {
+    name: 'Chicken Witch',
+    traits: { goblin: true, witch: true },
+    stats: { ATK: 4, ARM: 0, HP: 5 },
+    targets: 'MAG+',
+    value: 2,
+    skills: { rally: true, skirmish: true, summon: 'red' }
+  },
   ghoulTroll: {
     name: 'Ghoul Troll',
     traits: { undead: true },
@@ -51,6 +59,14 @@ export const monsters: MonsterBook = {
     targets: 'STR+',
     value: 1,
     skills: { horde: 'weird' }
+  },
+  nugBear: {
+    name: 'Nugbear',
+    traits: { goblin: true },
+    stats: { ATK: 5, ARM: 0, HP: 8 },
+    targets: 'STR+',
+    value: 1,
+    skills: { fury: true }
   },
   ratThing: {
     name: 'Rat Thing',

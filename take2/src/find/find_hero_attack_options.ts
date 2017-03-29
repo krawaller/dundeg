@@ -4,7 +4,8 @@ interface InstrJustHeroId { heroId: string }
 
 export const staticAttacks = {
   skinningKnife: { type: 'meelee', stat: 'AGI' },
-  nastyCleaver: { type: 'meelee', stat: 'STR' }
+  nastyCleaver: { type: 'meelee', stat: 'STR' },
+  luncheonTruncheon: { type: 'meelee', stat: 'STR' }
 };
 
 export const find_hero_attack_options = (battle: BattleState, instr: InstrJustHeroId) => {

@@ -1,4 +1,5 @@
 import { HeroId } from './hero_interfaces';
+import { RegionName } from './mixed_interfaces';
 
 export type MonsterId = string;
 
@@ -39,19 +40,22 @@ export interface MonsterStates {
   bloodCurse?: HeroId
 }
 
-export type MonsterBase = '_fierceTestMonster' | 'backAlleyBruiser' | 'ghoulTroll' | 'manAtArms' | 'megaRat' | 'nachtDrekSlicer' | 'ratThing' | 'slimeCorpse' | 'shambler' | 'swampTroll' | 'slitherFish';
+export type MonsterBase = '_fierceTestMonster' | 'backAlleyBruiser' | 'chickenWitch' | 'ghoulTroll' | 'manAtArms' | 'megaRat' | 'nachtDrekSlicer' | 'nugBear' | 'ratThing' | 'slimeCorpse' | 'shambler' | 'swampTroll' | 'slitherFish';
 
 export interface MonsterSkills {
   ambush?: true
   drain?: true
   fear?: true
   fierce?: true
+  fury?: true
   horde?: MonsterTraitName
   infect?: true
   pain?: true
+  rally?: true
   regenerate?: true
   skirmish?: true
   slime?: true
+  summon?: RegionName
   thief?: true
 }
 

@@ -1,11 +1,12 @@
 
-export type ItemName = 'barbedWhip' | 'bastardSword' | 'fortuneCards' | 'huntingBow' | 'mysteryMeat' | 'nastyCleaver' | 'shoddyShield' | 'skinningKnife' | 'spikedGauntlet' | 'stilleto' | 'trailRation' | 'vialOfPoison' | 'warPaint';
+export type ItemName = 'barbedWhip' | 'bastardSword' | 'fortuneCards' | 'huntingBow' | 'luncheonTruncheon' | 'mysteryMeat' | 'nastyCleaver' | 'shoddyShield' | 'skinningKnife' | 'spikedGauntlet' | 'stilleto' | 'trailRation' | 'vialOfPoison' | 'warPaint';
 
 export interface Inventory {
   barbedWhip?: number
   bastardSword?: number
   fortuneCards?: number
   huntingBow?: number
+  luncheonTruncheon?: number
   mysteryMeat?: number
   nastyCleaver?: number
   shoddyShield?: number

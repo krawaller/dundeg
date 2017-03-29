@@ -51,3 +51,5 @@ export interface PartyStatCheckOrderedPart {
 }
 
 export type StatCheckReason = '_testReason' | 'ambush' | 'monsterTargetAcquisition' | 'bloodCurse' | 'weakness' ;
+
+export type RegionName = 'red' | 'yellow' | 'blue' | 'green';
