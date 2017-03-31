@@ -36,8 +36,8 @@ export function calculate_damage_vs_monster (battle: BattleState, instr: Calcula
       val.history.push(['Exterminator deals 1 followup damage vs Vermin when assaulting', '+1']);
       val.value++;
     }
-    if (hero.skills.rage && hero.vars.stance === 'assault' && instr.attack.stat === 'STR'){
-      val.history.push(['Rage deals 1 followup damage when assaulting', '+1']);
+    if (hero.skills.rage && hero.vars.stance === 'assault' && instr.attack.stat === 'STR' && monster.vars.target === instr.heroId){
+      val.history.push(['Rage deals 1 followup damage when assaulting monster targetting you', '+1']);
       val.value++;
     }
     if (hero.skills.foeKiller && hero.vars.stance === 'assault' && monsterBlueprint.value >= 3){

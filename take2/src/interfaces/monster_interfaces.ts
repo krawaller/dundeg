@@ -40,10 +40,18 @@ export interface MonsterStates {
   bloodCurse?: HeroId
 }
 
-export type MonsterBase = '_fierceTestMonster' | 'backAlleyBruiser' | 'chickenWitch' | 'ghoulTroll' | 'manAtArms' | 'megaRat' | 'nachtDrekSlicer' | 'nugBear' | 'ratThing' | 'slimeCorpse' | 'shambler' | 'swampTroll' | 'slitherFish';
+export type MonsterBase = '_fierceTestMonster' | 'backAlleyBruiser' | 'chickenWitch' | 'footPad' | 'ghoulTroll' | 'manAtArms' | 'megaRat' | 'nachtDrekSlicer' | 'nugBear' | 'ratThing' | 'slimeCorpse' | 'shambler' | 'swampTroll' | 'slitherFish';
+
+export interface MonsterEntrySkills {
+  ambush?: MonsterId[]
+  dimwit?: MonsterId[]
+  fear?: MonsterId[]
+  rally?: MonsterId[]
+}
 
 export interface MonsterSkills {
   ambush?: true
+  dimwit?: true
   drain?: true
   fear?: true
   fierce?: true
@@ -68,6 +76,7 @@ export interface MonsterTraits {
   daemon?: true
   filth?: true
   fishoid?: true
+  fungus?: true
   goblin?: true
   human?: true
   hunter?: true

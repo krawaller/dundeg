@@ -24,8 +24,11 @@ export interface BattleState {
   monsters?: {
     [idx: string]: MonsterState
   }
-  log?: LogMessage[]
+  log?: LogMessage[],
+  stack?: StackItem[]
 }
+
+export type StackItem = any;
 
 export type LogMessagePart = string | LogMessageMonsterRef | LogMessageHeroRef | CalculationResult
 export type LogMessage = LogMessagePart[]

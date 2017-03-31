@@ -8,10 +8,9 @@ test('the rage hero skill', t => {
   const battle: BattleState = {
     heroes: {
       rager: makeHero('bloodsportBrawler',{stance:'assault'},{},{rage: true}),
-      defendingRager: makeHero('bloodsportBrawler',{stance:'defence'},{},{rage: true}),
     },
     monsters: {
-      monster: makeMonster('slitherFish')
+      monster: makeMonster('slitherFish',{target: 'rager'})
     }
   };
 
@@ -51,16 +50,31 @@ test('the rage hero skill', t => {
     'rage has no effect when no damage was done'
   );
 
+  battle.heroes.rager.vars.stance = 'defence';
   t.equal(
     calculate_damage_vs_monster(battle, {
       monsterId: 'monster',
-      heroId: 'defendingRager',
+      heroId: 'rager',
       heroATK: calcRes(6),
       monsterARM: calcRes(4),
       attack: <Attack>{stat: 'STR', using:'nastyCleaver', type: 'meelee'}
     }).value,
     2,
     'rage has no effect when not in assault mode'
+  );
+
+  battle.heroes.rager.vars.stance = 'assault';
+  battle.monsters.monster.vars.target = 'someoneElse';
+  t.equal(
+    calculate_damage_vs_monster(battle, {
+      monsterId: 'monster',
+      heroId: 'rager',
+      heroATK: calcRes(6),
+      monsterARM: calcRes(4),
+      attack: <Attack>{stat: 'STR', using:'nastyCleaver', type: 'meelee'}
+    }).value,
+    2,
+    'rage has no effect when target wasnt targetting attacker'
   );
 
   t.end();

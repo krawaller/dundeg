@@ -1,9 +1,9 @@
-import { BattleState, CalculationResult } from '../interfaces';
+import { BattleState, CalculationResult, HeroId, MonsterId } from '../interfaces';
 import { deepCopy } from '../utils/helpers';
 
 interface ApplyDamageToMonsterInstr {
-  heroId: string
-  monsterId: string
+  heroId: HeroId
+  monsterId: MonsterId
   monsterDMG: CalculationResult
   wasBloodCurse?: true
 }

@@ -28,6 +28,14 @@ export const monsters: MonsterBook = {
     value: 2,
     skills: { rally: true, skirmish: true, summon: 'red' }
   },
+  footPad: {
+    name: 'Footpad',
+    traits: { bandit: true },
+    stats: { ATK: 4, ARM: 0, HP: 4 },
+    targets: 'MRL-',
+    value: 1,
+    skills: { summon: 'yellow', ambush: true }
+  },
   ghoulTroll: {
     name: 'Ghoul Troll',
     traits: { undead: true },
