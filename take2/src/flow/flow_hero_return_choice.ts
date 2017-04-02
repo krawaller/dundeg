@@ -9,7 +9,7 @@ export function flow_hero_offer_return_choice(battle: BattleState, {heroId}:Hero
     return ['ask',{
       line: ['Should', {heroRef: heroId}, 'return to battle?'],
       options: {
-        yes: ['apply', 'heroReturn', {heroId: heroId}],
+        yes: ['apply', 'returnToBattle', {heroId: heroId}],
         no: undefined
       }
     }]

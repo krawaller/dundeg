@@ -1,13 +1,13 @@
 import { LogMessageLine } from './mixed_interfaces';
 
 
-import { ApplyReturnToHeroSpec } from '../apply/apply_return_to_hero';
+import { ReturnToBattleSpec } from '../apply/apply_return_to_battle';
 import { ApplyStanceChoiceToHeroSpec } from '../apply/apply_stance_choice_to_hero';
 import { RerollSpec } from '../apply/apply_reroll';
 
 export type FlowTarget =
   ['apply', 'stanceChoice', ApplyStanceChoiceToHeroSpec] |
-  ['apply', 'heroReturn', ApplyReturnToHeroSpec] |
+  ['apply', 'returnToBattle', ReturnToBattleSpec] |
   ['apply', 'reroll', RerollSpec ] |
   ['ask', Question];
 
