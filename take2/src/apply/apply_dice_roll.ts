@@ -1,4 +1,4 @@
-import { BattleState, HeroId, DiceType } from '../interfaces';
+import { BattleState, HeroId } from '../interfaces';
 import { deepCopy } from '../utils/helpers';
 
 export interface DiceRollSpec {

@@ -12,13 +12,13 @@ export function calculate_hero_defence (battle: BattleState, instr: CalculateHer
   if (!hero.vars.failedDefence){
     val.history.push(['Use highest die for defence when defence roll was successful', highest]);
     val.value = highest;
-    if (hero.vars.stance === 'defence' && hero.vars.powerDice > highest){
-      val.history.push(['In defence stance when defence roll was successful we can use POW for defence when higher', hero.vars.powerDice]);
-      val.value = hero.vars.powerDice;
+    if (hero.vars.stance === 'defence' && hero.vars.powerDie > highest){
+      val.history.push(['In defence stance when defence roll was successful we can use POW for defence when higher', hero.vars.powerDie]);
+      val.value = hero.vars.powerDie;
     }
   } else if (hero.vars.usePowForDefence){
-    val.history.push(['Can use POW for defence once when failed defence roll', hero.vars.powerDice]);
-    val.value = hero.vars.powerDice;
+    val.history.push(['Can use POW for defence once when failed defence roll', hero.vars.powerDie]);
+    val.value = hero.vars.powerDie;
   }
   return val;
 }

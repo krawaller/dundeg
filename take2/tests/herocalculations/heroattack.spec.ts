@@ -7,9 +7,9 @@ import { calculate_hero_attack } from '../../src/calculate/calculate_hero_attack
 test('calculate hero attack', t => {
   const battle: BattleState = {
     heroes: {
-      attackerHiPow: makeHero('bloodsportBrawler',{ stance: 'assault', powerDice: 4, attackDice: [1,3] }),
-      attackerLoPow: makeHero('bloodsportBrawler',{ stance: 'assault', powerDice: 2, attackDice: [1,3] }),
-      defender: makeHero('hinterLander',{ stance: 'defence', powerDice: 6, attackDice: [5,2] })
+      attackerHiPow: makeHero('bloodsportBrawler',{ stance: 'assault', powerDie: 4, attackDice: [1,3] }),
+      attackerLoPow: makeHero('bloodsportBrawler',{ stance: 'assault', powerDie: 2, attackDice: [1,3] }),
+      defender: makeHero('hinterLander',{ stance: 'defence', powerDie: 6, attackDice: [5,2] })
     },
     monsters: { }
   };

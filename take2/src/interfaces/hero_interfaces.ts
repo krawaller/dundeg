@@ -36,6 +36,7 @@ export interface HeroVars {
   gold?: number
   bloodCurseLink?: MonsterId
   target?: MonsterId
+  luck?: number
 }
 
 export interface HeroState {
