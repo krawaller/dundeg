@@ -11,6 +11,7 @@ test('calculate hero defence', t => {
       failedDefenderNoPick: makeHero('bloodsportBrawler',{stance: 'defence', powerDie: 4, defenceDice: [1,3], failedDefence: true}),
       failedDefenderPick: makeHero('bloodsportBrawler',{stance: 'defence', powerDie: 2, defenceDice: [1,3], failedDefence: true, usePowForDefence: true}),
       assaulter: makeHero('bloodsportBrawler',{stance: 'assault', powerDie: 6, defenceDice: [5,2]}),
+      failedEscaper: makeHero('angelOfDeath',{failedEscape: true})
     },
     monsters: {
       monster: makeMonster('slitherFish')
@@ -40,6 +41,11 @@ test('calculate hero defence', t => {
   t.equal(
     calculate_hero_defence(battle, {heroId: 'failedDefenderPick'}).value,
     2, 'failed defenders can choose to use power dice once'
+  );
+
+  t.equal(
+    calculate_hero_defence(battle, {heroId: 'failedEscaper'}).value,
+    0, 'hero with failed escape has no defence'
   );
 
   t.end();

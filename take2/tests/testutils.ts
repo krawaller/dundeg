@@ -16,7 +16,8 @@ export function makeMonster(monsterName: MonsterBase, vars?:MonsterVars, states?
   return {
     blueprint: monsterName,
     vars: vars || {},
-    states: states || {}
+    states: states || {},
+    name: monsterName
   };
 }
 

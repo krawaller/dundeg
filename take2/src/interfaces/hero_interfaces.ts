@@ -29,6 +29,7 @@ export interface HeroVars {
   attackDice?: number[]
   defenceDice?: number[]
   failedDefence?: true
+  failedEscape?: true
   usePowForDefence?: true
   knockedOutBy?: MonsterId
   escaped?: true

@@ -13,3 +13,5 @@ export function find_monster_entry_skills (battle: BattleState): MonsterEntrySki
   });
   return ret;
 }
+
+// TODO - deprecated, flow monster entry instead!

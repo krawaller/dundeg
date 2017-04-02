@@ -12,6 +12,6 @@ export function flow_hero_offer_return_choice(battle: BattleState, {heroId}:Hero
         yes: ['apply', 'returnToBattle', {heroId: heroId}],
         no: undefined
       }
-    }]
+    }];
   }
 }

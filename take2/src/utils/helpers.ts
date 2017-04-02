@@ -9,7 +9,7 @@ export const monsterHasTrait = (monster: MonsterState, trait: MonsterTraitName) 
 
 export const deepCopy = (obj: BattleState): BattleState => JSON.parse(JSON.stringify(obj));
 
-export const isHeroAlive = (hero: HeroState) => !hero.vars.escaped && !hero.vars.knockedOutBy;
+export const isHeroAlive = (hero: HeroState) => hero && !hero.vars.escaped && !hero.vars.knockedOutBy;
 
 export function removeAnItem(hero: HeroState, item: ItemName){
   hero.items[item]--;

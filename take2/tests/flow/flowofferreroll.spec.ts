@@ -15,12 +15,12 @@ test('flow hero reroll choice', t => {
   let q = <Question>result[1];
   t.deepEqual(Object.keys(q.options), ['accept','atk die with 7','atk die with 8','pow die with 9'], 'we got these options');
   t.deepEqual(
-    q.options['atk die with 8'], 
+    q.options['atk die with 8'][1][0], 
     <FlowInstruction>['apply', 'reroll', {heroId: 'hero', second: true, diceType: 'attack'}],
     'correct reroll instruction for second atk die'
   );
   t.deepEqual(
-    q.options['pow die with 9'],
+    q.options['pow die with 9'][1][0],
     <FlowInstruction>['apply', 'reroll', {heroId: 'hero', diceType: 'power'}],
     'correct reroll instruction for power die'
   );
