@@ -1,5 +1,5 @@
 
-import {MonsterState, MonsterTraitName, BattleState, HeroState, ItemName} from '../interfaces';
+import {MonsterState, MonsterTraitName, BattleState, HeroState, ItemName, LogMessageLine, LogMessageType} from '../interfaces';
 
 import {monsters} from '../library';
 
@@ -16,4 +16,12 @@ export function removeAnItem(hero: HeroState, item: ItemName){
   if (!hero.items[item]){
     delete hero.items[item];
   }
+}
+
+export function addLog(battle: BattleState, line: LogMessageLine, type: LogMessageType = 'info'): BattleState {
+  battle.log.push({
+    type: type,
+    line: line
+  });
+  return battle;
 }

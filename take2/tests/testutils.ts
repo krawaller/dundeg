@@ -9,7 +9,7 @@ export function lastLogHasStr(battle: BattleState, str: string){
     throw "No messages in log when we went looking for "+str;
   }
   let lastMsg = battle.log[battle.log.length-1];
-  return lastMsg.find( part => !!((<string>part).match && (<string>part).match(str)) );
+  return lastMsg.line.find( part => !!((<string>part).match && (<string>part).match(str)) );
 }
 
 export function makeMonster(monsterName: MonsterBase, vars?:MonsterVars, states?: MonsterStates): MonsterState {

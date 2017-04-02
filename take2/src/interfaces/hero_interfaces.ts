@@ -25,7 +25,7 @@ export type HeroStance = 'assault' | 'defence';
 export interface HeroVars {
   stance?: HeroStance
   ATK?: number
-  POW?: number
+  powerDie?: number
   attackDice?: number[]
   defenceDice?: number[]
   failedDefence?: true

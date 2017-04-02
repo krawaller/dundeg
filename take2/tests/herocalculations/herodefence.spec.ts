@@ -6,11 +6,11 @@ import { calculate_hero_defence } from '../../src/calculate/calculate_hero_defen
 test('calculate hero defence', t => {
   const battle: BattleState = {
     heroes: {
-      defenderHiPow: makeHero('bloodsportBrawler',{stance: 'defence', POW: 4, defenceDice: [1,3]}),
-      defenderLoPow: makeHero('bloodsportBrawler',{stance: 'defence', POW: 2, defenceDice: [1,3]}),
-      failedDefenderNoPick: makeHero('bloodsportBrawler',{stance: 'defence', POW: 4, defenceDice: [1,3], failedDefence: true}),
-      failedDefenderPick: makeHero('bloodsportBrawler',{stance: 'defence', POW: 2, defenceDice: [1,3], failedDefence: true, usePowForDefence: true}),
-      assaulter: makeHero('bloodsportBrawler',{stance: 'assault', POW: 6, defenceDice: [5,2]}),
+      defenderHiPow: makeHero('bloodsportBrawler',{stance: 'defence', powerDice: 4, defenceDice: [1,3]}),
+      defenderLoPow: makeHero('bloodsportBrawler',{stance: 'defence', powerDice: 2, defenceDice: [1,3]}),
+      failedDefenderNoPick: makeHero('bloodsportBrawler',{stance: 'defence', powerDice: 4, defenceDice: [1,3], failedDefence: true}),
+      failedDefenderPick: makeHero('bloodsportBrawler',{stance: 'defence', powerDice: 2, defenceDice: [1,3], failedDefence: true, usePowForDefence: true}),
+      assaulter: makeHero('bloodsportBrawler',{stance: 'assault', powerDice: 6, defenceDice: [5,2]}),
     },
     monsters: {
       monster: makeMonster('slitherFish')

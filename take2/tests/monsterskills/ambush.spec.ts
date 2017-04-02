@@ -4,6 +4,7 @@ import { makeHero, makeMonster, lastLogHasStr } from '../testutils';
 import { BattleState } from '../../src/interfaces';
 import { find_monster_entry_skills } from '../../src/find/find_monster_entry_skills';
 import { apply_ambush_result } from '../../src/apply/apply_ambush_result';
+import { flow_monster_entry } from '../../src/flow/flow_monster_entry';
 
 test('monster ambush skill', t => {
   let battle: BattleState = {

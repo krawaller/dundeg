@@ -23,7 +23,7 @@ export function calculate_damage_vs_monster (battle: BattleState, instr: Calcula
     ],
     value: instr.heroATK.value - instr.monsterARM.value
   }
-  if (hero.vars.POW === 6 && instr.using === 'nastyCleaver' && hero.vars.stance === 'assault'){
+  if (hero.vars.powerDie === 6 && instr.using === 'nastyCleaver' && hero.vars.stance === 'assault'){
     val.history.push(['Nasty Cleaver deals 1 followup damage when assaulting', '+1']);
     val.value++;
   }

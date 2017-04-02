@@ -1,5 +1,5 @@
 import { BattleState } from '../interfaces';
-import { deepCopy } from '../utils/helpers';
+import { deepCopy, addLog } from '../utils/helpers';
 import { monsters } from '../library'
 
 interface EndOfRoundInstr {
@@ -13,15 +13,15 @@ export function apply_end_of_round_to_monster (battle: BattleState, {monsterId}:
   let monRef = {monsterRef: monsterId};
   if (monster.vars.drained){
     monster.vars.HP = Math.min( monster.vars.HP + monster.vars.drained, blueprint.stats.HP );
-    ret.log.push( [monRef, 'recovered '+monster.vars.drained+' HP that it drained from adventurers this round'] );
+    addLog(ret, [monRef, 'recovered '+monster.vars.drained+' HP that it drained from adventurers this round'] );
     delete monster.vars.drained;
   }
   if (monster.states.dazed){
     delete monster.states.dazed;
-    ret.log.push( [monRef, 'is no longer dazed'] );
+    addLog(ret, [monRef, 'is no longer dazed'] );
   }
   if (blueprint.skills.skirmish){
-    ret.log.push( [monRef, 'is a skirmisher and now escapes the battle'] );
+    addLog(ret, [monRef, 'is a skirmisher and now escapes the battle'] );
     monster.vars.escaped = true;
   }
   return ret;

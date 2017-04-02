@@ -1,5 +1,5 @@
 import { BattleState, HeroId, HeroStance, CalculationResult } from '../interfaces';
-import { deepCopy } from '../utils/helpers';
+import { deepCopy, addLog } from '../utils/helpers';
 import { calculate_hero_stat } from '../calculate/calculate_hero_stat';
 import { monsters } from '../library';
 import { apply_damage_to_monster } from './apply_damage_to_monster';
@@ -15,7 +15,7 @@ export function apply_daemons_blood(battle: BattleState, {heroId,dice}:ApplyDaem
   let monster = ret.monsters[monsterId];
   let blueprint = monsters[monster.blueprint];
   monster.states.corroded = true;
-  ret.log.push([ {heroRef: heroId}, 'threw Daemon\'s Blood and corroded the armour of',{monsterRef: monsterId} ]);
+  addLog(ret, [ {heroRef: heroId}, 'threw Daemon\'s Blood and corroded the armour of',{monsterRef: monsterId} ]);
   let monsterDMG: CalculationResult;
   if (blueprint.traits.weird || blueprint.traits.fungus){
     monsterDMG = {

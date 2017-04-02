@@ -1,14 +1,14 @@
 import { BattleState, HeroId, HeroStance } from '../interfaces';
-import { deepCopy } from '../utils/helpers';
+import { deepCopy, addLog } from '../utils/helpers';
 
-interface ApplyStanceChoiceToHeroInstr {
+export interface ApplyStanceChoiceToHeroSpec {
   heroId: HeroId
   stance: HeroStance
 }
 
-export function apply_stance_choice_to_hero(battle: BattleState, {heroId, stance}:ApplyStanceChoiceToHeroInstr): BattleState {
+export function apply_stance_choice_to_hero(battle: BattleState, {heroId, stance}:ApplyStanceChoiceToHeroSpec): BattleState {
   let ret = deepCopy(battle);
   ret.heroes[heroId].vars.stance = stance;
-  ret.log.push([{heroRef: heroId}, 'adopts the ' + stance + ' stance']);
+  addLog(ret, [{heroRef: heroId}, 'adopts the ' + stance + ' stance']);
   return ret;
 }

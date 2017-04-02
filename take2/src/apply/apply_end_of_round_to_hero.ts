@@ -1,5 +1,5 @@
 import { BattleState } from '../interfaces';
-import { deepCopy } from '../utils/helpers';
+import { deepCopy, addLog } from '../utils/helpers';
 
 interface EndOfRoundInstr {
   heroId: string
@@ -10,7 +10,7 @@ export function apply_end_of_round_to_hero (battle: BattleState, {heroId}: EndOf
   let hero = ret.heroes.hero;
   if (hero.states.stunned){
     delete hero.states.stunned;
-    ret.log.push( [{heroRef: heroId},'is no longer stunned'] );
+    addLog(ret, [{heroRef: heroId},'is no longer stunned'] );
   }
   return ret;
 }

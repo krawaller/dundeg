@@ -8,7 +8,7 @@ import { find_hero_attack_options } from '../../src/find/find_hero_attack_option
 test('Nasty Cleaver', t => {
   const battle: BattleState = {
     heroes: {
-      hero: makeHero('bloodsportBrawler',{stance:'assault',POW:6},{},{},['nastyCleaver']),
+      hero: makeHero('bloodsportBrawler',{stance:'assault',powerDie:6},{},{},['nastyCleaver']),
     },
     monsters: {
       monster: makeMonster('manAtArms')
@@ -33,7 +33,7 @@ test('Nasty Cleaver', t => {
     'nasty cleaver gives +1 damage when power die is 6'
   );
 
-  battle.heroes.hero.vars.POW = 4;
+  battle.heroes.hero.vars.powerDie = 4;
   t.equal(
     calculate_damage_vs_monster(battle, {
       monsterId: 'monster',
@@ -46,7 +46,7 @@ test('Nasty Cleaver', t => {
     'nasty cleaver has no effect when power die isnt 6'
   );
 
-  battle.heroes.hero.vars.POW = 6;
+  battle.heroes.hero.vars.powerDie = 6;
   battle.heroes.hero.vars.stance = 'defence';
   t.equal(
     calculate_damage_vs_monster(battle, {

@@ -1,5 +1,5 @@
 import { BattleState, HeroId, HeroStance } from '../interfaces';
-import { deepCopy } from '../utils/helpers';
+import { deepCopy, addLog } from '../utils/helpers';
 import { calculate_hero_stat } from '../calculate/calculate_hero_stat';
 
 interface ApplyBloodCurseInvocationResultInstr {
@@ -14,9 +14,9 @@ export function apply_blood_curse_invocation_result(battle: BattleState, {heroId
   if (hero.vars.attackDice[0] + hero.vars.attackDice[1] <= calc.value){
     hero.vars.bloodCurseLink = monsterId;
     ret.monsters[monsterId].states.bloodCurse = heroId;
-    ret.log.push([ 'With a MAG of', calc, {heroRef:heroId}, 'successfully casts a blood curse on', {monsterRef: monsterId} ]);
+    addLog(ret, [ 'With a MAG of', calc, {heroRef:heroId}, 'successfully casts a blood curse on', {monsterRef: monsterId} ]);
   } else {
-    ret.log.push([ 'A MAG of', calc,'means',{heroRef:heroId}, 'failed to cast a blood curse on', {monsterRef: monsterId} ]);
+    addLog(ret, [ 'A MAG of', calc,'means',{heroRef:heroId}, 'failed to cast a blood curse on', {monsterRef: monsterId} ]);
   }
   return ret;
 }

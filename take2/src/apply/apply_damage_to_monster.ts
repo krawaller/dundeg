@@ -1,5 +1,5 @@
 import { BattleState, CalculationResult, HeroId, MonsterId } from '../interfaces';
-import { deepCopy } from '../utils/helpers';
+import { deepCopy, addLog } from '../utils/helpers';
 
 interface ApplyDamageToMonsterInstr {
   heroId: HeroId
@@ -18,23 +18,23 @@ export function apply_damage_to_monster (battle:BattleState, {monsterId,heroId,m
     target.vars.HP -= dealt;
     if (target.vars.HP){
       if (wasBloodCurse){
-        ret.log.push( ['The blood curse from',{heroRef: heroId}, 'makes', {monsterRef: monsterId}, 'also take',monsterDMG,'wounds'] );
+        addLog(ret, ['The blood curse from',{heroRef: heroId}, 'makes', {monsterRef: monsterId}, 'also take',monsterDMG,'wounds'] );
       } else {
-        ret.log.push( [heroRef, 'dealt', monsterDMG, 'damage to', monRef] );
+        addLog(ret, [heroRef, 'dealt', monsterDMG, 'damage to', monRef] );
       }
     } else {
       if (wasBloodCurse){
-        ret.log.push( ['The blood curse from',{heroRef: heroId}, 'knocked out', {monsterRef: monsterId}, 'by passing on',monsterDMG,'wounds'] );
-        ret.log.push( ['The blood curse is now lifted.'] );
+        addLog(ret, ['The blood curse from',{heroRef: heroId}, 'knocked out', {monsterRef: monsterId}, 'by passing on',monsterDMG,'wounds'] );
+        addLog(ret, ['The blood curse is now lifted.'] );
         delete ret.heroes[heroId].vars.bloodCurseLink;
         delete ret.monsters[monsterId].states.bloodCurse;
       } else {
-        ret.log.push( [heroRef, 'knocked', monRef, 'out with', monsterDMG, 'damage' ] );
+        addLog(ret, [heroRef, 'knocked', monRef, 'out with', monsterDMG, 'damage' ] );
       }
       target.vars.killedBy = heroId;
     }
   } else {
-    ret.log.push( [heroRef, 'tried to damage', monRef, 'but outcome was', monsterDMG] ); // 0 damage, stil lwant to expose calculation
+    addLog(ret, [heroRef, 'tried to damage', monRef, 'but outcome was', monsterDMG] ); // 0 damage, stil lwant to expose calculation
   }
   return ret;  
 }
