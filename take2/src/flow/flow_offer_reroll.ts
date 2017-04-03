@@ -16,7 +16,9 @@ export function flow_offer_reroll(battle: BattleState, {heroId}:OfferRerollSpec)
     };
     if (hero.vars.attackDice){
       opts['atk die with '+hero.vars.attackDice[0]] = withAccept(['apply','reroll',{heroId,diceType:'attack'}]);
-      opts['atk die with '+hero.vars.attackDice[1]] = withAccept(['apply','reroll',{heroId,diceType:'attack',second:true}]);
+      if (hero.vars.attackDice.length > 1) {
+        opts['atk die with '+hero.vars.attackDice[1]] = withAccept(['apply','reroll',{heroId,diceType:'attack',second:true}]);
+      }
     }
     if (hero.vars.defenceDice){
       opts['atk die with '+hero.vars.defenceDice[0]] = withAccept(['apply','reroll',{heroId,diceType:'defence'}]);

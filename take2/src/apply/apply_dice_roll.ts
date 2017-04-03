@@ -7,6 +7,7 @@ export interface DiceRollSpec {
     attack?: true
     defence?: true
     power?: true
+    singleAttack?: true
   }
 }
 
@@ -18,6 +19,8 @@ export function apply_dice_roll (battle:BattleState, {heroId,diceType}: DiceRoll
       Math.floor(Math.random()*6)+1,
       Math.floor(Math.random()*6)+1
     ];
+  } else if (diceType['singleAttack']){
+    hero.vars.attackDice = [Math.floor(Math.random()*6)+1];
   }
   if (diceType['defence']){
     hero.vars.defenceDice = [

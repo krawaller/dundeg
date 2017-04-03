@@ -5,14 +5,14 @@ import { BattleState, LogMessagePart, Question, FlowInstruction } from '../../sr
 import { flow_offer_reroll, OfferRerollSpec } from '../../src/flow/flow_offer_reroll';
 
 test('flow hero reroll choice', t => {
-  let result, battle: BattleState = {
+  let result, q, battle: BattleState = {
     heroes: { hero: makeHero('bloodsportBrawler', {luck: 777, attackDice: [7,8], powerDie: 9}) },
     monsters: { },
   };
 
   result = <FlowInstruction>flow_offer_reroll(battle, {heroId: 'hero'});
   t.equal(result[0],'ask','We got back a question');
-  let q = <Question>result[1];
+  q = <Question>result[1];
   t.deepEqual(Object.keys(q.options), ['accept','atk die with 7','atk die with 8','pow die with 9'], 'we got these options');
   t.deepEqual(
     q.options['atk die with 8'][1][0], 
@@ -25,6 +25,12 @@ test('flow hero reroll choice', t => {
     'correct reroll instruction for power die'
   );
   t.ok(!q.options['accept'], 'the accept prop has no instruction');
+
+  delete battle.heroes.hero.vars.powerDie;
+  battle.heroes.hero.vars.attackDice = [666];
+  result = <FlowInstruction>flow_offer_reroll(battle, {heroId: 'hero'});
+  q = <Question>result[1];
+  t.deepEqual(Object.keys(q.options), ['accept','atk die with 666'], 'it doesnt bug when we have rolled just 1 atk');
 
   delete battle.heroes.hero.vars.luck;
   t.ok(

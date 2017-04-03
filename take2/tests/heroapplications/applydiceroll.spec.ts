@@ -24,6 +24,17 @@ test('apply dice roll to hero', t => {
     t.ok(d <= 6, 'die is 6 or lower');
   });
 
+  result = apply_dice_roll(battle, {heroId: 'hero', diceType: {singleAttack:true}});
+  dice = result.heroes.hero.vars.attackDice;
+  t.equal(dice.length, 1 , 'hero got single attack dice' );
+  t.ok(!result.heroes.hero.vars.defenceDice, 'hero did NOT get defence die');
+  t.ok(!result.heroes.hero.vars.powerDie, 'hero did NOT get power');
+  dice.forEach((d,n) => {
+    t.equal(typeof d, 'number' , 'attack die '+n+' is number');
+    t.ok(d >= 1, 'die is 1 or over');
+    t.ok(d <= 6, 'die is 6 or lower');
+  });
+
   result = apply_dice_roll(battle, {heroId: 'hero', diceType: {defence:true}});
   dice = result.heroes.hero.vars.defenceDice;
   t.equal(dice.length, 2 , 'hero got defence dice' );
