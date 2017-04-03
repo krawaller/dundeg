@@ -24,29 +24,37 @@ export function flow_hero_offer_escape_choice(battle: BattleState, {heroId}:Hero
     let blueprint = monsters[monster.blueprint];
     return monster.vars.target === heroId && blueprint.skills.pursue;
   });
-  if (pursuers.length){
+  if (pursuers.length && !hero.items.nightCloak){
     return ['apply','log', <LogMessage>{
       line: [{heroRef:heroId},'cannot escape since', {monsterRef:pursuers[0]},'has Pursue'],
       type: 'verbose'
     }];
   }
 
-  return ['ask',{
-    line: [{heroRef: heroId}, 'rolled doubles for defence and may try to escape'],
-    options: {
-      escape: ['test',{
-        heroId: heroId,
-        reason: 'escape',
-        stat: 'PER',
-        dice: 'defence',
-        line: [
-          {heroRef: heroId}, 'must test against PER of',calculate_hero_stat(battle, {heroId: heroId, stat: 'PER', reason: 'escape'}),'to escape battle'
-        ],
-        success: ['apply', 'escapeOutcome', {heroId: heroId, success: true}],
-        failure: ['apply', 'escapeOutcome', {heroId: heroId, success: false}]
-      }],
-      remain: undefined
-    }
-  }];
+  function makeStatOpt(stat):FlowTarget{
+    return ['test',{
+      heroId: heroId,
+      reason: 'escape',
+      stat: stat,
+      dice: 'defence',
+      line: [
+        {heroRef: heroId}, 'tests against '+stat+' of',
+        calculate_hero_stat(battle, {heroId: heroId, stat: stat, reason: 'escape'}),
+        'to escape battle'
+      ],
+      success: ['apply', 'escapeOutcome', {heroId: heroId, success: true}],
+      failure: ['apply', 'escapeOutcome', {heroId: heroId, success: false}]
+    }]
+  }
+
+  let options = { 'escape (PER)': makeStatOpt('PER') };
+  let line = [{heroRef: heroId}, 'rolled doubles for defence and may try to escape'];
+  if (hero.items.nightCloak){
+    line = [{heroRef: heroId}, 'has Night Cloak and may try to escape using PER or MAG (and Pursue has no effect)'];
+    options['escape (MAG)'] = makeStatOpt('MAG');
+  }
+  options['remain'] = undefined;
+
+  return ['ask', { line: line, options: options }];
 
 }
