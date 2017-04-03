@@ -1,8 +1,12 @@
 import {
   BattleState, MonsterBase, MonsterState, MonsterVars, MonsterStates,
   HeroBase, HeroState, HeroStates, HeroVars, HeroSkills,
-  CalculationResult, ItemName
+  CalculationResult, ItemName, LogMessageLine
 } from '../src/interfaces';
+
+export function logMessageContains(msg: LogMessageLine, str: string){
+  return msg.find( part => !!((<string>part).match && (<string>part).match(str)) );
+}
 
 export function lastLogHasStr(battle: BattleState, str: string){
   if (!battle.log || !battle.log.length){

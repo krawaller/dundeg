@@ -41,7 +41,7 @@ export interface MonsterStates {
   bloodCurse?: HeroId
 }
 
-export type MonsterBase = '_fierceTestMonster' | 'backAlleyBruiser' | 'chickenWitch' | 'footPad' | 'ghoulTroll' | 'manAtArms' | 'megaRat' | 'nachtDrekSlicer' | 'nugBear' | 'ratThing' | 'slimeCorpse' | 'shambler' | 'swampTroll' | 'slitherFish';
+export type MonsterBase = '_fierceTestMonster' | 'backAlleyBruiser' | 'chickenWitch' | 'footPad' | 'ghoulTroll' | 'imperialHuntsman' | 'manAtArms' | 'megaRat' | 'nachtDrekSlicer' | 'nugBear' | 'ratThing' | 'slimeCorpse' | 'shambler' | 'swampTroll' | 'slitherFish';
 
 export interface MonsterEntrySkills {
   ambush?: MonsterId[]
@@ -60,6 +60,8 @@ export interface MonsterSkills {
   horde?: MonsterTraitName
   infect?: true
   pain?: true
+  pierce?: number
+  pursue?: true
   rally?: true
   regenerate?: true
   skirmish?: true

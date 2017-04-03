@@ -17,7 +17,7 @@ export interface Attack {
   stat: HeroStatName
 }
 
-import { StackItem, Question } from './flow_interfaces';
+import { Question } from './flow_interfaces';
 
 export interface BattleState {
   heroes?: {
@@ -27,12 +27,11 @@ export interface BattleState {
     [idx: string]: MonsterState
   }
   log?: LogMessage[],
-  stack?: StackItem[],
   question?: Question
 }
 
 export type LogMessageLine = LogMessagePart[]
-export type LogMessageType = 'info' | 'action' | 'monsterAction'
+export type LogMessageType = 'info' | 'action' | 'monsterAction' | 'verbose'
 export type LogMessagePart = string | LogMessageMonsterRef | LogMessageHeroRef | CalculationResult
 export interface LogMessage {
   type: LogMessageType
@@ -59,7 +58,7 @@ export interface PartyStatCheckOrderedPart {
   heroes: HeroId[]
 }
 
-export type StatCheckReason = '_testReason' | 'ambush' | 'monsterTargetAcquisition' | 'bloodCurse' | 'weakness' ;
+export type StatCheckReason = '_testReason' | 'ambush' | 'monsterTargetAcquisition' | 'bloodCurse' | 'weakness' | 'escape' ;
 
 export type RegionName = 'red' | 'yellow' | 'blue' | 'green';
 

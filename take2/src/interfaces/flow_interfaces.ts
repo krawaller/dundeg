@@ -1,4 +1,4 @@
-import { LogMessageLine, StatCheckReason } from './mixed_interfaces';
+import { LogMessage, LogMessageLine, StatCheckReason } from './mixed_interfaces';
 import { HeroId, HeroStatName } from './hero_interfaces';
 
 // Application specs
@@ -7,6 +7,8 @@ import { ApplyStanceChoiceToHeroSpec } from '../apply/apply_stance_choice_to_her
 import { RerollSpec } from '../apply/apply_reroll';
 import { TargetSelectionForMonsterSpec } from '../apply/apply_target_selection_for_monster';
 import { HeroTargetSelectionSpec } from '../apply/apply_target_selection_for_hero';
+import { DiceRemovalSpec } from '../apply/apply_dice_removal';
+import { EscapeOutcomeSpec } from '../apply/apply_escape_outcome';
 
 // Flow specs
 import { OfferRerollSpec } from '../flow/flow_offer_reroll';
@@ -17,6 +19,9 @@ export type FlowTarget =
   ['apply', 'monsterTargetChoice', TargetSelectionForMonsterSpec] |
   ['apply', 'heroTargetChoice', HeroTargetSelectionSpec] |
   ['apply', 'reroll', RerollSpec ] |
+  ['apply', 'diceRemoval', DiceRemovalSpec] |
+  ['apply', 'escapeOutcome', EscapeOutcomeSpec] |
+  ['apply', 'log', LogMessage] |
   ['flow', 'reroll', OfferRerollSpec] | 
   ['ask', Question] | 
   ['test', Test];
