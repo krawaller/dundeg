@@ -70,7 +70,7 @@ export interface MonsterSkills {
   thief?: true
 }
 
-export type MonsterTraitName = 'bandit' | 'construct' | 'cult' | 'daemon' | 'filth' | 'fishoid' | 'goblin' | 'human' | 'hunter' | 'law' | 'militant' | 'ooze' | 'puritan' | 'reptilian' | 'undead' | 'vermin' | 'weird' | 'witch'
+export type MonsterTraitName =  keyof MonsterTraits;
 
 export interface MonsterTraits {
   bandit?: true

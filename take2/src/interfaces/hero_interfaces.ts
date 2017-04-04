@@ -11,7 +11,7 @@ export interface HeroStats {
   STR: number
 }
 
-export type HeroStatName = 'AGI' | 'CON' | 'MAG' | 'MRL' | 'PER' | 'STR';
+export type HeroStatName = keyof HeroStats;
 
 export interface HeroDefinition {
   name: string,
@@ -50,7 +50,7 @@ export interface HeroState {
 
 export type HeroBase = 'angelOfDeath' | 'bloodsportBrawler' | 'carnivalDrifter' | 'hinterLander' | 'infamousButcher' | 'soldierOfFortune';
 
-export type HeroSkillName =  'bloodCurse' | 'exterminator' | 'fieldCraft' | 'findWeakness' | 'foeKiller' |  'gourmet' | 'martialDiscipline' | 'performance' | 'rage' | 'sixthSense' | 'sneakAttack';
+export type HeroSkillName = keyof HeroSkills;
 
 export interface HeroSkills {
   bloodCurse?: true
