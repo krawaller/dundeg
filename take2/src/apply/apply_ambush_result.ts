@@ -1,20 +1,19 @@
-import { BattleState, HeroId, HeroStance } from '../interfaces';
+import { BattleState, HeroId, MonsterId } from '../interfaces';
 import { deepCopy, addLog } from '../utils/helpers';
 import { calculate_hero_stat } from '../calculate/calculate_hero_stat';
 
-interface ApplyAmbushResultInstr {
+export interface AmbushResultSpec {
   heroId: HeroId,
-  monsterId
+  monsterId: MonsterId,
+  avoided?: true
 }
 
-export function apply_ambush_result(battle: BattleState, {heroId,monsterId}:ApplyAmbushResultInstr): BattleState {
+export function apply_ambush_result(battle: BattleState, {heroId,monsterId,avoided}:AmbushResultSpec): BattleState {
   let ret = deepCopy(battle);
-  let calc = calculate_hero_stat(ret, {heroId, stat: 'PER', reason: 'ambush'});
-  let hero = ret.heroes[heroId];
-  if (hero.vars.attackDice[0] + hero.vars.attackDice[1] <= calc.value){
-    addLog(ret,[ 'With a PER of', calc, {heroRef:heroId}, 'successfully avoids being ambushed by', {monsterRef: monsterId} ]);
+  if (avoided){
+    addLog(ret,[{heroRef:heroId}, 'successfully avoids being ambushed by', {monsterRef: monsterId} ]);
   } else {
-    addLog(ret,[ 'A PER of', calc, 'means', {heroRef:heroId}, 'is stunned by the ambush by', {monsterRef: monsterId} ]);
+    addLog(ret,[{heroRef:heroId}, 'is stunned by the ambush by', {monsterRef: monsterId} ]);
     ret.heroes[heroId].states.stunned = true;
   }
   return ret;

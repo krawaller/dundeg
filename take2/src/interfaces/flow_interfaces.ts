@@ -1,5 +1,6 @@
 import { LogMessage, LogMessageLine, StatCheckReason } from './mixed_interfaces';
 import { HeroId, HeroStatName } from './hero_interfaces';
+import { MonsterId } from './monster_interfaces';
 
 // Application specs
 import { ReturnToBattleSpec } from '../apply/apply_return_to_battle';
@@ -9,11 +10,13 @@ import { TargetSelectionForMonsterSpec } from '../apply/apply_target_selection_f
 import { HeroTargetSelectionSpec } from '../apply/apply_target_selection_for_hero';
 import { DiceRemovalSpec } from '../apply/apply_dice_removal';
 import { EscapeOutcomeSpec } from '../apply/apply_escape_outcome';
+import { AmbushResultSpec } from '../apply/apply_ambush_result';
 
 // Flow specs
 import { OfferRerollSpec } from '../flow/flow_offer_reroll';
 
 export type FlowTarget =
+  ['apply', 'ambushResult', AmbushResultSpec] |
   ['apply', 'stanceChoice', ApplyStanceChoiceToHeroSpec] |
   ['apply', 'returnToBattle', ReturnToBattleSpec] |
   ['apply', 'monsterTargetChoice', TargetSelectionForMonsterSpec] |
@@ -29,7 +32,8 @@ export type FlowTarget =
 export type FlowInstruction =
   FlowTarget |
   ['all', FlowTarget[]] |
-  ['eachHero', FlowTarget, any]
+  ['eachHero', (heroId:HeroId) => FlowTarget] |
+  ['eachMonster', (monsterId:MonsterId) => FlowTarget] |
   undefined;
 
 export interface Question {
