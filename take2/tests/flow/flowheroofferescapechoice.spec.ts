@@ -24,7 +24,6 @@ test('flow hero escape choice', t => {
   battle.heroes.hero.vars.defenceDice = [2,2];
   result = flow_hero_offer_escape_choice(battle, {heroId: 'hero'});
   t.equal(result[0], 'ask', 'we get question about escaping');
-  console.log(result);
 
   t.end();
 });
