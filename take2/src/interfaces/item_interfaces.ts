@@ -1,5 +1,5 @@
 
-export type ItemName = 'barbedWhip' | 'bastardSword' | 'daemonsBlood' | 'fortuneCards' | 'huntingBow' | 'luncheonTruncheon' | 'mysteryMeat' | 'nastyCleaver' | 'nightCloak' | 'shoddyShield' | 'skinningKnife' | 'spikedGauntlet' | 'stilleto' | 'trailRation' | 'vialOfPoison' | 'warPaint';
+export type ItemName = keyof Inventory;
 
 export interface Inventory {
   barbedWhip?: number
