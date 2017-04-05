@@ -20,9 +20,18 @@ export function apply_end_of_round_to_monster (battle: BattleState, {monsterId}:
     delete monster.states.dazed;
     addLog(ret, [monRef, 'is no longer dazed'] );
   }
+  if (monster.states.hungOver){
+    delete monster.states.hungOver;
+    addLog(ret, [monRef, 'is no longer hung over'] );
+  }
+  if (monster.states.ragingMad){
+    delete monster.states.ragingMad;
+    addLog(ret, [monRef, 'is no longer raging mad'] );
+  }
   if (blueprint.skills.skirmish){
     addLog(ret, [monRef, 'is a skirmisher and now escapes the battle'] );
     monster.vars.escaped = true;
   }
   return ret;
 }
+

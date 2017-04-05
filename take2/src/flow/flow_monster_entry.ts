@@ -10,6 +10,13 @@ export function flow_monster_entry(battle: BattleState, {monsterId}:MonsterEntry
   let monster = battle.monsters[monsterId];
   let blueprint = monsters[monster.blueprint];
 
+  if (blueprint.skills.dimwit){
+    list.push(<FlowTarget>['apply','dimwitResult',{
+      monsterId: monsterId,
+      result: ['hungOver','ragingMad','sober'][Math.floor(Math.random()*3)]
+    }])
+  }
+
   if (blueprint.skills.ambush){
     list.push(['eachHero',heroId=>{
       return ['test',{

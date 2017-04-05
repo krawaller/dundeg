@@ -34,6 +34,16 @@ export function calculate_monster_attack (battle: BattleState, instr: CalculateM
     }
   }
 
+  if (monster.states.hungOver){
+    val.history.push( ["Hung over monsters has weaker attack", "-2"] );
+    val.value = Math.max(0, val.value - 2);
+  }
+
+  if (monster.states.ragingMad){
+    val.history.push( ["Raging mad increases attack", "+2"] );
+    val.value += 2;
+  }
+
   if (monster.states.dazed){
     val.history.push( ['When dazed attack is halved, rounding down', '/2' ] );
     val.value = Math.floor( val.value / 2 );

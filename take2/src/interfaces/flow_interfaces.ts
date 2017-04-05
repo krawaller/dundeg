@@ -11,12 +11,14 @@ import { HeroTargetSelectionSpec } from '../apply/apply_target_selection_for_her
 import { DiceRemovalSpec } from '../apply/apply_dice_removal';
 import { EscapeOutcomeSpec } from '../apply/apply_escape_outcome';
 import { AmbushResultSpec } from '../apply/apply_ambush_result';
+import { DimwitResultSpec } from '../apply/apply_dimwit_result';
 
 // Flow specs
 import { OfferRerollSpec } from '../flow/flow_offer_reroll';
 
 export type FlowTarget =
   ['apply', 'ambushResult', AmbushResultSpec] |
+  ['apply', 'dimwitResult', DimwitResultSpec] |
   ['apply', 'stanceChoice', ApplyStanceChoiceToHeroSpec] |
   ['apply', 'returnToBattle', ReturnToBattleSpec] |
   ['apply', 'monsterTargetChoice', TargetSelectionForMonsterSpec] |

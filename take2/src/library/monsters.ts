@@ -28,6 +28,14 @@ export const monsters: MonsterBook = {
     value: 2,
     skills: { rally: true, skirmish: true, summon: 'red' }
   },
+  drunkenYokel: {
+    name: 'Drunken Yokel',
+    traits: { bandit: true },
+    stats: { ATK: 4, ARM: 0, HP: 4 },
+    targets: 'MAG+',
+    value: 1,
+    skills: { dimwit: true }
+  },
   footPad: {
     name: 'Footpad',
     traits: { bandit: true },
