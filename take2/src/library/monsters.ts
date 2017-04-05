@@ -52,6 +52,14 @@ export const monsters: MonsterBook = {
     value: 2,
     skills: { drain: true, fear: true }
   },
+  harpy: {
+    name: 'Harpy',
+    traits: { filth: true },
+    stats: { ATK: 4, ARM: 0, HP: 5 },
+    targets: 'AGI+',
+    value: 1,
+    skills: { evade: true, pursue: true }
+  },
   imperialHuntsman: {
     name: 'Imperial Huntsman',
     traits: { human: true, hunter: true, law: true },

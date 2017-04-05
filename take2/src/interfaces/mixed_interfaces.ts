@@ -31,8 +31,8 @@ export interface BattleState {
 }
 
 export type LogMessageLine = LogMessagePart[]
-export type LogMessageType = 'info' | 'action' | 'monsterAction' | 'verbose'
-export type LogMessagePart = string | LogMessageMonsterRef | LogMessageHeroRef | CalculationResult
+export type LogMessageType = 'info' | 'action' | 'monsterAction' | 'verbose' | 'fail'
+export type LogMessagePart = string | LogMessageMonsterRef | LogMessageHeroRef | CalculationResult | LogMessageItemRef
 export interface LogMessage {
   type: LogMessageType
   line: LogMessageLine
@@ -42,6 +42,9 @@ export interface LogMessageMonsterRef {
 }
 export interface LogMessageHeroRef {
   heroRef: string
+}
+export interface LogMessageItemRef {
+  itemRef: string
 }
 
 export interface PartyStatCheck {

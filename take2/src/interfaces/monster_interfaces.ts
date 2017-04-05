@@ -43,7 +43,7 @@ export interface MonsterStates {
   ragingMad?: true
 }
 
-export type MonsterBase = '_fierceTestMonster' | 'backAlleyBruiser' | 'chickenWitch' | 'drunkenYokel' | 'footPad' | 'ghoulTroll' | 'imperialHuntsman' | 'manAtArms' | 'megaRat' | 'nachtDrekSlicer' | 'nugBear' | 'ratThing' | 'slimeCorpse' | 'shambler' | 'swampTroll' | 'slitherFish';
+export type MonsterBase = '_fierceTestMonster' | 'backAlleyBruiser' | 'chickenWitch' | 'drunkenYokel' | 'footPad' | 'ghoulTroll' | 'harpy' | 'imperialHuntsman' | 'manAtArms' | 'megaRat' | 'nachtDrekSlicer' | 'nugBear' | 'ratThing' | 'slimeCorpse' | 'shambler' | 'swampTroll' | 'slitherFish';
 
 export interface MonsterEntrySkills {
   ambush?: MonsterId[]
@@ -56,6 +56,7 @@ export interface MonsterSkills {
   ambush?: true
   dimwit?: true
   drain?: true
+  evade?: true
   fear?: true
   fierce?: true
   fury?: true
