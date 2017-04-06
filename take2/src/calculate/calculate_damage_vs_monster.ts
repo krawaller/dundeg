@@ -41,7 +41,7 @@ export function calculate_damage_vs_monster (battle: BattleState, instr: Calcula
       val.value++;
     }
     if (hero.skills.foeKiller && hero.vars.stance === 'assault' && monsterBlueprint.value >= 3){
-      val.history.push(['Foekiller deals 1 followup damage versus value 3+ enemies', '+1']);
+      val.history.push(['Foekiller deals 1 followup damage when assaulting value 3+ enemies', '+1']);
       val.value++;
     }
   }

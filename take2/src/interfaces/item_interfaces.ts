@@ -15,6 +15,7 @@ export interface Inventory {
   skinningKnife?: number
   spikedGauntlet?: number
   stilleto?: number
+  studdedLeather?: number
   trailRation?: number
   vialOfPoison?: number
   warPaint?: number

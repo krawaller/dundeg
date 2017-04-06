@@ -19,7 +19,7 @@ export function calculate_monster_armour (battle: BattleState, instr: CalculateM
   }
 
   if (blueprint.traits.filth && instr.using === 'skinningKnife'){
-    val.history.push(['skinning knife VS filth', '-1']);
+    val.history.push(['skinning knife ignores 1 ARM VS filth', '-1']);
     val.value = Math.max( 0, val.value - 1 );
   }
 
