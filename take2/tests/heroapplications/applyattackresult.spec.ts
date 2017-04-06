@@ -19,5 +19,7 @@ test('apply attack result', t => {
   result = apply_attack_result(battle, {heroId: 'hero', monsterId: 'monster', attack: meelee});
   t.ok(lastLogHasStr(result,'misse'), 'log acknowledges miss');
 
+  // TODO - acknowledge successful attack
+
   t.end();
 });
