@@ -1,7 +1,7 @@
 import * as test from "tape";
 import { lastLogHasStr, makeHero, makeMonster } from '../testutils';
 import { BattleState, LogMessagePart } from '../../src/interfaces';
-import { apply_damage_to_hero } from '../../src/apply/apply_damage_to_hero';
+import { apply_wounds_to_hero } from '../../src/apply/apply_wounds_to_hero';
 import { apply_blood_curse_invocation_result } from '../../src/apply/apply_blood_curse_invocation_result';
 import { find_hero_actions } from '../../src/find/find_hero_actions';
 
@@ -42,19 +42,19 @@ test('blood curse hero skill', t => {
   t.equal(battle.monsters.cursedMonster.states.bloodCurse, 'curseLinkedHero', 'blood curse state added to monster');
   t.ok(lastLogHasStr(battle, 'lood curse'), 'msg acknowledges the successful');
 
-  battle = apply_damage_to_hero(battle, {
+  battle = apply_wounds_to_hero(battle, {
     heroId: 'curseLinkedHero',
     monsterId: 'thirdMonster',
-    heroDMG: {value: 2, history: []}
+    wounds: {value: 2, history: []}
   });
   t.equal(battle.heroes.curseLinkedHero.vars.HP, 3, 'hero took damage as normal');
   t.equal(battle.monsters.cursedMonster.vars.HP, 1, 'cursed monster took same damage');
   t.ok(lastLogHasStr(battle, 'lood curse'), 'msg acknowledges the curse');
 
-  battle = apply_damage_to_hero(battle, {
+  battle = apply_wounds_to_hero(battle, {
     heroId: 'curseLinkedHero',
     monsterId: 'thirdMonster',
-    heroDMG: {value: 2, history: []}
+    wounds: {value: 2, history: []}
   });
   t.equal(battle.heroes.curseLinkedHero.vars.HP, 1, 'hero took damage as normal');
   t.equal(battle.monsters.cursedMonster.vars.HP, 0, 'monster was knocked out by curse');
@@ -64,10 +64,10 @@ test('blood curse hero skill', t => {
 
   battle.heroes.curseLinkedHero.vars.bloodCurseLink = 'nextMonster';
   battle.monsters.nextMonster.states.bloodCurse = 'curseLinkedHero';
-  battle = apply_damage_to_hero(battle, {
+  battle = apply_wounds_to_hero(battle, {
     heroId: 'curseLinkedHero',
     monsterId: 'thirdMonster',
-    heroDMG: {value: 2, history: []}
+    wounds: {value: 2, history: []}
   });
   t.equal(battle.heroes.curseLinkedHero.vars.HP, 0, 'hero was knocked out as he should have been');
   t.equal(battle.monsters.nextMonster.vars.HP, 4, 'cursed monster only took 1 HP, since that is what was left for hero');

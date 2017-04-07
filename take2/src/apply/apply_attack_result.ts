@@ -19,6 +19,8 @@ export function apply_attack_result(battle: BattleState, {heroId,monsterId,attac
     addLog(ret,[{heroRef:heroId},'tries to attack',{monsterRef:monsterId},'with',{itemRef:attack.using},'but misses'],'fail');
   } else if (blueprint.skills.evade && hero.vars.attackDice[0] === hero.vars.attackDice[1]) {
     addLog(ret,[{monsterRef:monsterId},'evades (rolled double) the',{itemRef:attack.using},'attack by',{heroRef:heroId}],'fail');
+
+    // TODO - proper attack! :D
   }
   return ret;
 }

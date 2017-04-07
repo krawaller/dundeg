@@ -2,7 +2,7 @@ import * as test from "tape";
 import { lastLogHasStr, makeMonster, makeHero } from '../testutils';
 
 import { BattleState } from '../../src/interfaces';
-import { apply_damage_to_hero } from '../../src/apply/apply_damage_to_hero';
+import { apply_wounds_to_hero } from '../../src/apply/apply_wounds_to_hero';
 import { apply_end_of_round_to_monster } from '../../src/apply/apply_end_of_round_to_monster';
 
 test('the drain monster skill', t => {
@@ -12,10 +12,10 @@ test('the drain monster skill', t => {
     log: []
   };
 
-  battle = apply_damage_to_hero(battle, {
+  battle = apply_wounds_to_hero(battle, {
     heroId: 'hero',
     monsterId: 'drainer',
-    heroDMG: {value: 4, history: []}
+    wounds: {value: 4, history: []}
   });
   t.equal(battle.monsters.drainer.vars.drained, 5, 'the 3 dealt dmg was added to drained');
   t.ok(lastLogHasStr(battle, 'drain'), 'drain msg shown');
