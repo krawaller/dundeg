@@ -12,7 +12,12 @@ export function find_hero_actions (battle: BattleState, {heroId}: InstrJustHeroI
     ret.findWeakness = true; // TODO - sth
   }
   if (hero.items.daemonsBlood){
-    ret.daemonsBlood = true; // TODO - sth
+    ret.daemonsBlood = ['pickTargetAnd',{},['apply','daemonsBlood',{heroId: heroId}]]; // TODO - sth
+  }
+  if (hero.items.shrapnelBomb){
+    ret.shrapnelBomb = ['all',[
+      []
+    ]];
   }
   return ret;
 }

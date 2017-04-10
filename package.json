@@ -15,5 +15,8 @@
     "build": "webpack",
     "test_old": "ts-node node_modules/tape/bin/tape dev/tests/**/*.ts | node_modules/.bin/tap-spec",
     "test": "ts-node node_modules/tape/bin/tape take2/tests/**/*.ts | node_modules/.bin/tap-spec"
+  },
+  "dependencies": {
+    "seedrandom": "^2.4.2"
   }
 }

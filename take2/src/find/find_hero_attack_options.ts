@@ -1,6 +1,6 @@
-import { BattleState, HeroStatName, Attack, AttackOptions, ItemName, CalculationResult } from '../interfaces';
+import { BattleState, HeroStatName, Attack, AttackOptions, ItemName, CalculationResult, HeroId } from '../interfaces';
 
-interface InstrJustHeroId { heroId: string }
+interface InstrJustHeroId { heroId: HeroId }
 
 export const staticAttacks = {
   skinningKnife: { type: 'meelee', stat: 'AGI' },
@@ -8,9 +8,9 @@ export const staticAttacks = {
   luncheonTruncheon: { type: 'meelee', stat: 'STR' }
 };
 
-export const find_hero_attack_options = (battle: BattleState, instr: InstrJustHeroId) => {
+export const find_hero_attack_options = (battle: BattleState, {heroId}: InstrJustHeroId) => {
   let ret: AttackOptions = {};
-  let hero = battle.heroes[instr.heroId];
+  let hero = battle.heroes[heroId];
   if (hero.items.spikedGauntlet){
     ret['spikedGauntlet'] = {
       using: 'spikedGauntlet',

@@ -22,7 +22,7 @@ test('Luncheon Truncheon', t => {
   };
 
   t.deepEqual(
-    find_hero_attack_options(battle, {heroId: 'hero'}).luncheonTruncheon,
+    find_hero_attack_options(battle, {heroId: 'hero'})['luncheonTruncheon'],
     <Attack>{ using: 'luncheonTruncheon', type: 'meelee', stat: 'STR' },
     'luncheon truncheon offers STR attack'
   );

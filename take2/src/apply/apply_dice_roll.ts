@@ -1,14 +1,17 @@
 import { BattleState, HeroId } from '../interfaces';
 import { deepCopy } from '../utils/helpers';
+import { die } from '../utils/rand';
 
 export interface DiceRollSpec {
   heroId: HeroId
-  diceType: {
-    attack?: true
-    defence?: true
-    power?: true
-    singleAttack?: true
-  }
+  diceType: DiceSpec
+}
+
+export interface DiceSpec {
+  attack?: true
+  defence?: true
+  power?: true
+  singleAttack?: true
 }
 
 export function apply_dice_roll (battle:BattleState, {heroId,diceType}: DiceRollSpec): BattleState {
@@ -16,20 +19,20 @@ export function apply_dice_roll (battle:BattleState, {heroId,diceType}: DiceRoll
   let hero = ret.heroes[heroId];
   if (diceType['attack']){
     hero.vars.attackDice = [
-      Math.floor(Math.random()*6)+1,
-      Math.floor(Math.random()*6)+1
+      die(battle.seed),
+      die(battle.seed)
     ];
   } else if (diceType['singleAttack']){
-    hero.vars.attackDice = [Math.floor(Math.random()*6)+1];
+    hero.vars.attackDice = [die(battle.seed)];
   }
   if (diceType['defence']){
     hero.vars.defenceDice = [
-      Math.floor(Math.random()*6)+1,
-      Math.floor(Math.random()*6)+1
+      die(battle.seed),
+      die(battle.seed)
     ];
   }
   if (diceType['power']){
-    hero.vars.powerDie = Math.floor(Math.random()*6)+1;
+    hero.vars.powerDie = die(battle.seed);
   }
   return ret;
 }

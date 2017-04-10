@@ -18,7 +18,7 @@ export function flow_monster_target_choice(battle: BattleState, {monsterId}:Mons
   let party = find_party_stat(battle, {stat, reason: 'monsterTargetAcquisition', monsterId});
   let prospects = party.ordered[( high ? 0 : party.ordered.length-1 )];
   if (prospects.heroes.length === 1){
-    return ['apply', 'monsterTargetChoice', {monsterId, heroId: prospects.heroes[0], calculation: party.individual[prospects.heroes[0]]}];
+    return <FlowTarget>['apply', 'monsterTargetChoice', {monsterId, heroId: prospects.heroes[0], calculation: party.individual[prospects.heroes[0]]}];
   } else {
     let line = <LogMessageLine>[{monsterRef:monsterId},'goes after '+blueprint.targets+'.'];
     let opts = {};

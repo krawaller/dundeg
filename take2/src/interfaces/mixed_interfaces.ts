@@ -26,8 +26,9 @@ export interface BattleState {
   monsters?: {
     [idx: string]: MonsterState
   }
-  log?: LogMessage[],
+  log?: LogMessage[]
   question?: Question
+  seed?: string
 }
 
 export type LogMessageLine = LogMessagePart[]

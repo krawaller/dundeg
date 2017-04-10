@@ -12,6 +12,7 @@ export interface Inventory {
   nastyCleaver?: number
   nightCloak?: number
   shoddyShield?: number
+  shrapnelBomb?: number
   skinningKnife?: number
   spikedGauntlet?: number
   stilleto?: number
@@ -19,4 +20,36 @@ export interface Inventory {
   trailRation?: number
   vialOfPoison?: number
   warPaint?: number
+}
+
+export interface ItemDef {
+  name: string
+  traits: ItemTraits
+}
+
+export interface ItemBook {
+  barbedWhip?: ItemDef
+  bastardSword?: ItemDef
+  daemonsBlood?: ItemDef
+  fortuneCards?: ItemDef
+  huntingBow?: ItemDef
+  luncheonTruncheon?: ItemDef
+  mysteryMeat?: ItemDef
+  nastyCleaver?: ItemDef
+  nightCloak?: ItemDef
+  shoddyShield?: ItemDef
+  shrapnelBomb?: ItemDef
+  skinningKnife?: ItemDef
+  spikedGauntlet?: ItemDef
+  stilleto?: ItemDef
+  studdedLeather?: ItemDef
+  trailRation?: ItemDef
+  vialOfPoison?: ItemDef
+  warPaint?: ItemDef
+}
+
+export type ItemTraitName = keyof ItemTraits;
+
+export interface ItemTraits {
+  blade?: true
 }

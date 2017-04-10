@@ -14,7 +14,7 @@ export function flow_hero_offer_escape_choice(battle: BattleState, {heroId}:Hero
   }
   let dice = hero.vars.defenceDice;
   if (dice[0] !== dice[1]){
-    return ['apply','log', <LogMessage>{
+    return <FlowInstruction>['apply','log', <LogMessage>{
       line: [{heroRef:heroId},'didnt roll doubles for defence and thus cannot escape.'],
       type: 'verbose'
     }];
@@ -25,7 +25,7 @@ export function flow_hero_offer_escape_choice(battle: BattleState, {heroId}:Hero
     return monster.vars.target === heroId && blueprint.skills.pursue;
   });
   if (pursuers.length && !hero.items.nightCloak){
-    return ['apply','log', <LogMessage>{
+    return <FlowInstruction>['apply','log', <LogMessage>{
       line: [{heroRef:heroId},'cannot escape since', {monsterRef:pursuers[0]},'has Pursue'],
       type: 'verbose'
     }];

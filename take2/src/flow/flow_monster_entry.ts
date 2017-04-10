@@ -18,8 +18,8 @@ export function flow_monster_entry(battle: BattleState, {monsterId}:MonsterEntry
   }
 
   if (blueprint.skills.ambush){
-    list.push(['eachHero',heroId=>{
-      return ['test',{
+    list.push(<FlowInstruction>['eachHero',heroId=>{
+      return<FlowTarget>['test',{
         heroId: heroId,
         reason: 'ambush',
         stat: 'PER',
@@ -28,7 +28,7 @@ export function flow_monster_entry(battle: BattleState, {monsterId}:MonsterEntry
         success: ['apply', 'ambushResult', {heroId: heroId, monsterId: monsterId, avoided: true}],
         failure: ['apply', 'ambushResult', {heroId: heroId, monsterId: monsterId}]
       }];
-    }])
+    }]);
   }
 
   if (!list.length){

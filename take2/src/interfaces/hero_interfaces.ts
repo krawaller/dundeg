@@ -54,6 +54,7 @@ export type HeroSkillName = keyof HeroSkills;
 
 export interface HeroSkills {
   bloodCurse?: true
+  bloodLust?: true
   exterminator?: true
   fieldCraft?: true
   findWeakness?: true

@@ -23,7 +23,7 @@ export function flow_hero_target_choice(battle: BattleState, {heroId}:HeroTarget
     return ['ask',{
       line: ['Which monster should', {heroRef: heroId}, 'target?'],
       options: possibleIds.reduce((mem,monsterId)=>{
-        mem[battle.monsters[monsterId].name] = <FlowTarget>['apply', 'monsterTargetChoice', {monsterId, heroId}];
+        mem[battle.monsters[monsterId].name] = <FlowTarget>['apply', 'heroTargetChoice', {monsterId, heroId}];
         return mem;
       }, {})
     }]

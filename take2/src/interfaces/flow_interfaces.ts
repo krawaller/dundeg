@@ -34,6 +34,7 @@ export type FlowTarget =
 export type FlowInstruction =
   FlowTarget |
   ['all', FlowTarget[]] |
+  ['pickTargetAnd', any, | FlowTarget] | // targetpick config
   ['eachHero', (heroId:HeroId) => FlowTarget] |
   ['eachMonster', (monsterId:MonsterId) => FlowTarget] |
   undefined;
