@@ -1,10 +1,10 @@
 import { BattleState, Attack, ItemName, CalculationResult, HeroId, MonsterId } from '../interfaces';
 
-import { monsters } from '../library';
+import { monsters, items } from '../library';
 
-interface CalculateMonsterArmourInstr { monsterId: MonsterId, using?: ItemName, heroId?: HeroId }
+interface CalculateMonsterArmourInstr { monsterId: MonsterId, heroId?: HeroId, attack?: Attack }
 
-export function calculate_monster_armour (battle: BattleState, {monsterId, using, heroId}: CalculateMonsterArmourInstr) :CalculationResult {
+export function calculate_monster_armour (battle: BattleState, {monsterId, heroId, attack}: CalculateMonsterArmourInstr) :CalculationResult {
   let monster = battle.monsters[monsterId];
   let blueprint = monsters[monster.blueprint];
   let hero = battle.heroes[heroId];
@@ -19,14 +19,19 @@ export function calculate_monster_armour (battle: BattleState, {monsterId, using
     return val; // nothing else matters, force to 0;
   }
 
-  if (blueprint.traits.filth && using === 'skinningKnife'){
+  if (blueprint.traits.filth && attack && attack.using === 'skinningKnife'){
     val.history.push(['skinning knife ignores 1 ARM VS filth', '-1']);
     val.value = Math.max( 0, val.value - 1 );
   }
 
-  if (using === 'shrapnelBomb' && hero.vars.attackDice[0] === 6){
+  if (attack && attack.using === 'shrapnelBomb' && hero.vars.attackDice[0] === 6){
     val.history.push(['Shrapnel bomb deals piercing dmg when die was 6', '0']);
     val.value = 0;
+  }
+
+  if (hero && hero.skills.backStab && hero.vars.stance === 'assault' && monster.vars.target !== heroId && attack && attack.using && items[attack.using].traits.blade){
+    val.history.push(['backstab ignores 1 ARM when assaulting monster not targetting hero and using a bladed item', '-1']);
+    val.value = Math.max( 0, val.value - 1 );
   }
 
   return val;

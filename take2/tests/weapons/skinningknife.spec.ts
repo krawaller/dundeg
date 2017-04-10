@@ -18,13 +18,13 @@ test('skinning knife', t => {
   };
 
   t.equal(
-    calculate_monster_armour(battle, {monsterId: 'nonfilth', using: 'skinningKnife'}).value,
+    calculate_monster_armour(battle, {monsterId: 'nonfilth', attack: {stat:'STR',type:'meelee',using: 'skinningKnife'}}).value,
     monsters[battle.monsters.nonfilth.blueprint].stats.ARM,
     'just normal base value since wasnt filth'
   );
 
   t.equal(
-    calculate_monster_armour(battle, {monsterId: 'filth', using: 'skinningKnife'}).value,
+    calculate_monster_armour(battle, {monsterId: 'filth', attack: {stat:'STR',type:'meelee',using: 'skinningKnife'}}).value,
     monsters[battle.monsters.filth.blueprint].stats.ARM - 1,
     'deducts 1 ARM versus filth'
   );

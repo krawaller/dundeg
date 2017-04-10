@@ -27,5 +27,9 @@ export function calculate_hero_stat (battle: BattleState, {heroId, stat, reason}
     val.history.push(['friend with sixth sense', '+1']);
     val.value++;
   }
+  if (stat === 'PER' && hero.states.focused){
+    val.history.push(['focused','+1']);
+    val.value++;
+  }
   return val;
 }

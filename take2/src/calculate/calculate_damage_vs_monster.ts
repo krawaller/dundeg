@@ -1,4 +1,4 @@
-import { BattleState, Attack, CalculationResult } from '../interfaces';
+import { BattleState, Attack, CalculationResult, AttackType } from '../interfaces';
 
 import { monsters } from '../library';
 
@@ -6,7 +6,6 @@ interface CalculateMonsterDamageInstr {
   monsterId: string,
   heroId?: string,
   attack?: Attack,
-  using?: string,
   heroATK: CalculationResult,
   monsterARM: CalculationResult,
   powerDie?: number
@@ -23,8 +22,12 @@ export function calculate_damage_vs_monster (battle: BattleState, instr: Calcula
     ],
     value: instr.heroATK.value - instr.monsterARM.value
   }
-  if (hero.vars.powerDie === 6 && instr.using === 'nastyCleaver' && hero.vars.stance === 'assault'){
-    val.history.push(['Nasty Cleaver deals 1 followup damage when assaulting', '+1']);
+  if (hero.vars.powerDie === 6 && instr.attack && instr.attack.using === 'nastyCleaver' && hero.vars.stance === 'assault'){
+    val.history.push(['Nasty Cleaver deals 1 extra damage when assaulting', '+1']);
+    val.value++;
+  }
+  if (hero.skills.backStab && monster.vars.target !== instr.heroId && hero.vars.stance === 'assault' && instr.attack.type === 'meelee'){
+    val.history.push(['Backstab deals 1 extra DMG for meelee attacks in assault stance vs monsters targetting someone else', '+1']);
     val.value++;
   }
   if (val.value>0){

@@ -20,13 +20,13 @@ test('shrapnel bomb item', t => {
 
   battle.heroes.hero.vars.attackDice = [1,1];
   t.equal(
-    calculate_monster_armour(battle, {monsterId: 'monster', using: 'shrapnelBomb', heroId: 'hero'}).value,
+    calculate_monster_armour(battle, {monsterId: 'monster', attack: {stat:'STR',type:'meelee',using: 'shrapnelBomb'}, heroId: 'hero'}).value,
     monsters.slitherFish.stats.ARM, 'shrapnel bomb has no piercing by default'
   );
 
   battle.heroes.hero.vars.attackDice = [6,1];
   t.equal(
-    calculate_monster_armour(battle, {monsterId: 'monster', using: 'shrapnelBomb', heroId: 'hero'}).value,
+    calculate_monster_armour(battle, {monsterId: 'monster', attack: {stat:'STR',type:'meelee',using: 'shrapnelBomb'}, heroId: 'hero'}).value,
     0, 'shrapnel bomb has piercing when die was 6'
   );
 

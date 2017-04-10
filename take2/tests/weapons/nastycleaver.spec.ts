@@ -27,7 +27,7 @@ test('Nasty Cleaver', t => {
       heroId: 'hero',
       heroATK: {value: 6, history:[]},
       monsterARM: {value: 4, history:[]},
-      using: 'nastyCleaver'
+      attack: {using: 'nastyCleaver', stat: 'STR', type: 'meelee'}
     }).value,
     3,
     'nasty cleaver gives +1 damage when power die is 6'
@@ -40,7 +40,7 @@ test('Nasty Cleaver', t => {
       heroId: 'hero',
       heroATK: {value: 6, history:[]},
       monsterARM: {value: 4, history:[]},
-      using: 'nastyCleaver',
+      attack: {using: 'nastyCleaver', stat: 'STR', type: 'meelee'}
     }).value,
     2,
     'nasty cleaver has no effect when power die isnt 6'
@@ -54,7 +54,7 @@ test('Nasty Cleaver', t => {
       heroId: 'hero',
       heroATK: {value: 6, history:[]},
       monsterARM: {value: 4, history:[]},
-      using: 'nastyCleaver'
+      attack: {using: 'nastyCleaver', stat: 'STR', type: 'meelee'}
     }).value,
     2,
     'nasty cleaver has no effect when not assaulting'

@@ -11,8 +11,10 @@ export interface AttackOptions {
   [idx: string]: Attack
 }
 
+export type AttackType = 'meelee' | 'ranged'
+
 export interface Attack {
-  type: 'meelee' | 'ranged',
+  type: AttackType
   using: ItemName,
   stat: HeroStatName
 }

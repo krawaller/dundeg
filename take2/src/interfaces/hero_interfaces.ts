@@ -53,6 +53,7 @@ export type HeroBase = 'angelOfDeath' | 'bloodsportBrawler' | 'carnivalDrifter' 
 export type HeroSkillName = keyof HeroSkills;
 
 export interface HeroSkills {
+  backStab?: true
   bloodCurse?: true
   bloodLust?: true
   exterminator?: true
@@ -73,6 +74,7 @@ export interface HeroStates {
   poisoned?: true
   infected?: true
   stunned?: true
+  focused?: true
 }
 
 export type HeroId = string;
