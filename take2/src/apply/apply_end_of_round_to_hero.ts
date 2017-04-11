@@ -1,11 +1,11 @@
 import { BattleState } from '../interfaces';
 import { deepCopy, addLog } from '../utils/helpers';
 
-interface EndOfRoundInstr {
+export interface EndOfRoundHeroSpec {
   heroId: string
 }
 
-export function apply_end_of_round_to_hero (battle: BattleState, {heroId}: EndOfRoundInstr):BattleState {
+export function apply_end_of_round_to_hero (battle: BattleState, {heroId}: EndOfRoundHeroSpec):BattleState {
   let ret = deepCopy(battle);
   let hero = ret.heroes.hero;
   if (hero.states.stunned){

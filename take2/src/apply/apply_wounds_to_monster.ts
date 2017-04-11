@@ -1,14 +1,14 @@
 import { BattleState, CalculationResult, HeroId, MonsterId } from '../interfaces';
 import { deepCopy, addLog } from '../utils/helpers';
 
-interface ApplyWoundsToMonsterInstr {
+export interface WoundMonsterSpec {
   heroId: HeroId
   monsterId: MonsterId
   wounds: CalculationResult
   wasBloodCurse?: true
 }
 
-export function apply_wounds_to_monster (battle:BattleState, {monsterId,heroId,wounds,wasBloodCurse}: ApplyWoundsToMonsterInstr): BattleState {
+export function apply_wounds_to_monster (battle:BattleState, {monsterId,heroId,wounds,wasBloodCurse}: WoundMonsterSpec): BattleState {
   const ret = deepCopy(battle);
   let target = ret.monsters[monsterId];
   let dealt = Math.min(target.vars.HP, wounds.value);

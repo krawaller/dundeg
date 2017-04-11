@@ -2,12 +2,12 @@ import { BattleState, CalculationResult, MonsterBase } from '../interfaces';
 import { monsters } from '../library';
 import { deepCopy } from '../utils/helpers';
 
-interface ApplyIntroductionToMonsterInstr {
+export interface MonsterIntroductionSpec {
   monsterId: string,
   monsterType: MonsterBase
 }
 
-export function apply_introduction_to_monster(battle: BattleState, {monsterId, monsterType}: ApplyIntroductionToMonsterInstr):BattleState {
+export function apply_introduction_to_monster(battle: BattleState, {monsterId, monsterType}: MonsterIntroductionSpec):BattleState {
   if (battle.monsters[monsterId]){
     throw 'Already a monster existing with that Id';
   }

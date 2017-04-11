@@ -2,11 +2,11 @@ import { BattleState } from '../interfaces';
 import { deepCopy, addLog } from '../utils/helpers';
 import { monsters } from '../library'
 
-interface EndOfRoundInstr {
+export interface EndOfRoundMonsterSpec {
   monsterId: string
 }
 
-export function apply_end_of_round_to_monster (battle: BattleState, {monsterId}: EndOfRoundInstr):BattleState {
+export function apply_end_of_round_to_monster (battle: BattleState, {monsterId}: EndOfRoundMonsterSpec):BattleState {
   let ret = deepCopy(battle);
   let monster = ret.monsters[monsterId];
   let blueprint = monsters[monster.blueprint];

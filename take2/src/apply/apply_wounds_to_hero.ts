@@ -5,13 +5,13 @@ import { find_standing_monsters } from '../find/find_standing_monsters';
 import { deepCopy, isMonsterAlive, addLog } from '../utils/helpers';
 import { apply_wounds_to_monster } from './apply_wounds_to_monster';
 
-interface ApplyWoundsToHeroInstr {
+export interface WoundHeroSpec {
   heroId: string,
   monsterId: string,
   wounds: CalculationResult
 }
 
-export function apply_wounds_to_hero (battle: BattleState, {heroId,monsterId,wounds}: ApplyWoundsToHeroInstr): BattleState {
+export function apply_wounds_to_hero (battle: BattleState, {heroId,monsterId,wounds}: WoundHeroSpec): BattleState {
   let ret = deepCopy(battle);
   let monster = ret.monsters[monsterId];
   let target = ret.heroes[heroId];

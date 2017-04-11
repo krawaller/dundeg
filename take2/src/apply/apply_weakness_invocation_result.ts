@@ -2,20 +2,21 @@ import { BattleState, HeroId, HeroStance } from '../interfaces';
 import { deepCopy, addLog } from '../utils/helpers';
 import { calculate_hero_stat } from '../calculate/calculate_hero_stat';
 
-interface ApplyWeaknessInvocationResultInstr {
-  heroId: HeroId
+export interface WeaknessInvocationResultSpec {
+  heroId: HeroId,
+  success: boolean
 }
 
-export function apply_weakness_invocation_result(battle: BattleState, {heroId}:ApplyWeaknessInvocationResultInstr): BattleState {
+export function apply_weakness_invocation_result(battle: BattleState, {heroId,success}:WeaknessInvocationResultSpec): BattleState {
   let ret = deepCopy(battle);
   let calc = calculate_hero_stat(ret, {heroId, stat: 'PER', reason: 'weakness'});
   let hero = ret.heroes[heroId];
   let monsterId = hero.vars.target;
-  if (hero.vars.attackDice[0] + hero.vars.attackDice[1] <= calc.value){
+  if (success){
     ret.monsters[monsterId].states.weakness = heroId;
-    addLog(ret, [ 'With a PER of', calc, {heroRef:heroId}, 'successfully finds a weakness on', {monsterRef: monsterId} ]);
+    addLog(ret, [ {heroRef:heroId}, 'successfully finds a weakness on', {monsterRef: monsterId} ], 'success');
   } else {
-    addLog(ret, [ 'A PER of', calc, 'means', {heroRef:heroId}, 'failed to find a weakness on', {monsterRef: monsterId} ]);
+    addLog(ret, [ {heroRef:heroId}, 'failed to find a weakness on', {monsterRef: monsterId}, 'fail' ]);
   }
   return ret;
 }

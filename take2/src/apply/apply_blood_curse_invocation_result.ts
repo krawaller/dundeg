@@ -20,4 +20,3 @@ export function apply_blood_curse_invocation_result(battle: BattleState, {heroId
   }
   return ret;
 }
-// TODO - change to test!

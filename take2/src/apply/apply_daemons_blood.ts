@@ -4,16 +4,18 @@ import { calculate_hero_stat } from '../calculate/calculate_hero_stat';
 import { monsters } from '../library';
 import { apply_wounds_to_monster } from './apply_wounds_to_monster';
 
-interface ApplyDaemonsBloodInstr {
-  heroId: HeroId,
-  dice: number
+export interface DaemonsBloodSpec {
+  heroId: HeroId
 }
 
-export function apply_daemons_blood(battle: BattleState, {heroId,dice}:ApplyDaemonsBloodInstr): BattleState {
+// works with single attack dice
+
+export function apply_daemons_blood(battle: BattleState, {heroId}:DaemonsBloodSpec): BattleState {
   let ret = deepCopy(battle);
   let monsterId = ret.heroes[heroId].vars.target;
   let monster = ret.monsters[monsterId];
   let blueprint = monsters[monster.blueprint];
+  let dice = battle.heroes[heroId].vars.attackDice[0];
   monster.states.corroded = true;
   addLog(ret, [ {heroRef: heroId}, 'threw Daemon\'s Blood and corroded the armour of',{monsterRef: monsterId} ]);
   let wounds: CalculationResult;

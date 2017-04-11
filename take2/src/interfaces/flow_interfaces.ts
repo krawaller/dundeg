@@ -13,22 +13,40 @@ import { EscapeOutcomeSpec } from '../apply/apply_escape_outcome';
 import { AmbushResultSpec } from '../apply/apply_ambush_result';
 import { DimwitResultSpec } from '../apply/apply_dimwit_result';
 import { LuncheonTruncheonThrowSpec } from '../apply/apply_luncheon_truncheon_throw';
+import { BloodCurseSpec } from '../apply/apply_blood_curse_invocation_result';
+import { WeaknessInvocationResultSpec } from '../apply/apply_weakness_invocation_result';
+import { DaemonsBloodSpec } from '../apply/apply_daemons_blood';
+import { DiceRollSpec } from '../apply/apply_dice_roll';
+import { EndOfRoundHeroSpec } from '../apply/apply_end_of_round_to_hero';
+import { EndOfRoundMonsterSpec } from '../apply/apply_end_of_round_to_monster';
+import { MonsterIntroductionSpec } from '../apply/apply_introduction_to_monster';
+import { WoundHeroSpec } from '../apply/apply_wounds_to_hero';
+import { WoundMonsterSpec } from '../apply/apply_wounds_to_monster';
 
 // Flow specs
 import { OfferRerollSpec } from '../flow/flow_offer_reroll';
 
 export type FlowApply = // When add stuff here, must also add to exec/exec_apply
   ['apply', 'ambushResult', AmbushResultSpec] |
+  ['apply', 'bloodCurseResult', BloodCurseSpec] |
+  ['apply', 'daemonsBlood', DaemonsBloodSpec] |
   ['apply', 'diceRemoval', DiceRemovalSpec] |
+  ['apply', 'diceRoll', DiceRollSpec] |
   ['apply', 'dimwitResult', DimwitResultSpec] |
+  ['apply', 'endRoundHero', EndOfRoundHeroSpec] |
+  ['apply', 'endRoundMonster', EndOfRoundMonsterSpec] |
   ['apply', 'escapeOutcome', EscapeOutcomeSpec] |
   ['apply', 'heroTargetChoice', HeroTargetSelectionSpec] |
+  ['apply', 'introduceMonster', MonsterIntroductionSpec] |
   ['apply', 'log', LogMessage] |
   ['apply', 'luncheonTruncheonThrow', LuncheonTruncheonThrowSpec] |
   ['apply', 'monsterTargetChoice', TargetSelectionForMonsterSpec] |
   ['apply', 'reroll', RerollSpec ] |
   ['apply', 'returnToBattle', ReturnToBattleSpec] |
-  ['apply', 'stanceChoice', ApplyStanceChoiceToHeroSpec]
+  ['apply', 'stanceChoice', ApplyStanceChoiceToHeroSpec] |
+  ['apply', 'weaknessInvocationResult', WeaknessInvocationResultSpec] |
+  ['apply', 'woundHero', WoundHeroSpec] |
+  ['apply', 'WoundMonster', WoundMonsterSpec]
   ;
 
 export type FlowFurther = 

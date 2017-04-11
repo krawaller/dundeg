@@ -5,12 +5,10 @@ import { BattleState, Attack } from '../../src/interfaces';
 import { find_hero_actions } from '../../src/find/find_hero_actions';
 import { apply_daemons_blood } from '../../src/apply/apply_daemons_blood';
 
-// TODO - dice as state in hero since could've been rerolled?
-
 test('Daemons blood', t => {
   let battle: BattleState = {
     heroes: {
-      hero: makeHero('bloodsportBrawler',{target: 'megarat'},{},{},['daemonsBlood'])
+      hero: makeHero('bloodsportBrawler',{target: 'megarat',attackDice: [5]},{},{},['daemonsBlood'])
     },
     monsters: {
       megarat: makeMonster('megaRat',{HP:5}),
@@ -24,7 +22,7 @@ test('Daemons blood', t => {
     'daemons blood offers action' // TODO - what does it look like?
   );
 
-  battle = apply_daemons_blood(battle,{heroId:'hero',dice:5});
+  battle = apply_daemons_blood(battle,{heroId:'hero'});
   t.ok(
     battle.monsters.megarat.states.corroded,
     'megarat became corroded'
@@ -35,7 +33,7 @@ test('Daemons blood', t => {
   );
 
   battle.heroes.hero.vars.target = 'nacht';
-  battle = apply_daemons_blood(battle,{heroId:'hero',dice:5});
+  battle = apply_daemons_blood(battle,{heroId:'hero'});
   t.equal(
     battle.monsters.nacht.vars.HP,
     3, 'roll of 5 meant 5 since he is weird, D6 now'
