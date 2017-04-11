@@ -31,13 +31,11 @@ test('blood curse hero skill', t => {
   );
 
   battle.heroes.curseLinkedHero.vars.target = 'cursedMonster';
-  battle.heroes.curseLinkedHero.vars.attackDice = [5,6]; // will fail MAG roll, brawler has 5
-  battle = apply_blood_curse_invocation_result(battle, {heroId: 'curseLinkedHero'});
+  battle = apply_blood_curse_invocation_result(battle, {heroId: 'curseLinkedHero', success: false});
   t.ok(!battle.heroes.curseLinkedHero.vars.bloodCurseLink, 'blood curse was not added since invocation failed');
   t.ok(lastLogHasStr(battle, 'fail'), 'msg acknowledges the fail');
 
-  battle.heroes.curseLinkedHero.vars.attackDice = [1,2]; // will succeed
-  battle = apply_blood_curse_invocation_result(battle, {heroId: 'curseLinkedHero'});
+  battle = apply_blood_curse_invocation_result(battle, {heroId: 'curseLinkedHero', success: true});
   t.equal(battle.heroes.curseLinkedHero.vars.bloodCurseLink, 'cursedMonster', 'blood curse link set correctly');
   t.equal(battle.monsters.cursedMonster.states.bloodCurse, 'curseLinkedHero', 'blood curse state added to monster');
   t.ok(lastLogHasStr(battle, 'lood curse'), 'msg acknowledges the successful');

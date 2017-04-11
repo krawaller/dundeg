@@ -12,24 +12,31 @@ import { DiceRemovalSpec } from '../apply/apply_dice_removal';
 import { EscapeOutcomeSpec } from '../apply/apply_escape_outcome';
 import { AmbushResultSpec } from '../apply/apply_ambush_result';
 import { DimwitResultSpec } from '../apply/apply_dimwit_result';
+import { LuncheonTruncheonThrowSpec } from '../apply/apply_luncheon_truncheon_throw';
 
 // Flow specs
 import { OfferRerollSpec } from '../flow/flow_offer_reroll';
 
-export type FlowTarget =
+export type FlowApply = // When add stuff here, must also add to exec/exec_apply
   ['apply', 'ambushResult', AmbushResultSpec] |
-  ['apply', 'dimwitResult', DimwitResultSpec] |
-  ['apply', 'stanceChoice', ApplyStanceChoiceToHeroSpec] |
-  ['apply', 'returnToBattle', ReturnToBattleSpec] |
-  ['apply', 'monsterTargetChoice', TargetSelectionForMonsterSpec] |
-  ['apply', 'heroTargetChoice', HeroTargetSelectionSpec] |
-  ['apply', 'reroll', RerollSpec ] |
   ['apply', 'diceRemoval', DiceRemovalSpec] |
+  ['apply', 'dimwitResult', DimwitResultSpec] |
   ['apply', 'escapeOutcome', EscapeOutcomeSpec] |
+  ['apply', 'heroTargetChoice', HeroTargetSelectionSpec] |
   ['apply', 'log', LogMessage] |
+  ['apply', 'luncheonTruncheonThrow', LuncheonTruncheonThrowSpec] |
+  ['apply', 'monsterTargetChoice', TargetSelectionForMonsterSpec] |
+  ['apply', 'reroll', RerollSpec ] |
+  ['apply', 'returnToBattle', ReturnToBattleSpec] |
+  ['apply', 'stanceChoice', ApplyStanceChoiceToHeroSpec]
+  ;
+
+export type FlowFurther = 
   ['flow', 'reroll', OfferRerollSpec] | 
-  ['ask', Question] | 
-  ['test', Test];
+  ['flow', 'ask', Question] | 
+  ['flow', 'test', Test];
+
+export type FlowTarget = FlowApply | FlowFurther
 
 export type FlowInstruction =
   FlowTarget |
@@ -52,7 +59,7 @@ export interface Test {
   stat: HeroStatName,
   dice: 'attack' | 'defence',
   line: LogMessageLine,
-  success: FlowTarget,
+  success: (num: number) => FlowTarget,
   failure: FlowTarget
 }
 

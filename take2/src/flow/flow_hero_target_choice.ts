@@ -20,7 +20,7 @@ export function flow_hero_target_choice(battle: BattleState, {heroId}:HeroTarget
   if (possibleIds.length === 1){
     return <FlowTarget>['apply', 'heroTargetChoice', {heroId: heroId, monsterId: possibleIds[0]}];
   } else {
-    return ['ask',{
+    return <FlowTarget>['flow','ask',{
       line: ['Which monster should', {heroRef: heroId}, 'target?'],
       options: possibleIds.reduce((mem,monsterId)=>{
         mem[battle.monsters[monsterId].name] = <FlowTarget>['apply', 'heroTargetChoice', {monsterId, heroId}];

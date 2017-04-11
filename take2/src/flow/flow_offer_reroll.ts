@@ -27,7 +27,7 @@ export function flow_offer_reroll(battle: BattleState, {heroId}:OfferRerollSpec)
     if (hero.vars.powerDie){
       opts['pow die with '+hero.vars.powerDie] = withAccept(['apply','reroll',{heroId,diceType:'power'}]);
     }
-    return ['ask', {
+    return <FlowTarget>['flow','ask', {
       line: ['Will',{heroRef:heroId},'accept the result or spend luck to reroll?'],
       options: opts
     }];

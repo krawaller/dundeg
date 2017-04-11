@@ -2,21 +2,22 @@ import { BattleState, HeroId, HeroStance } from '../interfaces';
 import { deepCopy, addLog } from '../utils/helpers';
 import { calculate_hero_stat } from '../calculate/calculate_hero_stat';
 
-interface ApplyBloodCurseInvocationResultInstr {
-  heroId: HeroId
+export interface BloodCurseSpec {
+  heroId: HeroId,
+  success: boolean
 }
 
-export function apply_blood_curse_invocation_result(battle: BattleState, {heroId}:ApplyBloodCurseInvocationResultInstr): BattleState {
+export function apply_blood_curse_invocation_result(battle: BattleState, {heroId,success}:BloodCurseSpec): BattleState {
   let ret = deepCopy(battle);
-  let calc = calculate_hero_stat(ret, {heroId, stat: 'MAG', reason: 'bloodCurse'});
   let hero = ret.heroes[heroId];
   let monsterId = hero.vars.target;
-  if (hero.vars.attackDice[0] + hero.vars.attackDice[1] <= calc.value){
+  if (success){
     hero.vars.bloodCurseLink = monsterId;
     ret.monsters[monsterId].states.bloodCurse = heroId;
-    addLog(ret, [ 'With a MAG of', calc, {heroRef:heroId}, 'successfully casts a blood curse on', {monsterRef: monsterId} ]);
+    addLog(ret, [ {heroRef:heroId}, 'successfully casts a blood curse on', {monsterRef: monsterId}, 'success']);
   } else {
-    addLog(ret, [ 'A MAG of', calc,'means',{heroRef:heroId}, 'failed to cast a blood curse on', {monsterRef: monsterId} ]);
+    addLog(ret, [ {heroRef:heroId}, 'failed to cast a blood curse on', {monsterRef: monsterId} ], 'fail');
   }
   return ret;
 }
+// TODO - change to test!

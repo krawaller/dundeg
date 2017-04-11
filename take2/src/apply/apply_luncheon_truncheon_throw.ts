@@ -3,11 +3,11 @@ import { deepCopy, removeAnItem, addLog } from '../utils/helpers';
 import { find_standing_monsters } from '../find/find_standing_monsters';
 import { monsters } from '../library';
 
-interface ApplyLuncheonTruncheonThrowInstr {
+export interface LuncheonTruncheonThrowSpec {
   heroId: HeroId
 }
 
-export function apply_luncheon_truncheon_throw(battle: BattleState, {heroId}:ApplyLuncheonTruncheonThrowInstr): BattleState {
+export function apply_luncheon_truncheon_throw(battle: BattleState, {heroId}:LuncheonTruncheonThrowSpec): BattleState {
   let ret = deepCopy(battle);
   let hero = ret.heroes[heroId];
   addLog(ret, [{heroRef: heroId}, 'throws the Luncheon Truncheon amidst the enemies!'] );

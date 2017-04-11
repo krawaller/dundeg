@@ -1,4 +1,4 @@
-import { BattleState, MonsterId, FlowInstruction, FlowTarget } from '../interfaces';
+import { BattleState, MonsterId, FlowInstruction, FlowTarget, FlowFurther } from '../interfaces';
 import { monsters } from '../library';
 
 export interface MonsterEntrySpec {
@@ -19,13 +19,13 @@ export function flow_monster_entry(battle: BattleState, {monsterId}:MonsterEntry
 
   if (blueprint.skills.ambush){
     list.push(<FlowInstruction>['eachHero',heroId=>{
-      return<FlowTarget>['test',{
+      return <FlowTarget>['flow','test',{
         heroId: heroId,
         reason: 'ambush',
         stat: 'PER',
         dice: 'defence',
         line: [{heroRef:heroId},'must test against PER to avoid ambush by',{monsterRef:monsterId}],
-        success: ['apply', 'ambushResult', {heroId: heroId, monsterId: monsterId, avoided: true}],
+        success: num=> ['apply', 'ambushResult', {heroId: heroId, monsterId: monsterId, avoided: true}],
         failure: ['apply', 'ambushResult', {heroId: heroId, monsterId: monsterId}]
       }];
     }]);

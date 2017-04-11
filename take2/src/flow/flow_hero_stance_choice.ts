@@ -8,7 +8,7 @@ export interface HeroOfferStanceChoiceSpec {
 
 export function flow_hero_offer_stance_choice(battle: BattleState, {heroId}:HeroOfferStanceChoiceSpec): FlowInstruction {
   if (isHeroAlive(battle.heroes[heroId])){
-    return <FlowTarget>['ask',{
+    return <FlowTarget>['flow','ask',{
       line: ['Select stance for', {heroRef:heroId}],
       options: {
         assault: ['apply', 'stanceChoice' ,{heroId: heroId, stance: 'assault'}],

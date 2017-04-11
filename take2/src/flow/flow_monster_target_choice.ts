@@ -30,7 +30,7 @@ export function flow_monster_target_choice(battle: BattleState, {monsterId}:Mons
         calculation: party.individual[heroId]
       }];
     });
-    return ['ask',{
+    return <FlowTarget>['flow','ask',{
       line: line,
       options: opts
     }];

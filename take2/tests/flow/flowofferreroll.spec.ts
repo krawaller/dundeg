@@ -11,8 +11,8 @@ test('flow hero reroll choice', t => {
   };
 
   result = <FlowInstruction>flow_offer_reroll(battle, {heroId: 'hero'});
-  t.equal(result[0],'ask','We got back a question');
-  q = <Question>result[1];
+  t.equal(result[1],'ask','We got back a question');
+  q = <Question>result[2];
   t.deepEqual(Object.keys(q.options), ['accept','atk die with 7','atk die with 8','pow die with 9'], 'we got these options');
   t.deepEqual(
     q.options['atk die with 8'][1][0], 
@@ -29,7 +29,7 @@ test('flow hero reroll choice', t => {
   delete battle.heroes.hero.vars.powerDie;
   battle.heroes.hero.vars.attackDice = [666];
   result = <FlowInstruction>flow_offer_reroll(battle, {heroId: 'hero'});
-  q = <Question>result[1];
+  q = <Question>result[2];
   t.deepEqual(Object.keys(q.options), ['accept','atk die with 666'], 'it doesnt bug when we have rolled just 1 atk');
 
   delete battle.heroes.hero.vars.luck;
