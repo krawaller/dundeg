@@ -21,7 +21,7 @@ test('monster ambush skill', t => {
   t.ok( battle.heroes.hero.states.stunned, 'hero was stunned' );
 
   let result = flow_monster_entry(battle, {monsterId: 'ambusher'});
-  t.equal( result[0], 'eachHero', 'we got an ambushtest for each hero' );
+  t.equal( result[1], 'eachHero', 'we got an ambushtest for each hero' );
 
   t.end();
 

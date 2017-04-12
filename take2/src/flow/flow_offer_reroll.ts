@@ -1,30 +1,31 @@
-import { BattleState, MonsterId, FlowInstruction, FlowTarget } from '../interfaces';
+import { BattleState, MonsterId, FlowInstruction, FlowTarget, DiceSpec } from '../interfaces';
 
-export interface OfferRerollSpec {
-  heroId
+export interface OfferRerollSpec { // TODO - specify what we can reroll?
+  heroId,
+  diceTypes: DiceSpec
 }
 
-export function flow_offer_reroll(battle: BattleState, {heroId}:OfferRerollSpec): FlowInstruction {
+export function flow_offer_reroll(battle: BattleState, {heroId,diceTypes}:OfferRerollSpec): FlowInstruction {
   // wrap every reroll application with additional reroll question
   function withAccept(trgt: FlowTarget):FlowInstruction{
-    return ['all',[trgt,<FlowTarget>['flow', 'reroll', {heroId: heroId}]]];
+    return ['flow','all',[trgt,<FlowTarget>['flow', 'offerReroll', {heroId: heroId}]]];
   };
   let hero = battle.heroes[heroId];
   if (hero.vars.luck){
     let opts = {
       accept: undefined
     };
-    if (hero.vars.attackDice){
+    if (diceTypes.attack || diceTypes.singleAttack){
       opts['atk die with '+hero.vars.attackDice[0]] = withAccept(['apply','reroll',{heroId,diceType:'attack'}]);
-      if (hero.vars.attackDice.length > 1) {
+      if (!diceTypes.singleAttack) {
         opts['atk die with '+hero.vars.attackDice[1]] = withAccept(['apply','reroll',{heroId,diceType:'attack',second:true}]);
       }
     }
-    if (hero.vars.defenceDice){
+    if (diceTypes.defence){
       opts['atk die with '+hero.vars.defenceDice[0]] = withAccept(['apply','reroll',{heroId,diceType:'defence'}]);
       opts['atk die with '+hero.vars.defenceDice[1]] = withAccept(['apply','reroll',{heroId,diceType:'defence',second:true}]);
     }
-    if (hero.vars.powerDie){
+    if (diceTypes.power){
       opts['pow die with '+hero.vars.powerDie] = withAccept(['apply','reroll',{heroId,diceType:'power'}]);
     }
     return <FlowTarget>['flow','ask', {

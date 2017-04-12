@@ -13,7 +13,7 @@ test('apply dice roll to hero', t => {
 
   let result: BattleState, dice;
 
-  result = apply_dice_roll(battle, {heroId: 'hero', diceType: {attack:true}});
+  result = apply_dice_roll(battle, {heroId: 'hero', diceTypes: {attack:true}});
   dice = result.heroes.hero.vars.attackDice;
   t.equal(dice.length, 2 , 'hero got attack dice' );
   t.ok(!result.heroes.hero.vars.defenceDice, 'hero did NOT get defence die');
@@ -24,7 +24,7 @@ test('apply dice roll to hero', t => {
     t.ok(d <= 6, 'die is 6 or lower');
   });
 
-  result = apply_dice_roll(battle, {heroId: 'hero', diceType: {singleAttack:true}});
+  result = apply_dice_roll(battle, {heroId: 'hero', diceTypes: {singleAttack:true}});
   dice = result.heroes.hero.vars.attackDice;
   t.equal(dice.length, 1 , 'hero got single attack dice' );
   t.ok(!result.heroes.hero.vars.defenceDice, 'hero did NOT get defence die');
@@ -35,7 +35,7 @@ test('apply dice roll to hero', t => {
     t.ok(d <= 6, 'die is 6 or lower');
   });
 
-  result = apply_dice_roll(battle, {heroId: 'hero', diceType: {defence:true}});
+  result = apply_dice_roll(battle, {heroId: 'hero', diceTypes: {defence:true}});
   dice = result.heroes.hero.vars.defenceDice;
   t.equal(dice.length, 2 , 'hero got defence dice' );
   t.ok(!result.heroes.hero.vars.attackDice, 'hero did NOT get attack die');
@@ -46,7 +46,7 @@ test('apply dice roll to hero', t => {
     t.ok(d <= 6, 'die is 6 or lower');
   });
 
-  result = apply_dice_roll(battle, {heroId: 'hero', diceType: {power:true}});
+  result = apply_dice_roll(battle, {heroId: 'hero', diceTypes: {power:true}});
   dice = result.heroes.hero.vars.powerDie;
   t.ok(!result.heroes.hero.vars.attackDice, 'hero did NOT get attack die');
   t.ok(!result.heroes.hero.vars.defenceDice, 'hero did NOT get defence');

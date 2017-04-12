@@ -23,9 +23,6 @@ import { MonsterIntroductionSpec } from '../apply/apply_introduction_to_monster'
 import { WoundHeroSpec } from '../apply/apply_wounds_to_hero';
 import { WoundMonsterSpec } from '../apply/apply_wounds_to_monster';
 
-// Flow specs
-import { OfferRerollSpec } from '../flow/flow_offer_reroll';
-
 export type FlowApply = // When add stuff here, must also add to exec/exec_apply
   ['apply', 'ambushResult', AmbushResultSpec] |
   ['apply', 'bloodCurseResult', BloodCurseSpec] |
@@ -49,20 +46,32 @@ export type FlowApply = // When add stuff here, must also add to exec/exec_apply
   ['apply', 'WoundMonster', WoundMonsterSpec]
   ;
 
-export type FlowFurther = 
-  ['flow', 'reroll', OfferRerollSpec] | 
-  ['flow', 'ask', Question] | 
+// Flow specs
+import { OfferRerollSpec } from '../flow/flow_offer_reroll';
+import { HeroOfferEscapeChoiceSpec } from '../flow/flow_hero_escape_choice';
+import { HeroOfferReturnChoiceSpec } from '../flow/flow_hero_return_choice';
+import { HeroOfferStanceChoiceSpec } from '../flow/flow_hero_stance_choice';
+import { HeroTargetChoiceSpec } from '../flow/flow_hero_target_choice';
+import { MonsterTargetChoiceSpec } from '../flow/flow_monster_target_choice';
+
+export type FlowFurther = // When add stuff here, must also add to exec/exec_flow
+  ['flow', 'all', any[]] |
+  ['flow', 'ask', Question] |
+  ['flow', 'escapeChoice', HeroOfferEscapeChoiceSpec] |
+  ['flow', 'eachHero', (heroId:HeroId) => FlowTarget] |
+  ['flow', 'eachMonster', (monsterId:MonsterId) => FlowTarget] |
+  ['flow', 'heroTargetChoice', HeroTargetChoiceSpec] |
+  ['flow', 'monsterTargetChoice', MonsterTargetChoiceSpec] |
+  ['flow', 'offerReroll', OfferRerollSpec] | 
+  ['flow', 'returnChoice', HeroOfferReturnChoiceSpec] |
+  ['flow', 'stanceChoice', HeroOfferStanceChoiceSpec] |
   ['flow', 'test', Test];
+
+// TODO - remove test and ask from above, and add answer
 
 export type FlowTarget = FlowApply | FlowFurther
 
-export type FlowInstruction =
-  FlowTarget |
-  ['all', FlowTarget[]] |
-  ['pickTargetAnd', any, | FlowTarget] | // targetpick config
-  ['eachHero', (heroId:HeroId) => FlowTarget] |
-  ['eachMonster', (monsterId:MonsterId) => FlowTarget] |
-  undefined;
+export type FlowInstruction = FlowTarget | undefined;
 
 export interface Question {
   line: LogMessageLine

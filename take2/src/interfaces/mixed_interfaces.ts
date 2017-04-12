@@ -19,7 +19,7 @@ export interface Attack {
   stat: HeroStatName
 }
 
-import { Question } from './flow_interfaces';
+import { Question, FlowInstruction } from './flow_interfaces';
 
 export interface BattleState {
   heroes?: {
@@ -31,6 +31,7 @@ export interface BattleState {
   log?: LogMessage[]
   question?: Question
   seed?: string
+  stack?: FlowInstruction[]
 }
 
 export type LogMessageLine = LogMessagePart[]
@@ -69,4 +70,12 @@ export type StatCheckReason = '_testReason' | 'ambush' | 'monsterTargetAcquisiti
 export type RegionName = 'red' | 'yellow' | 'blue' | 'green';
 
 export type DiceType = 'attack' | 'defence' | 'power';
+
+export interface DiceSpec {
+  attack?: true
+  defence?: true
+  power?: true
+  singleAttack?: true
+}
+
 

@@ -13,12 +13,12 @@ export function flow_monster_entry(battle: BattleState, {monsterId}:MonsterEntry
   if (blueprint.skills.dimwit){
     list.push(<FlowTarget>['apply','dimwitResult',{
       monsterId: monsterId,
-      result: ['hungOver','ragingMad','sober'][Math.floor(Math.random()*3)]
+      result: ['hungOver','ragingMad','sober'][Math.floor(Math.random()*3)] // TODO seed
     }])
   }
 
   if (blueprint.skills.ambush){
-    list.push(<FlowInstruction>['eachHero',heroId=>{
+    list.push(<FlowInstruction>['flow','eachHero',heroId=>{
       return <FlowTarget>['flow','test',{
         heroId: heroId,
         reason: 'ambush',
@@ -36,6 +36,6 @@ export function flow_monster_entry(battle: BattleState, {monsterId}:MonsterEntry
   } else if (list.length === 1){
     return list[0];
   } else {
-    return <FlowInstruction>['all',list];
+    return <FlowInstruction>['flow','all',list];
   }
 }
