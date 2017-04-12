@@ -1,6 +1,6 @@
 import { BattleState, MonsterId, FlowInstruction, FlowTarget, DiceSpec } from '../interfaces';
 
-export interface OfferRerollSpec { // TODO - specify what we can reroll?
+export interface OfferRerollSpec {
   heroId,
   diceTypes: DiceSpec
 }
@@ -8,7 +8,7 @@ export interface OfferRerollSpec { // TODO - specify what we can reroll?
 export function flow_offer_reroll(battle: BattleState, {heroId,diceTypes}:OfferRerollSpec): FlowInstruction {
   // wrap every reroll application with additional reroll question
   function withAccept(trgt: FlowTarget):FlowInstruction{
-    return ['flow','all',[trgt,<FlowTarget>['flow', 'offerReroll', {heroId: heroId}]]];
+    return ['flow','all',[trgt,<FlowTarget>['flow', 'offerReroll', {heroId,diceTypes}]]];
   };
   let hero = battle.heroes[heroId];
   if (hero.vars.luck){
@@ -29,7 +29,7 @@ export function flow_offer_reroll(battle: BattleState, {heroId,diceTypes}:OfferR
       opts['pow die with '+hero.vars.powerDie] = withAccept(['apply','reroll',{heroId,diceType:'power'}]);
     }
     return <FlowTarget>['flow','ask', {
-      line: ['Will',{heroRef:heroId},'accept the result or spend luck to reroll?'],
+      line: ['Will',{heroRef:heroId},'accept the result or spend luck to reroll a die?'],
       options: opts
     }];
   }
