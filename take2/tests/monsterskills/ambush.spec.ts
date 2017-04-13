@@ -12,10 +12,12 @@ test('monster ambush skill', t => {
     log: []
   };
 
-  battle = apply_ambush_result(battle, {heroId: 'hero', monsterId: 'ambusher', avoided: true});
+  battle.heroes.hero.vars.testOutcome = 4; // succeeded
+  battle = apply_ambush_result(battle, {heroId: 'hero', monsterId: 'ambusher'});
   t.ok( lastLogHasStr(battle, 'avoid'), 'log tells story of success in avoiding ambush');
   t.ok( !battle.heroes.hero.states.stunned, 'hero wasnt stunned' );
 
+  battle.heroes.hero.vars.testOutcome = 0; // failed
   battle = apply_ambush_result(battle, {heroId: 'hero', monsterId: 'ambusher'});
   t.ok( lastLogHasStr(battle, 'stun'), 'log tells you are now stunned');
   t.ok( battle.heroes.hero.states.stunned, 'hero was stunned' );

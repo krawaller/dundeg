@@ -23,11 +23,13 @@ test('the Weakness state caused by Find Weakness skill', t => {
     'find weakness available in defence stance'
   );
 
-  battle = apply_weakness_invocation_result(battle,{heroId:'hero', success: false});
+  battle.heroes.hero.vars.testOutcome = 0; // Failed
+  battle = apply_weakness_invocation_result(battle,{heroId:'hero'});
   t.ok(!battle.monsters.monster.states.weakness, 'Weakness wasnt applied since invocation failed');
   t.ok( lastLogHasStr(battle, 'fail'), 'log acknowledges fail' );
 
-  battle = apply_weakness_invocation_result(battle,{heroId:'hero', success: true});
+  battle.heroes.hero.vars.testOutcome = 5; // success
+  battle = apply_weakness_invocation_result(battle,{heroId:'hero'});
   t.equal(battle.monsters.monster.states.weakness, 'hero', 'Weakness state was correctly set');
   t.ok( lastLogHasStr(battle, 'success'), 'log acknowledges success' );
 

@@ -11,13 +11,15 @@ test('apply escape outcome', t => {
     log: []
   };
 
-  result = apply_escape_outcome_to_hero(battle, {heroId: 'hero', success: true});
+  battle.heroes.hero.vars.testOutcome = 4; // succeeded
+  result = apply_escape_outcome_to_hero(battle, {heroId: 'hero'});
   hero =result.heroes.hero;
   t.ok( hero.vars.escaped, 'Hero escaped correctly' );
   t.ok( lastLogHasStr(result, 'success'), 'Escape message was added to log' );
   t.ok( !hero.vars.attackDice && !hero.vars.defenceDice && !hero.vars.powerDie, 'dice were removed correctly' );
 
-  result = apply_escape_outcome_to_hero(battle, {heroId: 'hero', success: false});
+  battle.heroes.hero.vars.testOutcome = 0; // failed
+  result = apply_escape_outcome_to_hero(battle, {heroId: 'hero'});
   hero =result.heroes.hero;
   t.ok( hero.vars.failedEscape, 'Hero fail was recorded' );
   t.ok( lastLogHasStr(result, 'fail'), 'Fail message was added to log' );
