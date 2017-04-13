@@ -7,7 +7,7 @@ export interface MakeRollSpec {
 }
 
 export function flow_dice_roll(battle: BattleState, {heroId,diceTypes,line}:MakeRollSpec): FlowInstruction {
-  return ['question',{
+  return ['flow','question',{
     line: line,
     options: {
       roll: ['flow','all',[

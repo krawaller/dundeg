@@ -14,12 +14,12 @@ test('night cloak item', t => {
 
   battle.heroes.hero.vars.defenceDice = [2,2];
   result = flow_hero_offer_escape_choice(battle, {heroId: 'hero'});
-  t.equal(result[0], 'question', 'we get question as usual');
-  t.deepEqual(Object.keys(result[1].options), ['escape (PER)','escape (MAG)','remain'], 'we get extra option');
+  t.equal(result[1], 'question', 'we get question as usual');
+  t.deepEqual(Object.keys(result[2].options), ['escape (PER)','escape (MAG)','remain'], 'we get extra option');
 
   battle.monsters.pursuer.vars.target = 'hero';
   result = flow_hero_offer_escape_choice(battle, {heroId: 'hero'});
-  t.equal(result[0], 'question', 'we get question even when there is a pursuer');
+  t.equal(result[1], 'question', 'we get question even when there is a pursuer');
 
   t.end();
 });

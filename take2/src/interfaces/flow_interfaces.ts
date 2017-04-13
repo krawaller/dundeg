@@ -77,26 +77,33 @@ import { HeroOfferReturnChoiceSpec } from '../flow/flow_hero_return_choice';
 import { HeroOfferStanceChoiceSpec } from '../flow/flow_hero_stance_choice';
 import { HeroTargetChoiceSpec } from '../flow/flow_hero_target_choice';
 import { MonsterTargetChoiceSpec } from '../flow/flow_monster_target_choice';
+import { MakeRollSpec } from '../flow/flow_dice_roll';
 
 export type FlowAll = ['flow','all', any[]];
+export type FlowDiceRoll = ['flow','diceRoll', MakeRollSpec];
 export type FlowEscapeChoice = ['flow', 'escapeChoice', HeroOfferEscapeChoiceSpec];
 export type FlowEachHero = ['flow', 'eachHero', (heroId:HeroId) => FlowTarget];
 export type FlowEachMonster = ['flow', 'eachMonster', (monsterId:MonsterId) => FlowTarget];
 export type FlowHeroTargetChoice = ['flow', 'heroTargetChoice', HeroTargetChoiceSpec];
 export type FlowMonsterTargetChoice = ['flow', 'monsterTargetChoice', MonsterTargetChoiceSpec];
 export type FlowOfferReroll = ['flow', 'offerReroll', OfferRerollSpec];
+export type FlowPickTestPath = ['flow', 'pickTestPath', Test];
+export type FlowQuestion = ['flow','question', Question];
 export type FlowReturnChoice = ['flow', 'returnChoice', HeroOfferReturnChoiceSpec];
 export type FlowStanceChoice = ['flow', 'stanceChoice', HeroOfferStanceChoiceSpec];
 export type FlowTest = ['flow', 'test', Test];
 
 export type FlowFurther = // When add stuff here, must also add to exec/exec_flow
   FlowAll |
+  FlowDiceRoll |
   FlowEscapeChoice |
   FlowEachHero |
   FlowEachMonster |
   FlowHeroTargetChoice |
   FlowMonsterTargetChoice |
   FlowOfferReroll |
+  FlowPickTestPath |
+  FlowQuestion | 
   FlowReturnChoice |
   FlowStanceChoice |
   FlowTest
@@ -104,7 +111,7 @@ export type FlowFurther = // When add stuff here, must also add to exec/exec_flo
 
 // TODO - remove test?
 
-export type FlowTarget = FlowApply | FlowFurther | PoseQuestion
+export type FlowTarget = FlowApply | FlowFurther
 
 export type FlowInstruction = FlowTarget | undefined;
 
@@ -114,13 +121,9 @@ export interface Test {
   stat: HeroStatName,
   dice: 'attack' | 'defence',
   line: LogMessageLine,
-  success: (num: number) => FlowTarget, // TODO - cannot be method here :(
+  success: FlowTarget,
   failure: FlowTarget
 }
-
-
-// Question spec
-export type PoseQuestion = ['question', Question];
 
 export interface Question {
   line: LogMessageLine

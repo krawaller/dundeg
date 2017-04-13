@@ -1,4 +1,4 @@
-import { BattleState, MonsterId, FlowInstruction, HeroStatName, LogMessageLine, PoseQuestion, ApplyMonsterTargetChoice } from '../interfaces';
+import { BattleState, MonsterId, FlowInstruction, HeroStatName, LogMessageLine, FlowQuestion, ApplyMonsterTargetChoice } from '../interfaces';
 import { find_party_stat } from '../find/find_party_stat';
 import { monsters, heroes } from '../library';
 import { isHeroAlive } from '../utils/helpers';
@@ -30,7 +30,7 @@ export function flow_monster_target_choice(battle: BattleState, {monsterId}:Mons
         calculation: party.individual[heroId]
       }];
     });
-    return <PoseQuestion>['question',{
+    return <FlowQuestion>['flow','question',{
       line: line,
       options: opts
     }];

@@ -25,7 +25,7 @@ export function flow_monster_entry(battle: BattleState, {monsterId}:MonsterEntry
         stat: 'PER',
         dice: 'defence',
         line: [{heroRef:heroId},'must test against PER to avoid ambush by',{monsterRef:monsterId}],
-        success: num=> ['apply', 'ambushResult', {heroId: heroId, monsterId: monsterId, avoided: true}],
+        success: ['apply', 'ambushResult', {heroId: heroId, monsterId: monsterId}],
         failure: ['apply', 'ambushResult', {heroId: heroId, monsterId: monsterId}]
       }];
     }]);
