@@ -38,6 +38,7 @@ export interface HeroVars {
   bloodCurseLink?: MonsterId
   target?: MonsterId
   luck?: number
+  testOutcome?: number
 }
 
 export interface HeroState {

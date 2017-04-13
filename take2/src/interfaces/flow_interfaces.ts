@@ -39,6 +39,7 @@ export type ApplyLogMessage = ['apply', 'log', LogMessage];
 export type ApplyLuncheonTruncheonThrow = ['apply', 'luncheonTruncheonThrow', LuncheonTruncheonThrowSpec];
 export type ApplyMonsterTargetChoice = ['apply', 'monsterTargetChoice', TargetSelectionForMonsterSpec];
 export type ApplyReroll = ['apply', 'reroll', RerollSpec ];
+export type ApplyRegisterTestOutcome = ['apply', 'registerTestOutcome', Test ];
 export type ApplyReturnToBattle = ['apply', 'returnToBattle', ReturnToBattleSpec];
 export type ApplyStanceChoice = ['apply', 'stanceChoice', ApplyStanceChoiceToHeroSpec];
 export type ApplyWeaknessInvocationResult = ['apply', 'weaknessInvocationResult', WeaknessInvocationResultSpec];
@@ -61,6 +62,7 @@ export type FlowApply = // When add stuff here, must also add to exec/exec_apply
   ApplyLuncheonTruncheonThrow |
   ApplyMonsterTargetChoice |
   ApplyReroll |
+  ApplyRegisterTestOutcome |
   ApplyReturnToBattle |
   ApplyStanceChoice |
   ApplyWeaknessInvocationResult |
