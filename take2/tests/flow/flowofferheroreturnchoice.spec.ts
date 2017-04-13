@@ -11,8 +11,8 @@ test('flow hero return choice', t => {
   };
 
   result = <FlowInstruction>flow_hero_offer_return_choice(battle, {heroId: 'hero'});
-  t.equal(result[1],'ask','We got back a question');
-  let q = <Question>result[2];
+  t.equal(result[0],'question','We got back a question');
+  let q = <Question>result[1];
   t.deepEqual(Object.keys(q.options), ['yes','no'], 'we got these two options');
   t.ok(q.options['yes'], 'the return property has an instruction');
   t.ok(!q.options['no'], 'the stay prop has no instruction');

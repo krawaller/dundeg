@@ -23,27 +23,49 @@ import { MonsterIntroductionSpec } from '../apply/apply_introduction_to_monster'
 import { WoundHeroSpec } from '../apply/apply_wounds_to_hero';
 import { WoundMonsterSpec } from '../apply/apply_wounds_to_monster';
 
+
+export type ApplyAmbushResult = ['apply', 'ambushResult', AmbushResultSpec];
+export type ApplyBloodCurseResult = ['apply', 'bloodCurseResult', BloodCurseSpec];
+export type ApplyDaemonsBlood = ['apply', 'daemonsBlood', DaemonsBloodSpec];
+export type ApplyDiceRemoval =  ['apply', 'diceRemoval', DiceRemovalSpec];
+export type ApplyDiceRoll =   ['apply', 'diceRoll', DiceRollSpec];
+export type ApplyDimwitResult = ['apply', 'dimwitResult', DimwitResultSpec];
+export type ApplyEndRoundHero = ['apply', 'endRoundHero', EndOfRoundHeroSpec];
+export type ApplyEndRoundMonster = ['apply', 'endRoundMonster', EndOfRoundMonsterSpec];
+export type ApplyEscapeOutcome = ['apply', 'escapeOutcome', EscapeOutcomeSpec];
+export type ApplyHeroTargetChoice = ['apply', 'heroTargetChoice', HeroTargetSelectionSpec];
+export type ApplyIntroduceMonster = ['apply', 'introduceMonster', MonsterIntroductionSpec];
+export type ApplyLogMessage = ['apply', 'log', LogMessage];
+export type ApplyLuncheonTruncheonThrow = ['apply', 'luncheonTruncheonThrow', LuncheonTruncheonThrowSpec];
+export type ApplyMonsterTargetChoice = ['apply', 'monsterTargetChoice', TargetSelectionForMonsterSpec];
+export type ApplyReroll = ['apply', 'reroll', RerollSpec ];
+export type ApplyReturnToBattle = ['apply', 'returnToBattle', ReturnToBattleSpec];
+export type ApplyStanceChoice = ['apply', 'stanceChoice', ApplyStanceChoiceToHeroSpec];
+export type ApplyWeaknessInvocationResult = ['apply', 'weaknessInvocationResult', WeaknessInvocationResultSpec];
+export type ApplyWoundHero = ['apply', 'woundHero', WoundHeroSpec];
+export type ApplyWoundMonster = ['apply', 'woundMonster', WoundMonsterSpec];
+
 export type FlowApply = // When add stuff here, must also add to exec/exec_apply
-  ['apply', 'ambushResult', AmbushResultSpec] |
-  ['apply', 'bloodCurseResult', BloodCurseSpec] |
-  ['apply', 'daemonsBlood', DaemonsBloodSpec] |
-  ['apply', 'diceRemoval', DiceRemovalSpec] |
-  ['apply', 'diceRoll', DiceRollSpec] |
-  ['apply', 'dimwitResult', DimwitResultSpec] |
-  ['apply', 'endRoundHero', EndOfRoundHeroSpec] |
-  ['apply', 'endRoundMonster', EndOfRoundMonsterSpec] |
-  ['apply', 'escapeOutcome', EscapeOutcomeSpec] |
-  ['apply', 'heroTargetChoice', HeroTargetSelectionSpec] |
-  ['apply', 'introduceMonster', MonsterIntroductionSpec] |
-  ['apply', 'log', LogMessage] |
-  ['apply', 'luncheonTruncheonThrow', LuncheonTruncheonThrowSpec] |
-  ['apply', 'monsterTargetChoice', TargetSelectionForMonsterSpec] |
-  ['apply', 'reroll', RerollSpec ] |
-  ['apply', 'returnToBattle', ReturnToBattleSpec] |
-  ['apply', 'stanceChoice', ApplyStanceChoiceToHeroSpec] |
-  ['apply', 'weaknessInvocationResult', WeaknessInvocationResultSpec] |
-  ['apply', 'woundHero', WoundHeroSpec] |
-  ['apply', 'WoundMonster', WoundMonsterSpec]
+  ApplyAmbushResult |
+  ApplyBloodCurseResult |
+  ApplyDaemonsBlood |
+  ApplyDiceRemoval |
+  ApplyDiceRoll |
+  ApplyDimwitResult |
+  ApplyEndRoundHero |
+  ApplyEndRoundMonster |
+  ApplyEscapeOutcome |
+  ApplyHeroTargetChoice |
+  ApplyIntroduceMonster |
+  ApplyLogMessage |
+  ApplyLuncheonTruncheonThrow |
+  ApplyMonsterTargetChoice |
+  ApplyReroll |
+  ApplyReturnToBattle |
+  ApplyStanceChoice |
+  ApplyWeaknessInvocationResult |
+  ApplyWoundHero |
+  ApplyWoundMonster
   ;
 
 // Flow specs
@@ -54,31 +76,35 @@ import { HeroOfferStanceChoiceSpec } from '../flow/flow_hero_stance_choice';
 import { HeroTargetChoiceSpec } from '../flow/flow_hero_target_choice';
 import { MonsterTargetChoiceSpec } from '../flow/flow_monster_target_choice';
 
+export type FlowAll = ['flow','all', any[]];
+export type FlowEscapeChoice = ['flow', 'escapeChoice', HeroOfferEscapeChoiceSpec];
+export type FlowEachHero = ['flow', 'eachHero', (heroId:HeroId) => FlowTarget];
+export type FlowEachMonster = ['flow', 'eachMonster', (monsterId:MonsterId) => FlowTarget];
+export type FlowHeroTargetChoice = ['flow', 'heroTargetChoice', HeroTargetChoiceSpec];
+export type FlowMonsterTargetChoice = ['flow', 'monsterTargetChoice', MonsterTargetChoiceSpec];
+export type FlowOfferReroll = ['flow', 'offerReroll', OfferRerollSpec];
+export type FlowReturnChoice = ['flow', 'returnChoice', HeroOfferReturnChoiceSpec];
+export type FlowStanceChoice = ['flow', 'stanceChoice', HeroOfferStanceChoiceSpec];
+export type FlowTest = ['flow', 'test', Test];
+
 export type FlowFurther = // When add stuff here, must also add to exec/exec_flow
-  ['flow', 'all', any[]] |
-  ['flow', 'ask', Question] |
-  ['flow', 'escapeChoice', HeroOfferEscapeChoiceSpec] |
-  ['flow', 'eachHero', (heroId:HeroId) => FlowTarget] |
-  ['flow', 'eachMonster', (monsterId:MonsterId) => FlowTarget] |
-  ['flow', 'heroTargetChoice', HeroTargetChoiceSpec] |
-  ['flow', 'monsterTargetChoice', MonsterTargetChoiceSpec] |
-  ['flow', 'offerReroll', OfferRerollSpec] | 
-  ['flow', 'returnChoice', HeroOfferReturnChoiceSpec] |
-  ['flow', 'stanceChoice', HeroOfferStanceChoiceSpec] |
-  ['flow', 'test', Test];
+  FlowAll |
+  FlowEscapeChoice |
+  FlowEachHero |
+  FlowEachMonster |
+  FlowHeroTargetChoice |
+  FlowMonsterTargetChoice |
+  FlowOfferReroll |
+  FlowReturnChoice |
+  FlowStanceChoice |
+  FlowTest
+  ;
 
-// TODO - remove test and ask from above, and add answer
+// TODO - remove test?
 
-export type FlowTarget = FlowApply | FlowFurther
+export type FlowTarget = FlowApply | FlowFurther | PoseQuestion
 
 export type FlowInstruction = FlowTarget | undefined;
-
-export interface Question {
-  line: LogMessageLine
-  options: {
-    [idx: string]: FlowTarget
-  }
-};
 
 export interface Test {
   heroId: HeroId,
@@ -86,7 +112,17 @@ export interface Test {
   stat: HeroStatName,
   dice: 'attack' | 'defence',
   line: LogMessageLine,
-  success: (num: number) => FlowTarget,
+  success: (num: number) => FlowTarget, // TODO - cannot be method here :(
   failure: FlowTarget
 }
 
+
+// Question spec
+export type PoseQuestion = ['question', Question];
+
+export interface Question {
+  line: LogMessageLine
+  options: {
+    [idx: string]: FlowTarget
+  }
+};

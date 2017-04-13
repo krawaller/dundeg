@@ -19,6 +19,7 @@ import { apply_end_of_round_to_hero, EndOfRoundHeroSpec } from '../apply/apply_e
 import { apply_end_of_round_to_monster, EndOfRoundMonsterSpec } from '../apply/apply_end_of_round_to_monster';
 import { apply_introduction_to_monster, MonsterIntroductionSpec } from '../apply/apply_introduction_to_monster';
 import { apply_wounds_to_hero, WoundHeroSpec } from '../apply/apply_wounds_to_hero';
+import { apply_wounds_to_monster, WoundMonsterSpec } from '../apply/apply_wounds_to_monster';
 
 export function exec_apply(battle:BattleState, [,what,spec]:FlowApply): BattleState{
   switch(what){
@@ -41,6 +42,7 @@ export function exec_apply(battle:BattleState, [,what,spec]:FlowApply): BattleSt
     case 'stanceChoice': return apply_stance_choice_to_hero(battle, <ApplyStanceChoiceToHeroSpec>spec);
     case 'weaknessInvocationResult': return apply_weakness_invocation_result(battle, <WeaknessInvocationResultSpec>spec);
     case 'woundHero': return apply_wounds_to_hero(battle, <WoundHeroSpec>spec);
+    case 'woundMonster': return apply_wounds_to_monster(battle, <WoundMonsterSpec>spec);
     default: throw 'Unknown application: '+spec;
   }
 }

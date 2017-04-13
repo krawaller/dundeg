@@ -23,7 +23,7 @@ test('flow hero escape choice', t => {
   delete battle.heroes.hero.vars.knockedOutBy;
   battle.heroes.hero.vars.defenceDice = [2,2];
   result = flow_hero_offer_escape_choice(battle, {heroId: 'hero'});
-  t.equal(result[1], 'ask', 'we get question about escaping');
+  t.equal(result[0], 'question', 'we get question about escaping');
 
   t.end();
 });

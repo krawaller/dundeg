@@ -1,4 +1,4 @@
-import { BattleState, MonsterId, FlowInstruction, FlowTarget, DiceSpec, LogMessageLine } from '../interfaces';
+import { BattleState, MonsterId, FlowInstruction, FlowTarget, DiceSpec, LogMessageLine, ApplyDiceRoll } from '../interfaces';
 
 export interface MakeRollSpec {
   heroId,
@@ -7,11 +7,11 @@ export interface MakeRollSpec {
 }
 
 export function flow_dice_roll(battle: BattleState, {heroId,diceTypes,line}:MakeRollSpec): FlowInstruction {
-  return ['flow','ask',{
+  return ['question',{
     line: line,
     options: {
       roll: ['flow','all',[
-        ['apply','diceRoll',{heroId,diceTypes}],
+        <ApplyDiceRoll>['apply','diceRoll',{heroId,diceTypes}],
         ['flow','offerReroll',{heroId,diceTypes}]
       ]]
     }

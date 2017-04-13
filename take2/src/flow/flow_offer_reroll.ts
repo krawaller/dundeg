@@ -1,4 +1,4 @@
-import { BattleState, MonsterId, FlowInstruction, FlowTarget, DiceSpec } from '../interfaces';
+import { BattleState, MonsterId, FlowInstruction, FlowTarget, DiceSpec, PoseQuestion } from '../interfaces';
 
 export interface OfferRerollSpec {
   heroId,
@@ -28,7 +28,7 @@ export function flow_offer_reroll(battle: BattleState, {heroId,diceTypes}:OfferR
     if (diceTypes.power){
       opts['pow die with '+hero.vars.powerDie] = withAccept(['apply','reroll',{heroId,diceType:'power'}]);
     }
-    return <FlowTarget>['flow','ask', {
+    return <PoseQuestion>['question', {
       line: ['Will',{heroRef:heroId},'accept the result or spend luck to reroll a die?'],
       options: opts
     }];

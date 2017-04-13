@@ -1,4 +1,4 @@
-import { BattleState, MonsterId, FlowInstruction, HeroStatName, LogMessageLine, FlowTarget } from '../interfaces';
+import { BattleState, MonsterId, FlowInstruction, HeroStatName, LogMessageLine, PoseQuestion, ApplyMonsterTargetChoice } from '../interfaces';
 import { find_party_stat } from '../find/find_party_stat';
 import { monsters, heroes } from '../library';
 import { isHeroAlive } from '../utils/helpers';
@@ -18,19 +18,19 @@ export function flow_monster_target_choice(battle: BattleState, {monsterId}:Mons
   let party = find_party_stat(battle, {stat, reason: 'monsterTargetAcquisition', monsterId});
   let prospects = party.ordered[( high ? 0 : party.ordered.length-1 )];
   if (prospects.heroes.length === 1){
-    return <FlowTarget>['apply', 'monsterTargetChoice', {monsterId, heroId: prospects.heroes[0], calculation: party.individual[prospects.heroes[0]]}];
+    return <ApplyMonsterTargetChoice>['apply', 'monsterTargetChoice', {monsterId, heroId: prospects.heroes[0], calculation: party.individual[prospects.heroes[0]]}];
   } else {
     let line = <LogMessageLine>[{monsterRef:monsterId},'goes after '+blueprint.targets+'.'];
     let opts = {};
     prospects.heroes.forEach(heroId=>{
       line = line.concat( [{heroRef: heroId}, 'has', party.individual[heroId], '. '] );
-      opts[ heroes[battle.heroes[heroId].blueprint].name ] = <FlowTarget>['apply', 'monsterTargetChoice', {
+      opts[ heroes[battle.heroes[heroId].blueprint].name ] = <ApplyMonsterTargetChoice>['apply', 'monsterTargetChoice', {
         monsterId: monsterId,
         heroId: heroId,
         calculation: party.individual[heroId]
       }];
     });
-    return <FlowTarget>['flow','ask',{
+    return <PoseQuestion>['question',{
       line: line,
       options: opts
     }];

@@ -19,8 +19,8 @@ test('flow monster target choice', t => {
 
   delete battle.monsters.monster.vars.target;
   result = flow_monster_target_choice(battle, {monsterId: 'monster'});
-  t.equal(result[1], 'ask', 'we got a question');
-  let q = <Question>result[2];
+  t.equal(result[0], 'question', 'we got a question');
+  let q = <Question>result[1];
   t.deepEqual(Object.keys(q.options), ['Bloodsport Brawler','Soldier of Fortune'], 'we got correct options');
 
   battle.heroes.butcher = makeHero('infamousButcher'); // MRL 6

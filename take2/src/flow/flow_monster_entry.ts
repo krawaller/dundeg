@@ -1,4 +1,4 @@
-import { BattleState, MonsterId, FlowInstruction, FlowTarget, FlowFurther } from '../interfaces';
+import { BattleState, MonsterId, FlowInstruction, FlowTarget, FlowFurther, ApplyDimwitResult } from '../interfaces';
 import { monsters } from '../library';
 
 export interface MonsterEntrySpec {
@@ -11,7 +11,7 @@ export function flow_monster_entry(battle: BattleState, {monsterId}:MonsterEntry
   let blueprint = monsters[monster.blueprint];
 
   if (blueprint.skills.dimwit){
-    list.push(<FlowTarget>['apply','dimwitResult',{
+    list.push(<ApplyDimwitResult>['apply','dimwitResult',{
       monsterId: monsterId,
       result: ['hungOver','ragingMad','sober'][Math.floor(Math.random()*3)] // TODO seed
     }])
