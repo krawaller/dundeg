@@ -6,7 +6,7 @@ export function find_hero_quick_actions (battle: BattleState, {heroId}: InstrJus
   let ret = <any>{};
   let hero = battle.heroes[heroId];
   if (hero.items.luncheonTruncheon){
-    ret.luncheonTruncheon = true; // TODO - what does it look like?
+    ret.luncheonTruncheon = ['apply','luncheonTruncheonThrow',{heroId:heroId}]
   }
   return ret;
 }

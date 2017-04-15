@@ -1,7 +1,7 @@
 import {
   BattleState, MonsterBase, MonsterState, MonsterVars, MonsterStates,
   HeroBase, HeroState, HeroStates, HeroVars, HeroSkills,
-  CalculationResult, ItemName, LogMessageLine
+  CalculationResult, ItemName, LogMessageLine, FlowInstruction
 } from '../src/interfaces';
 
 export function logMessageContains(msg: LogMessageLine, str: string){
@@ -43,4 +43,14 @@ export function calcRes(val: any): CalculationResult {
     value: val,
     history: []
   };
+}
+
+import { exec_step } from '../src/exec/exec_step';
+import { exec_until } from '../src/exec/exec_until';
+
+export function execUntil(battle:BattleState,instr:FlowInstruction){
+  return exec_until({
+    ...battle,
+    stack: [instr].concat(battle.stack || [])
+  });
 }

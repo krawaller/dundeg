@@ -10,8 +10,9 @@ export function exec_step(battle: BattleState): BattleState{
     throw "No next step to execute in this battle!";
   }
   let instruction: FlowInstruction = ret.stack.shift();
-  switch(ret[0]){
+  switch(instruction[0]){
     case 'apply': return exec_apply(ret, <FlowApply>instruction);
     case 'flow': return exec_flow(ret, <FlowFurther>instruction);
+    default: throw 'Unknown instruction: '+instruction
   }
 }

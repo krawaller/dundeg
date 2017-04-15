@@ -1,5 +1,5 @@
 import * as test from "tape";
-import { makeHero, makeMonster } from '../testutils';
+import { makeHero, makeMonster, execUntil } from '../testutils';
 
 import { BattleState, Attack } from '../../src/interfaces';
 import { find_hero_attack_options } from '../../src/find/find_hero_attack_options';
@@ -27,12 +27,13 @@ test('Luncheon Truncheon', t => {
     'luncheon truncheon offers STR attack'
   );
 
-  t.ok(
+  t.deepEqual(
     find_hero_quick_actions(battle, {heroId: 'hero'}).luncheonTruncheon,
-    'luncheon truncheon offers quick action' // TODO - what does it look like?
+    ['apply','luncheonTruncheonThrow',{heroId:'hero'}],
+    'luncheon truncheon offers quick action'
   );
 
-  battle = apply_luncheon_truncheon_throw(battle, {heroId: 'hero'});
+  battle = execUntil(battle, ['apply','luncheonTruncheonThrow',{heroId:'hero'}]);
   t.ok(
     !battle.heroes.hero.items.luncheonTruncheon,
     'hero lost sausage when he threw it'
