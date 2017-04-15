@@ -74,6 +74,8 @@ export type FlowApply = // When add stuff here, must also add to exec/exec_apply
 
 // Flow specs
 import { OfferRerollSpec } from '../flow/flow_offer_reroll';
+import { EachHeroSpec } from '../flow/flow_each_hero';
+import { EachMonsterSpec } from '../flow/flow_each_monster';
 import { HeroOfferEscapeChoiceSpec } from '../flow/flow_hero_escape_choice';
 import { HeroOfferReturnChoiceSpec } from '../flow/flow_hero_return_choice';
 import { HeroOfferStanceChoiceSpec } from '../flow/flow_hero_stance_choice';
@@ -84,8 +86,8 @@ import { MakeRollSpec } from '../flow/flow_dice_roll';
 export type FlowAll = ['flow','all', any[]];
 export type FlowDiceRoll = ['flow','diceRoll', MakeRollSpec];
 export type FlowEscapeChoice = ['flow', 'escapeChoice', HeroOfferEscapeChoiceSpec];
-export type FlowEachHero = ['flow', 'eachHero', (heroId:HeroId) => FlowTarget];
-export type FlowEachMonster = ['flow', 'eachMonster', (monsterId:MonsterId) => FlowTarget];
+export type FlowEachHero = ['flow', 'eachHero', EachHeroSpec];
+export type FlowEachMonster = ['flow', 'eachMonster', EachMonsterSpec];
 export type FlowHeroTargetChoice = ['flow', 'heroTargetChoice', HeroTargetChoiceSpec];
 export type FlowMonsterTargetChoice = ['flow', 'monsterTargetChoice', MonsterTargetChoiceSpec];
 export type FlowOfferReroll = ['flow', 'offerReroll', OfferRerollSpec];
