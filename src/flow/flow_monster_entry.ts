@@ -1,4 +1,4 @@
-import { BattleState, MonsterId, FlowInstruction, FlowTarget, FlowFurther, ApplyDimwitResult } from '../interfaces';
+import { BattleState, MonsterId, FlowInstruction, FlowTarget, FlowFurther } from '../interfaces';
 import { monsters } from '../library';
 
 export interface MonsterEntrySpec {
@@ -11,24 +11,11 @@ export function flow_monster_entry(battle: BattleState, {monsterId}:MonsterEntry
   let blueprint = monsters[monster.blueprint];
 
   if (blueprint.skills.dimwit){
-    list.push(<ApplyDimwitResult>['apply','dimwitResult',{
-      monsterId: monsterId,
-      result: ['hungOver','ragingMad','sober'][Math.floor(Math.random()*3)] // TODO seed
-    }])
+    list.push(<FlowInstruction>['flow','dimwit',{monsterId}]);
   }
 
   if (blueprint.skills.ambush){
-    list.push(<FlowInstruction>['flow','eachHero',heroId=>{
-      return <FlowTarget>['flow','test',{
-        heroId: heroId,
-        reason: 'ambush',
-        stat: 'PER',
-        dice: 'defence',
-        line: [{heroRef:heroId},'must test against PER to avoid ambush by',{monsterRef:monsterId}],
-        success: ['apply', 'ambushResult', {heroId: heroId, monsterId: monsterId}],
-        failure: ['apply', 'ambushResult', {heroId: heroId, monsterId: monsterId}]
-      }];
-    }]);
+    list.push(<FlowInstruction>['flow','ambush',{monsterId}]);
   }
 
   if (!list.length){

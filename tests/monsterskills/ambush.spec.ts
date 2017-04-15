@@ -1,5 +1,5 @@
 import * as test from "tape";
-import { makeHero, makeMonster, lastLogHasStr } from '../testutils';
+import { makeHero, makeMonster, lastLogHasStr, execUntil, reply, makeRoll } from '../testutils';
 
 import { BattleState } from '../../src/interfaces';
 import { apply_ambush_result } from '../../src/apply/apply_ambush_result';
@@ -7,23 +7,20 @@ import { flow_monster_entry } from '../../src/flow/flow_monster_entry';
 
 test('monster ambush skill', t => {
   let battle: BattleState = {
-    heroes: { hero: makeHero('bloodsportBrawler') },
+    heroes: {
+      hero: makeHero('bloodsportBrawler'), // PER 6
+      hero2: makeHero('hinterLander') // PER 9
+    },
     monsters: { ambusher: makeMonster('shambler') },
-    log: []
+    log: [],
+    seed: 'ambushohno' // will roll 5 4 2 3
   };
 
-  battle.heroes.hero.vars.testOutcome = 4; // succeeded
-  battle = apply_ambush_result(battle, {heroId: 'hero', monsterId: 'ambusher'});
-  t.ok( lastLogHasStr(battle, 'avoid'), 'log tells story of success in avoiding ambush');
-  t.ok( !battle.heroes.hero.states.stunned, 'hero wasnt stunned' );
-
-  battle.heroes.hero.vars.testOutcome = 0; // failed
-  battle = apply_ambush_result(battle, {heroId: 'hero', monsterId: 'ambusher'});
-  t.ok( lastLogHasStr(battle, 'stun'), 'log tells you are now stunned');
-  t.ok( battle.heroes.hero.states.stunned, 'hero was stunned' );
-
-  let result = flow_monster_entry(battle, {monsterId: 'ambusher'});
-  t.equal( result[1], 'eachHero', 'we got an ambushtest for each hero' );
+  battle = execUntil(battle, ['flow','monsterEntry',{monsterId:'ambusher'}]);
+  battle = reply(battle, makeRoll); // brawler rolls, will fail because 5+4 > 6
+  t.ok( battle.heroes.hero.states.stunned, 'brawler was stunned' );
+  battle = reply(battle, makeRoll); // hinterLander rolls, will succeed because 2+3 < 9
+  t.ok( !battle.heroes.hero2.states.stunned, 'hinterLander was not stunned' );
 
   t.end();
 

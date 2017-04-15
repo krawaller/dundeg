@@ -1,4 +1,4 @@
-import { FlowApply, BattleState, LogMessage, Question } from '../interfaces';
+import { FlowApply, BattleState, LogMessage, Question, Test } from '../interfaces';
 
 import { apply_ambush_result, AmbushResultSpec } from '../apply/apply_ambush_result';
 import { apply_dimwit_result, DimwitResultSpec } from '../apply/apply_dimwit_result';
@@ -21,6 +21,7 @@ import { apply_introduction_to_monster, MonsterIntroductionSpec } from '../apply
 import { apply_wounds_to_hero, WoundHeroSpec } from '../apply/apply_wounds_to_hero';
 import { apply_wounds_to_monster, WoundMonsterSpec } from '../apply/apply_wounds_to_monster';
 import { apply_question } from '../apply/apply_question';
+import { apply_register_test_outcome } from '../apply/apply_register_test_outcome';
 
 export function exec_apply(battle:BattleState, [,what,spec]:FlowApply): BattleState{
   switch(what){
@@ -39,12 +40,15 @@ export function exec_apply(battle:BattleState, [,what,spec]:FlowApply): BattleSt
     case 'luncheonTruncheonThrow': return apply_luncheon_truncheon_throw(battle, <LuncheonTruncheonThrowSpec>spec);
     case 'monsterTargetChoice': return apply_target_selection_for_monster(battle, <TargetSelectionForMonsterSpec>spec);
     case 'question': return  apply_question(battle, <Question>spec);
+    case 'registerTestOutcome': return apply_register_test_outcome(battle, <Test>spec);
     case 'reroll': return apply_reroll(battle, <RerollSpec>spec);
     case 'returnToBattle': return apply_return_to_battle(battle, <ReturnToBattleSpec>spec);
     case 'stanceChoice': return apply_stance_choice_to_hero(battle, <ApplyStanceChoiceToHeroSpec>spec);
     case 'weaknessInvocationResult': return apply_weakness_invocation_result(battle, <WeaknessInvocationResultSpec>spec);
     case 'woundHero': return apply_wounds_to_hero(battle, <WoundHeroSpec>spec);
     case 'woundMonster': return apply_wounds_to_monster(battle, <WoundMonsterSpec>spec);
-    default: throw 'Unknown application: '+spec;
+    default:
+      console.log("WHat the eff?!", what, spec);
+      throw 'Unknown application: '+what;
   }
 }

@@ -38,8 +38,8 @@ export type ApplyLogMessage = ['apply', 'log', LogMessage];
 export type ApplyLuncheonTruncheonThrow = ['apply', 'luncheonTruncheonThrow', LuncheonTruncheonThrowSpec];
 export type ApplyMonsterTargetChoice = ['apply', 'monsterTargetChoice', TargetSelectionForMonsterSpec];
 export type ApplyQuestion = ['apply','question',Question];
-export type ApplyReroll = ['apply', 'reroll', RerollSpec ];
 export type ApplyRegisterTestOutcome = ['apply', 'registerTestOutcome', Test ];
+export type ApplyReroll = ['apply', 'reroll', RerollSpec ];
 export type ApplyReturnToBattle = ['apply', 'returnToBattle', ReturnToBattleSpec];
 export type ApplyStanceChoice = ['apply', 'stanceChoice', ApplyStanceChoiceToHeroSpec];
 export type ApplyWeaknessInvocationResult = ['apply', 'weaknessInvocationResult', WeaknessInvocationResultSpec];
@@ -82,14 +82,20 @@ import { HeroTargetChoiceSpec } from '../flow/flow_hero_target_choice';
 import { MonsterTargetChoiceSpec } from '../flow/flow_monster_target_choice';
 import { MakeRollSpec } from '../flow/flow_dice_roll';
 import { ThrowDaemonsBloodSpec } from '../flow/flow_daemons_blood';
+import { InitiateAmbushSpec } from '../flow/flow_ambush';
+import { MonsterEntrySpec } from '../flow/flow_monster_entry';
+import { InitiateDimwitSpec } from '../flow/flow_dimwit';
 
 export type FlowAll = ['flow','all', any[]];
+export type FlowAmbush = ['flow','ambush', InitiateAmbushSpec];
 export type FlowDaemonsBlood = ['flow','daemonsBlood', ThrowDaemonsBloodSpec];
 export type FlowDiceRoll = ['flow','diceRoll', MakeRollSpec];
+export type FlowDimwit = ['flow','dimwit', InitiateDimwitSpec];
 export type FlowEscapeChoice = ['flow', 'escapeChoice', HeroOfferEscapeChoiceSpec];
 export type FlowEachHero = ['flow', 'eachHero', EachHeroSpec];
 export type FlowEachMonster = ['flow', 'eachMonster', EachMonsterSpec];
 export type FlowHeroTargetChoice = ['flow', 'heroTargetChoice', HeroTargetChoiceSpec];
+export type FlowMonsterEntry = ['flow', 'monsterEntry', MonsterEntrySpec];
 export type FlowMonsterTargetChoice = ['flow', 'monsterTargetChoice', MonsterTargetChoiceSpec];
 export type FlowOfferReroll = ['flow', 'offerReroll', OfferRerollSpec];
 export type FlowPickTestPath = ['flow', 'pickTestPath', Test];
@@ -97,14 +103,18 @@ export type FlowReturnChoice = ['flow', 'returnChoice', HeroOfferReturnChoiceSpe
 export type FlowStanceChoice = ['flow', 'stanceChoice', HeroOfferStanceChoiceSpec];
 export type FlowTest = ['flow', 'test', Test];
 
+
 export type FlowFurther = // When add stuff here, must also add to exec/exec_flow
   FlowAll |
+  FlowAmbush |
   FlowDaemonsBlood |
   FlowDiceRoll |
+  FlowDimwit |
   FlowEscapeChoice |
   FlowEachHero |
   FlowEachMonster |
   FlowHeroTargetChoice |
+  FlowMonsterEntry |
   FlowMonsterTargetChoice |
   FlowOfferReroll |
   FlowPickTestPath |

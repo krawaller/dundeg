@@ -12,19 +12,24 @@ import { flow_test } from '../flow/flow_test';
 import { flow_hero_offer_stance_choice, HeroOfferStanceChoiceSpec } from '../flow/flow_hero_stance_choice';
 import { flow_hero_offer_return_choice, HeroOfferReturnChoiceSpec } from '../flow/flow_hero_return_choice';
 import { flow_daemons_blood, ThrowDaemonsBloodSpec } from '../flow/flow_daemons_blood';
+import { flow_monster_entry, MonsterEntrySpec } from '../flow/flow_monster_entry';
+import { flow_ambush, InitiateAmbushSpec } from '../flow/flow_ambush';
+import { flow_dimwit, InitiateDimwitSpec } from '../flow/flow_dimwit';
 
 export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleState{
   let newInstr: FlowInstruction;
   switch(what){
     case 'all':
       return {...battle, stack: (<FlowInstruction[]>spec).concat(battle.stack || [])};
-
+    case 'ambush': newInstr = flow_ambush(battle, <InitiateAmbushSpec>spec); break;
     case 'daemonsBlood': newInstr = flow_daemons_blood(battle, <ThrowDaemonsBloodSpec>spec); break;
     case 'diceRoll': newInstr = flow_dice_roll(battle, <MakeRollSpec>spec); break;
+    case 'dimwit': newInstr = flow_dimwit(battle, <InitiateDimwitSpec>spec); break;
     case 'escapeChoice': newInstr = flow_hero_offer_escape_choice(battle, <HeroOfferEscapeChoiceSpec>spec); break;
     case 'eachHero': newInstr = flow_each_hero(battle, <EachHeroSpec>spec); break;
     case 'eachMonster': newInstr = flow_each_monster(battle, <EachMonsterSpec>spec); break;
     case 'heroTargetChoice': newInstr = flow_hero_target_choice(battle, <HeroTargetChoiceSpec>spec); break;
+    case 'monsterEntry': newInstr = flow_monster_entry(battle, <MonsterEntrySpec>spec); break;
     case 'monsterTargetChoice': newInstr = flow_monster_target_choice(battle,<MonsterTargetChoiceSpec>spec); break;
     case 'offerReroll': newInstr = flow_offer_reroll(battle, <OfferRerollSpec>spec); break;
     case 'pickTestPath': newInstr = flow_pick_test_path(battle, <Test>spec); break;

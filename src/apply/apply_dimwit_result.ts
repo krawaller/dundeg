@@ -9,7 +9,6 @@ export interface DimwitResultSpec {
 export function apply_dimwit_result(battle: BattleState, {monsterId,result}:DimwitResultSpec): BattleState {
   let ret = deepCopy(battle);
   let monster = ret.monsters[monsterId];
-
   switch(result){
     case 'hungOver':
       monster.states.hungOver = true;
