@@ -1,15 +1,16 @@
 import * as test from "tape";
-import { makeMonster, makeHero, lastLogHasStr } from '../testutils';
-import { BattleState } from '../../src/interfaces';
+import { makeMonster, makeHero, lastLogHasStr, makeRoll, execUntil, reply } from '../testutils';
+import { BattleState, FlowInstruction } from '../../src/interfaces';
 import { calculate_damage_vs_monster } from '../../src/calculate/calculate_damage_vs_monster';
 import { apply_weakness_invocation_result } from '../../src/apply/apply_weakness_invocation_result';
 import { find_hero_actions } from '../../src/find/find_hero_actions';
 
-test('the Weakness state caused by Find Weakness skill', t => {
-  let battle: BattleState = {
+test('the hero weakness skill', t => {
+  let result: BattleState, battle: BattleState = { // brawler has PER = 6
     heroes: { hero: makeHero('bloodsportBrawler',{target:'monster',stance:'assault'},{},{findWeakness:true}) },
     monsters: { monster: makeMonster('slitherFish') },
-    log: []
+    log: [],
+    seed: 'findweakness' // will roll 4 2 5 4
   };
 
   t.ok(
@@ -17,24 +18,22 @@ test('the Weakness state caused by Find Weakness skill', t => {
     'find weakness not available in assault stance'
   );
 
+  let action: FlowInstruction = ['flow','weakness',{heroId:'hero'}];
+
   battle.heroes.hero.vars.stance = 'defence';
-  t.ok(
+  t.deepEqual(
     find_hero_actions(battle,{heroId:'hero'}).findWeakness,
+    action,
     'find weakness available in defence stance'
   );
 
-  battle.heroes.hero.vars.testOutcome = 0; // Failed
-  battle = apply_weakness_invocation_result(battle,{heroId:'hero'});
-  t.ok(!battle.monsters.monster.states.weakness, 'Weakness wasnt applied since invocation failed');
-  t.ok( lastLogHasStr(battle, 'fail'), 'log acknowledges fail' );
-
-  battle.heroes.hero.vars.testOutcome = 5; // success
-  battle = apply_weakness_invocation_result(battle,{heroId:'hero'});
-  t.equal(battle.monsters.monster.states.weakness, 'hero', 'Weakness state was correctly set');
-  t.ok( lastLogHasStr(battle, 'success'), 'log acknowledges success' );
+  result = execUntil(battle, action);
+  result = reply(result,makeRoll); // was prompted to roll for test, will succeed
+  t.equal(result.monsters.monster.states.weakness, 'hero', 'Weakness state was correctly set');
+  t.ok( lastLogHasStr(result, 'success'), 'log acknowledges success' );
 
   t.equal(
-    calculate_damage_vs_monster(battle, {
+    calculate_damage_vs_monster(result, {
       monsterId: 'monster',
       heroATK: {value: 6, history:[]},
       monsterARM: {value: 4, history:[]},
@@ -44,8 +43,14 @@ test('the Weakness state caused by Find Weakness skill', t => {
     'weakness gives 1 additional damage'
   );
 
+
+  result = execUntil(battle, action);
+  result = reply(result,makeRoll); // was prompted to roll for test, will fail
+  t.ok(!result.monsters.monster.states.weakness, 'Weakness wasnt applied since invocation failed');
+  t.ok( lastLogHasStr(result, 'fail'), 'log acknowledges fail' );
+
   t.equal(
-    calculate_damage_vs_monster(battle, {
+    calculate_damage_vs_monster(result, {
       monsterId: 'monster',
       heroATK: {value: 4, history:[]},
       monsterARM: {value: 4, history:[]},

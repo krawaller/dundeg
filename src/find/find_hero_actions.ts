@@ -9,7 +9,7 @@ export function find_hero_actions (battle: BattleState, {heroId}: InstrJustHeroI
     ret.bloodCurse = true; // TODO - sth
   }
   if (hero.vars.stance === 'defence' && hero.skills.findWeakness){
-    ret.findWeakness = true; // TODO - sth
+    ret.findWeakness = <FlowInstruction>['flow','weakness',{heroId: heroId}];
   }
   if (hero.items.daemonsBlood){
     ret.daemonsBlood = <FlowInstruction>['flow','daemonsBlood',{heroId: heroId}];

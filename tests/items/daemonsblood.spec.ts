@@ -8,7 +8,7 @@ import { apply_daemons_blood } from '../../src/apply/apply_daemons_blood';
 test('Daemons blood', t => {
   let battle: BattleState = {
     heroes: {
-      hero: makeHero('bloodsportBrawler',{target: 'megarat'},{},{},['daemonsBlood'])
+      hero: makeHero('bloodsportBrawler',{},{},{},['daemonsBlood'])
     },
     monsters: {
       megarat: makeMonster('megaRat',{HP:5}),

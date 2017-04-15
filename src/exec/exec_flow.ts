@@ -15,6 +15,7 @@ import { flow_daemons_blood, ThrowDaemonsBloodSpec } from '../flow/flow_daemons
 import { flow_monster_entry, MonsterEntrySpec } from '../flow/flow_monster_entry';
 import { flow_ambush, InitiateAmbushSpec } from '../flow/flow_ambush';
 import { flow_dimwit, InitiateDimwitSpec } from '../flow/flow_dimwit';
+import { flow_weakness, InitiateWeakness } from '../flow/flow_weakness';
 
 export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleState{
   let newInstr: FlowInstruction;
@@ -36,6 +37,7 @@ export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleSt
     case 'returnChoice': newInstr = flow_hero_offer_return_choice(battle, <HeroOfferReturnChoiceSpec>spec); break;
     case 'stanceChoice': newInstr = flow_hero_offer_stance_choice(battle, <HeroOfferStanceChoiceSpec>spec); break;
     case 'test': newInstr = flow_test(battle, <Test>spec); break;
+    case 'weakness': newInstr = flow_weakness(battle, <InitiateWeakness>spec); break;
     default: throw 'Unknown flow: '+what;
   }
   if (!newInstr){

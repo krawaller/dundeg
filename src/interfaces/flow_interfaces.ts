@@ -85,6 +85,7 @@ import { ThrowDaemonsBloodSpec } from '../flow/flow_daemons_blood';
 import { InitiateAmbushSpec } from '../flow/flow_ambush';
 import { MonsterEntrySpec } from '../flow/flow_monster_entry';
 import { InitiateDimwitSpec } from '../flow/flow_dimwit';
+import { InitiateWeakness } from '../flow/flow_weakness';
 
 export type FlowAll = ['flow','all', any[]];
 export type FlowAmbush = ['flow','ambush', InitiateAmbushSpec];
@@ -102,6 +103,7 @@ export type FlowPickTestPath = ['flow', 'pickTestPath', Test];
 export type FlowReturnChoice = ['flow', 'returnChoice', HeroOfferReturnChoiceSpec];
 export type FlowStanceChoice = ['flow', 'stanceChoice', HeroOfferStanceChoiceSpec];
 export type FlowTest = ['flow', 'test', Test];
+export type FlowWeakness = ['flow','weakness', InitiateWeakness];
 
 
 export type FlowFurther = // When add stuff here, must also add to exec/exec_flow
@@ -120,10 +122,9 @@ export type FlowFurther = // When add stuff here, must also add to exec/exec_flo
   FlowPickTestPath |
   FlowReturnChoice |
   FlowStanceChoice |
-  FlowTest
+  FlowTest |
+  FlowWeakness
   ;
-
-// TODO - remove test?
 
 export type FlowTarget = FlowApply | FlowFurther
 

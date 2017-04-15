@@ -8,7 +8,7 @@ export interface HeroTargetChoiceSpec {
   heroId: HeroId
 }
 
-// TODO - no question if dont need target! also, hero's action could be taken into account?
+// TODO - no question if dont need target! also, hero's action could be taken into account? optional line in spec!
 
 export function flow_hero_target_choice(battle: BattleState, {heroId}:HeroTargetChoiceSpec): FlowInstruction {
   let {targettingMe, targettingOthers} = find_monsters(battle,{}).reduce((mem,monsterId)=>{
