@@ -1,6 +1,6 @@
 import { BattleState, HeroId, HeroStance } from '../interfaces';
 import { deepCopy, removeAnItem, addLog } from '../utils/helpers';
-import { find_standing_monsters } from '../find/find_standing_monsters';
+import { find_monsters } from '../find/find_monsters';
 import { monsters } from '../library';
 
 export interface LuncheonTruncheonThrowSpec {
@@ -12,7 +12,7 @@ export function apply_luncheon_truncheon_throw(battle: BattleState, {heroId}:Lun
   let hero = ret.heroes[heroId];
   addLog(ret, [{heroRef: heroId}, 'throws the Luncheon Truncheon amidst the enemies!'] );
   removeAnItem(hero, 'luncheonTruncheon');
-  find_standing_monsters(ret).forEach(monsterId => {
+  find_monsters(ret,{}).forEach(monsterId => {
     let monster = ret.monsters[monsterId];
     let blueprint = monsters[monster.blueprint];
     if ((!monster.states.dazed && blueprint.value === 1) && (blueprint.traits.goblin || blueprint.traits.filth)){

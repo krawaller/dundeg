@@ -1,7 +1,7 @@
 import { BattleState, Attack, ItemName, CalculationResult } from '../interfaces';
 import { monsters } from '../library';
 
-import { find_standing_monsters } from '../find/find_standing_monsters';
+import { find_monsters } from '../find/find_monsters';
 
 interface CalculateMonsterAttackInstr { monsterId: string, heroId?: string }
 
@@ -21,7 +21,7 @@ export function calculate_monster_attack (battle: BattleState, instr: CalculateM
   }
 
   if (blueprint.skills.horde){
-    let others = find_standing_monsters(battle).reduce((list,otherId) => {
+    let others = find_monsters(battle,{}).reduce((list,otherId) => {
       let other = battle.monsters[otherId];
       if (otherId !== instr.monsterId && monsters[other.blueprint].traits[blueprint.skills.horde]){
         list.push(otherId);

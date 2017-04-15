@@ -1,7 +1,6 @@
 import { BattleState, HeroStatName, Attack, AttackOptions, ItemName, CalculationResult } from '../interfaces';
 
 import { monsters, heroes } from '../library';
-import { find_standing_monsters } from '../find/find_standing_monsters';
 import { deepCopy, isMonsterAlive, addLog } from '../utils/helpers';
 import { apply_wounds_to_monster } from './apply_wounds_to_monster';
 

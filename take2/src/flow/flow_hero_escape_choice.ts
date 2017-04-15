@@ -1,6 +1,6 @@
 import { BattleState, HeroId, FlowTarget, FlowInstruction, LogMessage, Question, ApplyQuestion } from '../interfaces';
 import { monsters } from '../library';
-import { find_standing_monsters } from '../find/find_standing_monsters';
+import { find_monsters } from '../find/find_monsters';
 import { calculate_hero_stat } from '../calculate/calculate_hero_stat';
 
 export interface HeroOfferEscapeChoiceSpec {
@@ -19,7 +19,7 @@ export function flow_hero_offer_escape_choice(battle: BattleState, {heroId}:Hero
       type: 'verbose'
     }];
   }
-  let pursuers = find_standing_monsters(battle).filter(monsterId => {
+  let pursuers = find_monsters(battle,{}).filter(monsterId => {
     let monster = battle.monsters[monsterId];
     let blueprint = monsters[monster.blueprint];
     return monster.vars.target === heroId && blueprint.skills.pursue;

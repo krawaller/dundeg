@@ -1,5 +1,5 @@
 import { BattleState, HeroStatName, CalculationResult, StatCheckReason } from '../interfaces';
-import { find_standing_heroes } from '../find/find_standing_heroes';
+import { find_heroes } from '../find/find_heroes';
 import { heroes } from '../library';
 
 interface CalculateHeroStatInstr { heroId: string, stat: HeroStatName, reason: StatCheckReason }
@@ -23,7 +23,7 @@ export function calculate_hero_stat (battle: BattleState, {heroId, stat, reason}
     val.history.push(['poisoned','-1']);
     val.value--;
   }
-  if (reason === 'ambush' && find_standing_heroes(battle).filter(id=>battle.heroes[id].skills.sixthSense).length){
+  if (reason === 'ambush' && find_heroes(battle).filter(id=>battle.heroes[id].skills.sixthSense).length){
     val.history.push(['friend with sixth sense', '+1']);
     val.value++;
   }

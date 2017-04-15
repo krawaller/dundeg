@@ -2,7 +2,7 @@ import { BattleState, HeroId, FlowInstruction, HeroStatName, LogMessageLine, App
 import { find_party_stat } from '../find/find_party_stat';
 import { monsters, heroes } from '../library';
 import { isHeroAlive } from '../utils/helpers';
-import { find_standing_monsters } from '../find/find_standing_monsters';
+import { find_monsters } from '../find/find_monsters';
 
 export interface HeroTargetChoiceSpec {
   heroId: HeroId
@@ -11,7 +11,7 @@ export interface HeroTargetChoiceSpec {
 // TODO - no question if dont need target! also, hero's action could be taken into account?
 
 export function flow_hero_target_choice(battle: BattleState, {heroId}:HeroTargetChoiceSpec): FlowInstruction {
-  let {targettingMe, targettingOthers} = find_standing_monsters(battle).reduce((mem,monsterId)=>{
+  let {targettingMe, targettingOthers} = find_monsters(battle,{}).reduce((mem,monsterId)=>{
     mem[battle.monsters[monsterId].vars.target === heroId ? 'targettingMe' : 'targettingOthers'].push(monsterId);
     return mem;
   },{targettingMe:[], targettingOthers: []});
