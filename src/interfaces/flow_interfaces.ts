@@ -86,9 +86,11 @@ import { InitiateAmbushSpec } from '../flow/flow_ambush';
 import { MonsterEntrySpec } from '../flow/flow_monster_entry';
 import { InitiateDimwitSpec } from '../flow/flow_dimwit';
 import { InitiateWeakness } from '../flow/flow_weakness';
+import { InitiateBloodCurseSpec } from '../flow/flow_bloodcurse';
 
 export type FlowAll = ['flow','all', any[]];
 export type FlowAmbush = ['flow','ambush', InitiateAmbushSpec];
+export type FlowBloodCurse = ['flow','bloodCurse', InitiateBloodCurseSpec];
 export type FlowDaemonsBlood = ['flow','daemonsBlood', ThrowDaemonsBloodSpec];
 export type FlowDiceRoll = ['flow','diceRoll', MakeRollSpec];
 export type FlowDimwit = ['flow','dimwit', InitiateDimwitSpec];
@@ -109,6 +111,7 @@ export type FlowWeakness = ['flow','weakness', InitiateWeakness];
 export type FlowFurther = // When add stuff here, must also add to exec/exec_flow
   FlowAll |
   FlowAmbush |
+  FlowBloodCurse |
   FlowDaemonsBlood |
   FlowDiceRoll |
   FlowDimwit |

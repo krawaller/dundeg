@@ -16,6 +16,7 @@ import { flow_monster_entry, MonsterEntrySpec } from '../flow/flow_monster_entry
 import { flow_ambush, InitiateAmbushSpec } from '../flow/flow_ambush';
 import { flow_dimwit, InitiateDimwitSpec } from '../flow/flow_dimwit';
 import { flow_weakness, InitiateWeakness } from '../flow/flow_weakness';
+import { flow_bloodcurse, InitiateBloodCurseSpec } from '../flow/flow_bloodcurse';
 
 export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleState{
   let newInstr: FlowInstruction;
@@ -23,6 +24,7 @@ export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleSt
     case 'all':
       return {...battle, stack: (<FlowInstruction[]>spec).concat(battle.stack || [])};
     case 'ambush': newInstr = flow_ambush(battle, <InitiateAmbushSpec>spec); break;
+    case 'bloodCurse': newInstr = flow_bloodcurse(battle, <InitiateBloodCurseSpec>spec); break;
     case 'daemonsBlood': newInstr = flow_daemons_blood(battle, <ThrowDaemonsBloodSpec>spec); break;
     case 'diceRoll': newInstr = flow_dice_roll(battle, <MakeRollSpec>spec); break;
     case 'dimwit': newInstr = flow_dimwit(battle, <InitiateDimwitSpec>spec); break;

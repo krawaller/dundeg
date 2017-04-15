@@ -6,7 +6,7 @@ export function find_hero_actions (battle: BattleState, {heroId}: InstrJustHeroI
   let ret = <any>{};
   let hero = battle.heroes[heroId];
   if (hero.vars.stance === 'assault' && hero.skills.bloodCurse){
-    ret.bloodCurse = true; // TODO - sth
+    ret.bloodCurse = <FlowInstruction>['flow','bloodCurse',{heroId: heroId}];
   }
   if (hero.vars.stance === 'defence' && hero.skills.findWeakness){
     ret.findWeakness = <FlowInstruction>['flow','weakness',{heroId: heroId}];
