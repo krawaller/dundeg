@@ -17,17 +17,17 @@ test('monster dimwit skill', t => {
   result = execUntil(battle, ['flow','monsterEntry',{monsterId:'monster'}]);
   t.ok(result.monsters.monster.states.hungOver, 'monster got hung over');
   t.ok(!result.monsters.monster.states.ragingMad, 'monster isnt raging mad');
-  //t.ok(lastLogHasStr(result, 'hung'), 'msg acknowledges that monster is hung over');
+  t.ok(lastLogHasStr(result, 'hung'), 'msg acknowledges that monster is hung over');
 
   result = execUntil(battle, ['flow','monsterEntry',{monsterId:'monster'}]);
   t.ok(result.monsters.monster.states.ragingMad, 'monster got raging mad');
   t.ok(!result.monsters.monster.states.hungOver, 'monster isnt hung over');
-  //t.ok(lastLogHasStr(result, 'rag'), 'msg acknowledges that monster is raging mad');
+  t.ok(lastLogHasStr(result, 'rag'), 'msg acknowledges that monster is raging mad');
 
   result = execUntil(battle, ['flow','monsterEntry',{monsterId:'monster'}]);
   t.ok(!result.monsters.monster.states.ragingMad, 'monster isnt raging mad');
   t.ok(!result.monsters.monster.states.hungOver, 'monster isnt hung over');
-  //t.ok(lastLogHasStr(result, 'sober'), 'msg acknowledges that monster is sober');
+  t.ok(lastLogHasStr(result, 'sober'), 'msg acknowledges that monster is sober');
 
   t.end();
 
