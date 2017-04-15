@@ -1,7 +1,7 @@
 import * as test from "tape";
 import { makeHero, makeMonster, execUntil } from '../testutils';
 
-import { BattleState, Attack } from '../../src/interfaces';
+import { BattleState, Attack, FlowInstruction } from '../../src/interfaces';
 import { find_hero_attack_options } from '../../src/find/find_hero_attack_options';
 import { find_hero_quick_actions } from '../../src/find/find_hero_quick_actions';
 import { apply_luncheon_truncheon_throw } from '../../src/apply/apply_luncheon_truncheon_throw';
@@ -27,13 +27,15 @@ test('Luncheon Truncheon', t => {
     'luncheon truncheon offers STR attack'
   );
 
+  let throwAction:FlowInstruction = ['apply','luncheonTruncheonThrow',{heroId:'hero'}];
+
   t.deepEqual(
     find_hero_quick_actions(battle, {heroId: 'hero'}).luncheonTruncheon,
-    ['apply','luncheonTruncheonThrow',{heroId:'hero'}],
+    throwAction,
     'luncheon truncheon offers quick action'
   );
 
-  battle = execUntil(battle, ['apply','luncheonTruncheonThrow',{heroId:'hero'}]);
+  battle = execUntil(battle, throwAction);
   t.ok(
     !battle.heroes.hero.items.luncheonTruncheon,
     'hero lost sausage when he threw it'

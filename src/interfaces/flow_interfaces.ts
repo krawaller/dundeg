@@ -23,7 +23,6 @@ import { MonsterIntroductionSpec } from '../apply/apply_introduction_to_monster'
 import { WoundHeroSpec } from '../apply/apply_wounds_to_hero';
 import { WoundMonsterSpec } from '../apply/apply_wounds_to_monster';
 
-
 export type ApplyAmbushResult = ['apply', 'ambushResult', AmbushResultSpec];
 export type ApplyBloodCurseResult = ['apply', 'bloodCurseResult', BloodCurseSpec];
 export type ApplyDaemonsBlood = ['apply', 'daemonsBlood', DaemonsBloodSpec];
@@ -82,8 +81,10 @@ import { HeroOfferStanceChoiceSpec } from '../flow/flow_hero_stance_choice';
 import { HeroTargetChoiceSpec } from '../flow/flow_hero_target_choice';
 import { MonsterTargetChoiceSpec } from '../flow/flow_monster_target_choice';
 import { MakeRollSpec } from '../flow/flow_dice_roll';
+import { ThrowDaemonsBloodSpec } from '../flow/flow_daemons_blood';
 
 export type FlowAll = ['flow','all', any[]];
+export type FlowDaemonsBlood = ['flow','daemonsBlood', ThrowDaemonsBloodSpec];
 export type FlowDiceRoll = ['flow','diceRoll', MakeRollSpec];
 export type FlowEscapeChoice = ['flow', 'escapeChoice', HeroOfferEscapeChoiceSpec];
 export type FlowEachHero = ['flow', 'eachHero', EachHeroSpec];
@@ -98,6 +99,7 @@ export type FlowTest = ['flow', 'test', Test];
 
 export type FlowFurther = // When add stuff here, must also add to exec/exec_flow
   FlowAll |
+  FlowDaemonsBlood |
   FlowDiceRoll |
   FlowEscapeChoice |
   FlowEachHero |

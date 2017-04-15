@@ -1,5 +1,5 @@
 import { BattleState, HeroId, HeroStance, CalculationResult } from '../interfaces';
-import { deepCopy, addLog } from '../utils/helpers';
+import { deepCopy, addLog, removeAnItem } from '../utils/helpers';
 import { calculate_hero_stat } from '../calculate/calculate_hero_stat';
 import { monsters } from '../library';
 import { apply_wounds_to_monster } from './apply_wounds_to_monster';
@@ -31,5 +31,6 @@ export function apply_daemons_blood(battle: BattleState, {heroId}:DaemonsBloodSp
       history: [ ['Daemons Blood causes D3 roll damage', dice] ]
     }
   }
+  removeAnItem(ret.heroes[heroId], 'daemonsBlood');
   return apply_wounds_to_monster(ret, {monsterId, heroId, wounds});
 }

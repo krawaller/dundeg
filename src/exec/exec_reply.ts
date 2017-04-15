@@ -16,6 +16,6 @@ export function exec_reply(battle: BattleState, {option}: ReplySpec): BattleStat
   return {
     ...battle,
     question: undefined,
-    stack: [].concat(battle.question.options[option]).concat(battle.stack || [])
+    stack: [].concat(battle.question.options[option] ? [battle.question.options[option]] : []).concat(battle.stack || [])
   };
 }

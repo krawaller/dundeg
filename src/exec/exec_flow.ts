@@ -11,23 +11,30 @@ import { flow_pick_test_path } from '../flow/flow_pick_test_path';
 import { flow_test } from '../flow/flow_test';
 import { flow_hero_offer_stance_choice, HeroOfferStanceChoiceSpec } from '../flow/flow_hero_stance_choice';
 import { flow_hero_offer_return_choice, HeroOfferReturnChoiceSpec } from '../flow/flow_hero_return_choice';
+import { flow_daemons_blood, ThrowDaemonsBloodSpec } from '../flow/flow_daemons_blood';
 
 export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleState{
-  let newStack: FlowInstruction | FlowInstruction[];
+  let newInstr: FlowInstruction;
   switch(what){
-    case 'all': newStack = <FlowInstruction[]>spec; break;
-    case 'diceRoll': newStack = flow_dice_roll(battle, <MakeRollSpec>spec); break;
-    case 'escapeChoice': newStack = flow_hero_offer_escape_choice(battle, <HeroOfferEscapeChoiceSpec>spec); break;
-    case 'eachHero': newStack = flow_each_hero(battle, <EachHeroSpec>spec); break;
-    case 'eachMonster': newStack = flow_each_monster(battle, <EachMonsterSpec>spec); break;
-    case 'heroTargetChoice': newStack = flow_hero_target_choice(battle, <HeroTargetChoiceSpec>spec); break;
-    case 'monsterTargetChoice': newStack = flow_monster_target_choice(battle,<MonsterTargetChoiceSpec>spec); break;
-    case 'offerReroll': newStack = flow_offer_reroll(battle, <OfferRerollSpec>spec); break;
-    case 'pickTestPath': newStack = flow_pick_test_path(battle, <Test>spec); break;
-    case 'returnChoice': newStack = flow_hero_offer_return_choice(battle, <HeroOfferReturnChoiceSpec>spec); break;
-    case 'stanceChoice': newStack = flow_hero_offer_stance_choice(battle, <HeroOfferStanceChoiceSpec>spec); break;
-    case 'test': newStack = flow_test(battle, <Test>spec); break;
+    case 'all':
+      return {...battle, stack: (<FlowInstruction[]>spec).concat(battle.stack || [])};
+
+    case 'daemonsBlood': newInstr = flow_daemons_blood(battle, <ThrowDaemonsBloodSpec>spec); break;
+    case 'diceRoll': newInstr = flow_dice_roll(battle, <MakeRollSpec>spec); break;
+    case 'escapeChoice': newInstr = flow_hero_offer_escape_choice(battle, <HeroOfferEscapeChoiceSpec>spec); break;
+    case 'eachHero': newInstr = flow_each_hero(battle, <EachHeroSpec>spec); break;
+    case 'eachMonster': newInstr = flow_each_monster(battle, <EachMonsterSpec>spec); break;
+    case 'heroTargetChoice': newInstr = flow_hero_target_choice(battle, <HeroTargetChoiceSpec>spec); break;
+    case 'monsterTargetChoice': newInstr = flow_monster_target_choice(battle,<MonsterTargetChoiceSpec>spec); break;
+    case 'offerReroll': newInstr = flow_offer_reroll(battle, <OfferRerollSpec>spec); break;
+    case 'pickTestPath': newInstr = flow_pick_test_path(battle, <Test>spec); break;
+    case 'returnChoice': newInstr = flow_hero_offer_return_choice(battle, <HeroOfferReturnChoiceSpec>spec); break;
+    case 'stanceChoice': newInstr = flow_hero_offer_stance_choice(battle, <HeroOfferStanceChoiceSpec>spec); break;
+    case 'test': newInstr = flow_test(battle, <Test>spec); break;
     default: throw 'Unknown flow: '+what;
   }
-  return {...battle, stack: [].concat(newStack).concat(battle.stack || [])};
+  if (!newInstr){
+    return battle;
+  }
+  return {...battle, stack: [newInstr].concat(battle.stack || [])};
 }

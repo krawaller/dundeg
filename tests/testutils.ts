@@ -47,6 +47,7 @@ export function calcRes(val: any): CalculationResult {
 
 import { exec_step } from '../src/exec/exec_step';
 import { exec_until } from '../src/exec/exec_until';
+import { exec_reply } from '../src/exec/exec_reply';
 
 export function execUntil(battle:BattleState,instr:FlowInstruction){
   return exec_until({
@@ -54,3 +55,10 @@ export function execUntil(battle:BattleState,instr:FlowInstruction){
     stack: [instr].concat(battle.stack || [])
   });
 }
+
+export function reply(battle,opt:string){
+  return exec_until( exec_reply(battle, {option:opt}) );
+}
+
+export const acceptRoll = 'accept';
+export const makeRoll = 'roll';

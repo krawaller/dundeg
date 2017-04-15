@@ -1,4 +1,4 @@
-import { BattleState } from '../interfaces';
+import { BattleState, FlowInstruction } from '../interfaces';
 
 interface InstrJustHeroId { heroId: string }
 
@@ -12,9 +12,9 @@ export function find_hero_actions (battle: BattleState, {heroId}: InstrJustHeroI
     ret.findWeakness = true; // TODO - sth
   }
   if (hero.items.daemonsBlood){
-    ret.daemonsBlood = ['pickTargetAnd',{},['apply','daemonsBlood',{heroId: heroId}]]; // TODO - sth
+    ret.daemonsBlood = <FlowInstruction>['flow','daemonsBlood',{heroId: heroId}];
   }
-  if (hero.items.shrapnelBomb){
+  if (hero.items.shrapnelBomb){ // TODO - sth
     ret.shrapnelBomb = ['all',[
       []
     ]];
