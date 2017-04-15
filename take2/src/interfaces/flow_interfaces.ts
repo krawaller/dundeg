@@ -38,6 +38,7 @@ export type ApplyIntroduceMonster = ['apply', 'introduceMonster', MonsterIntrodu
 export type ApplyLogMessage = ['apply', 'log', LogMessage];
 export type ApplyLuncheonTruncheonThrow = ['apply', 'luncheonTruncheonThrow', LuncheonTruncheonThrowSpec];
 export type ApplyMonsterTargetChoice = ['apply', 'monsterTargetChoice', TargetSelectionForMonsterSpec];
+export type ApplyQuestion = ['apply','question',Question];
 export type ApplyReroll = ['apply', 'reroll', RerollSpec ];
 export type ApplyRegisterTestOutcome = ['apply', 'registerTestOutcome', Test ];
 export type ApplyReturnToBattle = ['apply', 'returnToBattle', ReturnToBattleSpec];
@@ -61,6 +62,7 @@ export type FlowApply = // When add stuff here, must also add to exec/exec_apply
   ApplyLogMessage |
   ApplyLuncheonTruncheonThrow |
   ApplyMonsterTargetChoice |
+  ApplyQuestion |
   ApplyReroll |
   ApplyRegisterTestOutcome |
   ApplyReturnToBattle |
@@ -88,7 +90,6 @@ export type FlowHeroTargetChoice = ['flow', 'heroTargetChoice', HeroTargetChoice
 export type FlowMonsterTargetChoice = ['flow', 'monsterTargetChoice', MonsterTargetChoiceSpec];
 export type FlowOfferReroll = ['flow', 'offerReroll', OfferRerollSpec];
 export type FlowPickTestPath = ['flow', 'pickTestPath', Test];
-export type FlowQuestion = ['flow','question', Question];
 export type FlowReturnChoice = ['flow', 'returnChoice', HeroOfferReturnChoiceSpec];
 export type FlowStanceChoice = ['flow', 'stanceChoice', HeroOfferStanceChoiceSpec];
 export type FlowTest = ['flow', 'test', Test];
@@ -103,7 +104,6 @@ export type FlowFurther = // When add stuff here, must also add to exec/exec_flo
   FlowMonsterTargetChoice |
   FlowOfferReroll |
   FlowPickTestPath |
-  FlowQuestion | 
   FlowReturnChoice |
   FlowStanceChoice |
   FlowTest

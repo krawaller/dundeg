@@ -1,4 +1,4 @@
-import { FlowApply, BattleState, LogMessage } from '../interfaces';
+import { FlowApply, BattleState, LogMessage, Question } from '../interfaces';
 
 import { apply_ambush_result, AmbushResultSpec } from '../apply/apply_ambush_result';
 import { apply_dimwit_result, DimwitResultSpec } from '../apply/apply_dimwit_result';
@@ -20,6 +20,7 @@ import { apply_end_of_round_to_monster, EndOfRoundMonsterSpec } from '../apply/
 import { apply_introduction_to_monster, MonsterIntroductionSpec } from '../apply/apply_introduction_to_monster';
 import { apply_wounds_to_hero, WoundHeroSpec } from '../apply/apply_wounds_to_hero';
 import { apply_wounds_to_monster, WoundMonsterSpec } from '../apply/apply_wounds_to_monster';
+import { apply_question } from '../apply/apply_question';
 
 export function exec_apply(battle:BattleState, [,what,spec]:FlowApply): BattleState{
   switch(what){
@@ -37,6 +38,7 @@ export function exec_apply(battle:BattleState, [,what,spec]:FlowApply): BattleSt
     case 'log': return apply_log(battle, <LogMessage>spec);
     case 'luncheonTruncheonThrow': return apply_luncheon_truncheon_throw(battle, <LuncheonTruncheonThrowSpec>spec);
     case 'monsterTargetChoice': return apply_target_selection_for_monster(battle, <TargetSelectionForMonsterSpec>spec);
+    case 'question': return  apply_question(battle, <Question>spec);
     case 'reroll': return apply_reroll(battle, <RerollSpec>spec);
     case 'returnToBattle': return apply_return_to_battle(battle, <ReturnToBattleSpec>spec);
     case 'stanceChoice': return apply_stance_choice_to_hero(battle, <ApplyStanceChoiceToHeroSpec>spec);

@@ -1,4 +1,4 @@
-import { BattleState, HeroId, FlowTarget, FlowInstruction, LogMessage, Question, FlowQuestion } from '../interfaces';
+import { BattleState, HeroId, FlowTarget, FlowInstruction, LogMessage, Question, ApplyQuestion } from '../interfaces';
 import { monsters } from '../library';
 import { find_standing_monsters } from '../find/find_standing_monsters';
 import { calculate_hero_stat } from '../calculate/calculate_hero_stat';
@@ -55,6 +55,6 @@ export function flow_hero_offer_escape_choice(battle: BattleState, {heroId}:Hero
   }
   options['remain'] = undefined;
 
-  return <FlowQuestion>['flow','question', { line: line, options: options }];
+  return <ApplyQuestion>['apply','question', { line: line, options: options }];
 
 }
