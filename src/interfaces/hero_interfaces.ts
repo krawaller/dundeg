@@ -69,6 +69,8 @@ export interface HeroSkills {
   sneakAttack?: true
 }
 
+export type HeroStateName = keyof HeroStates;
+
 export interface HeroStates {
   blessed?: true
   exalted?: true
