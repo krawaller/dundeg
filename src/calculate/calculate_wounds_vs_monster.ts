@@ -26,7 +26,7 @@ export function calculate_wounds_vs_monster (battle: BattleState, {monsterId, he
   let armour = calculate_monster_armour(battle, {monsterId, heroId, attack});
 
   val.history.push( [ 'deduct monster armour', armour ] );
-  val.value = Math.max(  damage.value - armour.value );
+  val.value = Math.max(  damage.value - armour.value, 0 );
 
   if (val.value>0){
     if (monster.states.weakness){

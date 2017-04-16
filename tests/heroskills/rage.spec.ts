@@ -1,79 +1,65 @@
 import * as test from "tape";
-import { makeMonster, makeHero, calcRes } from '../testutils';
+import { makeMonster, makeHero, execUntil } from '../testutils';
 
-import { BattleState, Attack } from '../../src/interfaces';
-import { calculate_damage_vs_monster } from '../../src/calculate/calculate_damage_vs_monster';
+import { BattleState, Attack, FlowPerformHeroAttack } from '../../src/interfaces';
+
+import { monsters } from '../../src/library';
 
 test('the rage hero skill', t => {
   const battle: BattleState = {
     heroes: {
-      rager: makeHero('bloodsportBrawler',{stance:'assault'},{},{rage: true}),
+      hero: makeHero('bloodsportBrawler',{attackDice: [1,3], target: 'monster'},{},{rage: true}),
     },
     monsters: {
-      monster: makeMonster('slitherFish',{target: 'rager'})
-    }
+      monster: makeMonster('slitherFish',{target: 'hero'}) // HP - 3, ARM - 2
+    },
+    log: []
   };
 
+  let result:BattleState;
+  let heroId = 'hero';
+  let DMG = 3; // highest attack die
+
+
+  battle.heroes.hero.vars.stance = 'assault';
+  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId, attack:{type:'meelee',stat:'STR'}}]);
   t.equal(
-    calculate_damage_vs_monster(battle, {
-      monsterId: 'monster',
-      heroId: 'rager',
-      heroATK: calcRes(6),
-      monsterARM: calcRes(4),
-      attack: <Attack>{stat: 'STR', using: 'nastyCleaver', type: 'meelee'}
-    }).value,
-    3,
-    'rage gives 1 additional damage in assault'
+    result.monsters.monster.vars.HP,
+    monsters.slitherFish.stats.HP - (DMG + 1 - monsters.slitherFish.stats.ARM),
+    'rage gives 1 additional damage for STR attacks in assault'
   );
 
+  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId, attack:{type:'meelee',stat:'AGI'}}]);
   t.equal(
-    calculate_damage_vs_monster(battle, {
-      monsterId: 'monster',
-      heroId: 'rager',
-      heroATK: calcRes(6),
-      monsterARM: calcRes(4),
-      attack: <Attack>{stat: 'AGI', using:'nastyCleaver', type: 'meelee'}
-    }).value,
-    2,
+    result.monsters.monster.vars.HP,
+    monsters.slitherFish.stats.HP - (DMG - monsters.slitherFish.stats.ARM),
     'rage has no effect when attack isnt using STR'
   );
 
+  battle.heroes.hero.vars.attackDice = [1,1];
+  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId, attack:{type:'meelee',stat:'STR'}}]);
   t.equal(
-    calculate_damage_vs_monster(battle, {
-      monsterId: 'monster',
-      heroId: 'rager',
-      heroATK: calcRes(4),
-      monsterARM: calcRes(4),
-      attack: <Attack>{stat: 'STR', using:'nastyCleaver', type: 'meelee'}
-    }).value,
-    0,
-    'rage has no effect when no damage was done'
+    result.monsters.monster.vars.HP,
+    monsters.slitherFish.stats.HP,
+    'rage has no effect when no damage was done (slitherfish has 1 ARM)'
   );
 
-  battle.heroes.rager.vars.stance = 'defence';
+  battle.heroes.hero.vars.attackDice = [1,3];
+  battle.heroes.hero.vars.stance = 'defence';
+  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId, attack:{type:'meelee',stat:'STR'}}]);
   t.equal(
-    calculate_damage_vs_monster(battle, {
-      monsterId: 'monster',
-      heroId: 'rager',
-      heroATK: calcRes(6),
-      monsterARM: calcRes(4),
-      attack: <Attack>{stat: 'STR', using:'nastyCleaver', type: 'meelee'}
-    }).value,
-    2,
+    result.monsters.monster.vars.HP,
+    monsters.slitherFish.stats.HP - (DMG - monsters.slitherFish.stats.ARM),
     'rage has no effect when not in assault mode'
   );
 
-  battle.heroes.rager.vars.stance = 'assault';
+
+  battle.heroes.hero.vars.stance = 'assault';
   battle.monsters.monster.vars.target = 'someoneElse';
+  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId, attack:{type:'meelee',stat:'STR'}}]);
   t.equal(
-    calculate_damage_vs_monster(battle, {
-      monsterId: 'monster',
-      heroId: 'rager',
-      heroATK: calcRes(6),
-      monsterARM: calcRes(4),
-      attack: <Attack>{stat: 'STR', using:'nastyCleaver', type: 'meelee'}
-    }).value,
-    2,
+    result.monsters.monster.vars.HP,
+    monsters.slitherFish.stats.HP - (DMG - monsters.slitherFish.stats.ARM),
     'rage has no effect when target wasnt targetting attacker'
   );
 

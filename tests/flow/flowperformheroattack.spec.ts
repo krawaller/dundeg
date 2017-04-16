@@ -50,6 +50,14 @@ test('flow perform hero attack', t => {
     'dealt 3 damage (ignore power since not in assault), -1 armour'
   );
 
+  battle.heroes.hero.vars.attackDice = [0,0];
+  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId:'hero',attack}]);
+  t.equal(
+    result.monsters.monster.vars.HP,
+    blueprint.stats.HP,
+    'negative damage doesnt heal monster, that sucks'
+  );
+
   t.end();
 });
 
