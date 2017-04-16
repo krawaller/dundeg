@@ -25,7 +25,9 @@ import { WoundMonsterSpec } from '../apply/apply_wounds_to_monster';
 import { StateToHeroSpec } from '../apply/apply_state_to_hero';
 import { RemoveItemSpec } from '../apply/apply_remove_item';
 import { StateToMonsterSpec } from '../apply/apply_state_to_monster';
+import { ActionSelectionSpec } from '../apply/apply_action_selection';
 
+export type ApplyActionSelection = ['apply', 'actionSelection', ActionSelectionSpec];
 export type ApplyAmbushResult = ['apply', 'ambushResult', AmbushResultSpec];
 export type ApplyBloodCurseResult = ['apply', 'bloodCurseResult', BloodCurseSpec];
 export type ApplyDaemonsBlood = ['apply', 'daemonsBlood', DaemonsBloodSpec];
@@ -53,6 +55,7 @@ export type ApplyWoundHero = ['apply', 'woundHero', WoundHeroSpec];
 export type ApplyWoundMonster = ['apply', 'woundMonster', WoundMonsterSpec];
 
 export type FlowApply = // When add stuff here, must also add to exec/exec_apply
+  ApplyActionSelection |
   ApplyAmbushResult |
   ApplyBloodCurseResult |
   ApplyDaemonsBlood |

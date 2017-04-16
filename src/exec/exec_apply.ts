@@ -25,10 +25,12 @@ import { apply_register_test_outcome } from '../apply/apply_register_test_outco
 import { apply_state_to_hero, StateToHeroSpec } from '../apply/apply_state_to_hero';
 import { apply_remove_item, RemoveItemSpec } from '../apply/apply_remove_item';
 import { apply_state_to_monster, StateToMonsterSpec } from '../apply/apply_state_to_monster';
+import { apply_action_selection, ActionSelectionSpec } from '../apply/apply_action_selection';
 
 
 export function exec_apply(battle:BattleState, [,what,spec]:FlowApply): BattleState{
   switch(what){
+    case 'actionSelection': return apply_action_selection(battle, <ActionSelectionSpec>spec);
     case 'ambushResult': return apply_ambush_result(battle, <AmbushResultSpec>spec);
     case 'bloodCurseResult': return apply_blood_curse_invocation_result(battle, <BloodCurseSpec>spec);
     case 'daemonsBlood': return apply_daemons_blood(battle, <DaemonsBloodSpec>spec);

@@ -1,5 +1,5 @@
 import { Inventory, ItemName } from './item_interfaces';
-
+import { FlowInstruction } from './flow_interfaces';
 import { MonsterId } from './monster_interfaces';
 
 export interface HeroStats {
@@ -39,6 +39,7 @@ export interface HeroVars {
   target?: MonsterId
   luck?: number
   testOutcome?: number
+  action?: FlowInstruction
 }
 
 export interface HeroState {
