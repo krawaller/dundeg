@@ -1,4 +1,4 @@
-import { BattleState, CalculationResult, HeroId, MonsterId, FlowInstruction, FlowDiceRoll, FlowDetonateShrapnelBomb, Attack  } from '../interfaces';
+import { BattleState, CalculationResult, HeroId, MonsterId, FlowInstruction, FlowDiceRoll, FlowDetonateShrapnelBomb, Attack, ApplyRemoveItem  } from '../interfaces';
 
 import { calculate_wounds_vs_monster } from '../calculate/calculate_wounds_vs_monster';
 
@@ -8,10 +8,13 @@ export interface ThrowShrapnelBombSpec {
 }
 
 export function flow_throw_shrapnel_bomb(battle: BattleState, {heroId}:ThrowShrapnelBombSpec): FlowInstruction {
-  return ['flow','eachMonster', monsterId => ['flow','all',[
-    <FlowDiceRoll>['flow','diceRoll',{heroId, diceTypes: {singleAttack: true}}],
-    <FlowDetonateShrapnelBomb>['flow','detonateShrapnelBomb',{heroId,monsterId}]
-  ]]];
+  return ['flow','all',[
+    ['flow','eachMonster', monsterId => ['flow','all',[
+      <FlowDiceRoll>['flow','diceRoll',{heroId, diceTypes: {singleAttack: true}}],
+      <FlowDetonateShrapnelBomb>['flow','detonateShrapnelBomb',{heroId,monsterId}]
+    ]]],
+    <ApplyRemoveItem>['apply', 'removeItem', {heroId, item: 'shrapnelBomb'}]
+  ]];
 }
 
 

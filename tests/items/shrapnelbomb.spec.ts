@@ -38,5 +38,10 @@ test('shrapnel bomb item', t => {
     'Did D3+1 = 2 damage, not piercing, so no damage dealt'
   );
 
+  t.ok(
+    !battle.heroes.hero.items.shrapnelBomb,
+    'hero lost the shrapnel bomb after throwing it'
+  );
+
   t.end();
 });
