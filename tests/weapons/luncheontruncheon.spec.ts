@@ -4,7 +4,8 @@ import { makeHero, makeMonster, execUntil } from '../testutils';
 import { BattleState, Attack, FlowInstruction } from '../../src/interfaces';
 import { find_hero_attack_options } from '../../src/find/find_hero_attack_options';
 import { find_hero_quick_actions } from '../../src/find/find_hero_quick_actions';
-import { apply_luncheon_truncheon_throw } from '../../src/apply/apply_luncheon_truncheon_throw';
+
+import { items } from '../../src/library';
 
 test('Luncheon Truncheon', t => {
   let battle: BattleState = {
@@ -22,7 +23,7 @@ test('Luncheon Truncheon', t => {
   };
 
   t.deepEqual(
-    find_hero_attack_options(battle, {heroId: 'hero'})['luncheonTruncheon'],
+    find_hero_attack_options(battle, {heroId: 'hero'})[items.luncheonTruncheon.actions.luncheonTruncheonAttack],
     <Attack>{ using: 'luncheonTruncheon', type: 'meelee', stat: 'STR' },
     'luncheon truncheon offers STR attack'
   );
@@ -30,9 +31,9 @@ test('Luncheon Truncheon', t => {
   let throwAction:FlowInstruction = ['apply','luncheonTruncheonThrow',{heroId:'hero'}];
 
   t.deepEqual(
-    find_hero_quick_actions(battle, {heroId: 'hero'}).luncheonTruncheon,
+    find_hero_quick_actions(battle, {heroId: 'hero'})[items.luncheonTruncheon.actions.throwLuncheonTruncheon],
     throwAction,
-    'luncheon truncheon offers quick action'
+    'luncheon truncheon offers throw sausage action'
   );
 
   battle = execUntil(battle, throwAction);

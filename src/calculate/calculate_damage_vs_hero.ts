@@ -19,3 +19,5 @@ export function calculate_damage_vs_hero (battle: BattleState, instr: CalculateH
   };
   return val;
 }
+
+// TODO - stupefy this

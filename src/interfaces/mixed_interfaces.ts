@@ -1,4 +1,4 @@
-import { HeroStatName, HeroState, HeroId } from './hero_interfaces';
+import { HeroStatName, HeroState, HeroId, HeroSkillName } from './hero_interfaces';
 import { MonsterState } from './monster_interfaces';
 import { ItemName } from './item_interfaces';
 
@@ -15,7 +15,8 @@ export type AttackType = 'meelee' | 'ranged' | 'special'
 
 export interface Attack {
   type: AttackType
-  using: ItemName,
+  using?: ItemName,
+  skill?: HeroSkillName, 
   stat?: HeroStatName
 }
 
@@ -65,7 +66,7 @@ export interface PartyStatCheckOrderedPart {
   heroes: HeroId[]
 }
 
-export type StatCheckReason = '_testReason' | 'ambush' | 'monsterTargetAcquisition' | 'bloodCurse' | 'weakness' | 'escape' ;
+export type StatCheckReason = '_testReason' | 'ambush' | 'monsterTargetAcquisition' | 'bloodCurse' | 'weakness' | 'escape' | 'landAttack' ;
 
 export type RegionName = 'red' | 'yellow' | 'blue' | 'green';
 

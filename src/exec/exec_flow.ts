@@ -20,12 +20,15 @@ import { flow_bloodcurse, InitiateBloodCurseSpec } from '../flow/flow_bloodcurse
 import { flow_wound_monster, InitiateWoundMonsterSpec } from '../flow/flow_wound_monster';
 import { flow_throw_shrapnel_bomb, ThrowShrapnelBombSpec, flow_detonate_shrapnel_bomb, DetonateShrapnelBombSpec } from '../flow/flow_shrapnel_bomb';
 import { flow_flash_bomb, FlashBombSpec } from '../flow/flow_flash_bomb';
+import { flow_perform_hero_attack, PerformHeroAttackSpec } from '../flow/flow_perform_hero_attack';
+
 
 export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleState{
   let newInstr: FlowInstruction;
   switch(what){
-    case 'all':
-      return {...battle, stack: (<FlowInstruction[]>spec).concat(battle.stack || [])};
+    // Special ALL case, fix and return from here
+    case 'all': return {...battle, stack: (<FlowInstruction[]>spec).concat(battle.stack || [])};
+    // All others just give back 1 new instruction
     case 'ambush': newInstr = flow_ambush(battle, <InitiateAmbushSpec>spec); break;
     case 'bloodCurse': newInstr = flow_bloodcurse(battle, <InitiateBloodCurseSpec>spec); break;
     case 'daemonsBlood': newInstr = flow_daemons_blood(battle, <ThrowDaemonsBloodSpec>spec); break;
@@ -40,6 +43,7 @@ export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleSt
     case 'monsterEntry': newInstr = flow_monster_entry(battle, <MonsterEntrySpec>spec); break;
     case 'monsterTargetChoice': newInstr = flow_monster_target_choice(battle,<MonsterTargetChoiceSpec>spec); break;
     case 'offerReroll': newInstr = flow_offer_reroll(battle, <OfferRerollSpec>spec); break;
+    case 'performHeroAttack': newInstr = flow_perform_hero_attack(battle, <PerformHeroAttackSpec>spec); break;
     case 'pickTestPath': newInstr = flow_pick_test_path(battle, <Test>spec); break;
     case 'returnChoice': newInstr = flow_hero_offer_return_choice(battle, <HeroOfferReturnChoiceSpec>spec); break;
     case 'throwShrapnelBomb': newInstr = flow_throw_shrapnel_bomb(battle, <ThrowShrapnelBombSpec>spec); break;

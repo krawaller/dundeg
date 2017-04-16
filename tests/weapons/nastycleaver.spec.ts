@@ -1,62 +1,51 @@
 import * as test from "tape";
-import { makeHero, makeMonster } from '../testutils';
+import { makeHero, makeMonster, execUntil } from '../testutils';
 
-import { BattleState, Attack } from '../../src/interfaces';
-import { calculate_damage_vs_monster } from '../../src/calculate/calculate_damage_vs_monster';
+import { monsters, items } from '../../src/library';
+
+import { BattleState, Attack, FlowPerformHeroAttack } from '../../src/interfaces';
 import { find_hero_attack_options } from '../../src/find/find_hero_attack_options';
 
 test('Nasty Cleaver', t => {
-  const battle: BattleState = {
+  let result: BattleState,  battle: BattleState = {
     heroes: {
-      hero: makeHero('bloodsportBrawler',{stance:'assault',powerDie:6},{},{},['nastyCleaver']),
+      hero: makeHero('bloodsportBrawler',{target: 'monster', stance:'assault',powerDie:6,attackDice:[1,2]},{},{},['nastyCleaver']),
     },
     monsters: {
-      monster: makeMonster('manAtArms')
-    }
+      monster: makeMonster('swampTroll') // HP 12, ARM 0
+    },
+    log: []
   };
 
+  let attack:Attack = { using: 'nastyCleaver', type: 'meelee', stat: 'STR' };
+
   t.deepEqual(
-    find_hero_attack_options(battle, {heroId: 'hero'}).nastyCleaver,
-    <Attack>{ using: 'nastyCleaver', type: 'meelee', stat: 'STR' },
-    'nasty cleaver offers STR attack'
+    find_hero_attack_options(battle, {heroId: 'hero'})[items.nastyCleaver.actions.nastyCleaverAttack],
+    attack,
+    'nasty cleaver offers STR meelee attack'
   );
 
+  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId:'hero',attack}]);
   t.equal(
-    calculate_damage_vs_monster(battle, {
-      monsterId: 'monster',
-      heroId: 'hero',
-      heroATK: {value: 6, history:[]},
-      monsterARM: {value: 4, history:[]},
-      attack: {using: 'nastyCleaver', stat: 'STR', type: 'meelee'}
-    }).value,
-    3,
+    result.monsters.monster.vars.HP,
+    monsters.swampTroll.stats.HP - (6 + 1),
     'nasty cleaver gives +1 damage when power die is 6'
   );
 
-  battle.heroes.hero.vars.powerDie = 4;
+  battle.heroes.hero.vars.powerDie = 5;
+  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId:'hero',attack}]);
   t.equal(
-    calculate_damage_vs_monster(battle, {
-      monsterId: 'monster',
-      heroId: 'hero',
-      heroATK: {value: 6, history:[]},
-      monsterARM: {value: 4, history:[]},
-      attack: {using: 'nastyCleaver', stat: 'STR', type: 'meelee'}
-    }).value,
-    2,
+    result.monsters.monster.vars.HP,
+    monsters.swampTroll.stats.HP - 5,
     'nasty cleaver has no effect when power die isnt 6'
   );
 
   battle.heroes.hero.vars.powerDie = 6;
   battle.heroes.hero.vars.stance = 'defence';
+  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId:'hero',attack}]);
   t.equal(
-    calculate_damage_vs_monster(battle, {
-      monsterId: 'monster',
-      heroId: 'hero',
-      heroATK: {value: 6, history:[]},
-      monsterARM: {value: 4, history:[]},
-      attack: {using: 'nastyCleaver', stat: 'STR', type: 'meelee'}
-    }).value,
-    2,
+    result.monsters.monster.vars.HP,
+    monsters.swampTroll.stats.HP - 2, // 2 is highest attack die
     'nasty cleaver has no effect when not assaulting'
   );
 

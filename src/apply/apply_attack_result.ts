@@ -24,3 +24,6 @@ export function apply_attack_result(battle: BattleState, {heroId,monsterId,attac
   }
   return ret;
 }
+
+
+// TODO - rework this to a flow_try_to_attack or sth

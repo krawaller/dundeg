@@ -33,7 +33,11 @@ export const items:ItemBook = {
   },
   luncheonTruncheon: {
     name: 'Luncheon Truncheon',
-    traits: {}
+    traits: {},
+    actions: {
+      luncheonTruncheonAttack: 'Luncheon Truncheon',
+      throwLuncheonTruncheon: 'Throw Luncheon Truncheon'
+    }
   },
   mysteryMeat: {
     name: 'Mystery Meat',
@@ -41,7 +45,10 @@ export const items:ItemBook = {
   },
   nastyCleaver: {
     name: 'Nasty Cleaver',
-    traits: {}
+    traits: {},
+    actions: {
+      nastyCleaverAttack: 'Nasty Cleaver'
+    }
   },
   nightCloak: {
     name: 'Night Cloak',
@@ -60,11 +67,18 @@ export const items:ItemBook = {
   },
   skinningKnife: {
     name: 'Skinning Knife',
-    traits: { blade: true }
+    traits: { blade: true },
+    actions: {
+      skinningKnifeAttack: 'Skinning Knife'
+    }
   },
   spikedGauntlet: {
     name: 'Spiked Gauntlet',
-    traits: {}
+    traits: {},
+    actions: {
+      spikedGauntletAttackAssault: 'Spiked Gauntlet',
+      spikedGauntletAttackDefence: 'Spiked Gauntlet'
+    }
   },
   stilleto: {
     name: 'Stilleto',

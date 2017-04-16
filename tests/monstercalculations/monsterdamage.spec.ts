@@ -1,3 +1,4 @@
+/*
 import * as test from "tape";
 import { makeMonster, makeHero } from '../testutils';
 import { BattleState } from '../../src/interfaces';
@@ -22,3 +23,4 @@ test('calculating damage vs monster', t => {
 
   t.end();
 });
+*/

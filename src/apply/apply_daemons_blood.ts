@@ -32,5 +32,5 @@ export function apply_daemons_blood(battle: BattleState, {heroId}:DaemonsBloodSp
     }
   }
   removeAnItem(ret.heroes[heroId], 'daemonsBlood');
-  return apply_wounds_to_monster(ret, {monsterId, heroId, wounds});
+  return apply_wounds_to_monster(ret, {monsterId, heroId, wounds, attack: {using: 'daemonsBlood', type: 'special'}});
 }

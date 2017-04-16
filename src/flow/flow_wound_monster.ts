@@ -1,9 +1,10 @@
-import { BattleState, CalculationResult, HeroId, MonsterId, FlowInstruction, FlowTarget, DiceSpec, ApplyQuestion } from '../interfaces';
+import { BattleState, CalculationResult, HeroId, MonsterId, FlowInstruction, Attack } from '../interfaces';
 
 export interface InitiateWoundMonsterSpec {
   heroId: HeroId
   monsterId: MonsterId
   wounds: CalculationResult
+  attack: Attack
 }
 
 export function flow_wound_monster(battle: BattleState, spec:InitiateWoundMonsterSpec): FlowInstruction {

@@ -1,14 +1,14 @@
-import { BattleState, CalculationResult, HeroId, MonsterId } from '../interfaces';
+import { BattleState, CalculationResult, HeroId, MonsterId, Attack } from '../interfaces';
 import { deepCopy, addLog } from '../utils/helpers';
 
 export interface WoundMonsterSpec {
   heroId: HeroId
   monsterId: MonsterId
   wounds: CalculationResult
-  wasBloodCurse?: true
+  attack: Attack
 }
 
-export function apply_wounds_to_monster (battle:BattleState, {monsterId,heroId,wounds,wasBloodCurse}: WoundMonsterSpec): BattleState {
+export function apply_wounds_to_monster (battle:BattleState, {monsterId,heroId,wounds,attack}: WoundMonsterSpec): BattleState {
   const ret = deepCopy(battle);
   let target = ret.monsters[monsterId];
   let dealt = Math.min(target.vars.HP, wounds.value);
@@ -17,13 +17,13 @@ export function apply_wounds_to_monster (battle:BattleState, {monsterId,heroId,w
   if (dealt){
     target.vars.HP -= dealt;
     if (target.vars.HP){
-      if (wasBloodCurse){
+      if (attack.skill === 'bloodCurse'){
         addLog(ret, ['The blood curse from',{heroRef: heroId}, 'makes', {monsterRef: monsterId}, 'also take',wounds,'wounds'] );
       } else {
         addLog(ret, [monRef, 'took', wounds, 'wounds'] );
       }
     } else {
-      if (wasBloodCurse){
+      if (attack.skill === 'bloodCurse'){
         addLog(ret, ['The blood curse from',{heroRef: heroId}, 'knocked out', {monsterRef: monsterId}, 'by passing on',wounds,'wounds'] );
         addLog(ret, ['The blood curse is now lifted.'] );
         delete ret.heroes[heroId].vars.bloodCurseLink;

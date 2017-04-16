@@ -24,9 +24,15 @@ export interface Inventory {
 }
 
 export interface ItemActions {
+  luncheonTruncheonAttack?: string
+  nastyCleaverAttack?: string
+  skinningKnifeAttack?: string
+  spikedGauntletAttackAssault?: string
+  spikedGauntletAttackDefence?: string
   throwDaemonsBlood?: string
   throwFlashBomb?: string
   throwShrapnelBomb?: string
+  throwLuncheonTruncheon?: string
 }
 
 export interface ItemDef {

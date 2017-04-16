@@ -51,7 +51,7 @@ export function apply_wounds_to_hero (battle: BattleState, {heroId,monsterId,wou
           let bloodCurseWounds = {
             value: wounds.value, history: [['Blood curse passes wounds on',wounds.value]]
           };
-          ret = apply_wounds_to_monster(ret, {monsterId: target.vars.bloodCurseLink, wounds:bloodCurseWounds, heroId, wasBloodCurse: true });
+          ret = apply_wounds_to_monster(ret, {attack: {type: 'special', skill: 'bloodCurse'}, monsterId: target.vars.bloodCurseLink, wounds:bloodCurseWounds, heroId });
         }
       }
     } else {
