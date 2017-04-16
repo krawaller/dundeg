@@ -4,6 +4,8 @@ import { makeHero, makeMonster, execUntil, reply, makeRoll } from '../testutils'
 import { BattleState, FlowInstruction } from '../../src/interfaces';
 import { find_hero_actions } from '../../src/find/find_hero_actions';
 
+import { items } from '../../src/library';
+
 test('flash bomb item', t => {
   let battle: BattleState = {
     heroes: {
@@ -21,7 +23,7 @@ test('flash bomb item', t => {
   let action: FlowInstruction = ['flow','flashBomb',{heroId: 'hero'}];
 
   t.deepEqual(
-    find_hero_actions(battle,{heroId:'hero'}).flashBomb,
+    find_hero_actions(battle,{heroId:'hero'})[items.flashBomb.actions.throwFlashBomb],
     action
   );
 

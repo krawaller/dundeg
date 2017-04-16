@@ -23,9 +23,16 @@ export interface Inventory {
   warPaint?: number
 }
 
+export interface ItemActions {
+  throwDaemonsBlood?: string
+  throwFlashBomb?: string
+  throwShrapnelBomb?: string
+}
+
 export interface ItemDef {
   name: string
   traits: ItemTraits
+  actions?: ItemActions
 }
 
 export interface ItemBook {

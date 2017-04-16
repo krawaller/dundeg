@@ -4,6 +4,7 @@ import { BattleState, LogMessagePart, FlowInstruction } from '../../src/interfac
 import { apply_wounds_to_hero } from '../../src/apply/apply_wounds_to_hero';
 import { apply_blood_curse_invocation_result } from '../../src/apply/apply_blood_curse_invocation_result';
 import { find_hero_actions } from '../../src/find/find_hero_actions';
+import { heroSkills } from '../../src/library';
 
 test('blood curse hero skill', t => {
   let battle: BattleState = {
@@ -21,7 +22,7 @@ test('blood curse hero skill', t => {
   };
 
   t.ok(
-    !find_hero_actions(battle,{heroId:'curseLinkedHero'}).bloodCurse,
+    !find_hero_actions(battle,{heroId:'curseLinkedHero'})[heroSkills.bloodCurse.actions.castBloodCurse],
     'bloodcurse not available in defence stance'
   );
 
@@ -29,7 +30,7 @@ test('blood curse hero skill', t => {
 
   battle.heroes.curseLinkedHero.vars.stance = 'assault';
   t.deepEqual(
-    find_hero_actions(battle,{heroId:'curseLinkedHero'}).bloodCurse,
+    find_hero_actions(battle,{heroId:'curseLinkedHero'})[heroSkills.bloodCurse.actions.castBloodCurse],
     action,
     'bloodcurse available in assault mode'
   );

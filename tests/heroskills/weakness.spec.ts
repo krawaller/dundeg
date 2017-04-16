@@ -4,6 +4,7 @@ import { BattleState, FlowInstruction } from '../../src/interfaces';
 import { calculate_damage_vs_monster } from '../../src/calculate/calculate_damage_vs_monster';
 import { apply_weakness_invocation_result } from '../../src/apply/apply_weakness_invocation_result';
 import { find_hero_actions } from '../../src/find/find_hero_actions';
+import { heroSkills } from '../../src/library';
 
 test('the hero weakness skill', t => {
   let result: BattleState, battle: BattleState = { // brawler has PER = 6
@@ -14,7 +15,7 @@ test('the hero weakness skill', t => {
   };
 
   t.ok(
-    !find_hero_actions(battle,{heroId:'hero'}).findWeakness,
+    !find_hero_actions(battle,{heroId:'hero'})[heroSkills.findWeakness.actions.findWeakness],
     'find weakness not available in assault stance'
   );
 
@@ -22,7 +23,7 @@ test('the hero weakness skill', t => {
 
   battle.heroes.hero.vars.stance = 'defence';
   t.deepEqual(
-    find_hero_actions(battle,{heroId:'hero'}).findWeakness,
+    find_hero_actions(battle,{heroId:'hero'})[heroSkills.findWeakness.actions.findWeakness],
     action,
     'find weakness available in defence stance'
   );

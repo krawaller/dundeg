@@ -11,11 +11,17 @@ export const items:ItemBook = {
   },
   daemonsBlood: {
     name: 'Daemon\'s blood',
-    traits: {}
+    traits: {},
+    actions: {
+      throwDaemonsBlood: 'Throw Daemon\s blood'
+    }
   },
   flashBomb: {
     name: 'Flash bomb',
-    traits: {}
+    traits: {},
+    actions: {
+      throwFlashBomb: 'Throw Flash Bomb'
+    }
   },
   fortuneCards: {
     name: 'Fortune Cards',
@@ -47,7 +53,10 @@ export const items:ItemBook = {
   },
   shrapnelBomb: {
     name: 'Shrapnel Bomb',
-    traits: {}
+    traits: {},
+    actions: {
+      throwShrapnelBomb: 'Throw shrapnel bomb'
+    }
   },
   skinningKnife: {
     name: 'Skinning Knife',

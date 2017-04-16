@@ -4,6 +4,7 @@ import { makeHero, makeMonster, execUntil, reply, makeRoll } from '../testutils'
 import { BattleState, Attack, FlowInstruction } from '../../src/interfaces';
 import { find_hero_actions } from '../../src/find/find_hero_actions';
 import { apply_daemons_blood } from '../../src/apply/apply_daemons_blood';
+import { items } from '../../src/library';
 
 test('Daemons blood', t => {
   let battle: BattleState = {
@@ -20,7 +21,7 @@ test('Daemons blood', t => {
   let action: FlowInstruction = ['flow','daemonsBlood',{heroId:'hero'}];
 
   t.deepEqual(
-    find_hero_actions(battle, {heroId: 'hero'}).daemonsBlood,
+    find_hero_actions(battle, {heroId: 'hero'})[items.daemonsBlood.actions.throwDaemonsBlood],
     action,
     'daemons blood offers action'
   );

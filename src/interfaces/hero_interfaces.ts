@@ -69,6 +69,33 @@ export interface HeroSkills {
   sneakAttack?: true
 }
 
+export interface HeroSkillBook {
+  backStab: HeroSkillDef
+  bloodCurse: HeroSkillDef
+  bloodLust: HeroSkillDef
+  exterminator: HeroSkillDef
+  fieldCraft: HeroSkillDef
+  findWeakness: HeroSkillDef
+  foeKiller: HeroSkillDef
+  gourmet: HeroSkillDef
+  martialDiscipline: HeroSkillDef
+  performance: HeroSkillDef
+  rage: HeroSkillDef
+  sixthSense: HeroSkillDef
+  sneakAttack: HeroSkillDef
+}
+
+export interface HeroSkillDef {
+  name: string
+  actions?: HeroSkillActions
+  description: string
+}
+
+export interface HeroSkillActions {
+  findWeakness?: string
+  castBloodCurse?: string
+}
+
 export type HeroStateName = keyof HeroStates;
 
 export interface HeroStates {

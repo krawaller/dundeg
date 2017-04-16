@@ -4,7 +4,7 @@ import { makeHero, makeMonster, execUntil, reply, makeRoll } from '../testutils'
 import { BattleState, FlowInstruction } from '../../src/interfaces';
 import { calculate_monster_armour } from '../../src/calculate/calculate_monster_armour';
 import { find_hero_actions } from '../../src/find/find_hero_actions';
-import { monsters } from '../../src/library';
+import { monsters, items } from '../../src/library';
 
 test('shrapnel bomb item', t => {
   let battle: BattleState = {
@@ -20,7 +20,7 @@ test('shrapnel bomb item', t => {
   let action: FlowInstruction = ['flow','throwShrapnelBomb',{heroId: 'hero'}];
 
   t.deepEqual(
-    find_hero_actions(battle,{heroId:'hero'}).shrapnelBomb,
+    find_hero_actions(battle,{heroId:'hero'})[items.shrapnelBomb.actions.throwShrapnelBomb],
     action
   );
 
