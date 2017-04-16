@@ -1,7 +1,7 @@
 import * as test from "tape";
-import { makeHero, makeMonster } from '../testutils';
+import { makeHero, makeMonster, execUntil, reply, makeRoll } from '../testutils';
 
-import { BattleState } from '../../src/interfaces';
+import { BattleState, FlowInstruction } from '../../src/interfaces';
 import { calculate_monster_armour } from '../../src/calculate/calculate_monster_armour';
 import { find_hero_actions } from '../../src/find/find_hero_actions';
 import { monsters } from '../../src/library';
@@ -9,28 +9,34 @@ import { monsters } from '../../src/library';
 test('shrapnel bomb item', t => {
   let battle: BattleState = {
     heroes: { hero: makeHero('bloodsportBrawler',{},{},{},['shrapnelBomb']) },
-    monsters: { monster: makeMonster('slitherFish') }
+    monsters: {
+      monster: makeMonster('slimeCorpse'), // armour 1, HP 8
+      monster2: makeMonster('slitherFish') // armour 2, HP 3
+    },
+    log: [],
+    seed: 'shrapnelBOOOOOM' // will roll 6 1
   };
 
-  battle.heroes.hero.vars.stance = 'defence';
-  t.ok(
+  let action: FlowInstruction = ['flow','throwShrapnelBomb',{heroId: 'hero'}];
+
+  t.deepEqual(
     find_hero_actions(battle,{heroId:'hero'}).shrapnelBomb,
-    'shrapnel bomb is available as action'
+    action
   );
 
-  battle.heroes.hero.vars.attackDice = [1,1];
+  battle = execUntil(battle, action);
+  battle = reply(battle, makeRoll); // roll for dmg vs first monster, will be a 6 (piercing)
+  battle = reply(battle, makeRoll); // roll for dmg vs second monster, will be 1
   t.equal(
-    calculate_monster_armour(battle, {monsterId: 'monster', attack: {stat:'STR',type:'meelee',using: 'shrapnelBomb'}, heroId: 'hero'}).value,
-    monsters.slitherFish.stats.ARM, 'shrapnel bomb has no piercing by default'
+    battle.monsters.monster.vars.HP,
+    monsters.slimeCorpse.stats.HP - 4,
+    'Did D3+1 = 4 damage, and piercing since rolled 6 so no armour'
   );
-
-  battle.heroes.hero.vars.attackDice = [6,1];
   t.equal(
-    calculate_monster_armour(battle, {monsterId: 'monster', attack: {stat:'STR',type:'meelee',using: 'shrapnelBomb'}, heroId: 'hero'}).value,
-    0, 'shrapnel bomb has piercing when die was 6'
+    battle.monsters.monster2.vars.HP,
+    monsters.slitherFish.stats.HP,
+    'Did D3+1 = 2 damage, not piercing, so no damage dealt'
   );
 
   t.end();
 });
-
-// TODO - in progress

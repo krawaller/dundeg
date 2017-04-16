@@ -4,6 +4,8 @@ import {
   CalculationResult, ItemName, LogMessageLine, FlowInstruction
 } from '../src/interfaces';
 
+import { monsters } from '../src/library/monsters';
+
 export function logMessageContains(msg: LogMessageLine, str: string){
   return msg.find( part => !!((<string>part).match && (<string>part).match(str)) );
 }
@@ -17,9 +19,11 @@ export function lastLogHasStr(battle: BattleState, str: string){
 }
 
 export function makeMonster(monsterName: MonsterBase, vars?:MonsterVars, states?: MonsterStates): MonsterState {
+  let v = vars || {};
+  v.HP = v.HP || monsters[monsterName].stats.HP;
   return {
     blueprint: monsterName,
-    vars: vars || {},
+    vars: v,
     states: states || {},
     name: monsterName
   };

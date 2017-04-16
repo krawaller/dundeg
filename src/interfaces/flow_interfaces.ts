@@ -87,11 +87,14 @@ import { MonsterEntrySpec } from '../flow/flow_monster_entry';
 import { InitiateDimwitSpec } from '../flow/flow_dimwit';
 import { InitiateWeakness } from '../flow/flow_weakness';
 import { InitiateBloodCurseSpec } from '../flow/flow_bloodcurse';
+import { InitiateWoundMonsterSpec } from '../flow/flow_wound_monster';
+import { ThrowShrapnelBombSpec, DetonateShrapnelBombSpec } from '../flow/flow_shrapnel_bomb';
 
 export type FlowAll = ['flow','all', any[]];
 export type FlowAmbush = ['flow','ambush', InitiateAmbushSpec];
 export type FlowBloodCurse = ['flow','bloodCurse', InitiateBloodCurseSpec];
 export type FlowDaemonsBlood = ['flow','daemonsBlood', ThrowDaemonsBloodSpec];
+export type FlowDetonateShrapnelBomb = ['flow', 'detonateShrapnelBomb', DetonateShrapnelBombSpec];
 export type FlowDiceRoll = ['flow','diceRoll', MakeRollSpec];
 export type FlowDimwit = ['flow','dimwit', InitiateDimwitSpec];
 export type FlowEscapeChoice = ['flow', 'escapeChoice', HeroOfferEscapeChoiceSpec];
@@ -103,9 +106,11 @@ export type FlowMonsterTargetChoice = ['flow', 'monsterTargetChoice', MonsterTar
 export type FlowOfferReroll = ['flow', 'offerReroll', OfferRerollSpec];
 export type FlowPickTestPath = ['flow', 'pickTestPath', Test];
 export type FlowReturnChoice = ['flow', 'returnChoice', HeroOfferReturnChoiceSpec];
+export type FlowThrowShrapnelBomb = ['flow', 'throwShrapnelBomb', ThrowShrapnelBombSpec];
 export type FlowStanceChoice = ['flow', 'stanceChoice', HeroOfferStanceChoiceSpec];
 export type FlowTest = ['flow', 'test', Test];
 export type FlowWeakness = ['flow','weakness', InitiateWeakness];
+export type FlowWoundMonster = ['flow','woundMonster', InitiateWoundMonsterSpec];
 
 
 export type FlowFurther = // When add stuff here, must also add to exec/exec_flow
@@ -113,6 +118,7 @@ export type FlowFurther = // When add stuff here, must also add to exec/exec_flo
   FlowAmbush |
   FlowBloodCurse |
   FlowDaemonsBlood |
+  FlowDetonateShrapnelBomb |
   FlowDiceRoll |
   FlowDimwit |
   FlowEscapeChoice |
@@ -124,9 +130,11 @@ export type FlowFurther = // When add stuff here, must also add to exec/exec_flo
   FlowOfferReroll |
   FlowPickTestPath |
   FlowReturnChoice |
+  FlowThrowShrapnelBomb |
   FlowStanceChoice |
   FlowTest |
-  FlowWeakness
+  FlowWeakness |
+  FlowWoundMonster
   ;
 
 export type FlowTarget = FlowApply | FlowFurther

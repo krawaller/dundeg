@@ -23,6 +23,7 @@ import { apply_wounds_to_monster, WoundMonsterSpec } from '../apply/apply_wounds
 import { apply_question } from '../apply/apply_question';
 import { apply_register_test_outcome } from '../apply/apply_register_test_outcome';
 
+
 export function exec_apply(battle:BattleState, [,what,spec]:FlowApply): BattleState{
   switch(what){
     case 'ambushResult': return apply_ambush_result(battle, <AmbushResultSpec>spec);

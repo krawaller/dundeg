@@ -11,12 +11,12 @@ export interface AttackOptions {
   [idx: string]: Attack
 }
 
-export type AttackType = 'meelee' | 'ranged'
+export type AttackType = 'meelee' | 'ranged' | 'special'
 
 export interface Attack {
   type: AttackType
   using: ItemName,
-  stat: HeroStatName
+  stat?: HeroStatName
 }
 
 import { Question, FlowInstruction } from './flow_interfaces';
