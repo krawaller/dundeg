@@ -2,7 +2,6 @@ import * as test from "tape";
 import { makeHero, makeMonster, lastLogHasStr, execUntil } from '../testutils';
 
 import { BattleState, Attack, FlowInstruction } from '../../src/interfaces';
-import { apply_attack_result, AttackResultSpec } from '../../src/apply/apply_attack_result';
 import { monsters } from '../../src/library';
 
 test('monster evade skill', t => {

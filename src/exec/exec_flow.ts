@@ -22,6 +22,7 @@ import { flow_throw_shrapnel_bomb, ThrowShrapnelBombSpec, flow_detonate_shrapnel
 import { flow_flash_bomb, FlashBombSpec } from '../flow/flow_flash_bomb';
 import { flow_perform_hero_attack, PerformHeroAttackSpec } from '../flow/flow_perform_hero_attack';
 import { flow_perform_monster_attack, PerformMonsterAttackSpec } from '../flow/flow_perform_monster_attack';
+import { flow_battle_dice, BattleDiceSpec } from '../flow/flow_battle_dice';
 
 
 export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleState{
@@ -31,6 +32,7 @@ export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleSt
     case 'all': return {...battle, stack: (<FlowInstruction[]>spec).concat(battle.stack || [])};
     // All others just give back 1 new instruction
     case 'ambush': newInstr = flow_ambush(battle, <InitiateAmbushSpec>spec); break;
+    case 'battleDice': newInstr = flow_battle_dice(battle, <BattleDiceSpec>spec); break;
     case 'bloodCurse': newInstr = flow_bloodcurse(battle, <InitiateBloodCurseSpec>spec); break;
     case 'daemonsBlood': newInstr = flow_daemons_blood(battle, <ThrowDaemonsBloodSpec>spec); break;
     case 'detonateShrapnelBomb': newInstr = flow_detonate_shrapnel_bomb(battle, <DetonateShrapnelBombSpec>spec); break;

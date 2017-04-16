@@ -104,9 +104,11 @@ import { ThrowShrapnelBombSpec, DetonateShrapnelBombSpec } from '../flow/flow_sh
 import { FlashBombSpec } from '../flow/flow_flash_bomb';
 import { PerformHeroAttackSpec } from '../flow/flow_perform_hero_attack';
 import { PerformMonsterAttackSpec } from '../flow/flow_perform_monster_attack';
+import { BattleDiceSpec } from '../flow/flow_battle_dice';
 
 export type FlowAll = ['flow','all', any[]];
 export type FlowAmbush = ['flow','ambush', InitiateAmbushSpec];
+export type FlowBattleDice = ['flow','battleDice',BattleDiceSpec];
 export type FlowBloodCurse = ['flow','bloodCurse', InitiateBloodCurseSpec];
 export type FlowDaemonsBlood = ['flow','daemonsBlood', ThrowDaemonsBloodSpec];
 export type FlowDetonateShrapnelBomb = ['flow', 'detonateShrapnelBomb', DetonateShrapnelBombSpec];
@@ -134,6 +136,7 @@ export type FlowWoundMonster = ['flow','woundMonster', InitiateWoundMonsterSpec]
 export type FlowFurther = // When add stuff here, must also add to exec/exec_flow
   FlowAll |
   FlowAmbush |
+  FlowBattleDice |
   FlowBloodCurse |
   FlowDaemonsBlood |
   FlowDetonateShrapnelBomb |
