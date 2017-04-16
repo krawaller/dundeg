@@ -11,14 +11,21 @@ export interface AttackOptions {
   [idx: string]: Attack
 }
 
+// DMG versus monstesr
 export type AttackType = 'meelee' | 'ranged' | 'special'
-
 export interface Attack {
   type: AttackType
   using?: ItemName,
   skill?: HeroSkillName, 
   stat?: HeroStatName
 }
+
+// DMG versus heroes
+export type EvilAttackType = 'regular'
+export interface EvilAttack {
+  type: EvilAttackType
+}
+
 
 import { Question, FlowInstruction } from './flow_interfaces';
 

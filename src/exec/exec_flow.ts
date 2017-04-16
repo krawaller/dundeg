@@ -21,6 +21,7 @@ import { flow_wound_monster, InitiateWoundMonsterSpec } from '../flow/flow_wound
 import { flow_throw_shrapnel_bomb, ThrowShrapnelBombSpec, flow_detonate_shrapnel_bomb, DetonateShrapnelBombSpec } from '../flow/flow_shrapnel_bomb';
 import { flow_flash_bomb, FlashBombSpec } from '../flow/flow_flash_bomb';
 import { flow_perform_hero_attack, PerformHeroAttackSpec } from '../flow/flow_perform_hero_attack';
+import { flow_perform_monster_attack, PerformMonsterAttackSpec } from '../flow/flow_perform_monster_attack';
 
 
 export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleState{
@@ -44,6 +45,7 @@ export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleSt
     case 'monsterTargetChoice': newInstr = flow_monster_target_choice(battle,<MonsterTargetChoiceSpec>spec); break;
     case 'offerReroll': newInstr = flow_offer_reroll(battle, <OfferRerollSpec>spec); break;
     case 'performHeroAttack': newInstr = flow_perform_hero_attack(battle, <PerformHeroAttackSpec>spec); break;
+    case 'performMonsterAttack': newInstr = flow_perform_monster_attack(battle, <PerformMonsterAttackSpec>spec); break;
     case 'pickTestPath': newInstr = flow_pick_test_path(battle, <Test>spec); break;
     case 'returnChoice': newInstr = flow_hero_offer_return_choice(battle, <HeroOfferReturnChoiceSpec>spec); break;
     case 'throwShrapnelBomb': newInstr = flow_throw_shrapnel_bomb(battle, <ThrowShrapnelBombSpec>spec); break;

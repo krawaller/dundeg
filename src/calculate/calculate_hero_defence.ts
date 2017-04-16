@@ -1,6 +1,9 @@
-import { BattleState, CalculationResult } from '../interfaces';
+import { BattleState, CalculationResult, HeroId, MonsterId } from '../interfaces';
 
-interface CalculateHeroDefenceInstr { heroId: string }
+interface CalculateHeroDefenceInstr {
+  heroId: HeroId,
+  monsterId: MonsterId
+}
 
 export function calculate_hero_defence (battle: BattleState, instr: CalculateHeroDefenceInstr): CalculationResult {
   let hero = battle.heroes[instr.heroId];

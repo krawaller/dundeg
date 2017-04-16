@@ -100,6 +100,7 @@ import { InitiateWoundMonsterSpec } from '../flow/flow_wound_monster';
 import { ThrowShrapnelBombSpec, DetonateShrapnelBombSpec } from '../flow/flow_shrapnel_bomb';
 import { FlashBombSpec } from '../flow/flow_flash_bomb';
 import { PerformHeroAttackSpec } from '../flow/flow_perform_hero_attack';
+import { PerformMonsterAttackSpec } from '../flow/flow_perform_monster_attack';
 
 export type FlowAll = ['flow','all', any[]];
 export type FlowAmbush = ['flow','ambush', InitiateAmbushSpec];
@@ -117,6 +118,7 @@ export type FlowMonsterEntry = ['flow', 'monsterEntry', MonsterEntrySpec];
 export type FlowMonsterTargetChoice = ['flow', 'monsterTargetChoice', MonsterTargetChoiceSpec];
 export type FlowOfferReroll = ['flow', 'offerReroll', OfferRerollSpec];
 export type FlowPerformHeroAttack = ['flow', 'performHeroAttack', PerformHeroAttackSpec];
+export type FlowPerformMonsterAttack = ['flow', 'performMonsterAttack', PerformMonsterAttackSpec];
 export type FlowPickTestPath = ['flow', 'pickTestPath', Test];
 export type FlowReturnChoice = ['flow', 'returnChoice', HeroOfferReturnChoiceSpec];
 export type FlowThrowShrapnelBomb = ['flow', 'throwShrapnelBomb', ThrowShrapnelBombSpec];
@@ -143,6 +145,7 @@ export type FlowFurther = // When add stuff here, must also add to exec/exec_flo
   FlowMonsterTargetChoice |
   FlowOfferReroll |
   FlowPerformHeroAttack |
+  FlowPerformMonsterAttack |
   FlowPickTestPath |
   FlowReturnChoice |
   FlowThrowShrapnelBomb |
