@@ -73,9 +73,10 @@ export type HeroStateName = keyof HeroStates;
 
 export interface HeroStates {
   blessed?: true
+  blinded?: true
   exalted?: true
-  poisoned?: true
   infected?: true
+  poisoned?: true
   stunned?: true
   focused?: true
 }

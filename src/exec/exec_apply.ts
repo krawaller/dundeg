@@ -24,6 +24,7 @@ import { apply_question } from '../apply/apply_question';
 import { apply_register_test_outcome } from '../apply/apply_register_test_outcome';
 import { apply_state_to_hero, StateToHeroSpec } from '../apply/apply_state_to_hero';
 import { apply_remove_item, RemoveItemSpec } from '../apply/apply_remove_item';
+import { apply_state_to_monster, StateToMonsterSpec } from '../apply/apply_state_to_monster';
 
 
 export function exec_apply(battle:BattleState, [,what,spec]:FlowApply): BattleState{
@@ -47,7 +48,8 @@ export function exec_apply(battle:BattleState, [,what,spec]:FlowApply): BattleSt
     case 'removeItem': return apply_remove_item(battle, <RemoveItemSpec>spec);
     case 'reroll': return apply_reroll(battle, <RerollSpec>spec);
     case 'returnToBattle': return apply_return_to_battle(battle, <ReturnToBattleSpec>spec);
-    case 'stateToHero': return apply_state_to_hero(battle, <StateToHeroSpec>spec); 
+    case 'stateToHero': return apply_state_to_hero(battle, <StateToHeroSpec>spec);
+    case 'stateToMonster': return apply_state_to_monster(battle, <StateToMonsterSpec>spec);
     case 'stanceChoice': return apply_stance_choice_to_hero(battle, <ApplyStanceChoiceToHeroSpec>spec);
     case 'weaknessInvocationResult': return apply_weakness_invocation_result(battle, <WeaknessInvocationResultSpec>spec);
     case 'woundHero': return apply_wounds_to_hero(battle, <WoundHeroSpec>spec);

@@ -13,6 +13,10 @@ export const items:ItemBook = {
     name: 'Daemon\'s blood',
     traits: {}
   },
+  flashBomb: {
+    name: 'Flash bomb',
+    traits: {}
+  },
   fortuneCards: {
     name: 'Fortune Cards',
     traits: {}

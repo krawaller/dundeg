@@ -24,6 +24,7 @@ import { WoundHeroSpec } from '../apply/apply_wounds_to_hero';
 import { WoundMonsterSpec } from '../apply/apply_wounds_to_monster';
 import { StateToHeroSpec } from '../apply/apply_state_to_hero';
 import { RemoveItemSpec } from '../apply/apply_remove_item';
+import { StateToMonsterSpec } from '../apply/apply_state_to_monster';
 
 export type ApplyAmbushResult = ['apply', 'ambushResult', AmbushResultSpec];
 export type ApplyBloodCurseResult = ['apply', 'bloodCurseResult', BloodCurseSpec];
@@ -46,6 +47,7 @@ export type ApplyReroll = ['apply', 'reroll', RerollSpec ];
 export type ApplyReturnToBattle = ['apply', 'returnToBattle', ReturnToBattleSpec];
 export type ApplyStanceChoice = ['apply', 'stanceChoice', ApplyStanceChoiceToHeroSpec];
 export type ApplyStateToHero = ['apply', 'stateToHero', StateToHeroSpec];
+export type ApplyStateToMonster = ['apply', 'stateToMonster', StateToMonsterSpec];
 export type ApplyWeaknessInvocationResult = ['apply', 'weaknessInvocationResult', WeaknessInvocationResultSpec];
 export type ApplyWoundHero = ['apply', 'woundHero', WoundHeroSpec];
 export type ApplyWoundMonster = ['apply', 'woundMonster', WoundMonsterSpec];
@@ -72,6 +74,7 @@ export type FlowApply = // When add stuff here, must also add to exec/exec_apply
   ApplyReturnToBattle |
   ApplyStanceChoice |
   ApplyStateToHero |
+  ApplyStateToMonster |
   ApplyWeaknessInvocationResult |
   ApplyWoundHero |
   ApplyWoundMonster
@@ -95,6 +98,7 @@ import { InitiateWeakness } from '../flow/flow_weakness';
 import { InitiateBloodCurseSpec } from '../flow/flow_bloodcurse';
 import { InitiateWoundMonsterSpec } from '../flow/flow_wound_monster';
 import { ThrowShrapnelBombSpec, DetonateShrapnelBombSpec } from '../flow/flow_shrapnel_bomb';
+import { FlashBombSpec } from '../flow/flow_flash_bomb';
 
 export type FlowAll = ['flow','all', any[]];
 export type FlowAmbush = ['flow','ambush', InitiateAmbushSpec];
@@ -106,6 +110,7 @@ export type FlowDimwit = ['flow','dimwit', InitiateDimwitSpec];
 export type FlowEscapeChoice = ['flow', 'escapeChoice', HeroOfferEscapeChoiceSpec];
 export type FlowEachHero = ['flow', 'eachHero', EachHeroSpec];
 export type FlowEachMonster = ['flow', 'eachMonster', EachMonsterSpec];
+export type FlowFlashBomb = ['flow', 'flashBomb', FlashBombSpec];
 export type FlowHeroTargetChoice = ['flow', 'heroTargetChoice', HeroTargetChoiceSpec];
 export type FlowMonsterEntry = ['flow', 'monsterEntry', MonsterEntrySpec];
 export type FlowMonsterTargetChoice = ['flow', 'monsterTargetChoice', MonsterTargetChoiceSpec];
@@ -130,6 +135,7 @@ export type FlowFurther = // When add stuff here, must also add to exec/exec_flo
   FlowEscapeChoice |
   FlowEachHero |
   FlowEachMonster |
+  FlowFlashBomb |
   FlowHeroTargetChoice |
   FlowMonsterEntry |
   FlowMonsterTargetChoice |

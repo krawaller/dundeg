@@ -34,6 +34,8 @@ export interface MonsterState {
   states?: MonsterStates
 }
 
+export type MonsterStateName = keyof MonsterStates;
+
 export interface MonsterStates {
   corroded?: true
   weakness?: HeroId

@@ -17,5 +17,8 @@ export function find_hero_actions (battle: BattleState, {heroId}: InstrJustHeroI
   if (hero.items.shrapnelBomb){
     ret.shrapnelBomb = <FlowInstruction>['flow','throwShrapnelBomb',{heroId}];
   }
+  if (hero.items.flashBomb){
+    ret.flashBomb = <FlowInstruction>['flow','flashBomb',{heroId}];
+  }
   return ret;
 }

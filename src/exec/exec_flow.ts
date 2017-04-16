@@ -19,6 +19,7 @@ import { flow_weakness, InitiateWeakness } from '../flow/flow_weakness';
 import { flow_bloodcurse, InitiateBloodCurseSpec } from '../flow/flow_bloodcurse';
 import { flow_wound_monster, InitiateWoundMonsterSpec } from '../flow/flow_wound_monster';
 import { flow_throw_shrapnel_bomb, ThrowShrapnelBombSpec, flow_detonate_shrapnel_bomb, DetonateShrapnelBombSpec } from '../flow/flow_shrapnel_bomb';
+import { flow_flash_bomb, FlashBombSpec } from '../flow/flow_flash_bomb';
 
 export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleState{
   let newInstr: FlowInstruction;
@@ -34,6 +35,7 @@ export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleSt
     case 'escapeChoice': newInstr = flow_hero_offer_escape_choice(battle, <HeroOfferEscapeChoiceSpec>spec); break;
     case 'eachHero': newInstr = flow_each_hero(battle, <EachHeroSpec>spec); break;
     case 'eachMonster': newInstr = flow_each_monster(battle, <EachMonsterSpec>spec); break;
+    case 'flashBomb': newInstr = flow_flash_bomb(battle, <FlashBombSpec>spec); break;
     case 'heroTargetChoice': newInstr = flow_hero_target_choice(battle, <HeroTargetChoiceSpec>spec); break;
     case 'monsterEntry': newInstr = flow_monster_entry(battle, <MonsterEntrySpec>spec); break;
     case 'monsterTargetChoice': newInstr = flow_monster_target_choice(battle,<MonsterTargetChoiceSpec>spec); break;

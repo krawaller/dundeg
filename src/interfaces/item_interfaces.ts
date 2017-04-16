@@ -5,6 +5,7 @@ export interface Inventory {
   barbedWhip?: number
   bastardSword?: number
   daemonsBlood?: number
+  flashBomb?: number
   fortuneCards?: number
   huntingBow?: number
   luncheonTruncheon?: number
@@ -31,6 +32,7 @@ export interface ItemBook {
   barbedWhip?: ItemDef
   bastardSword?: ItemDef
   daemonsBlood?: ItemDef
+  flashBomb?: ItemDef
   fortuneCards?: ItemDef
   huntingBow?: ItemDef
   luncheonTruncheon?: ItemDef
