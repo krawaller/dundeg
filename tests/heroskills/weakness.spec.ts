@@ -1,17 +1,16 @@
 import * as test from "tape";
 import { makeMonster, makeHero, lastLogHasStr, makeRoll, execUntil, reply } from '../testutils';
-import { BattleState, FlowInstruction } from '../../src/interfaces';
-import { calculate_damage_vs_monster } from '../../src/calculate/calculate_damage_vs_monster';
+import { BattleState, FlowInstruction, FlowPerformHeroAttack } from '../../src/interfaces';
 import { apply_weakness_invocation_result } from '../../src/apply/apply_weakness_invocation_result';
 import { find_hero_actions } from '../../src/find/find_hero_actions';
-import { heroSkills } from '../../src/library';
+import { heroSkills, monsters } from '../../src/library';
 
 test('the hero weakness skill', t => {
   let result: BattleState, battle: BattleState = { // brawler has PER = 6
     heroes: { hero: makeHero('bloodsportBrawler',{target:'monster',stance:'assault'},{},{findWeakness:true}) },
     monsters: { monster: makeMonster('slitherFish') },
     log: [],
-    seed: 'findweakness' // will roll 4 2 5 4
+    seed: 'weaknessomgomgomg' // will roll 4 3 2 2
   };
 
   t.ok(
@@ -29,36 +28,29 @@ test('the hero weakness skill', t => {
   );
 
   result = execUntil(battle, action);
-  result = reply(result,makeRoll); // was prompted to roll for test, will succeed
-  t.equal(result.monsters.monster.states.weakness, 'hero', 'Weakness state was correctly set');
-  t.ok( lastLogHasStr(result, 'success'), 'log acknowledges success' );
-
-  t.equal(
-    calculate_damage_vs_monster(result, {
-      monsterId: 'monster',
-      heroATK: {value: 6, history:[]},
-      monsterARM: {value: 4, history:[]},
-      heroId: 'hero'
-    }).value,
-    3,
-    'weakness gives 1 additional damage'
-  );
-
-
-  result = execUntil(battle, action);
   result = reply(result,makeRoll); // was prompted to roll for test, will fail
   t.ok(!result.monsters.monster.states.weakness, 'Weakness wasnt applied since invocation failed');
   t.ok( lastLogHasStr(result, 'fail'), 'log acknowledges fail' );
 
+  result = execUntil(battle, action);
+  result = reply(result,makeRoll); // was prompted to roll for test, will succeed
+  t.equal(result.monsters.monster.states.weakness, 'hero', 'Weakness state was correctly set');
+  t.ok( lastLogHasStr(result, 'success'), 'log acknowledges success' );
+
+  result.heroes.hero.vars.attackDice = [1,1]; // slitherfish has 1 arm, won't do anything
+  result = execUntil(result, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId:'hero',attack:{}}]);
   t.equal(
-    calculate_damage_vs_monster(result, {
-      monsterId: 'monster',
-      heroATK: {value: 4, history:[]},
-      monsterARM: {value: 4, history:[]},
-      heroId: 'hero'
-    }).value,
-    0,
+    result.monsters.monster.vars.HP,
+    monsters.slitherFish.stats.HP,
     'weakness has no effect if didnt do damage'
+  );
+
+  result.heroes.hero.vars.attackDice = [1,3];
+  result = execUntil(result, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId:'hero',attack:{}}]);
+  t.equal(
+    result.monsters.monster.vars.HP,
+    monsters.slitherFish.stats.HP - (3 + 1 - monsters.slitherFish.stats.ARM),
+    'weakness gives 1 additional damage'
   );
 
   t.end();
