@@ -3,12 +3,12 @@ import { monsters } from '../library';
 
 import { find_monsters } from '../find/find_monsters';
 
-interface CalculateMonsterAttackInstr { monsterId: string, heroId?: string }
+interface CalculateMonsterAttackInstr { monsterId: string }
 
 export function calculate_monster_attack (battle: BattleState, instr: CalculateMonsterAttackInstr) :CalculationResult {
   let monster = battle.monsters[instr.monsterId];
   let blueprint = monsters[monster.blueprint];
-  let hero = instr.heroId && battle.heroes[instr.heroId];
+  let hero = monster.vars.target && battle.heroes[monster.vars.target];
 
   let val = {
     history: [[blueprint.name, blueprint.stats.ATK]],
