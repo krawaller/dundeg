@@ -1,12 +1,17 @@
-import { BattleState, PartyStatCheck, HeroStatName, StatCheckReason, MonsterId } from '../interfaces';
+import { BattleState, PartyStatCheck, HeroStatName, StatCheckReason, MonsterId, HeroGroup } from '../interfaces';
 
 import { find_heroes } from './find_heroes';
 import { calculate_hero_stat } from '../calculate/calculate_hero_stat';
 
-interface FindPartyStatInstr { stat: HeroStatName, reason: StatCheckReason, monsterId?: MonsterId }
+interface FindPartyStatInstr {
+  stat: HeroStatName
+  reason: StatCheckReason
+  group?: HeroGroup
+  monsterId?: MonsterId // because when monster is looking for target, we might want to know who is asking
+}
 
-export function find_party_stat (battle: BattleState, {stat,reason}: FindPartyStatInstr): PartyStatCheck {
-  let all = find_heroes(battle).reduce((mem,heroId)=> {
+export function find_party_stat (battle: BattleState, {stat,reason,group}: FindPartyStatInstr): PartyStatCheck {
+  let all = find_heroes(battle,{reason,group}).reduce((mem,heroId)=> {
     let calc = calculate_hero_stat(battle, {heroId, reason, stat});
     mem.indiv[heroId] = calc;
     if (!mem.byVal[calc.value]){

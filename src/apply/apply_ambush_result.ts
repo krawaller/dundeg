@@ -18,3 +18,5 @@ export function apply_ambush_result(battle: BattleState, {heroId,monsterId}:Ambu
   }
   return ret;
 }
+
+// TODO - use apply state and apply log instead?

@@ -32,7 +32,7 @@ export function flow_hero_offer_escape_choice(battle: BattleState, {heroId}:Hero
   }
 
   function makeStatOpt(stat):FlowTarget{
-    return ['flow','test',{
+    return <FlowInstruction>['flow','test',{
       heroId: heroId,
       reason: 'escape',
       stat: stat,

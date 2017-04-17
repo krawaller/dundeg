@@ -9,5 +9,6 @@ export interface ActionSelectionSpec {
 export function apply_action_selection(battle: BattleState, {heroId, action}:ActionSelectionSpec): BattleState {
   let ret: BattleState = deepCopy(battle);
   ret.heroes[heroId].vars.action = action;
+  ret.heroes[heroId].vars.hasActed = true; // TODO - maybe not here?
   return ret;
 }

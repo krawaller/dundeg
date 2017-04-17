@@ -23,6 +23,9 @@ import { flow_flash_bomb, FlashBombSpec } from '../flow/flow_flash_bomb';
 import { flow_perform_hero_attack, PerformHeroAttackSpec } from '../flow/flow_perform_hero_attack';
 import { flow_perform_monster_attack, PerformMonsterAttackSpec } from '../flow/flow_perform_monster_attack';
 import { flow_battle_dice, BattleDiceSpec } from '../flow/flow_battle_dice';
+import { flow_player_round, PlayerRoundSpec } from '../flow/flow_player_round';
+import { flow_round_end } from '../flow/flow_round_end';
+import { flow_next_player } from '../flow/flow_next_player';
 
 
 export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleState{
@@ -45,11 +48,14 @@ export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleSt
     case 'heroTargetChoice': newInstr = flow_hero_target_choice(battle, <HeroTargetChoiceSpec>spec); break;
     case 'monsterEntry': newInstr = flow_monster_entry(battle, <MonsterEntrySpec>spec); break;
     case 'monsterTargetChoice': newInstr = flow_monster_target_choice(battle,<MonsterTargetChoiceSpec>spec); break;
+    case 'nextPlayer': newInstr = flow_next_player(battle, <any>spec); break;
     case 'offerReroll': newInstr = flow_offer_reroll(battle, <OfferRerollSpec>spec); break;
     case 'performHeroAttack': newInstr = flow_perform_hero_attack(battle, <PerformHeroAttackSpec>spec); break;
     case 'performMonsterAttack': newInstr = flow_perform_monster_attack(battle, <PerformMonsterAttackSpec>spec); break;
+    case 'playerRound': newInstr = flow_player_round(battle, <PlayerRoundSpec>spec); break;
     case 'pickTestPath': newInstr = flow_pick_test_path(battle, <Test>spec); break;
     case 'returnChoice': newInstr = flow_hero_offer_return_choice(battle, <HeroOfferReturnChoiceSpec>spec); break;
+    case 'roundEnd': newInstr = flow_round_end(battle, <any>spec); break;
     case 'throwShrapnelBomb': newInstr = flow_throw_shrapnel_bomb(battle, <ThrowShrapnelBombSpec>spec); break;
     case 'stanceChoice': newInstr = flow_hero_offer_stance_choice(battle, <HeroOfferStanceChoiceSpec>spec); break;
     case 'test': newInstr = flow_test(battle, <Test>spec); break;

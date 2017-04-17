@@ -31,5 +31,5 @@ export function flow_detonate_shrapnel_bomb(battle: BattleState, {heroId,monster
   }
   let attack:Attack = {type: 'special', using: 'shrapnelBomb'};
   let wounds = calculate_wounds_vs_monster(battle, {heroId, monsterId, damage, attack });
-  return ['flow','woundMonster', { monsterId, heroId, wounds, attack: {type:'special', using: 'shrapnelBomb'} }];
+  return <FlowInstruction>['flow','woundMonster', { monsterId, heroId, wounds, attack: {type:'special', using: 'shrapnelBomb'} }];
 }

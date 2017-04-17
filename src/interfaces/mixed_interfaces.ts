@@ -73,7 +73,7 @@ export interface PartyStatCheckOrderedPart {
   heroes: HeroId[]
 }
 
-export type StatCheckReason = '_testReason' | 'ambush' | 'monsterTargetAcquisition' | 'bloodCurse' | 'weakness' | 'escape' | 'landAttack' ;
+export type StatCheckReason = '_testReason' | 'ambush' | 'monsterTargetAcquisition' | 'bloodCurse' | 'weakness' | 'escape' | 'landAttack' | 'playerOrder' ;
 
 export type RegionName = 'red' | 'yellow' | 'blue' | 'green';
 
@@ -87,3 +87,4 @@ export interface DiceSpec {
 }
 
 
+export type HeroGroup = 'standing' | 'notActed'

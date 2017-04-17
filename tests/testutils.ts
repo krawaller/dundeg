@@ -53,15 +53,30 @@ import { exec_step } from '../src/exec/exec_step';
 import { exec_until } from '../src/exec/exec_until';
 import { exec_reply } from '../src/exec/exec_reply';
 
-export function execUntil(battle:BattleState,instr:FlowInstruction){
+export function execUntil(battle:BattleState,instr:FlowInstruction): BattleState{
   return exec_until({
     ...battle,
     stack: [instr].concat(battle.stack || [])
   });
 }
 
-export function reply(battle,opt:string){
+export function reply(battle,opt:string): BattleState{
   return exec_until( exec_reply(battle, {option:opt}) );
+}
+
+export function justReply(battle,opt:string): BattleState{
+  return exec_reply(battle, {option:opt});
+}
+
+export function step(battle,instr:FlowInstruction): BattleState{
+  return exec_step({
+    ...battle,
+    stack: [instr].concat(battle.stack || [])
+  });
+}
+
+export function next(battle): BattleState{
+  return exec_step(battle);
 }
 
 export const acceptRoll = 'accept';

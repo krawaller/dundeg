@@ -1,5 +1,20 @@
 
 battle
+    createfromdef
+    eachmonster->monsterentry (obs, rally!) // maybe do it like nextplayer is planned as? :D
+    newround->
+        *->eachplayer->returnchoice
+        *->eachmonster->monstertargetchoice
+        *->nextplayer
+            ?->playerround
+            ?->roundend
+                ?->newround
+                ?->battleend
+    
+
+
+
+battle
     init (entry skills, must happen now)
     roundloop
         rejoin

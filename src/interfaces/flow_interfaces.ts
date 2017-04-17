@@ -105,6 +105,7 @@ import { FlashBombSpec } from '../flow/flow_flash_bomb';
 import { PerformHeroAttackSpec } from '../flow/flow_perform_hero_attack';
 import { PerformMonsterAttackSpec } from '../flow/flow_perform_monster_attack';
 import { BattleDiceSpec } from '../flow/flow_battle_dice';
+import { PlayerRoundSpec } from '../flow/flow_player_round';
 
 export type FlowAll = ['flow','all', any[]];
 export type FlowAmbush = ['flow','ambush', InitiateAmbushSpec];
@@ -121,11 +122,14 @@ export type FlowFlashBomb = ['flow', 'flashBomb', FlashBombSpec];
 export type FlowHeroTargetChoice = ['flow', 'heroTargetChoice', HeroTargetChoiceSpec];
 export type FlowMonsterEntry = ['flow', 'monsterEntry', MonsterEntrySpec];
 export type FlowMonsterTargetChoice = ['flow', 'monsterTargetChoice', MonsterTargetChoiceSpec];
+export type FlowNextPlayer = ['flow', 'nextPlayer', any];
 export type FlowOfferReroll = ['flow', 'offerReroll', OfferRerollSpec];
 export type FlowPerformHeroAttack = ['flow', 'performHeroAttack', PerformHeroAttackSpec];
 export type FlowPerformMonsterAttack = ['flow', 'performMonsterAttack', PerformMonsterAttackSpec];
+export type FlowPlayerRound = ['flow', 'playerRound', PlayerRoundSpec];
 export type FlowPickTestPath = ['flow', 'pickTestPath', Test];
 export type FlowReturnChoice = ['flow', 'returnChoice', HeroOfferReturnChoiceSpec];
+export type FlowRoundEnd = ['flow', 'roundEnd', any];
 export type FlowThrowShrapnelBomb = ['flow', 'throwShrapnelBomb', ThrowShrapnelBombSpec];
 export type FlowStanceChoice = ['flow', 'stanceChoice', HeroOfferStanceChoiceSpec];
 export type FlowTest = ['flow', 'test', Test];
@@ -149,11 +153,14 @@ export type FlowFurther = // When add stuff here, must also add to exec/exec_flo
   FlowHeroTargetChoice |
   FlowMonsterEntry |
   FlowMonsterTargetChoice |
+  FlowNextPlayer |
   FlowOfferReroll |
   FlowPerformHeroAttack |
   FlowPerformMonsterAttack |
+  FlowPlayerRound |
   FlowPickTestPath |
   FlowReturnChoice |
+  FlowRoundEnd |
   FlowThrowShrapnelBomb |
   FlowStanceChoice |
   FlowTest |
