@@ -106,9 +106,11 @@ import { PerformHeroAttackSpec } from '../flow/flow_perform_hero_attack';
 import { PerformMonsterAttackSpec } from '../flow/flow_perform_monster_attack';
 import { BattleDiceSpec } from '../flow/flow_battle_dice';
 import { PlayerRoundSpec } from '../flow/flow_player_round';
+import { BashPlayerSpec } from '../flow/flow_bash_player';
 
 export type FlowAll = ['flow','all', any[]];
 export type FlowAmbush = ['flow','ambush', InitiateAmbushSpec];
+export type FlowBashPlayer = ['flow','bashPlayer',BashPlayerSpec];
 export type FlowBattleDice = ['flow','battleDice',BattleDiceSpec];
 export type FlowBloodCurse = ['flow','bloodCurse', InitiateBloodCurseSpec];
 export type FlowDaemonsBlood = ['flow','daemonsBlood', ThrowDaemonsBloodSpec];
@@ -140,6 +142,7 @@ export type FlowWoundMonster = ['flow','woundMonster', InitiateWoundMonsterSpec]
 export type FlowFurther = // When add stuff here, must also add to exec/exec_flow
   FlowAll |
   FlowAmbush |
+  FlowBashPlayer |
   FlowBattleDice |
   FlowBloodCurse |
   FlowDaemonsBlood |

@@ -26,6 +26,7 @@ import { flow_battle_dice, BattleDiceSpec } from '../flow/flow_battle_dice';
 import { flow_player_round, PlayerRoundSpec } from '../flow/flow_player_round';
 import { flow_round_end } from '../flow/flow_round_end';
 import { flow_next_player } from '../flow/flow_next_player';
+import { flow_bash_player, BashPlayerSpec } from '../flow/flow_bash_player';
 
 
 export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleState{
@@ -35,6 +36,7 @@ export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleSt
     case 'all': return {...battle, stack: (<FlowInstruction[]>spec).concat(battle.stack || [])};
     // All others just give back 1 new instruction
     case 'ambush': newInstr = flow_ambush(battle, <InitiateAmbushSpec>spec); break;
+    case 'bashPlayer': newInstr = flow_bash_player(battle, <BashPlayerSpec>spec); break;
     case 'battleDice': newInstr = flow_battle_dice(battle, <BattleDiceSpec>spec); break;
     case 'bloodCurse': newInstr = flow_bloodcurse(battle, <InitiateBloodCurseSpec>spec); break;
     case 'daemonsBlood': newInstr = flow_daemons_blood(battle, <ThrowDaemonsBloodSpec>spec); break;

@@ -7,7 +7,7 @@ import { calculate_wounds_vs_hero } from '../calculate/calculate_wounds_vs_hero'
 
 export interface PerformMonsterAttackSpec {
   monsterId: MonsterId,
-  attack: EvilAttack
+  attack?: EvilAttack
 }
 
 export function flow_perform_monster_attack(battle: BattleState, {monsterId, attack}:PerformMonsterAttackSpec): FlowInstruction {

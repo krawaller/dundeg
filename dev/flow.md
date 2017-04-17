@@ -7,18 +7,13 @@ battle
         *->eachmonster->monstertargetchoice
         *->nextplayer
             ?->playerround
+                -> choose stance
+                -> choose action
+                -> roll battle dice (might mean escaping)
+                -> bash player (unless escaped!)
+                -> perform action (unless escaped!)
             ?->roundend
+                *->eachplayer->endroundplayer
+                *->eachmonster->endroundmonster
                 ?->newround
                 ?->battleend
-    
-
-
-
-battle
-    init (entry skills, must happen now)
-    roundloop
-        rejoin
-        assign targetless enemies (in whichever order?), players decide draws
-        playerloop (perception order)
-            choose stance
-            choose action (might req choosing target)
