@@ -27,7 +27,6 @@ import { RemoveItemSpec } from '../apply/apply_remove_item';
 import { StateToMonsterSpec } from '../apply/apply_state_to_monster';
 import { ActionSelectionSpec } from '../apply/apply_action_selection';
 
-export type ApplyActionSelection = ['apply', 'actionSelection', ActionSelectionSpec];
 export type ApplyAmbushResult = ['apply', 'ambushResult', AmbushResultSpec];
 export type ApplyBloodCurseResult = ['apply', 'bloodCurseResult', BloodCurseSpec];
 export type ApplyDaemonsBlood = ['apply', 'daemonsBlood', DaemonsBloodSpec];
@@ -43,6 +42,7 @@ export type ApplyLogMessage = ['apply', 'log', LogMessage];
 export type ApplyLuncheonTruncheonThrow = ['apply', 'luncheonTruncheonThrow', LuncheonTruncheonThrowSpec];
 export type ApplyMonsterTargetChoice = ['apply', 'monsterTargetChoice', TargetSelectionForMonsterSpec];
 export type ApplyQuestion = ['apply','question',Question];
+export type ApplyRegisterActionSelection = ['apply', 'registerActionSelection', ActionSelectionSpec];
 export type ApplyRegisterTestOutcome = ['apply', 'registerTestOutcome', Test ];
 export type ApplyRemoveItem = ['apply', 'removeItem', RemoveItemSpec];
 export type ApplyReroll = ['apply', 'reroll', RerollSpec ];
@@ -55,7 +55,6 @@ export type ApplyWoundHero = ['apply', 'woundHero', WoundHeroSpec];
 export type ApplyWoundMonster = ['apply', 'woundMonster', WoundMonsterSpec];
 
 export type FlowApply = // When add stuff here, must also add to exec/exec_apply
-  ApplyActionSelection |
   ApplyAmbushResult |
   ApplyBloodCurseResult |
   ApplyDaemonsBlood |
@@ -72,6 +71,7 @@ export type FlowApply = // When add stuff here, must also add to exec/exec_apply
   ApplyMonsterTargetChoice |
   ApplyQuestion |
   ApplyReroll |
+  ApplyRegisterActionSelection |
   ApplyRegisterTestOutcome |
   ApplyRemoveItem |
   ApplyReturnToBattle |
@@ -108,6 +108,7 @@ import { BattleDiceSpec } from '../flow/flow_battle_dice';
 import { PlayerRoundSpec } from '../flow/flow_player_round';
 import { BashPlayerSpec } from '../flow/flow_bash_player';
 import { ExecuteActionSpec } from '../flow/flow_execute_action';
+import { SelectActionSpec } from '../flow/flow_select_action';
 
 export type FlowAll = ['flow','all', any[]];
 export type FlowAmbush = ['flow','ambush', InitiateAmbushSpec];
@@ -137,6 +138,7 @@ export type FlowPickTestPath = ['flow', 'pickTestPath', Test];
 export type FlowReturnChoice = ['flow', 'returnChoice', HeroOfferReturnChoiceSpec];
 export type FlowRoundEnd = ['flow', 'roundEnd', any];
 export type FlowThrowShrapnelBomb = ['flow', 'throwShrapnelBomb', ThrowShrapnelBombSpec];
+export type FlowSelectAction = ['flow','selectAction', SelectActionSpec];
 export type FlowStanceChoice = ['flow', 'stanceChoice', HeroOfferStanceChoiceSpec];
 export type FlowTest = ['flow', 'test', Test];
 export type FlowWeakness = ['flow','weakness', InitiateWeakness];
@@ -173,6 +175,7 @@ export type FlowFurther = // When add stuff here, must also add to exec/exec_flo
   FlowReturnChoice |
   FlowRoundEnd |
   FlowThrowShrapnelBomb |
+  FlowSelectAction |
   FlowStanceChoice |
   FlowTest |
   FlowWeakness |

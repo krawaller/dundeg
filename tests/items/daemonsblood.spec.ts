@@ -18,37 +18,39 @@ test('Daemons blood', t => {
     log: []
   };
 
-  let action: FlowInstruction = ['flow','daemonsBlood',{heroId:'hero'}];
-
-  t.deepEqual(
-    find_hero_actions(battle, {heroId: 'hero'})[items.daemonsBlood.actions.throwDaemonsBlood],
-    action,
-    'daemons blood offers action'
-  );
-
   battle.seed = '5plsplspls!' // will roll 5;
-  battle = execUntil(battle, action); // will now ask for target
-  battle = reply(battle, 'megaRat');
-  battle = reply(battle, makeRoll); // roll the die, no confirmation required since we have no luck
+  battle = execUntil(battle, ['flow','selectAction',{heroId:'hero'}]);
+  battle = reply(battle, items.daemonsBlood.actions.throwDaemonsBlood);
+  if (!battle.heroes.hero.vars.target) battle = reply(battle, battle.monsters.megarat.name);
+
+  let result:BattleState
+
+  //  ---------------- D3 Damage versus non-weird -----------------
+
+  result = execUntil(battle, ['flow','executeAction',{heroId:'hero'}]);
+  result = reply(result, makeRoll); // roll the die, no confirmation required since we have no luck
   t.ok(
-    battle.monsters.megarat.states.corroded,
+    result.monsters.megarat.states.corroded,
     'megarat became corroded'
   );
   t.equal(
-    battle.monsters.megarat.vars.HP,
+    result.monsters.megarat.vars.HP,
     2, 'roll of 5 means 3 since it was a D3 dice'
   );
   t.ok(
-    !battle.heroes.hero.items.daemonsBlood,
+    !result.heroes.hero.items.daemonsBlood,
     'hero lost the daemons blood'
   );
 
+    //  ---------------- D5 Damage versus weird -----------------
+
   battle.seed = 'another5thanku' // will roll 5 again
-  battle = execUntil(battle, action); // will now ask for target
-  battle = reply(battle, 'nachtDrekSlicer');
-  battle = reply(battle, makeRoll); // roll the die, no confirmation required since we have no luck
+  battle.heroes.hero.vars.target = 'nacht';
+  result = execUntil(battle, ['flow','executeAction',{heroId:'hero'}]);
+
+  result = reply(result, makeRoll); // roll the die, no confirmation required since we have no luck
   t.equal(
-    battle.monsters.nacht.vars.HP,
+    result.monsters.nacht.vars.HP,
     3, 'roll of 5 meant 5 since he is weird, D6 now'
   );
 

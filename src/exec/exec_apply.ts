@@ -30,7 +30,6 @@ import { apply_action_selection, ActionSelectionSpec } from '../apply/apply_acti
 
 export function exec_apply(battle:BattleState, [,what,spec]:FlowApply): BattleState{
   switch(what){
-    case 'actionSelection': return apply_action_selection(battle, <ActionSelectionSpec>spec);
     case 'ambushResult': return apply_ambush_result(battle, <AmbushResultSpec>spec);
     case 'bloodCurseResult': return apply_blood_curse_invocation_result(battle, <BloodCurseSpec>spec);
     case 'daemonsBlood': return apply_daemons_blood(battle, <DaemonsBloodSpec>spec);
@@ -46,6 +45,7 @@ export function exec_apply(battle:BattleState, [,what,spec]:FlowApply): BattleSt
     case 'luncheonTruncheonThrow': return apply_luncheon_truncheon_throw(battle, <LuncheonTruncheonThrowSpec>spec);
     case 'monsterTargetChoice': return apply_target_selection_for_monster(battle, <TargetSelectionForMonsterSpec>spec);
     case 'question': return  apply_question(battle, <Question>spec);
+    case 'registerActionSelection': return apply_action_selection(battle, <ActionSelectionSpec>spec);
     case 'registerTestOutcome': return apply_register_test_outcome(battle, <Test>spec);
     case 'removeItem': return apply_remove_item(battle, <RemoveItemSpec>spec);
     case 'reroll': return apply_reroll(battle, <RerollSpec>spec);

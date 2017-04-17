@@ -36,6 +36,6 @@ export const find_hero_attack_options = (battle: BattleState, {heroId}: InstrJus
       throw "Warning! attack action '"+check+"' was undefined!";
     }
   });
-  
+
   return ret;
 }

@@ -6,7 +6,7 @@ export interface ThrowDaemonsBloodSpec {
 
 export function flow_daemons_blood(battle: BattleState, {heroId}:ThrowDaemonsBloodSpec): FlowInstruction {
   return ['flow','all',[
-    <FlowInstruction>['flow','heroTargetChoice',{heroId}],
+    //<FlowInstruction>['flow','heroTargetChoice',{heroId}], // Targetting moved to action selection
     <FlowDiceRoll>['flow','diceRoll',{heroId, diceTypes: {singleAttack:true} }],
     <ApplyDaemonsBlood>['apply','daemonsBlood',{heroId}]
   ]];

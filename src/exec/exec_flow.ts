@@ -31,6 +31,7 @@ import { flow_new_round } from '../flow/flow_new_round';
 import { flow_win_game } from '../flow/flow_win_game';
 import { flow_lose_game } from '../flow/flow_lose_game';
 import { flow_execute_action, ExecuteActionSpec } from '../flow/flow_execute_action';
+import { flow_select_action, SelectActionSpec } from '../flow/flow_select_action';
 
 
 export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleState{
@@ -66,6 +67,7 @@ export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleSt
     case 'returnChoice': newInstr = flow_hero_offer_return_choice(battle, <HeroOfferReturnChoiceSpec>spec); break;
     case 'roundEnd': newInstr = flow_round_end(battle, <any>spec); break;
     case 'throwShrapnelBomb': newInstr = flow_throw_shrapnel_bomb(battle, <ThrowShrapnelBombSpec>spec); break;
+    case 'selectAction': newInstr = flow_select_action(battle, <SelectActionSpec>spec); break;
     case 'stanceChoice': newInstr = flow_hero_offer_stance_choice(battle, <HeroOfferStanceChoiceSpec>spec); break;
     case 'test': newInstr = flow_test(battle, <Test>spec); break;
     case 'weakness': newInstr = flow_weakness(battle, <InitiateWeakness>spec); break;

@@ -20,14 +20,10 @@ test('flash bomb item', t => {
     seed: 'flashbombing' // will roll 3 5 6 4
   };
 
-  let action: FlowInstruction = ['flow','flashBomb',{heroId: 'hero'}];
+  battle = execUntil(battle, ['flow','selectAction',{heroId:'hero'}]);
+  battle = reply(battle, items.flashBomb.actions.throwFlashBomb);
 
-  t.deepEqual(
-    find_hero_actions(battle,{heroId:'hero'})[items.flashBomb.actions.throwFlashBomb],
-    action
-  );
-
-  battle = execUntil(battle, action);
+  battle = execUntil(battle, ['flow','executeAction',{heroId:'hero'}]);
   battle = reply(battle, makeRoll); // roll for blind test for 1st hero, will pass
   battle = reply(battle, makeRoll); // roll for blind test for 2nd hero, will fail
   t.ok(battle.monsters.monster.states.dazed, 'first monster was dazed');

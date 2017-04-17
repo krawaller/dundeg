@@ -76,8 +76,8 @@ export const items:ItemBook = {
     name: 'Spiked Gauntlet',
     traits: {},
     actions: {
-      spikedGauntletAttackAssault: 'Spiked Gauntlet',
-      spikedGauntletAttackDefence: 'Spiked Gauntlet'
+      spikedGauntletAttackAssault: 'Spiked Gauntlet [CON]',
+      spikedGauntletAttackDefence: 'Spiked Gauntlet [AGI]'
     }
   },
   stilleto: {

@@ -1,5 +1,5 @@
 import * as test from "tape";
-import { makeMonster, makeHero, lastLogHasStr, makeRoll, execUntil, reply } from '../testutils';
+import { makeMonster, makeHero, lastLogHasStr, makeRoll, execUntil, reply, justReply } from '../testutils';
 import { BattleState, FlowInstruction, FlowPerformHeroAttack } from '../../src/interfaces';
 import { apply_weakness_invocation_result } from '../../src/apply/apply_weakness_invocation_result';
 import { find_hero_actions } from '../../src/find/find_hero_actions';
@@ -18,21 +18,18 @@ test('the hero weakness skill', t => {
     'find weakness not available in assault stance'
   );
 
-  let action: FlowInstruction = ['flow','weakness',{heroId:'hero'}];
-
   battle.heroes.hero.vars.stance = 'defence';
-  t.deepEqual(
-    find_hero_actions(battle,{heroId:'hero'})[heroSkills.findWeakness.actions.findWeakness],
-    action,
-    'find weakness available in defence stance'
-  );
+  
+  battle = execUntil(battle, ['flow','selectAction',{heroId:'hero'}]);
+  battle = reply(battle, heroSkills.findWeakness.actions.findWeakness);
+  if (!battle.heroes.hero.vars.target) battle = reply(battle, battle.monsters.monster.name); // maybe auto selected since only 1
 
-  result = execUntil(battle, action);
+  result = execUntil(battle, ['flow','executeAction',{heroId:'hero'}]);
   result = reply(result,makeRoll); // was prompted to roll for test, will fail
   t.ok(!result.monsters.monster.states.weakness, 'Weakness wasnt applied since invocation failed');
   t.ok( lastLogHasStr(result, 'fail'), 'log acknowledges fail' );
 
-  result = execUntil(battle, action);
+  result = execUntil(battle, ['flow','executeAction',{heroId:'hero'}]);
   result = reply(result,makeRoll); // was prompted to roll for test, will succeed
   t.equal(result.monsters.monster.states.weakness, 'hero', 'Weakness state was correctly set');
   t.ok( lastLogHasStr(result, 'success'), 'log acknowledges success' );

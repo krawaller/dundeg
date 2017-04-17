@@ -17,14 +17,10 @@ test('shrapnel bomb item', t => {
     seed: 'shrapnelBOOOOOM' // will roll 6 1
   };
 
-  let action: FlowInstruction = ['flow','throwShrapnelBomb',{heroId: 'hero'}];
+  battle = execUntil(battle, ['flow','selectAction',{heroId:'hero'}]);
+  battle = reply(battle, items.shrapnelBomb.actions.throwShrapnelBomb);
 
-  t.deepEqual(
-    find_hero_actions(battle,{heroId:'hero'})[items.shrapnelBomb.actions.throwShrapnelBomb],
-    action
-  );
-
-  battle = execUntil(battle, action);
+  battle = execUntil(battle, ['flow','executeAction',{heroId:'hero'}]);
   battle = reply(battle, makeRoll); // roll for dmg vs first monster, will be a 6 (piercing)
   battle = reply(battle, makeRoll); // roll for dmg vs second monster, will be 1
   t.equal(
