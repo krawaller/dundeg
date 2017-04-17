@@ -18,8 +18,10 @@ test('flow next player', t => {
   // -------------- TEST SINGLE UPCOMING PLAYER ---------------
 
   result = step(battle, ['flow','nextPlayer',{}]); // TODO - message!
+  t.equal(result.stack[0][1], 'all');
+  t.equal(result.stack[0][2][0][1], 'log', 'we added a log message first');
   t.deepEqual(
-    result.stack[0],
+    result.stack[0][2][1],
     ['flow','playerRound',{heroId:'angel'}],
     'highest perception player goes next, which is angel'
   );

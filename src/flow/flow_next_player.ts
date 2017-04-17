@@ -13,7 +13,11 @@ export function flow_next_player(battle: BattleState, spec: any): FlowInstructio
   if (party.ordered.length === 0){
     return ['flow','roundEnd',{}];
   } else if (party.ordered[0].heroes.length === 1){
-    return ['flow','playerRound',{heroId: party.ordered[0].heroes[0]}];
+    let nextId = party.ordered[0].heroes[0];
+    return ['flow','all',[
+      ['apply','log',{line:[{heroRef: nextId},'has PER',party.individual[nextId],'and goes next']}],
+      ['flow','playerRound',{heroId: nextId}]
+    ]];
   } else {
     let line = <LogMessageLine>[];
     let opts = {};
