@@ -60,6 +60,14 @@ export function execUntil(battle:BattleState,instr:FlowInstruction): BattleState
   });
 }
 
+export function execTo(battle, instr: FlowInstruction, targets: string[]){
+  battle.stack = [instr].concat(battle.stack || []);
+  while(battle.stack.length && targets.indexOf(battle.stack[0][1]) === -1){
+    battle = exec_step(battle);
+  }
+  return battle;
+}
+
 export function reply(battle,opt:string): BattleState{
   return exec_until( exec_reply(battle, {option:opt}) );
 }

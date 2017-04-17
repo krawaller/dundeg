@@ -122,8 +122,10 @@ export type FlowEachHero = ['flow', 'eachHero', EachHeroSpec];
 export type FlowEachMonster = ['flow', 'eachMonster', EachMonsterSpec];
 export type FlowFlashBomb = ['flow', 'flashBomb', FlashBombSpec];
 export type FlowHeroTargetChoice = ['flow', 'heroTargetChoice', HeroTargetChoiceSpec];
+export type FlowLoseGame = ['flow', 'loseGame', any];
 export type FlowMonsterEntry = ['flow', 'monsterEntry', MonsterEntrySpec];
 export type FlowMonsterTargetChoice = ['flow', 'monsterTargetChoice', MonsterTargetChoiceSpec];
+export type FlowNewRound = ['flow', 'newRound', any];
 export type FlowNextPlayer = ['flow', 'nextPlayer', any];
 export type FlowOfferReroll = ['flow', 'offerReroll', OfferRerollSpec];
 export type FlowPerformHeroAttack = ['flow', 'performHeroAttack', PerformHeroAttackSpec];
@@ -136,6 +138,7 @@ export type FlowThrowShrapnelBomb = ['flow', 'throwShrapnelBomb', ThrowShrapnelB
 export type FlowStanceChoice = ['flow', 'stanceChoice', HeroOfferStanceChoiceSpec];
 export type FlowTest = ['flow', 'test', Test];
 export type FlowWeakness = ['flow','weakness', InitiateWeakness];
+export type FlowWinGame = ['flow', 'winGame', any];
 export type FlowWoundMonster = ['flow','woundMonster', InitiateWoundMonsterSpec];
 
 
@@ -154,8 +157,10 @@ export type FlowFurther = // When add stuff here, must also add to exec/exec_flo
   FlowEachMonster |
   FlowFlashBomb |
   FlowHeroTargetChoice |
+  FlowLoseGame |
   FlowMonsterEntry |
   FlowMonsterTargetChoice |
+  FlowNewRound |
   FlowNextPlayer |
   FlowOfferReroll |
   FlowPerformHeroAttack |
@@ -168,6 +173,7 @@ export type FlowFurther = // When add stuff here, must also add to exec/exec_flo
   FlowStanceChoice |
   FlowTest |
   FlowWeakness |
+  FlowWinGame |
   FlowWoundMonster
   ;
 

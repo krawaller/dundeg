@@ -27,6 +27,9 @@ import { flow_player_round, PlayerRoundSpec } from '../flow/flow_player_round';
 import { flow_round_end } from '../flow/flow_round_end';
 import { flow_next_player } from '../flow/flow_next_player';
 import { flow_bash_player, BashPlayerSpec } from '../flow/flow_bash_player';
+import { flow_new_round } from '../flow/flow_new_round';
+import { flow_win_game } from '../flow/flow_win_game';
+import { flow_lose_game } from '../flow/flow_lose_game';
 
 
 export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleState{
@@ -48,8 +51,10 @@ export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleSt
     case 'eachMonster': newInstr = flow_each_monster(battle, <EachMonsterSpec>spec); break;
     case 'flashBomb': newInstr = flow_flash_bomb(battle, <FlashBombSpec>spec); break;
     case 'heroTargetChoice': newInstr = flow_hero_target_choice(battle, <HeroTargetChoiceSpec>spec); break;
+    case 'loseGame': newInstr = flow_lose_game(battle,<any>spec); break;
     case 'monsterEntry': newInstr = flow_monster_entry(battle, <MonsterEntrySpec>spec); break;
     case 'monsterTargetChoice': newInstr = flow_monster_target_choice(battle,<MonsterTargetChoiceSpec>spec); break;
+    case 'newRound': newInstr = flow_new_round(battle, <any>spec); break;
     case 'nextPlayer': newInstr = flow_next_player(battle, <any>spec); break;
     case 'offerReroll': newInstr = flow_offer_reroll(battle, <OfferRerollSpec>spec); break;
     case 'performHeroAttack': newInstr = flow_perform_hero_attack(battle, <PerformHeroAttackSpec>spec); break;
@@ -62,6 +67,7 @@ export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleSt
     case 'stanceChoice': newInstr = flow_hero_offer_stance_choice(battle, <HeroOfferStanceChoiceSpec>spec); break;
     case 'test': newInstr = flow_test(battle, <Test>spec); break;
     case 'weakness': newInstr = flow_weakness(battle, <InitiateWeakness>spec); break;
+    case 'winGame': newInstr = flow_win_game(battle,<any>spec); break;
     case 'woundMonster': newInstr = flow_wound_monster(battle, <InitiateWoundMonsterSpec>spec); break;
     default: throw 'Unknown flow: '+what;
   }

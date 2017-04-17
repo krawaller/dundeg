@@ -13,6 +13,9 @@ export function flow_hero_offer_escape_choice(battle: BattleState, {heroId}:Hero
     return;
   }
   let dice = hero.vars.defenceDice;
+  if (!dice){ // no one targetting hero so he hasnt rolled defence dice
+    return undefined;
+  }
   if (dice[0] !== dice[1]){
     return <FlowInstruction>['apply','log', <LogMessage>{
       line: [{heroRef:heroId},'didnt roll doubles for defence and thus cannot escape.'],

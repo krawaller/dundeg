@@ -6,8 +6,9 @@ export interface EndOfRoundHeroSpec {
 }
 
 export function apply_end_of_round_to_hero (battle: BattleState, {heroId}: EndOfRoundHeroSpec):BattleState {
-  let ret = deepCopy(battle);
+  let ret:BattleState = deepCopy(battle);
   let hero = ret.heroes.hero;
+  delete hero.vars.hasActed;
   if (hero.states.stunned){
     delete hero.states.stunned;
     addLog(ret, [{heroRef: heroId},'is no longer stunned'] );

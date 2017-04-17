@@ -25,6 +25,7 @@ export interface MonsterVars {
   escaped?: true
   target?: string
   name?: string
+  hasAttacked?: true
 }
 
 export interface MonsterState {
