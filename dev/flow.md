@@ -12,7 +12,7 @@
 [X]                 -> roll battle dice
 [X]                 -> escape choice
 [X]                 -> bash player (unless escaped!)
-[ ]                 -> perform action (unless escaped!)
+[X]                 -> perform action (unless escaped!)
 [X]             ?->roundend
 [X]                 *->eachplayer->endroundplayer
 [X]                 *->eachmonster->endroundmonster

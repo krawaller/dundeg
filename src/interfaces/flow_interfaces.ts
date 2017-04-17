@@ -107,6 +107,7 @@ import { PerformMonsterAttackSpec } from '../flow/flow_perform_monster_attack';
 import { BattleDiceSpec } from '../flow/flow_battle_dice';
 import { PlayerRoundSpec } from '../flow/flow_player_round';
 import { BashPlayerSpec } from '../flow/flow_bash_player';
+import { ExecuteActionSpec } from '../flow/flow_execute_action';
 
 export type FlowAll = ['flow','all', any[]];
 export type FlowAmbush = ['flow','ambush', InitiateAmbushSpec];
@@ -120,6 +121,7 @@ export type FlowDimwit = ['flow','dimwit', InitiateDimwitSpec];
 export type FlowEscapeChoice = ['flow', 'escapeChoice', HeroOfferEscapeChoiceSpec];
 export type FlowEachHero = ['flow', 'eachHero', EachHeroSpec];
 export type FlowEachMonster = ['flow', 'eachMonster', EachMonsterSpec];
+export type FlowExecuteAction = ['flow', 'executeAction', ExecuteActionSpec];
 export type FlowFlashBomb = ['flow', 'flashBomb', FlashBombSpec];
 export type FlowHeroTargetChoice = ['flow', 'heroTargetChoice', HeroTargetChoiceSpec];
 export type FlowLoseGame = ['flow', 'loseGame', any];
@@ -152,9 +154,10 @@ export type FlowFurther = // When add stuff here, must also add to exec/exec_flo
   FlowDetonateShrapnelBomb |
   FlowDiceRoll |
   FlowDimwit |
-  FlowEscapeChoice |
   FlowEachHero |
   FlowEachMonster |
+  FlowEscapeChoice |
+  FlowExecuteAction |
   FlowFlashBomb |
   FlowHeroTargetChoice |
   FlowLoseGame |

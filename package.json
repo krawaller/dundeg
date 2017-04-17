@@ -14,7 +14,7 @@
   "scripts": {
     "build": "webpack",
     "test": "ts-node node_modules/tape/bin/tape tests/**/*.ts | node_modules/.bin/tap-spec",
-    "testthis": "ts-node node_modules/tape/bin/tape tests/flow/flowroundend.spec.ts | node_modules/.bin/tap-spec",
+    "testthis": "ts-node node_modules/tape/bin/tape tests/flow/flowexecuteaction.spec.ts | node_modules/.bin/tap-spec",
     "tryseed": "ts-node tests/tryseed.ts"
   },
   "dependencies": {
