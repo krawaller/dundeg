@@ -1,8 +1,6 @@
 import * as test from "tape";
 import { lastLogHasStr, makeHero, makeMonster, execUntil, makeRoll, reply } from '../testutils';
 import { BattleState, LogMessagePart, FlowInstruction } from '../../src/interfaces';
-import { apply_wounds_to_hero } from '../../src/apply/apply_wounds_to_hero';
-import { apply_blood_curse_invocation_result } from '../../src/apply/apply_blood_curse_invocation_result';
 import { find_hero_actions } from '../../src/find/find_hero_actions';
 import { heroSkills } from '../../src/library';
 
@@ -21,13 +19,13 @@ test('blood curse hero skill', t => {
     seed: 'bloodcursetest' // 4 6 3 1
   };
 
+  // ---------------- TEST THROWING
+
   battle.heroes.curseLinkedHero.vars.stance = 'defence';
   t.ok(
     !find_hero_actions(battle,{heroId:'curseLinkedHero'})[heroSkills.bloodCurse.actions.castBloodCurse],
     'bloodcurse not available in defence stance'
   );
-
-  // ---------------- TEST THROWING
 
   battle.heroes.curseLinkedHero.vars.stance = 'assault';
   battle = execUntil(battle, ['flow','selectAction',{heroId:'curseLinkedHero'}]);
