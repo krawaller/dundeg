@@ -21,7 +21,7 @@ export function removeAnItem(hero: HeroState, item: ItemName){
 }
 
 export function addLog(battle: BattleState, line: LogMessageLine, type: LogMessageType = 'info'): BattleState {
-  battle.log.push({
+  battle.log = (battle.log || []).concat({
     type: type,
     line: line
   });

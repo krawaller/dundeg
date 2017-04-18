@@ -17,7 +17,7 @@ export function calculate_hero_defence (battle: BattleState, instr: CalculateHer
     history: [['heroes have no natural defence',0]],
     value: 0
   };
-  let highest = Math.max.apply(Math,hero.vars.defenceDice);
+  let highest = Math.max.apply(Math,hero.vars.defenceDice||[0]);
   if (!hero.vars.failedDefence){
     val.history.push(['Use highest die for defence when defence roll was successful', highest]);
     val.value = highest;

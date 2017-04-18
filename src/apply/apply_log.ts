@@ -3,6 +3,6 @@ import { deepCopy, addLog } from '../utils/helpers';
 
 export function apply_log(battle: BattleState, logMessage: LogMessage): BattleState {
   let ret = deepCopy(battle);
-  ret.log.push(logMessage);
+  addLog(ret, logMessage.line, logMessage.type);
   return ret;
 }

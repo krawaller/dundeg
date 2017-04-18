@@ -1,19 +1,16 @@
 import * as test from "tape";
-import { makeHero, makeMonster } from '../testutils';
+import { makeHero, makeMonster, execUntil } from '../testutils';
 
 import { BattleState } from '../../src/interfaces';
-import { calculate_hero_armour } from '../../src/calculate/calculate_hero_armour';
 
 test('monster pierce skill', t => {
   let battle: BattleState = {
-    heroes: { hero: makeHero('bloodsportBrawler',{},{},{},['studdedLeather']) },
-    monsters: { monster: makeMonster('imperialHuntsman') } // has Pierce(1)
+    heroes: { hero: makeHero('bloodsportBrawler',{HP:5,failedDefence:true},{},{},['studdedLeather']) }, // leather gives ARM 1
+    monsters: { monster: makeMonster('imperialHuntsman',{target:'hero'}) } // has Pierce(1), ATK=4
   };
 
-  t.equal(
-    calculate_hero_armour(battle, {heroId: 'hero',monsterId:'monster'}).value,
-    0, 'pierce negates studded leather'
-  );
+  battle = execUntil(battle, ['flow','performMonsterAttack',{monsterId:'monster'}]);
+  t.equal(battle.heroes.hero.vars.HP, 1, 'hero took 4 dmg in spite of having 1 armour');
 
   t.end();
 });
