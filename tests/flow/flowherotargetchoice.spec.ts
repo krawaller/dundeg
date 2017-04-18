@@ -21,18 +21,18 @@ test('flow hero target choice', t => {
 
   let result, q;
 
-  result = flow_hero_target_choice(battle, {heroId: 'disturbed'});
+  result = flow_hero_target_choice(battle, {heroId: 'disturbed',line:[]});
   t.equal(result[1], 'question', 'we got a question');
   q = <Question>result[2];
   t.deepEqual(Object.keys(q.options), ['slitherFish', 'megaRat']);
 
-  result = flow_hero_target_choice(battle, {heroId: 'undisturbed'});
+  result = flow_hero_target_choice(battle, {heroId: 'undisturbed',line:[]});
   t.equal(result[1], 'question', 'we got a question');
   q = <Question>result[2];
   t.deepEqual(Object.keys(q.options), ['slitherFish', 'megaRat', 'ghoulTroll']);
 
   delete battle.monsters.alsoDisturbing;
-  result = flow_hero_target_choice(battle, {heroId: 'disturbed'});
+  result = flow_hero_target_choice(battle, {heroId: 'disturbed',line:[]});
   t.equal(result[0], 'apply');
   t.equal(result[1], 'heroTargetChoice');
   t.equal(result[2].heroId, 'disturbed');

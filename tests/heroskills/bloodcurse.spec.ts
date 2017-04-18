@@ -9,7 +9,7 @@ import { heroSkills } from '../../src/library';
 test('blood curse hero skill', t => {
   let battle: BattleState = {
     heroes: {
-      curseLinkedHero: makeHero('bloodsportBrawler',{HP: 5, stance: 'defence'},{},{bloodCurse:true}),
+      curseLinkedHero: makeHero('bloodsportBrawler',{HP: 5},{},{bloodCurse:true}),
       anotherHero: makeHero('infamousButcher',{HP: 7})
     },
     monsters: {
@@ -21,32 +21,31 @@ test('blood curse hero skill', t => {
     seed: 'bloodcursetest' // 4 6 3 1
   };
 
+  battle.heroes.curseLinkedHero.vars.stance = 'defence';
   t.ok(
     !find_hero_actions(battle,{heroId:'curseLinkedHero'})[heroSkills.bloodCurse.actions.castBloodCurse],
     'bloodcurse not available in defence stance'
   );
 
-  let action:FlowInstruction = ['flow','bloodCurse',{heroId:'curseLinkedHero'}];
+  // TEST THROWING
 
   battle.heroes.curseLinkedHero.vars.stance = 'assault';
-  t.deepEqual(
-    find_hero_actions(battle,{heroId:'curseLinkedHero'})[heroSkills.bloodCurse.actions.castBloodCurse],
-    action,
-    'bloodcurse available in assault mode'
-  );
+  battle = execUntil(battle, ['flow','selectAction',{heroId:'curseLinkedHero'}]);
+  battle = reply(battle, heroSkills.bloodCurse.actions.castBloodCurse);
+  battle = reply(battle, battle.monsters.cursedMonster.name);
 
-  battle = execUntil(battle, action); // initiate throw blood curse
-  battle = reply(battle, 'slitherFish'); // pick target
+  battle = execUntil(battle, ['flow','executeAction',{heroId:'curseLinkedHero'}]); // initiate throw blood curse
   battle = reply(battle, makeRoll); // roll dice, gonna fail because 4+6 > 5
   t.ok(!battle.heroes.curseLinkedHero.vars.bloodCurseLink, 'blood curse was not added since invocation failed');
   t.ok(lastLogHasStr(battle, 'fail'), 'msg acknowledges the fail');
 
-  battle = execUntil(battle, action); // initiate throw blood curse
-  battle = reply(battle, 'slitherFish'); // pick target
+  battle = execUntil(battle, ['flow','executeAction',{heroId:'curseLinkedHero'}]); // initiate throw blood curse
   battle = reply(battle, makeRoll); // roll dice, gonna succeed because 3+1 < 5
   t.equal(battle.heroes.curseLinkedHero.vars.bloodCurseLink, 'cursedMonster', 'blood curse link set correctly');
   t.equal(battle.monsters.cursedMonster.states.bloodCurse, 'curseLinkedHero', 'blood curse state added to monster');
   t.ok(lastLogHasStr(battle, 'lood curse'), 'msg acknowledges the successful');
+
+  // TEST EFFECT
 
   battle = apply_wounds_to_hero(battle, {
     heroId: 'curseLinkedHero',
