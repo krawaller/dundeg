@@ -6,6 +6,13 @@ import {
 
 import { monsters } from '../src/library/monsters';
 
+export function logHasStr(battle: BattleState, str: string){
+  if (!battle.log || !battle.log.length){
+    throw "No messages in log when we went looking for "+str;
+  }
+  return battle.log.find( entry=> !!logMessageContains(entry.line, str) );
+}
+
 export function logMessageContains(msg: LogMessageLine, str: string){
   return msg.find( part => !!((<string>part).match && (<string>part).match(str)) );
 }
