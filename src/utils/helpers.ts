@@ -1,7 +1,8 @@
 
-import {MonsterState, MonsterTraitName, BattleState, HeroState, ItemName, LogMessageLine, LogMessageType} from '../interfaces';
+import {HeroId, MonsterState, MonsterTraitName, BattleState, HeroState, ItemName, LogMessageLine, LogMessageType, FlowInstruction} from '../interfaces';
 
 import {monsters} from '../library';
+import { HeroTargetChoiceSpec } from '../flow/flow_hero_target_choice';
 
 //import deepClcloone from 'lodash/cloneDeep';
 
@@ -26,4 +27,11 @@ export function addLog(battle: BattleState, line: LogMessageLine, type: LogMessa
     line: line
   });
   return battle;
+}
+
+export function registerAndTarget(heroId: HeroId, action: FlowInstruction, line: LogMessageLine):FlowInstruction{
+  return <FlowInstruction>['flow','all',[
+    <FlowInstruction>['apply','registerActionSelection',{heroId,action}],
+    <FlowInstruction>['flow','heroTargetChoice',{heroId,line}] // TODO - what kind, allow spec?
+  ]];
 }
