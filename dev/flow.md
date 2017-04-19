@@ -6,9 +6,9 @@
 [X]         *->eachplayer->returnchoice
 [X]         *->eachmonster->monstertargetchoice
 [ ]         *->nextplayer
-[ ]             ?->playerround
+[X]             ?->playerround
 [X]                 -> choose stance
-[ ]                 -> choose action // TODO - where and when do we select battle target?
+[X]                 -> choose action
 [X]                 -> roll battle dice
 [X]                 -> escape choice
 [X]                 -> bash player (unless escaped!)

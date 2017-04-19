@@ -67,7 +67,7 @@ export function execUntil(battle:BattleState,instr:FlowInstruction): BattleState
   });
 }
 
-export function execTo(battle, instr: FlowInstruction, targets: string[]){
+export function execTo(battle:BattleState, instr: FlowInstruction, targets: string[]): BattleState{
   battle.stack = [instr].concat(battle.stack || []);
   while(battle.stack.length && targets.indexOf(battle.stack[0][1]) === -1){
     battle = exec_step(battle);
@@ -75,12 +75,20 @@ export function execTo(battle, instr: FlowInstruction, targets: string[]){
   return battle;
 }
 
-export function reply(battle,opt:string): BattleState{
+export function reply(battle:BattleState,opt:string): BattleState{
   return exec_until( exec_reply(battle, {option:opt}) );
 }
 
-export function justReply(battle,opt:string): BattleState{
+export function justReply(battle:BattleState,opt:string): BattleState{
   return exec_reply(battle, {option:opt});
+}
+
+export function replyTo(battle:BattleState, opt:string, targets: string[]):BattleState{
+  battle = justReply(battle,opt);
+  while(battle.stack.length && targets.indexOf(battle.stack[0][1]) === -1){
+    battle = exec_step(battle);
+  }
+  return battle;
 }
 
 export function step(battle,instr:FlowInstruction): BattleState{
