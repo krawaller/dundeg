@@ -16,7 +16,7 @@ test('corroded monsters', t => {
   };
 
   let result:BattleState = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{
-    heroId: 'hero', attack: {type:'special'}
+    heroId: 'hero', attack: {type:'special',stat:'STR'}
   }]);
   t.equal(
     result.monsters.corroded.vars.HP,

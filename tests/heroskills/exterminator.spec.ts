@@ -18,7 +18,7 @@ test('the Exterminator hero skill', t => {
 
   let result: BattleState;
   let heroId = 'hero';
-  let attack = {type:'meelee'};
+  let attack = {type:'meelee',stat:'STR'};
   let DMG = 3; // highest attack die
 
   battle.heroes.hero.vars.stance = 'assault';

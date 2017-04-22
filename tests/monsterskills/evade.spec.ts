@@ -14,13 +14,12 @@ test('monster evade skill', t => {
     },
     log: []
   };
-  let meelee:Attack = {type: 'meelee'};
 
-  result = execUntil(battle, <FlowInstruction>['flow','performHeroAttack', {heroId:'hero',attack:{type: 'meelee'}}]);
+  result = execUntil(battle, <FlowInstruction>['flow','performHeroAttack', {heroId:'hero',attack:{type: 'meelee', stat: 'STR'}}]);
   t.ok(lastLogHasStr(result,'evade'), 'log talks about evade');
   t.equal(result.monsters.monster.vars.HP, monsters.harpy.stats.HP, 'harpy wasnt damaged' );
 
-  result = execUntil(battle, <FlowInstruction>['flow','performHeroAttack', {heroId:'hero',attack:{type: 'ranged'}}]);
+  result = execUntil(battle, <FlowInstruction>['flow','performHeroAttack', {heroId:'hero',attack:{type: 'ranged', stat: 'STR'}}]);
   t.ok(result.monsters.monster.vars.HP !== monsters.harpy.stats.HP, 'harpy took damage as normal' );
 
   t.end();

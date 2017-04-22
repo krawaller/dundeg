@@ -33,7 +33,7 @@ test('flow player round', t => {
   // Escape choice (since double def roll)
   battle = replyTo(battle, 'remain', ['nextPlayer']);
 
-  // Take hit from both monsters
+  // Take hit from both monsters // TODO - test defence choice too? where?
   battle;
   battle;
 

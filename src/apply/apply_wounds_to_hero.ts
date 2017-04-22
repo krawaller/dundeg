@@ -1,5 +1,5 @@
 import { BattleState, HeroStatName, Attack, AttackOptions, ItemName, CalculationResult } from '../interfaces';
-
+import { newCalc, addCalcStep } from '../utils/helpers';
 import { monsters, heroes } from '../library';
 import { deepCopy, isMonsterAlive, addLog } from '../utils/helpers';
 import { apply_wounds_to_monster } from './apply_wounds_to_monster';
@@ -48,9 +48,7 @@ export function apply_wounds_to_hero (battle: BattleState, {heroId,monsterId,wou
       if (target.vars.bloodCurseLink){
         let monsterVictim = battle.monsters[target.vars.bloodCurseLink];
         if (monsterVictim && isMonsterAlive(monsterVictim)){
-          let bloodCurseWounds = {
-            value: wounds.value, history: [['Blood curse passes wounds on',wounds.value]]
-          };
+          let bloodCurseWounds = newCalc('Blood Curse damage',['Blood Curse bounces back the', wounds, 'wounds'], wounds.value);
           ret = apply_wounds_to_monster(ret, {attack: {type: 'special', skill: 'bloodCurse'}, monsterId: target.vars.bloodCurseLink, wounds:bloodCurseWounds, heroId });
         }
       }

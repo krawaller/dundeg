@@ -3,6 +3,7 @@ import { MonsterState } from './monster_interfaces';
 import { ItemName } from './item_interfaces';
 
 export interface CalculationResult {
+  title: string
   value: any,
   history: any[]
 }

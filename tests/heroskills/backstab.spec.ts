@@ -22,7 +22,7 @@ test('the backstab hero skill', t => {
   // ------------ Test extra damage -----------------------
 
   battle.monsters.monster.vars.target = 'hero';
-  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId,attack:{type:'meelee'}}]);
+  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId,attack:{stat: 'STR', type:'meelee'}}]);
   t.equal(
     result.monsters.monster.vars.HP,
     monsters.imperialHuntsman.stats.HP - (ATK - monsters.imperialHuntsman.stats.ARM),
@@ -31,7 +31,7 @@ test('the backstab hero skill', t => {
 
   delete battle.monsters.monster.vars.target;
   battle.heroes.hero.vars.stance = 'defence';
-  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId,attack:{type:'meelee'}}]);
+  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId,attack:{stat: 'STR', type:'meelee'}}]);
   t.equal(
     result.monsters.monster.vars.HP,
     monsters.imperialHuntsman.stats.HP - (ATK - monsters.imperialHuntsman.stats.ARM),
@@ -39,14 +39,14 @@ test('the backstab hero skill', t => {
   );
 
   battle.heroes.hero.vars.stance = 'assault';
-  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId,attack:{type:'ranged'}}]);
+  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId,attack:{stat: 'STR', type:'ranged'}}]);
   t.equal(
     result.monsters.monster.vars.HP,
     monsters.imperialHuntsman.stats.HP - (ATK - monsters.imperialHuntsman.stats.ARM),
     'backstab gives no extra damage when not meelee'
   );
 
-  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId,attack:{type:'meelee'}}]);
+  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId,attack:{stat: 'STR', type:'meelee'}}]);
   t.equal(
     result.monsters.monster.vars.HP,
     monsters.imperialHuntsman.stats.HP - (ATK + 1 - monsters.imperialHuntsman.stats.ARM),
@@ -56,7 +56,7 @@ test('the backstab hero skill', t => {
   // ------------------- Test -1 ARM ---------------------------
 
   battle.monsters.monster.vars.target = 'hero';
-  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId,attack:{type:'special',using:'skinningKnife'}}]);
+  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId,attack:{stat: 'STR', type:'special',using:'skinningKnife'}}]);
   t.equal(
     result.monsters.monster.vars.HP,
     monsters.imperialHuntsman.stats.HP - (ATK - monsters.imperialHuntsman.stats.ARM),
@@ -65,7 +65,7 @@ test('the backstab hero skill', t => {
 
   delete battle.monsters.monster.vars.target;
   battle.heroes.hero.vars.stance = 'defence';
-  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId,attack:{type:'special',using:'skinningKnife'}}]);
+  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId,attack:{stat: 'STR', type:'special',using:'skinningKnife'}}]);
   t.equal(
     result.monsters.monster.vars.HP,
     monsters.imperialHuntsman.stats.HP - (ATK - monsters.imperialHuntsman.stats.ARM),
@@ -73,14 +73,14 @@ test('the backstab hero skill', t => {
   );
 
   battle.heroes.hero.vars.stance = 'assault';
-  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId,attack:{type:'special',using:'luncheonTruncheon'}}]);
+  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId,attack:{stat: 'STR', type:'special',using:'luncheonTruncheon'}}]);
   t.equal(
     result.monsters.monster.vars.HP,
     monsters.imperialHuntsman.stats.HP - (ATK - monsters.imperialHuntsman.stats.ARM),
     'backstab gives no ARM minus when not using bladed item'
   );
 
-  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId,attack:{type:'special',using:'skinningKnife'}}]);
+  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId,attack:{stat: 'STR', type:'special',using:'skinningKnife'}}]);
   t.equal(
     result.monsters.monster.vars.HP,
     monsters.imperialHuntsman.stats.HP - (ATK - (monsters.imperialHuntsman.stats.ARM - 1)),
@@ -89,7 +89,7 @@ test('the backstab hero skill', t => {
 
   // ---------------------- BOTH! :D -------------------------------
 
-  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId,attack:{type:'meelee',using:'skinningKnife'}}]);
+  result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId,attack:{stat: 'STR', type:'meelee',using:'skinningKnife'}}]);
   t.equal(
     result.monsters.monster.vars.HP,
     monsters.imperialHuntsman.stats.HP - (ATK + 1 - (monsters.imperialHuntsman.stats.ARM - 1)),

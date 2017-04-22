@@ -1,5 +1,7 @@
 import { BattleState, CalculationResult, HeroId, MonsterId } from '../interfaces';
 
+import { newCalc, addCalcStep } from '../utils/helpers';
+
 interface CalculateHeroDefenceInstr {
   heroId: HeroId,
   monsterId: MonsterId
@@ -8,26 +10,19 @@ interface CalculateHeroDefenceInstr {
 export function calculate_hero_defence (battle: BattleState, instr: CalculateHeroDefenceInstr): CalculationResult {
   let hero = battle.heroes[instr.heroId];
   if (hero.vars.failedEscape){
-    return {
-      value: 0,
-      history: ['A failed escape attempt means no defence',0]
-    };
+    return newCalc('Hero DEF', 'Failed escape attempt means no DEF', 0); // TODO - does it? :D
   }
-  let val = {
-    history: [['heroes have no natural defence',0]],
-    value: 0
-  };
-  let highest = Math.max.apply(Math,hero.vars.defenceDice||[0]);
+
+  let ret = newCalc('Hero DEF', 'Heroes have no natural defence', 0);
+
   if (!hero.vars.failedDefence){
-    val.history.push(['Use highest die for defence when defence roll was successful', highest]);
-    val.value = highest;
+    let highest = Math.max.apply(Math,hero.vars.defenceDice||[0]);
+    ret = addCalcStep(ret, 'Successful defenders use highest defence die', n=>highest);
     if (hero.vars.stance === 'defence' && hero.vars.powerDie > highest){
-      val.history.push(['In defence stance when defence roll was successful we can use POW for defence when higher', hero.vars.powerDie]);
-      val.value = hero.vars.powerDie;
+      ret = addCalcStep(ret, 'Successful defenders in defence stance use POW die when higher', n=> hero.vars.powerDie);
     }
   } else if (hero.vars.usePowForDefence){
-    val.history.push(['Can use POW for defence once when failed defence roll', hero.vars.powerDie]);
-    val.value = hero.vars.powerDie;
+    ret = addCalcStep(ret, 'Failed defence but chose one-time use of POW die', n=> hero.vars.powerDie);
   }
-  return val;
+  return ret;
 }

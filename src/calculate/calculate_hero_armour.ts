@@ -1,5 +1,6 @@
 import { BattleState, CalculationResult, HeroId, MonsterId } from '../interfaces';
 import { monsters } from '../library';
+import { newCalc, addCalcStep } from '../utils/helpers';
 
 export interface CalculateHeroArmourInstr { heroId: HeroId, monsterId?: MonsterId }
 
@@ -7,18 +8,15 @@ export function calculate_hero_armour (battle: BattleState, {heroId,monsterId}: 
   let hero = battle.heroes[heroId];
   let monster = battle.monsters[monsterId];
   let blueprint = monster && monsters[monster.blueprint];
-  let val = {
-    history: [['Heroes have no natural armour', 0]],
-    value: 0
-  };
+
+  let ret = newCalc('Hero ARM','Heroes have no natural armour',0);
+
   if (hero.items.studdedLeather){
-    val.history.push(['Studded leather gives +1 ARM','+1']);
-    val.value++;
+    ret = addCalcStep(ret, 'Studded leather gives +1', n=>n+1);
   }
-  let pierce = blueprint && blueprint.skills.pierce
+  let pierce = blueprint && blueprint.skills.pierce // is number, TODO - always?
   if (pierce){
-    val.history.push([`Pierce(${pierce}) ignores ${pierce} armour`,'-'+pierce]);
-    val.value = Math.max(0, val.value - pierce);
+    ret = addCalcStep(ret, `Pierce(${pierce}) ignores ${pierce} armour`, n=>n-pierce);
   }
-  return val;
+  return ret;
 }

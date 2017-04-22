@@ -35,7 +35,7 @@ test('the hero weakness skill', t => {
   t.ok( lastLogHasStr(result, 'success'), 'log acknowledges success' );
 
   result.heroes.hero.vars.attackDice = [1,1]; // slitherfish has 1 arm, won't do anything
-  result = execUntil(result, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId:'hero',attack:{}}]);
+  result = execUntil(result, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId:'hero',attack:{stat:'STR'}}]);
   t.equal(
     result.monsters.monster.vars.HP,
     monsters.slitherFish.stats.HP,
@@ -43,7 +43,7 @@ test('the hero weakness skill', t => {
   );
 
   result.heroes.hero.vars.attackDice = [1,3];
-  result = execUntil(result, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId:'hero',attack:{}}]);
+  result = execUntil(result, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId:'hero',attack:{stat:'STR'}}]);
   t.equal(
     result.monsters.monster.vars.HP,
     monsters.slitherFish.stats.HP - (3 + 1 - monsters.slitherFish.stats.ARM),

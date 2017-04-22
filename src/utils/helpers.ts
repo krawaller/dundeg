@@ -1,5 +1,5 @@
 
-import {HeroId, MonsterState, MonsterTraitName, BattleState, HeroState, ItemName, LogMessageLine, LogMessageType, FlowInstruction} from '../interfaces';
+import {HeroId, MonsterState, MonsterTraitName, BattleState, HeroState, ItemName, LogMessageLine, LogMessageType, FlowInstruction, CalculationResult} from '../interfaces';
 
 import {monsters} from '../library';
 import { HeroTargetChoiceSpec } from '../flow/flow_hero_target_choice';
@@ -34,4 +34,19 @@ export function registerAndTarget(heroId: HeroId, action: FlowInstruction, line:
     <FlowInstruction>['apply','registerActionSelection',{heroId,action}],
     <FlowInstruction>['flow','heroTargetChoice',{heroId,line}] // TODO - what kind, allow spec?
   ]];
+}
+
+export function newCalc(title: string, initialDesc: string|LogMessageLine, startVal: number | CalculationResult): CalculationResult{
+  return {
+    title: title,
+    value: (<CalculationResult>startVal).value || startVal,
+    history: [[Array.isArray(initialDesc) ? initialDesc : [initialDesc], startVal]]
+  }
+}
+
+export function addCalcStep(calc: CalculationResult, desc: string|LogMessageLine, func: (oldVal:number)=>number):CalculationResult{
+  let newVal = Math.max(0,func(calc.value));
+  calc.value = newVal;
+  calc.history.push([Array.isArray(desc) ? desc : [desc], newVal]);
+  return calc;
 }

@@ -17,7 +17,7 @@ test('the foekiller hero skill', t => {
 
   let result: BattleState;
   let heroId = 'hero';
-  let attack = {}
+  let attack = {stat:'STR'}
   let DMG = 3;
 
 
