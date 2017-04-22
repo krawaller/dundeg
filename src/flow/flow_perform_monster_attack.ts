@@ -15,5 +15,8 @@ export function flow_perform_monster_attack(battle: BattleState, {monsterId, att
   let heroId = monster.vars.target;
   let hero = battle.heroes[heroId];
   let wounds = calculate_wounds_vs_hero(battle, {monsterId});
-  return <FlowInstruction>['apply','woundHero',{heroId,wounds,monsterId}];
+  return <FlowInstruction>['flow','all',[
+    ['apply','log',{line:[{monsterRef:monsterId},'attacks',{heroRef:heroId}], type:'monsterAction'}],
+    ['apply','woundHero',{heroId,wounds,monsterId}]
+  ]];
 }

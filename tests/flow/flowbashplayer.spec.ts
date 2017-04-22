@@ -1,16 +1,16 @@
 import * as test from "tape";
-import { makeHero, makeMonster, step } from '../testutils';
+import { makeHero, makeMonster, step, execUntil } from '../testutils';
 
 import { BattleState, FlowInstruction } from '../../src/interfaces';
 
 test('flow bash player spec', t => {
   let battle: BattleState = {
     heroes: {
-      hero: makeHero('hinterLander')
+      hero: makeHero('hinterLander',{HP: 10})
     },
     monsters: {
-      monster1: makeMonster('backAlleyBruiser'),
-      monster2: makeMonster('slitherFish'),
+      monster1: makeMonster('backAlleyBruiser'), // ATK 4
+      monster2: makeMonster('slitherFish'), // ATK 3
       monster3: makeMonster('nachtDrekSlicer'),
       monster4: makeMonster('slimeCorpse')
     },
@@ -38,15 +38,8 @@ test('flow bash player spec', t => {
 
   delete battle.monsters.monster1.vars.killedBy
   delete battle.monsters.monster2.vars.killedBy
-  result = step(battle, ['flow','bashPlayer',{heroId}]);
-  t.equal(result.stack[0][1], 'all', 'we got a multistack result');
-  let question = result.stack[0][2][0];
-  t.equal(question[1], 'question', 'first is a question');
-  t.deepEqual(Object.keys(question[2].options),['continue'],'we can just move on');
-  t.deepEqual(question[2].options.continue,['flow','performMonsterAttack',{monsterId:'monster1'}],'hero will get attacked');
-  question = result.stack[0][2][1];
-  t.equal(question[1], 'question', 'second is also question');
-  t.deepEqual(question[2].options.continue,['flow','performMonsterAttack',{monsterId:'monster2'}],'next monster will attack');
+  result = execUntil(battle, ['flow','bashPlayer',{heroId}]);
+  t.equal(result.heroes.hero.vars.HP, 3, 'both monsters did damage (10-4-3)')
 
   t.end();
 });

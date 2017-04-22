@@ -31,13 +31,13 @@ test('flow player round', t => {
   battle = reply(battle, makeRoll);
 
   // Escape choice (since double def roll)
-  battle = reply(battle, 'remain');
+  battle = replyTo(battle, 'remain', ['nextPlayer']);
 
   // Take hit from both monsters
-  battle = replyTo(battle, 'continue', ['nextPlayer']);
-  battle = replyTo(battle, 'continue', ['nextPlayer']);
+  battle;
+  battle;
 
-  // Player does his thing (obs, no question as of yet, TODO should there be?)
+  // Player does his thing, no question
   battle;
 
   t.equal(
