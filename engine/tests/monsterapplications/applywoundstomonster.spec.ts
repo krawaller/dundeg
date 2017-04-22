@@ -10,8 +10,8 @@ test('apply wounds to monster', t => {
     monsters: { monster: makeMonster('slitherFish',{HP: 7}) },
     log: []
   };
-  const blow:WoundMonsterSpec = { heroId: 'hero', monsterId: 'monster', wounds: {value: 4, history: []}, attack: {type:'special'} }
-  const failedBlow:WoundMonsterSpec = { heroId: 'hero', monsterId: 'monster', wounds: {value: 0, history: []}, attack: {type:'special'} }
+  const blow:WoundMonsterSpec = { heroId: 'hero', monsterId: 'monster', wounds: {title:'test', value: 4, history: []}, attack: {type:'special'} }
+  const failedBlow:WoundMonsterSpec = { heroId: 'hero', monsterId: 'monster', wounds: {title:'test', value: 0, history: []}, attack: {type:'special'} }
 
   battle = apply_wounds_to_monster(battle, failedBlow);
   t.equal(battle.monsters.monster.vars.HP, 7, 'failed blow deals no wounds to hero HP');

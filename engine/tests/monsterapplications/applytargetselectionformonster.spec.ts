@@ -11,7 +11,7 @@ test('apply target selection to monster', t => {
     log: []
   };
 
-  battle = apply_target_selection_for_monster(battle, {monsterId: 'monster', heroId: 'hero', calculation: {history:[],value:'foo'}});
+  battle = apply_target_selection_for_monster(battle, {monsterId: 'monster', heroId: 'hero', calculation: {title:'testing',history:[],value:'foo'}});
   t.equal( battle.monsters.monster.vars.target, 'hero', 'Monster is now targetting hero' );
   t.ok( lastLogHasStr(battle, 'targets'), 'Targetting message was added to log' );
 

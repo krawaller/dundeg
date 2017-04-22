@@ -51,6 +51,7 @@ export function makeHero(heroName: HeroBase, vars?:HeroVars, states?: HeroStates
 
 export function calcRes(val: any): CalculationResult {
   return {
+    title: 'SomeTestVal',
     value: val,
     history: []
   };

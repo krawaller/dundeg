@@ -14,8 +14,8 @@ test('the monster thief skill', t => {
     },
     log: []
   };
-  const blow = { heroId: 'hero', monsterId: 'monster', wounds: {value: 4, history: []} }
-  const failedBlow = { heroId: 'hero', monsterId: 'monster', wounds: {value: 0, history: []} }
+  const blow = { heroId: 'hero', monsterId: 'monster', wounds: {title:'test', value: 4, history: []} }
+  const failedBlow = { heroId: 'hero', monsterId: 'monster', wounds: {title:'test', value: 0, history: []} }
 
   battle = apply_wounds_to_hero(battle, blow);
   t.equal(battle.heroes.hero.vars.HP, 7, 'dmg was NOT deducted from HP');
