@@ -2,7 +2,7 @@
 [ ] battle
 [ ]     createfromdef
 [/]     eachmonster->monsterentry (obs, rally!) // maybe do it like nextplayer is planned as? :D
-[ ]     newround->
+[/]     newround->
 [X]         *->eachplayer->returnchoice
 [X]         *->eachmonster->monstertargetchoice
 [X]         *->nextplayer
