@@ -7,7 +7,7 @@ export interface BattleDiceSpec {
 
 export function flow_battle_dice(battle: BattleState, {heroId}:BattleDiceSpec): FlowInstruction {
   let need:DiceSpec = {}
-  let chargingMonsters = find_monsters(battle,{}).filter(monsterId => battle.monsters[monsterId].vars.target === heroId);
+  let chargingMonsters = find_monsters(battle,{targetting: heroId});
   let hero = battle.heroes[heroId];
   if (chargingMonsters.length){
     need.defence = true;

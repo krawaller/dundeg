@@ -26,6 +26,7 @@ import { apply_state_to_hero, StateToHeroSpec } from '../apply/apply_state_to_he
 import { apply_remove_item, RemoveItemSpec } from '../apply/apply_remove_item';
 import { apply_state_to_monster, StateToMonsterSpec } from '../apply/apply_state_to_monster';
 import { apply_action_selection, ActionSelectionSpec } from '../apply/apply_action_selection';
+import { apply_onetime_pow_defence, OneTimePowDefenceSpec } from '../apply/apply_onetime_pow_defence';
 
 
 export function exec_apply(battle:BattleState, [,what,spec]:FlowApply): BattleState{
@@ -44,6 +45,7 @@ export function exec_apply(battle:BattleState, [,what,spec]:FlowApply): BattleSt
     case 'log': return apply_log(battle, <LogMessage>spec);
     case 'luncheonTruncheonThrow': return apply_luncheon_truncheon_throw(battle, <LuncheonTruncheonThrowSpec>spec);
     case 'monsterTargetChoice': return apply_target_selection_for_monster(battle, <TargetSelectionForMonsterSpec>spec);
+    case 'oneTimePowDefence': return apply_onetime_pow_defence(battle, <OneTimePowDefenceSpec>spec);
     case 'question': return  apply_question(battle, <Question>spec);
     case 'registerActionSelection': return apply_action_selection(battle, <ActionSelectionSpec>spec);
     case 'registerTestOutcome': return apply_register_test_outcome(battle, <Test>spec);

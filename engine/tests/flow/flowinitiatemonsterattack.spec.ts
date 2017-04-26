@@ -1,10 +1,10 @@
 import * as test from "tape";
-import { makeHero, makeMonster, execUntil } from '../testutils';
+import { makeHero, makeMonster, execUntil, reply } from '../testutils';
 
-import { BattleState, FlowPerformMonsterAttack, EvilAttack } from '../../src/interfaces';
+import { BattleState, FlowInitiateMonsterAttack, EvilAttack } from '../../src/interfaces';
 import { monsters } from '../../src/library';
 
-test('flow perform monster attack', t => {
+test('flow initiate monster attack', t => {
   let startingHP = 10;
   let battle: BattleState = {
     heroes: { hero: makeHero('infamousButcher',{HP:startingHP}) },
@@ -21,7 +21,7 @@ test('flow perform monster attack', t => {
   battle.heroes.hero.vars.defenceDice = [1,2];
   battle.heroes.hero.vars.powerDie = 3;
   battle.heroes.hero.vars.stance = 'defence';
-  result = execUntil(battle, <FlowPerformMonsterAttack>['flow','performMonsterAttack',{monsterId,attack}]);
+  result = execUntil(battle, <FlowInitiateMonsterAttack>['flow','initiateMonsterAttack',{monsterId,attack}]);
   t.equal(
     result.heroes.hero.vars.HP,
     startingHP - (DMG - 3),
@@ -31,7 +31,7 @@ test('flow perform monster attack', t => {
   battle.heroes.hero.vars.defenceDice = [1,3];
   battle.heroes.hero.vars.powerDie = 2;
   battle.heroes.hero.vars.stance = 'defence';
-  result = execUntil(battle, <FlowPerformMonsterAttack>['flow','performMonsterAttack',{monsterId,attack}]);
+  result = execUntil(battle, <FlowInitiateMonsterAttack>['flow','initiateMonsterAttack',{monsterId,attack}]);
   t.equal(
     result.heroes.hero.vars.HP,
     startingHP - (DMG - 3),
@@ -40,33 +40,50 @@ test('flow perform monster attack', t => {
 
   battle.heroes.hero.vars.powerDie = 5;
   battle.heroes.hero.vars.stance = 'assault';
-  result = execUntil(battle, <FlowPerformMonsterAttack>['flow','performMonsterAttack',{monsterId,attack}]);
+  result = execUntil(battle, <FlowInitiateMonsterAttack>['flow','initiateMonsterAttack',{monsterId,attack}]);
   t.equal(
     result.heroes.hero.vars.HP,
     startingHP - (DMG - 3),
     'assaulting hero ignores power die for defence, just uses defence die'
   );
 
+  battle.heroes.hero.vars.powerDie = 2;
   battle.heroes.hero.vars.failedDefence = true;
-  result = execUntil(battle, <FlowPerformMonsterAttack>['flow','performMonsterAttack',{monsterId,attack}]);
+
+  result = execUntil(battle, <FlowInitiateMonsterAttack>['flow','initiateMonsterAttack',{monsterId,attack}]);
+  result = reply(result, 'no');
   t.equal(
     result.heroes.hero.vars.HP,
     startingHP - DMG,
-    'failed defence means no defence val'
+    'failed defence and opt not to use pow means no defence val'
   );
 
-  battle.heroes.hero.vars.usePowForDefence = true;
-  battle.heroes.hero.vars.powerDie = 2;
-  result = execUntil(battle, <FlowPerformMonsterAttack>['flow','performMonsterAttack',{monsterId,attack}]);
+  result = execUntil(battle, <FlowInitiateMonsterAttack>['flow','initiateMonsterAttack',{monsterId,attack}]);
+  result = reply(result, 'yes');
   t.equal(
     result.heroes.hero.vars.HP,
     startingHP - (DMG - 2),
     'unless they choose to use POW die for defence'
   );
+  t.ok(
+    !result.heroes.hero.vars.usePowForDefence,
+    'usePowForDefence was removed afterwards'
+  );
+  t.ok(
+    result.heroes.hero.vars.hasUsedPowForDefence,
+    'hasUsedPowForDefence was set to prevent it from being used again'
+  );
 
-  delete battle.heroes.hero.vars.usePowForDefence
+  battle.heroes.hero.vars.hasUsedPowForDefence = true;
+  result = execUntil(battle, <FlowInitiateMonsterAttack>['flow','initiateMonsterAttack',{monsterId,attack}]);
+  t.equal(
+    result.heroes.hero.vars.HP,
+    startingHP - DMG,
+    'failed defence and already used pow means no question and no defence val'
+  );
+
   battle.heroes.hero.vars.failedEscape = true;
-  result = execUntil(battle, <FlowPerformMonsterAttack>['flow','performMonsterAttack',{monsterId,attack}]);
+  result = execUntil(battle, <FlowInitiateMonsterAttack>['flow','initiateMonsterAttack',{monsterId,attack}]);
   t.equal(
     result.heroes.hero.vars.HP,
     startingHP - DMG,

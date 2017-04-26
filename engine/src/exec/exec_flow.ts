@@ -32,6 +32,7 @@ import { flow_win_game } from '../flow/flow_win_game';
 import { flow_lose_game } from '../flow/flow_lose_game';
 import { flow_execute_action, ExecuteActionSpec } from '../flow/flow_execute_action';
 import { flow_select_action, SelectActionSpec } from '../flow/flow_select_action';
+import { flow_initiate_monster_attack, InitiateMonsterAttackSpec } from '../flow/flow_initiate_monster_attack';
 
 
 export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleState{
@@ -54,6 +55,7 @@ export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleSt
     case 'executeAction': newInstr = flow_execute_action(battle, <ExecuteActionSpec>spec); break;
     case 'flashBomb': newInstr = flow_flash_bomb(battle, <FlashBombSpec>spec); break;
     case 'heroTargetChoice': newInstr = flow_hero_target_choice(battle, <HeroTargetChoiceSpec>spec); break;
+    case 'initiateMonsterAttack': newInstr = flow_initiate_monster_attack(battle, <InitiateMonsterAttackSpec>spec); break;
     case 'loseGame': newInstr = flow_lose_game(battle,<any>spec); break;
     case 'monsterEntry': newInstr = flow_monster_entry(battle, <MonsterEntrySpec>spec); break;
     case 'monsterTargetChoice': newInstr = flow_monster_target_choice(battle,<MonsterTargetChoiceSpec>spec); break;

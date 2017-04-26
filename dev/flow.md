@@ -1,17 +1,17 @@
 
 [ ] battle
 [ ]     createfromdef
-[X]     eachmonster->monsterentry (obs, rally!) // maybe do it like nextplayer is planned as? :D
+[/]     eachmonster->monsterentry (obs, rally!) // maybe do it like nextplayer is planned as? :D
 [ ]     newround->
 [X]         *->eachplayer->returnchoice
 [X]         *->eachmonster->monstertargetchoice
-[ ]         *->nextplayer
-[X]             ?->playerround
+[X]         *->nextplayer
+[/]             ?->playerround
 [X]                 -> choose stance
 [X]                 -> choose action
 [X]                 -> roll battle dice
 [X]                 -> escape choice
-[X]                 -> bash player (unless escaped!)
+[X]                 -> bash player (unless escaped!) (including defence choice)
 [X]                 -> perform action (unless escaped!)
                     -> nextplayer
 [X]             ?->roundend

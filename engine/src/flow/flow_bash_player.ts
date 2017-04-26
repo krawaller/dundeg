@@ -19,13 +19,7 @@ export function flow_bash_player(battle: BattleState,{heroId}:BashPlayerSpec): F
   if (attackers.length){
     return ['flow','all',
       attackers.map(monsterId => (
-        <FlowInstruction>['flow','performMonsterAttack',{monsterId}]
-        /*<FlowInstruction>['apply','question',{
-          line: [{monsterRef:monsterId},'attacks',{heroRef:heroId}],
-          options: {
-            continue:  <FlowInstruction>['flow','performMonsterAttack',{monsterId}]
-          }
-        }]*/
+        <FlowInstruction>['flow','initiateMonsterAttack',{monsterId}]
       ))
     ];
   }

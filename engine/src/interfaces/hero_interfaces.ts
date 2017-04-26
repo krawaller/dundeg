@@ -31,6 +31,7 @@ export interface HeroVars {
   failedDefence?: true
   failedEscape?: true
   usePowForDefence?: true
+  hasUsedPowForDefence?: true
   knockedOutBy?: MonsterId
   hasActed?: true
   escaped?: true

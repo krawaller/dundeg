@@ -26,6 +26,7 @@ import { StateToHeroSpec } from '../apply/apply_state_to_hero';
 import { RemoveItemSpec } from '../apply/apply_remove_item';
 import { StateToMonsterSpec } from '../apply/apply_state_to_monster';
 import { ActionSelectionSpec } from '../apply/apply_action_selection';
+import { OneTimePowDefenceSpec } from '../apply/apply_onetime_pow_defence';
 
 export type ApplyAmbushResult = ['apply', 'ambushResult', AmbushResultSpec];
 export type ApplyBloodCurseResult = ['apply', 'bloodCurseResult', BloodCurseSpec];
@@ -41,6 +42,7 @@ export type ApplyIntroduceMonster = ['apply', 'introduceMonster', MonsterIntrodu
 export type ApplyLogMessage = ['apply', 'log', LogMessage];
 export type ApplyLuncheonTruncheonThrow = ['apply', 'luncheonTruncheonThrow', LuncheonTruncheonThrowSpec];
 export type ApplyMonsterTargetChoice = ['apply', 'monsterTargetChoice', TargetSelectionForMonsterSpec];
+export type ApplyOneTimePowDefence = ['apply','oneTimePowDefence', OneTimePowDefenceSpec];
 export type ApplyQuestion = ['apply','question',Question];
 export type ApplyRegisterActionSelection = ['apply', 'registerActionSelection', ActionSelectionSpec];
 export type ApplyRegisterTestOutcome = ['apply', 'registerTestOutcome', Test ];
@@ -69,6 +71,7 @@ export type FlowApply = // When add stuff here, must also add to exec/exec_apply
   ApplyLogMessage |
   ApplyLuncheonTruncheonThrow |
   ApplyMonsterTargetChoice |
+  ApplyOneTimePowDefence |
   ApplyQuestion |
   ApplyReroll |
   ApplyRegisterActionSelection |
@@ -109,6 +112,7 @@ import { PlayerRoundSpec } from '../flow/flow_player_round';
 import { BashPlayerSpec } from '../flow/flow_bash_player';
 import { ExecuteActionSpec } from '../flow/flow_execute_action';
 import { SelectActionSpec } from '../flow/flow_select_action';
+import { InitiateMonsterAttackSpec } from '../flow/flow_initiate_monster_attack';
 
 export type FlowAll = ['flow','all', any[]];
 export type FlowAmbush = ['flow','ambush', InitiateAmbushSpec];
@@ -125,6 +129,7 @@ export type FlowEachMonster = ['flow', 'eachMonster', EachMonsterSpec];
 export type FlowExecuteAction = ['flow', 'executeAction', ExecuteActionSpec];
 export type FlowFlashBomb = ['flow', 'flashBomb', FlashBombSpec];
 export type FlowHeroTargetChoice = ['flow', 'heroTargetChoice', HeroTargetChoiceSpec];
+export type FlowInitiateMonsterAttack = ['flow','initiateMonsterAttack', InitiateMonsterAttackSpec];
 export type FlowLoseGame = ['flow', 'loseGame', any];
 export type FlowMonsterEntry = ['flow', 'monsterEntry', MonsterEntrySpec];
 export type FlowMonsterTargetChoice = ['flow', 'monsterTargetChoice', MonsterTargetChoiceSpec];
@@ -162,6 +167,7 @@ export type FlowFurther = // When add stuff here, must also add to exec/exec_flo
   FlowExecuteAction |
   FlowFlashBomb |
   FlowHeroTargetChoice |
+  FlowInitiateMonsterAttack |
   FlowLoseGame |
   FlowMonsterEntry |
   FlowMonsterTargetChoice |
