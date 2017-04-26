@@ -40,7 +40,8 @@ export interface BattleState {
   log?: LogMessage[]
   question?: Question
   seed?: string
-  stack?: FlowInstruction[]
+  stack?: FlowInstruction[],
+  round?: number
 }
 
 export type LogMessageLine = LogMessagePart[]

@@ -49,6 +49,7 @@ export type ApplyRegisterTestOutcome = ['apply', 'registerTestOutcome', Test ];
 export type ApplyRemoveItem = ['apply', 'removeItem', RemoveItemSpec];
 export type ApplyReroll = ['apply', 'reroll', RerollSpec ];
 export type ApplyReturnToBattle = ['apply', 'returnToBattle', ReturnToBattleSpec];
+export type ApplyRoundStart = ['apply', 'roundStart', any];
 export type ApplyStanceChoice = ['apply', 'stanceChoice', ApplyStanceChoiceToHeroSpec];
 export type ApplyStateToHero = ['apply', 'stateToHero', StateToHeroSpec];
 export type ApplyStateToMonster = ['apply', 'stateToMonster', StateToMonsterSpec];
@@ -78,6 +79,7 @@ export type FlowApply = // When add stuff here, must also add to exec/exec_apply
   ApplyRegisterTestOutcome |
   ApplyRemoveItem |
   ApplyReturnToBattle |
+  ApplyRoundStart |
   ApplyStanceChoice |
   ApplyStateToHero |
   ApplyStateToMonster |
@@ -118,6 +120,7 @@ export type FlowAll = ['flow','all', any[]];
 export type FlowAmbush = ['flow','ambush', InitiateAmbushSpec];
 export type FlowBashPlayer = ['flow','bashPlayer',BashPlayerSpec];
 export type FlowBattleDice = ['flow','battleDice',BattleDiceSpec];
+export type FlowBeginBattle = ['flow','beginBattle',any];
 export type FlowBloodCurse = ['flow','bloodCurse', InitiateBloodCurseSpec];
 export type FlowDaemonsBlood = ['flow','daemonsBlood', ThrowDaemonsBloodSpec];
 export type FlowDetonateShrapnelBomb = ['flow', 'detonateShrapnelBomb', DetonateShrapnelBombSpec];
@@ -156,6 +159,7 @@ export type FlowFurther = // When add stuff here, must also add to exec/exec_flo
   FlowAmbush |
   FlowBashPlayer |
   FlowBattleDice |
+  FlowBeginBattle |
   FlowBloodCurse |
   FlowDaemonsBlood |
   FlowDetonateShrapnelBomb |
