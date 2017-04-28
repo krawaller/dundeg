@@ -2,9 +2,16 @@
   "compilerOptions": {
     "target": "es5",
     "sourceMap": true,
+    "moduleResolution": "node",
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react",
+    "lib": [
+      "dom",
+      "es2015",
+      "es5"
+    ],
+    "types": ["react","react-dom","redux","react-redux"]
   },
-  "exclude": ["node_modules"],
-  "types": ["core-js","bluebird"]
+  "exclude": ["node_modules"]
 }

@@ -3,22 +3,39 @@
     "@types/bluebird": "^3.5.0",
     "@types/core-js": "^0.9.35",
     "@types/tape": "^4.2.29",
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-es2016": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "bluebird": "^3.5.0",
     "tap-spec": "^4.1.1",
     "tape": "^4.6.3",
     "ts-loader": "^1.3.3",
     "ts-node": "^2.1.0",
     "typescript": "^2.1.5",
-    "webpack": "^1.14.0"
+    "webpack": "2.4.1"
   },
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --display-error-details",
     "test": "ts-node node_modules/tape/bin/tape engine/tests/**/*.ts | node_modules/.bin/tap-spec",
     "testthis": "ts-node node_modules/tape/bin/tape engine/tests/flow/flowinitiatemonsterattack.spec.ts | node_modules/.bin/tap-spec",
     "tryseed": "ts-node engine/tests/tryseed.ts"
   },
   "dependencies": {
+    "@types/react": "^15.0.23",
+    "@types/react-dom": "^15.5.0",
+    "@types/react-redux": "^4.4.40",
+    "@types/redux": "^3.6.0",
     "lodash": "^4.17.4",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-redux": "^5.0.4",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0",
     "seedrandom": "^2.4.2"
   }
 }

@@ -33,6 +33,7 @@ import { flow_lose_game } from '../flow/flow_lose_game';
 import { flow_execute_action, ExecuteActionSpec } from '../flow/flow_execute_action';
 import { flow_select_action, SelectActionSpec } from '../flow/flow_select_action';
 import { flow_initiate_monster_attack, InitiateMonsterAttackSpec } from '../flow/flow_initiate_monster_attack';
+import { flow_begin_battle } from '../flow/flow_begin_battle';
 
 
 export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleState{
@@ -44,6 +45,7 @@ export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleSt
     case 'ambush': newInstr = flow_ambush(battle, <InitiateAmbushSpec>spec); break;
     case 'bashPlayer': newInstr = flow_bash_player(battle, <BashPlayerSpec>spec); break;
     case 'battleDice': newInstr = flow_battle_dice(battle, <BattleDiceSpec>spec); break;
+    case 'beginBattle': newInstr = flow_begin_battle(battle, spec); break;
     case 'bloodCurse': newInstr = flow_bloodcurse(battle, <InitiateBloodCurseSpec>spec); break;
     case 'daemonsBlood': newInstr = flow_daemons_blood(battle, <ThrowDaemonsBloodSpec>spec); break;
     case 'detonateShrapnelBomb': newInstr = flow_detonate_shrapnel_bomb(battle, <DetonateShrapnelBombSpec>spec); break;
