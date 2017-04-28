@@ -7,7 +7,7 @@ import { LogLine } from './logline';
 export interface ReplierProps {
   question: Question,
   battle: BattleState
-}212
+}
 
 export class Replier extends React.Component<ReplierProps,undefined> {
   render(){

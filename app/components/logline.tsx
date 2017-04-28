@@ -1,27 +1,13 @@
 import * as React from 'react';
-import { typedConnect } from '../connector';
+import { withBattle } from '../connector';
 
 import { BattleState, LogMessageLine, LogMessagePart, CalculationResult, LogMessageHeroRef, LogMessageMonsterRef } from '../../engine/src/interfaces';
 
 import { heroes } from '../../engine/src/library/heroes';
 
-export type LogLineProps = StateProps & GivenProps;
+export interface GivenProps { line: LogMessageLine }
 
-export interface GivenProps {
-  line: LogMessageLine
-}
-
-export interface StateProps {
-  battle: BattleState
-}
-
-import { AppState } from '../interfaces';
-
-const mapStateToProps = (appState: AppState, givenProps: GivenProps)=> ({
-  battle: appState.battle
-});
-
-export const LogLine = typedConnect(mapStateToProps)((props)=>{
+export const LogLine = withBattle<GivenProps>((props)=>{
   function renderItem(item:LogMessagePart){
     if (typeof item === 'string'){
       return item;

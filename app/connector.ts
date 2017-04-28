@@ -1,5 +1,6 @@
 import { AppState, Dispatch } from './interfaces';
 import {connect} from 'react-redux';
+import { BattleState } from '../engine/src/interfaces';
 
 //https://www.silviogutierrez.com/blog/react-redux-and-typescript-typed-connect/
 
@@ -17,4 +18,14 @@ export function typedConnect<OwnProps, StateProps, DispatchProps>(
         // And export a component that only takes OwnProps.
         return connect(mapStateToProps, mapDispatchToProps as any)(component) as any as React.StatelessComponent<OwnProps>;
     }
+}
+
+interface justBattle {
+    battle:BattleState
+}
+
+export function withBattle<T>(component: React.StatelessComponent<T & justBattle>){
+    return typedConnect<T,justBattle,any>(
+        appState => ({battle: appState.battle})
+    )(component);
 }
