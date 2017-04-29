@@ -9,6 +9,9 @@ interface FindHeroesSpec {
 
 export function find_heroes(battle: BattleState, {reason,group}:FindHeroesSpec = {}): HeroId[] {
   let ret = Object.keys(battle.heroes);
+  if (group === 'escaped'){
+    return ret.filter(heroId => battle.heroes[heroId].vars.escaped);
+  }
   ret = ret.filter(heroId => isHeroAlive(battle.heroes[heroId]));
   if (group === 'notActed'){
     ret = ret.filter(heroId => !battle.heroes[heroId].vars.hasActed);

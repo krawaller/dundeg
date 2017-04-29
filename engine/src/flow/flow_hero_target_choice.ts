@@ -17,8 +17,8 @@ export function flow_hero_target_choice(battle: BattleState, {heroId,line}:HeroT
     return mem;
   },{targettingMe:[], targettingOthers: []});
   let possibleIds = targettingMe.length ? targettingMe : targettingOthers;
-
-  if (possibleIds.length === 1){ // TODO - really?
+  const autoChoice = false;
+  if (autoChoice && possibleIds.length === 1){ // TODO - really? NO!
     return <ApplyHeroTargetChoice>['apply', 'heroTargetChoice', {heroId: heroId, monsterId: possibleIds[0]}];
   } else {
     return <ApplyQuestion>['apply','question',{

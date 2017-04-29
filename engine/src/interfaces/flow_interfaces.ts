@@ -115,6 +115,7 @@ import { BashPlayerSpec } from '../flow/flow_bash_player';
 import { ExecuteActionSpec } from '../flow/flow_execute_action';
 import { SelectActionSpec } from '../flow/flow_select_action';
 import { InitiateMonsterAttackSpec } from '../flow/flow_initiate_monster_attack';
+import { EachEscapedHeroSpec } from '../flow/flow_each_escaped_hero';
 
 export type FlowAll = ['flow','all', any[]];
 export type FlowAmbush = ['flow','ambush', InitiateAmbushSpec];
@@ -127,6 +128,7 @@ export type FlowDetonateShrapnelBomb = ['flow', 'detonateShrapnelBomb', Detonate
 export type FlowDiceRoll = ['flow','diceRoll', MakeRollSpec];
 export type FlowDimwit = ['flow','dimwit', InitiateDimwitSpec];
 export type FlowEscapeChoice = ['flow', 'escapeChoice', HeroOfferEscapeChoiceSpec];
+export type FlowEachEscapedHero = ['flow', 'eachEscapedHero', EachEscapedHeroSpec];
 export type FlowEachHero = ['flow', 'eachHero', EachHeroSpec];
 export type FlowEachMonster = ['flow', 'eachMonster', EachMonsterSpec];
 export type FlowExecuteAction = ['flow', 'executeAction', ExecuteActionSpec];
@@ -165,6 +167,7 @@ export type FlowFurther = // When add stuff here, must also add to exec/exec_flo
   FlowDetonateShrapnelBomb |
   FlowDiceRoll |
   FlowDimwit |
+  FlowEachEscapedHero |
   FlowEachHero |
   FlowEachMonster |
   FlowEscapeChoice |

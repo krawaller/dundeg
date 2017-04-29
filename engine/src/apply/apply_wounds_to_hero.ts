@@ -33,9 +33,9 @@ export function apply_wounds_to_hero (battle: BattleState, {heroId,monsterId,wou
     if (wounds.value){
       target.vars.HP -= wounds.value;
       if (!target.vars.HP){
-        addLog(ret, [heroRef, 'took', wounds, 'and was knocked out!'] );
+        addLog(ret, [heroRef, 'took', wounds, 'wounds and was knocked out!'] );
       } else {
-        addLog(ret, [heroRef, 'took', wounds] );
+        addLog(ret, [heroRef, 'took', wounds, 'wounds'] );
       }
       if (blueprint.skills.drain){
         ret.monsters[monsterId].vars.drained = (monster.vars.drained || 0) + wounds.value;
@@ -53,7 +53,7 @@ export function apply_wounds_to_hero (battle: BattleState, {heroId,monsterId,wou
         }
       }
     } else {
-      addLog(ret, [heroRef, 'took', wounds] ); // 0 damage, still want to expose calculation
+      addLog(ret, [heroRef, 'took', wounds, 'wounds'] ); // 0 damage, still want to expose calculation
     }
   }
   return ret;

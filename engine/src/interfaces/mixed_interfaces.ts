@@ -45,7 +45,7 @@ export interface BattleState {
 }
 
 export type LogMessageLine = LogMessagePart[]
-export type LogMessageType = 'info' | 'action' | 'monsterAction' | 'verbose' | 'fail' | 'success'
+export type LogMessageType = 'info' | 'action' | 'monsterAction' | 'verbose' | 'fail' | 'success' | 'reply'
 export type LogMessagePart = string | LogMessageMonsterRef | LogMessageHeroRef | CalculationResult | LogMessageItemRef
 export interface LogMessage {
   type: LogMessageType
@@ -89,4 +89,4 @@ export interface DiceSpec {
 }
 
 
-export type HeroGroup = 'standing' | 'notActed'
+export type HeroGroup = 'standing' | 'notActed' | 'escaped'

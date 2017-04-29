@@ -23,7 +23,15 @@ export function flow_battle_dice(battle: BattleState, {heroId}:BattleDiceSpec): 
   }
 
   if (Object.keys(need).length){
-    return <FlowInstruction>['flow','diceRoll',{heroId,diceTypes:need,line:['Roll battle dice!']}];
+    let msg;
+    if (need.defence && need.attack){
+      msg = 'will attack and be attacked';
+    } else if (!need.attack) {
+      msg = 'will be attacked';
+    } else {
+      msg = 'will attack'
+    }
+    return <FlowInstruction>['flow','diceRoll',{heroId,diceTypes:need,line:[{heroRef:heroId},msg+' so must roll battle dice!']}];
   }
   return undefined;
 }

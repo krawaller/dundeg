@@ -34,6 +34,7 @@ import { flow_execute_action, ExecuteActionSpec } from '../flow/flow_execute_act
 import { flow_select_action, SelectActionSpec } from '../flow/flow_select_action';
 import { flow_initiate_monster_attack, InitiateMonsterAttackSpec } from '../flow/flow_initiate_monster_attack';
 import { flow_begin_battle } from '../flow/flow_begin_battle';
+import { flow_each_escaped_hero, EachEscapedHeroSpec } from '../flow/flow_each_escaped_hero';
 
 
 export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleState{
@@ -51,6 +52,7 @@ export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleSt
     case 'detonateShrapnelBomb': newInstr = flow_detonate_shrapnel_bomb(battle, <DetonateShrapnelBombSpec>spec); break;
     case 'diceRoll': newInstr = flow_dice_roll(battle, <MakeRollSpec>spec); break;
     case 'dimwit': newInstr = flow_dimwit(battle, <InitiateDimwitSpec>spec); break;
+    case 'eachEscapedHero': newInstr = flow_each_escaped_hero(battle, <EachEscapedHeroSpec>spec); break;
     case 'eachHero': newInstr = flow_each_hero(battle, <EachHeroSpec>spec); break;
     case 'eachMonster': newInstr = flow_each_monster(battle, <EachMonsterSpec>spec); break;
     case 'escapeChoice': newInstr = flow_hero_offer_escape_choice(battle, <HeroOfferEscapeChoiceSpec>spec); break;

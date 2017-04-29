@@ -4,22 +4,20 @@ import { Question, BattleState } from '../../engine/src/interfaces';
 
 import { LogLine } from './logline';
 
-export interface ReplierProps {
-  question: Question,
-  battle: BattleState
-}
+import { withBattle } from '../connector';
 
-export class Replier extends React.Component<ReplierProps,undefined> {
-  render(){
-    let btns = [];
-    for(let opt in (this.props.question.options)){
-      btns.push(<button key={opt}>{opt}</button>);
-    }
-    return (
-      <div>
-        <LogLine line={this.props.question.line} />
-        {btns}
-      </div>
-    )
+export const Replier = withBattle(props => {
+  if (!props.battle.question){
+    return <div></div>;
   }
-}
+  let btns = [];
+  for(let opt in (props.battle.question.options)){
+    btns.push(<button key={opt} onClick={()=> props.reply(opt)}>{opt}</button>);
+  }
+  return (
+    <div>
+      <LogLine line={props.battle.question.line} />
+      {btns}
+    </div>
+  )
+});

@@ -6,11 +6,12 @@ Will also go to round end if there was no next player.
 import { BattleState, FlowInstruction, ApplyQuestion, LogMessageLine } from '../interfaces';
 import { heroes } from '../library/heroes';
 import { find_heroes } from '../find/find_heroes';
+import { find_monsters } from '../find/find_monsters';
 import { find_party_stat } from '../find/find_party_stat';
 
 export function flow_next_player(battle: BattleState, spec: any): FlowInstruction {
   let party = find_party_stat(battle,{stat:'PER', reason:'playerOrder', group: 'notActed'});
-  if (party.ordered.length === 0){
+  if (party.ordered.length === 0 || find_monsters(battle, {}).length === 0){
     return ['flow','roundEnd',{}];
   } else if (party.ordered[0].heroes.length === 1){
     let nextId = party.ordered[0].heroes[0];

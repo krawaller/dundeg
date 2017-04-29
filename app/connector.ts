@@ -1,6 +1,7 @@
 import { AppState, Dispatch } from './interfaces';
 import {connect} from 'react-redux';
 import { BattleState } from '../engine/src/interfaces';
+import { actions } from './actions';
 
 //https://www.silviogutierrez.com/blog/react-redux-and-typescript-typed-connect/
 
@@ -24,8 +25,13 @@ interface justBattle {
     battle:BattleState
 }
 
-export function withBattle<T>(component: React.StatelessComponent<T & justBattle>){
+interface actions {
+    reply: Function
+}
+
+export function withBattle<T>(component: React.StatelessComponent<T & justBattle & actions>){
     return typedConnect<T,justBattle,any>(
-        appState => ({battle: appState.battle})
+        appState => ({battle: appState.battle}),
+        dispatch => ({reply: (opt)=> dispatch(actions.reply(opt))})
     )(component);
 }

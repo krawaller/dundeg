@@ -6,7 +6,7 @@
 [X]         *->eachplayer->returnchoice
 [X]         *->eachmonster->monstertargetchoice
 [X]         *->nextplayer
-[/]             ?->playerround
+[/]             ?->playerround (if monsters alive!)
 [X]                 -> choose stance
 [X]                 -> choose action
 [X]                 -> roll battle dice

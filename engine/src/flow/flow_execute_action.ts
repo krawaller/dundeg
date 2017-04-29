@@ -10,9 +10,12 @@ export interface ExecuteActionSpec {
 }
 
 export function flow_execute_action(battle: BattleState, {heroId}:ExecuteActionSpec): FlowInstruction {
-  let action = battle.heroes[heroId].vars.action;
-  if (!action){
-    throw "Wanted to perform action for "+heroId+" but no action was selected!";
+  let hero = battle.heroes[heroId]
+  if (!hero.vars.escaped){
+    let action = hero.vars.action;
+    if (!action){
+      throw "Wanted to perform action for "+heroId+" but no action was selected!";
+    }
+    return action;
   }
-  return action;
 }

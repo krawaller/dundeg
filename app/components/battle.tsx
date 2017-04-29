@@ -13,7 +13,7 @@ export const Battle = withBattle(props=>{
   ).reverse()
   return (
     <div>
-      { b.question && <Replier question={b.question} battle={b} /> }
+      { b.question && <Replier/> }
       <ul>
         {log}
       </ul>
