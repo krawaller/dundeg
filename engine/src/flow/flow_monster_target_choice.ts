@@ -30,6 +30,7 @@ export function flow_monster_target_choice(battle: BattleState, {monsterId}:Mons
         calculation: party.individual[heroId]
       }];
     });
+    line = line.concat(['Who should',{monsterRef:monsterId},'target?'])
     return <ApplyQuestion>['apply','question',{
       line: line,
       options: opts

@@ -15,7 +15,7 @@ export function flow_initiate_monster_attack(battle: BattleState, {monsterId, at
   let hero = battle.heroes[heroId];
   if (hero.vars.powerDie && hero.vars.failedDefence && !hero.vars.hasUsedPowForDefence){
     return <ApplyQuestion>['apply','question',{
-      line: ['Will',{heroRef:heroId},'use POW to defend (can do once per round when fail defence)?'],
+      line: ['Will',{heroRef:heroId},'use POW to defend (can do once per round when fail defence) against',{monsterRef:monsterId},'?'],
       options: {
         yes: ['flow','all',[
           <FlowInstruction>['apply','oneTimePowDefence',{heroId, when: 'before'}],

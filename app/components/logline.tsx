@@ -28,8 +28,8 @@ export const LogLine = withBattle<GivenProps>((props)=>{
     console.log("whats going on?!", props)
   }
   return (
-    <div className="logline">
+    <span className="logline">
       {props.line.map( renderItem )}
-    </div>
+    </span>
   );
 });

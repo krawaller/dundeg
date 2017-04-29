@@ -27,10 +27,12 @@ import { RemoveItemSpec } from '../apply/apply_remove_item';
 import { StateToMonsterSpec } from '../apply/apply_state_to_monster';
 import { ActionSelectionSpec } from '../apply/apply_action_selection';
 import { OneTimePowDefenceSpec } from '../apply/apply_onetime_pow_defence';
+import { DefenceOutcomeSpec } from '../apply/apply_defence_outcome';
 
 export type ApplyAmbushResult = ['apply', 'ambushResult', AmbushResultSpec];
 export type ApplyBloodCurseResult = ['apply', 'bloodCurseResult', BloodCurseSpec];
 export type ApplyDaemonsBlood = ['apply', 'daemonsBlood', DaemonsBloodSpec];
+export type ApplyDefenceOutcome = ['apply', 'defenceOutcome', DefenceOutcomeSpec];
 export type ApplyDiceRemoval =  ['apply', 'diceRemoval', DiceRemovalSpec];
 export type ApplyDiceRoll =   ['apply', 'diceRoll', DiceRollSpec];
 export type ApplyDimwitResult = ['apply', 'dimwitResult', DimwitResultSpec];
@@ -61,6 +63,7 @@ export type FlowApply = // When add stuff here, must also add to exec/exec_apply
   ApplyAmbushResult |
   ApplyBloodCurseResult |
   ApplyDaemonsBlood |
+  ApplyDefenceOutcome |
   ApplyDiceRemoval |
   ApplyDiceRoll |
   ApplyDimwitResult |

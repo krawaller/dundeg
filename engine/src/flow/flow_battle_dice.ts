@@ -31,7 +31,10 @@ export function flow_battle_dice(battle: BattleState, {heroId}:BattleDiceSpec): 
     } else {
       msg = 'will attack'
     }
-    return <FlowInstruction>['flow','diceRoll',{heroId,diceTypes:need,line:[{heroRef:heroId},msg+' so must roll battle dice!']}];
+    return ['flow','all',[
+      <FlowInstruction>['flow','diceRoll',{heroId,diceTypes:need,line:[{heroRef:heroId},msg+' so must roll battle dice!']}],
+      <FlowInstruction>['apply','defenceOutcome',{heroId}]
+    ]];
   }
   return undefined;
 }

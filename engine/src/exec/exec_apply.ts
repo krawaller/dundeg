@@ -28,12 +28,14 @@ import { apply_state_to_monster, StateToMonsterSpec } from '../apply/apply_state
 import { apply_action_selection, ActionSelectionSpec } from '../apply/apply_action_selection';
 import { apply_onetime_pow_defence, OneTimePowDefenceSpec } from '../apply/apply_onetime_pow_defence';
 import { apply_round_start } from '../apply/apply_round_start';
+import { apply_defence_outcome, DefenceOutcomeSpec } from '../apply/apply_defence_outcome';
 
 export function exec_apply(battle:BattleState, [,what,spec]:FlowApply): BattleState{
   switch(what){
     case 'ambushResult': return apply_ambush_result(battle, <AmbushResultSpec>spec);
     case 'bloodCurseResult': return apply_blood_curse_invocation_result(battle, <BloodCurseSpec>spec);
     case 'daemonsBlood': return apply_daemons_blood(battle, <DaemonsBloodSpec>spec);
+    case 'defenceOutcome': return apply_defence_outcome(battle, <DefenceOutcomeSpec>spec);
     case 'diceRemoval': return apply_dice_removal(battle, <DiceRemovalSpec>spec);
     case 'diceRoll': return apply_dice_roll(battle, <DiceRollSpec>spec);
     case 'dimwitResult': return apply_dimwit_result(battle, <DimwitResultSpec>spec);
