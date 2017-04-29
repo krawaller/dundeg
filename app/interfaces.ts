@@ -2,7 +2,7 @@ import { BattleState, CalculationResult } from '../engine/src/interfaces'
 
 export interface AppState {
   battle?: BattleState
-  calculation?: CalculationResult
+  calculation: CalculationResult[]
 }
 
 export type Action = {

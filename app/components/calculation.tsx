@@ -6,23 +6,22 @@ import { LogLine } from './logline';
 
 import { withBattle } from '../connector';
 
-export interface GivenProps { calculation: CalculationResult }
-
-export const Calculation = withBattle<GivenProps>(props => {
-  let rows = props.calculation.history.map((entry,n)=>(
+export const Calculation = withBattle(props => {
+  let rows = props.calculation[0].history.map((entry,n)=>(
     <tr key={n}>
-      <td><LogLine line={entry[0]} /></td>
+      <td><LogLine line={entry[0]} where="calc" /></td>
       <td>{entry[1]}</td>
     </tr>
   ));
   return (
     <div className='calctable'>
-      <strong>Calculating {props.calculation.title}</strong>
+      {props.calculation.length > 1 && <button onClick={e=>props.backCalculation()}>back</button>}
+      <strong>Calculating {props.calculation[0].title}</strong>
       <table>
         <tbody>
           {rows}
         </tbody>
       </table>
     </div>
-  )
+  );
 });

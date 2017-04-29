@@ -1,3 +1,5 @@
+import { CalculationResult } from '../engine/src/interfaces'
+
 export const actions = {
   reply(opt){
     return {
@@ -5,11 +7,17 @@ export const actions = {
       option: opt
     };
   },
-  showCalculation(calc){
+  showCalculation(calc:CalculationResult,dig?: string){
     console.log("CALC",calc);
     return {
       type: 'showcalc',
-      calc: calc
-    }
+      calc: calc,
+      dig: dig
+    };
+  },
+  backCalculation(){
+    return {
+      type: 'backcalc'
+    };
   }
 };

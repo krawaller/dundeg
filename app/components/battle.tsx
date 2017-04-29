@@ -12,6 +12,7 @@ export const Battle = withBattle(props=>{
   let log = props.battle.log.map(
     (msg,n) => <li key={n}><LogLine key={n} line={msg.line}/></li>
   ).reverse()
+  console.log("WTF",props);
   return (
     <div className="battle">
       <div>
@@ -21,7 +22,7 @@ export const Battle = withBattle(props=>{
         </ul>
       </div>
       <div>
-        {props.calculation && <Calculation calculation={props.calculation}/>}
+        {props.calculation.length > 0 ? <Calculation/> : undefined}
       </div>
     </div>
   )

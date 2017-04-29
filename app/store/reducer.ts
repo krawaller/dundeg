@@ -14,8 +14,13 @@ export function reducer(currentState: AppState, action): AppState{
     case 'showcalc':
       return {
         ...currentState,
-        calculation: action.calc
-      }
+        calculation: action.dig ? [action.calc].concat(currentState.calculation) : [action.calc]
+      };
+    case 'backcalc':
+      return {
+        ...currentState,
+        calculation: currentState.calculation.slice(1)
+      };
     default: return currentState;
   }
 }

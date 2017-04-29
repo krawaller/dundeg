@@ -23,17 +23,22 @@ export function typedConnect<OwnProps, StateProps, DispatchProps>(
 
 interface stateProps {
     battle:BattleState,
-    calculation: CalculationResult
+    calculation: CalculationResult[]
 }
 
 interface actions {
     reply: Function,
-    showCalculation: Function
+    showCalculation: Function,
+    backCalculation: Function
 }
 
 export function withBattle<T>(component: React.StatelessComponent<T & stateProps & actions>){
     return typedConnect<T,stateProps,any>(
         appState => ({battle: appState.battle, calculation: appState.calculation}),
-        dispatch => ({reply: (opt)=> dispatch(actions.reply(opt)), showCalculation: (calc)=> dispatch(actions.showCalculation(calc))})
+        dispatch => ({
+            reply: (opt)=> dispatch(actions.reply(opt)),
+            showCalculation: (calc,dig)=> dispatch(actions.showCalculation(calc,dig)),
+            backCalculation: ()=> dispatch(actions.backCalculation())
+        })
     )(component);
 }

@@ -21,4 +21,4 @@ let battle: BattleState = {
 battle = exec_flow(battle, ['flow','beginBattle',{}]);
 battle = exec_until(battle);
 
-export const store = createStore( reducer, <any>{battle} );
+export const store = createStore( reducer, <any>{battle,calculation:[]} );

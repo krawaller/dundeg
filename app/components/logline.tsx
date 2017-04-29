@@ -5,14 +5,14 @@ import { BattleState, LogMessageLine, LogMessagePart, LogMessageItemRef, Calcula
 
 import { heroes } from '../../engine/src/library/heroes';
 
-export interface GivenProps { line: LogMessageLine }
+export interface GivenProps { line: LogMessageLine, where?: string }
 
 export const LogLine = withBattle<GivenProps>((props)=>{
   function renderItem(item:LogMessagePart,n){
     if (typeof item === 'string'){
       return <span key={n}>{item}</span>;
     } else if ((item as CalculationResult).hasOwnProperty('value')){
-      return <span key={n} onClick={e=>props.showCalculation(item)} className='calculation'>{(item as CalculationResult).value}</span>;
+      return <span key={n} onClick={e=>props.showCalculation(item,props.where === 'calc')} className='calculation'>{(item as CalculationResult).value}</span>;
     } else if ((item as LogMessageHeroRef).heroRef){
       return <span key={n}>{heroes[props.battle.heroes[(item as LogMessageHeroRef).heroRef].blueprint].name}</span>;
     } else if ((item as LogMessageMonsterRef).monsterRef){
