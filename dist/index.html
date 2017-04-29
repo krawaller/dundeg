@@ -5,6 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Dungeon Degenerates</title>
+  <style>
+    .logline > * {
+      margin-right: 8px;
+    }
+    .calculation {
+      border: 1px solid rebeccapurple;
+      padding: 0 3px;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: cornsilk;
+    }
+    .calculation:hover {
+      background-color: bisque;
+    }
+    .battle {
+      display: flex;
+    }
+    .calctable table {
+      border-collapse: collapse;
+    }
+    .calctable table td {
+      border: 1px solid #CCC;
+      font-family: monospace;
+      font-size: 0.9em;
+    }
+    .battle > div:first-child {
+      flex: 1;
+    }
+    .battle > div:last-child {
+      flex: 0.8;
+    }
+  </style>
 </head>
 <body>
   <div id="wrapper"></div>

@@ -2,10 +2,12 @@ import { HeroStatName, HeroState, HeroId, HeroSkillName } from './hero_interface
 import { MonsterState } from './monster_interfaces';
 import { ItemName } from './item_interfaces';
 
+export type CalculationResultStep = [LogMessageLine,number];
+
 export interface CalculationResult {
   title: string
   value: any,
-  history: any[]
+  history: CalculationResultStep[]
 }
 
 export interface AttackOptions {

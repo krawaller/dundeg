@@ -1,6 +1,6 @@
 import { AppState, Dispatch } from './interfaces';
 import {connect} from 'react-redux';
-import { BattleState } from '../engine/src/interfaces';
+import { BattleState, CalculationResult } from '../engine/src/interfaces';
 import { actions } from './actions';
 
 //https://www.silviogutierrez.com/blog/react-redux-and-typescript-typed-connect/
@@ -21,17 +21,19 @@ export function typedConnect<OwnProps, StateProps, DispatchProps>(
     }
 }
 
-interface justBattle {
-    battle:BattleState
+interface stateProps {
+    battle:BattleState,
+    calculation: CalculationResult
 }
 
 interface actions {
-    reply: Function
+    reply: Function,
+    showCalculation: Function
 }
 
-export function withBattle<T>(component: React.StatelessComponent<T & justBattle & actions>){
-    return typedConnect<T,justBattle,any>(
-        appState => ({battle: appState.battle}),
-        dispatch => ({reply: (opt)=> dispatch(actions.reply(opt))})
+export function withBattle<T>(component: React.StatelessComponent<T & stateProps & actions>){
+    return typedConnect<T,stateProps,any>(
+        appState => ({battle: appState.battle, calculation: appState.calculation}),
+        dispatch => ({reply: (opt)=> dispatch(actions.reply(opt)), showCalculation: (calc)=> dispatch(actions.showCalculation(calc))})
     )(component);
 }

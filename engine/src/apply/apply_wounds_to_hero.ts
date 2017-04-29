@@ -21,14 +21,14 @@ export function apply_wounds_to_hero (battle: BattleState, {heroId,monsterId,wou
   if (blueprint.skills.thief){
     if (wounds.value > target.vars.gold){
       wounds.value = target.vars.gold;
-      wounds.history.push([heroRef,'only had '+target.vars.gold+' gold']);
+      wounds.history.push([[heroRef,'only had '+target.vars.gold+' gold'],target.vars.gold]);
     }
     target.vars.gold -= wounds.value;
     addLog(ret, [heroRef, 'lost', wounds, 'gold'] );
   } else {
     if (wounds.value > target.vars.HP){
       wounds.value = target.vars.HP;
-      wounds.history.push([heroRef,'only had '+target.vars.HP+' HP']);
+      wounds.history.push([[heroRef,'only had '+target.vars.HP+' HP'],target.vars.HP]);
     }
     if (wounds.value){
       target.vars.HP -= wounds.value;

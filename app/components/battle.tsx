@@ -5,6 +5,7 @@ import { BattleState } from '../../engine/src/interfaces';
 
 import { LogLine } from './logline';
 import { Replier } from './replier';
+import { Calculation } from './calculation';
 
 export const Battle = withBattle(props=>{
   let b = props.battle;
@@ -12,11 +13,16 @@ export const Battle = withBattle(props=>{
     (msg,n) => <li key={n}><LogLine key={n} line={msg.line}/></li>
   ).reverse()
   return (
-    <div>
-      { b.question && <Replier/> }
-      <ul>
-        {log}
-      </ul>
+    <div className="battle">
+      <div>
+        { b.question && <Replier/> }
+        <ul>
+          {log}
+        </ul>
+      </div>
+      <div>
+        {props.calculation && <Calculation calculation={props.calculation}/>}
+      </div>
     </div>
   )
 });

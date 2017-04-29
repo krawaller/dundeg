@@ -9,8 +9,12 @@ export interface ThrowShrapnelBombSpec {
 
 export function flow_throw_shrapnel_bomb(battle: BattleState, {heroId}:ThrowShrapnelBombSpec): FlowInstruction {
   return ['flow','all',[
+    ['apply','log',{
+      line: [{heroRef:heroId},'throws a Shrapnel Bomb!'],
+      type: 'action'
+    }],
     ['flow','eachMonster', monsterId => ['flow','all',[
-      <FlowDiceRoll>['flow','diceRoll',{heroId, diceTypes: {singleAttack: true}}],
+      <FlowDiceRoll>['flow','diceRoll',{heroId, diceTypes: {singleAttack: true},line:['Roll for Shrapnel Bomb damage vs',{monsterRef:monsterId}]}],
       <FlowDetonateShrapnelBomb>['flow','detonateShrapnelBomb',{heroId,monsterId}]
     ]]],
     <ApplyRemoveItem>['apply', 'removeItem', {heroId, item: 'shrapnelBomb'}]

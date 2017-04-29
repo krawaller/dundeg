@@ -40,7 +40,7 @@ export function newCalc(title: string, initialDesc: string|LogMessageLine, start
   return {
     title: title,
     value: (<CalculationResult>startVal).value || startVal,
-    history: [[Array.isArray(initialDesc) ? initialDesc : [initialDesc], startVal]]
+    history: [[Array.isArray(initialDesc) ? initialDesc : [initialDesc], (<CalculationResult>startVal).value || startVal]]
   }
 }
 

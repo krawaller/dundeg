@@ -8,8 +8,8 @@ import { exec_until } from '../../engine/src/exec/exec_until';
 
 let battle: BattleState = {
   heroes: {
-    hero1: makeHero('hinterLander',{HP: 16},{},{findWeakness:true},['skinningKnife']),
-    hero2: makeHero('soldierOfFortune',{HP: 18},{},{backStab:true,sixthSense:true},['spikedGauntlet'])
+    hero1: makeHero('hinterLander',{HP: 16},{},{findWeakness:true},['skinningKnife','shrapnelBomb','daemonsBlood']),
+    hero2: makeHero('soldierOfFortune',{HP: 18},{},{backStab:true,sixthSense:true},['spikedGauntlet','flashBomb'])
   },
   monsters: {
     mon1: makeMonster('slitherFish'),

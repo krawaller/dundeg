@@ -1,7 +1,8 @@
-import { BattleState } from '../engine/src/interfaces'
+import { BattleState, CalculationResult } from '../engine/src/interfaces'
 
 export interface AppState {
   battle?: BattleState
+  calculation?: CalculationResult
 }
 
 export type Action = {

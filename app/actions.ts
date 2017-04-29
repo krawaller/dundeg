@@ -1,9 +1,15 @@
 export const actions = {
   reply(opt){
-    console.log("Creating action for opt", opt);
     return {
       type: 'reply',
       option: opt
     };
+  },
+  showCalculation(calc){
+    console.log("CALC",calc);
+    return {
+      type: 'showcalc',
+      calc: calc
+    }
   }
 };

@@ -8,8 +8,14 @@ export function reducer(currentState: AppState, action): AppState{
     case 'reply':
       console.log("Got action", action);
       return {
+        ...currentState,
         battle: exec_until(exec_reply(currentState.battle, {option:action.option}))
       };
+    case 'showcalc':
+      return {
+        ...currentState,
+        calculation: action.calc
+      }
     default: return currentState;
   }
 }
