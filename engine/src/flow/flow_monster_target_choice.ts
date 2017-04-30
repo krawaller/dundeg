@@ -27,7 +27,8 @@ export function flow_monster_target_choice(battle: BattleState, {monsterId}:Mons
       opts[ heroes[battle.heroes[heroId].blueprint].name ] = <ApplyMonsterTargetChoice>['apply', 'monsterTargetChoice', {
         monsterId: monsterId,
         heroId: heroId,
-        calculation: party.individual[heroId]
+        calculation: party.individual[heroId],
+        forced: true
       }];
     });
     line = line.concat(['Who should',{monsterRef:monsterId},'target?'])

@@ -4,6 +4,8 @@ Initiates a regular monster attack. Hero might need option to use POW dice for d
 
 import { BattleState, MonsterId, FlowInstruction, EvilAttack, FlowWoundMonster, ApplyQuestion } from '../interfaces';
 
+import { calculate_monster_attack } from '../calculate/calculate_monster_attack';
+
 export interface InitiateMonsterAttackSpec {
   monsterId: MonsterId,
   attack?: EvilAttack
@@ -33,8 +35,9 @@ export function flow_initiate_monster_attack(battle: BattleState, {monsterId, at
         ]];
         return mem;
       },{no: ['flow','performMonsterAttack',{monsterId, attack}]});
+      let atk = calculate_monster_attack(battle,{monsterId});
       return <ApplyQuestion>['apply','question',{
-        line: ['Will',{heroRef:heroId},'use a POW to defend (can do once per dice per round in guard stance when fail defence) against',{monsterRef:monsterId},'?'],
+        line: ['Will',{heroRef:heroId},'use a POW to defend (can do once per dice per round in guard stance when fail defence) against',{monsterRef:monsterId},'with ATK',atk,'?'],
         options: opts
       }];
     }
