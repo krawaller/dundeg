@@ -16,7 +16,7 @@ export const Replier = withBattle(props => {
   }
   return (
     <div>
-      <LogLine line={props.battle.question.line} />
+      <LogLine line={props.battle.question.line} highlight={true} />
       {btns}
     </div>
   )

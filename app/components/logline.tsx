@@ -5,7 +5,7 @@ import { BattleState, LogMessageLine, LogMessagePart, LogMessageItemRef, Calcula
 
 import { heroes } from '../../engine/src/library/heroes';
 
-export interface GivenProps { line: LogMessageLine, where?: string }
+export interface GivenProps { line: LogMessageLine, where?: string, highlight?: boolean }
 
 export const LogLine = withBattle<GivenProps>((props)=>{
   function renderItem(item:LogMessagePart,n){
@@ -14,9 +14,9 @@ export const LogLine = withBattle<GivenProps>((props)=>{
     } else if ((item as CalculationResult).hasOwnProperty('value')){
       return <span key={n} onClick={e=>props.showCalculation(item,props.where === 'calc')} className='calculation'>{(item as CalculationResult).value}</span>;
     } else if ((item as LogMessageHeroRef).heroRef){
-      return <span key={n}>{heroes[props.battle.heroes[(item as LogMessageHeroRef).heroRef].blueprint].name}</span>;
+      return <span key={n} className='heroref'>{heroes[props.battle.heroes[(item as LogMessageHeroRef).heroRef].blueprint].name}</span>;
     } else if ((item as LogMessageMonsterRef).monsterRef){
-      return <span key={n}>{props.battle.monsters[(item as LogMessageMonsterRef).monsterRef].name}</span>;
+      return <span key={n} className='monsterref'>{props.battle.monsters[(item as LogMessageMonsterRef).monsterRef].name}</span>;
     } else if ((item as LogMessageItemRef).itemRef){
       return <span key={n}>{(item as LogMessageItemRef).itemRef}</span>;
     } else {
@@ -28,7 +28,7 @@ export const LogLine = withBattle<GivenProps>((props)=>{
     console.log("whats going on?!", props)
   }
   return (
-    <span className="logline">
+    <span className={"logline" + (props.highlight?' highlight':'')}>
       {props.line.map( renderItem )}
     </span>
   );

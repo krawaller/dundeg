@@ -6,7 +6,7 @@ import { BattleState, MonsterId } from '../../engine/src/interfaces';
 import { monsters } from '../../engine/src/library/monsters';
 import { heroes } from '../../engine/src/library/heroes';
 
-export interface GivenProps { monsterId: MonsterId }
+export interface GivenProps { monsterId: MonsterId, highlight: boolean }
 
 export const Monster = withBattle<GivenProps>((props)=>{
   let monster = props.battle.monsters[props.monsterId];
@@ -17,7 +17,7 @@ export const Monster = withBattle<GivenProps>((props)=>{
     monster.vars.escaped ? 'escaped' : 
     'idle';
   return (
-    <div className="monster">
+    <div className={"monster" + (props.highlight ? ' highlight' : '')}>
       <strong>Monster: {blueprint.name}</strong>
       <div>HP: {monster.vars.HP}/{blueprint.stats.HP}, status: {status}</div>
       <div>skills: {Object.keys(blueprint.skills).join(',')}</div>

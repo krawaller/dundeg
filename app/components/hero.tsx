@@ -5,7 +5,7 @@ import { BattleState, HeroId } from '../../engine/src/interfaces';
 
 import { heroes } from '../../engine/src/library/heroes';
 
-export interface GivenProps { heroId: HeroId }
+export interface GivenProps { heroId: HeroId, highlight: boolean }
 
 export const Hero = withBattle<GivenProps>((props)=>{
   let hero = props.battle.heroes[props.heroId];
@@ -16,7 +16,7 @@ export const Hero = withBattle<GivenProps>((props)=>{
     hero.vars.stance ? hero.vars.stance :
     'idle';
   return (
-    <div className="hero">
+    <div className={"hero" + (props.highlight ? ' highlight' : '')}>
       <strong>Hero: {blueprint.name}</strong>
       <div>HP: {hero.vars.HP}/{blueprint.stats.CON*2}, luck: {hero.vars.luck}, gold: {hero.vars.gold}, status: {status}</div>
       <div>skills: {Object.keys(hero.skills).join(',')}</div>
