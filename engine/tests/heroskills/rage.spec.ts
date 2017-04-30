@@ -45,7 +45,7 @@ test('the rage hero skill', t => {
   );
 
   battle.heroes.hero.vars.attackDice = [1,3];
-  battle.heroes.hero.vars.stance = 'defence';
+  battle.heroes.hero.vars.stance = 'guard';
   result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId, attack:{type:'meelee',stat:'STR'}}]);
   t.equal(
     result.monsters.monster.vars.HP,

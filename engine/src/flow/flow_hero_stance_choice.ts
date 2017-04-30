@@ -12,7 +12,7 @@ export function flow_hero_offer_stance_choice(battle: BattleState, {heroId}:Hero
       line: ['Select stance for', {heroRef:heroId}],
       options: {
         assault: <ApplyStanceChoice>['apply', 'stanceChoice' ,{heroId: heroId, stance: 'assault'}],
-        defence: <ApplyStanceChoice>['apply', 'stanceChoice', {heroId: heroId, stance: 'defence'}]
+        guard: <ApplyStanceChoice>['apply', 'stanceChoice', {heroId: heroId, stance: 'guard'}]
       }
     }];
   }

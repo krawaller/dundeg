@@ -30,12 +30,12 @@ test('the backstab hero skill', t => {
   )
 
   delete battle.monsters.monster.vars.target;
-  battle.heroes.hero.vars.stance = 'defence';
+  battle.heroes.hero.vars.stance = 'guard';
   result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId,attack:{stat: 'STR', type:'meelee'}}]);
   t.equal(
     result.monsters.monster.vars.HP,
     monsters.imperialHuntsman.stats.HP - (ATK - monsters.imperialHuntsman.stats.ARM),
-    'backstab gives no extra damage when stance is defence'
+    'backstab gives no extra damage when stance is guard'
   );
 
   battle.heroes.hero.vars.stance = 'assault';
@@ -64,7 +64,7 @@ test('the backstab hero skill', t => {
   );
 
   delete battle.monsters.monster.vars.target;
-  battle.heroes.hero.vars.stance = 'defence';
+  battle.heroes.hero.vars.stance = 'guard';
   result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId,attack:{stat: 'STR', type:'special',using:'skinningKnife'}}]);
   t.equal(
     result.monsters.monster.vars.HP,

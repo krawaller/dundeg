@@ -9,7 +9,7 @@ import { find_hero_attack_options } from '../../src/find/find_hero_attack_option
 test('Nasty Cleaver', t => {
   let result: BattleState,  battle: BattleState = {
     heroes: {
-      hero: makeHero('bloodsportBrawler',{target: 'monster', stance:'assault',powerDie:6,attackDice:[1,2]},{},{},['nastyCleaver']),
+      hero: makeHero('bloodsportBrawler',{target: 'monster', stance:'assault',powerDice:[6],attackDice:[1,2]},{},{},['nastyCleaver']),
     },
     monsters: {
       monster: makeMonster('swampTroll') // HP 12, ARM 0
@@ -32,7 +32,7 @@ test('Nasty Cleaver', t => {
     'nasty cleaver gives +1 damage when power die is 6'
   );
 
-  battle.heroes.hero.vars.powerDie = 5;
+  battle.heroes.hero.vars.powerDice = [5];
   result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId:'hero',attack}]);
   t.equal(
     result.monsters.monster.vars.HP,
@@ -40,8 +40,8 @@ test('Nasty Cleaver', t => {
     'nasty cleaver has no effect when power die isnt 6'
   );
 
-  battle.heroes.hero.vars.powerDie = 6;
-  battle.heroes.hero.vars.stance = 'defence';
+  battle.heroes.hero.vars.powerDice = [6];
+  battle.heroes.hero.vars.stance = 'guard';
   result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId:'hero',attack}]);
   t.equal(
     result.monsters.monster.vars.HP,
@@ -51,3 +51,5 @@ test('Nasty Cleaver', t => {
 
   t.end();
 });
+
+// TODO - how is nasty cleaver updated?

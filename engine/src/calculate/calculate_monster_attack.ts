@@ -12,7 +12,7 @@ export function calculate_monster_attack (battle: BattleState, instr: CalculateM
 
   let ret = newCalc('Monster ATK', blueprint.name+' base ATK', blueprint.stats.ATK);
 
-  if (blueprint.skills.fierce && hero && hero.vars.stance === 'defence'){
+  if (blueprint.skills.fierce && hero && hero.vars.stance === 'guard'){
     ret = addCalcStep(ret, 'Fierce gives +1 VS defending hero', n=>n+2);
   }
 

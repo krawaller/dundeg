@@ -11,9 +11,9 @@ test('apply stance choice to hero', t => {
     log: []
   };
 
-  battle = apply_stance_choice_to_hero(battle, {heroId: 'hero', stance: 'defence'});
-  t.equal( battle.heroes.hero.vars.stance, 'defence', 'Hero adopted stance correctly' );
-  t.ok( lastLogHasStr(battle, 'defence'), 'Correct message was added to log' );
+  battle = apply_stance_choice_to_hero(battle, {heroId: 'hero', stance: 'guard'});
+  t.equal( battle.heroes.hero.vars.stance, 'guard', 'Hero adopted stance correctly' );
+  t.ok( lastLogHasStr(battle, 'guard'), 'Correct message was added to log' );
 
   t.end();
 });

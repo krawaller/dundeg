@@ -6,7 +6,7 @@ import { apply_escape_outcome_to_hero } from '../../src/apply/apply_escape_outco
 
 test('apply escape outcome', t => {
   let hero, result, battle: BattleState = {
-    heroes: { hero: makeHero('bloodsportBrawler',{attackDice:[1,2],defenceDice:[3,4],powerDie:5}) },
+    heroes: { hero: makeHero('bloodsportBrawler',{attackDice:[1,2],defenceDice:[3,4],powerDice:[5]}) },
     monsters: {},
     log: []
   };

@@ -39,12 +39,12 @@ test('the Exterminator hero skill', t => {
   );
 
   battle.heroes.hero.vars.target = 'vermin';
-  battle.heroes.hero.vars.stance = 'defence';
+  battle.heroes.hero.vars.stance = 'guard';
   result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId,attack}]);
   t.equal(
     result.monsters.vermin.vars.HP,
     monsters.slitherFish.stats.HP - (DMG - monsters.slitherFish.stats.ARM),
-    'defending exterminator has no effect'
+    'guarding exterminator has no effect'
   );
 
   battle.heroes.hero.vars.stance = 'assault';

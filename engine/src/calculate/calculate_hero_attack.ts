@@ -18,14 +18,15 @@ export function calculate_hero_attack (battle: BattleState, {heroId,attack}: Cal
   let monster = battle.monsters[hero.vars.target];
   let monsterBlueprint = monsters[monster.blueprint];
   let highest = Math.max.apply(Math,hero.vars.attackDice);
+  let highestPow = Math.max.apply(Math,hero.vars.powerDice||[]);
 
   let ret = newCalc('Hero ATK', 'Base ATK is highest attack die', highest);
 
-  if (hero.vars.stance === 'assault' && hero.vars.powerDie > highest){
-    ret = addCalcStep(ret, 'Assaulting heroes use power die when higher', n=>hero.vars.powerDie);
+  if (hero.vars.stance === 'assault' && highestPow > highest){
+    ret = addCalcStep(ret, 'Assaulting heroes use power die when higher', n=>highestPow);
   }
-  if (hero.vars.powerDie === 6 && attack && attack.using === 'nastyCleaver' && hero.vars.stance === 'assault'){
-    ret = addCalcStep(ret, 'Nasty Cleaver has +1 ATK when assaulting', n=>n+1);
+  if (highestPow === 6 && attack && attack.using === 'nastyCleaver' && hero.vars.stance === 'assault'){
+    ret = addCalcStep(ret, 'Nasty Cleaver has +1 ATK when assaulting and a POW die is 6', n=>n+1);
   }
   if (hero.skills.backStab && monster.vars.target !== heroId && hero.vars.stance === 'assault' && attack.type === 'meelee'){
     ret = addCalcStep(ret, 'Backstab has +1 ATK for assault meelee attacks vs monsters targetting someone else', n=>n+1);

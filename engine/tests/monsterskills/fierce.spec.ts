@@ -31,7 +31,7 @@ test('monster fierce state', t => {
     'Fierce makes no difference versus assaulting hero'
   );
 
-  battle.heroes.hero.vars.stance = 'defence';
+  battle.heroes.hero.vars.stance = 'guard';
   result = execUntil(battle, <FlowPerformMonsterAttack>['flow','performMonsterAttack',{monsterId,attack}]);
   t.equal(
     result.heroes.hero.vars.HP,

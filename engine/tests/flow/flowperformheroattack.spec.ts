@@ -24,7 +24,7 @@ test('flow perform hero attack', t => {
   );
   
   battle.heroes.hero.vars.attackDice = [2,3]; // will succeed since 2+3 <= 8
-  battle.heroes.hero.vars.powerDie = 5; 
+  battle.heroes.hero.vars.powerDice = [5]; 
   battle.heroes.hero.vars.stance = 'assault'; // will use power die as attack, meaning 5 in dmg
   result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId:'hero',attack}]);
   t.equal(
@@ -33,7 +33,7 @@ test('flow perform hero attack', t => {
     'dealt 5 damage (power die), -1 armour'
   );
 
-  battle.heroes.hero.vars.powerDie = 1; 
+  battle.heroes.hero.vars.powerDice = [1]; 
   result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId:'hero',attack}]);
   t.equal(
     result.monsters.monster.vars.HP,
@@ -41,8 +41,8 @@ test('flow perform hero attack', t => {
     'dealt 3 damage (highest die since power was lower), -1 armour'
   );
 
-  battle.heroes.hero.vars.powerDie = 6; 
-  battle.heroes.hero.vars.stance = 'defence';
+  battle.heroes.hero.vars.powerDice = [6]; 
+  battle.heroes.hero.vars.stance = 'guard';
   result = execUntil(battle, <FlowPerformHeroAttack>['flow','performHeroAttack',{heroId:'hero',attack}]);
   t.equal(
     result.monsters.monster.vars.HP,
