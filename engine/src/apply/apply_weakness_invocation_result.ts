@@ -15,7 +15,7 @@ export function apply_weakness_invocation_result(battle: BattleState, {heroId}:W
     ret.monsters[monsterId].states.weakness = heroId;
     addLog(ret, [ {heroRef:heroId}, 'successfully finds a weakness on', {monsterRef: monsterId} ], 'success');
   } else {
-    addLog(ret, [ {heroRef:heroId}, 'failed to find a weakness on', {monsterRef: monsterId}, 'fail' ]);
+    addLog(ret, [ {heroRef:heroId}, 'failed to find a weakness on', {monsterRef: monsterId} ], 'fail');
   }
   return ret;
 }

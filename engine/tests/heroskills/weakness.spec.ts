@@ -25,11 +25,13 @@ test('the hero weakness skill', t => {
   if (!battle.heroes.hero.vars.target) battle = reply(battle, battle.monsters.monster.name); // maybe auto selected since only 1
 
   result = execUntil(battle, ['flow','executeAction',{heroId:'hero'}]);
+  result = reply(result, result.monsters.monster.name);
   result = reply(result,makeRoll); // was prompted to roll for test, will fail
   t.ok(!result.monsters.monster.states.weakness, 'Weakness wasnt applied since invocation failed');
   t.ok( lastLogHasStr(result, 'fail'), 'log acknowledges fail' );
 
   result = execUntil(battle, ['flow','executeAction',{heroId:'hero'}]);
+  result = reply(result, result.monsters.monster.name);
   result = reply(result,makeRoll); // was prompted to roll for test, will succeed
   t.equal(result.monsters.monster.states.weakness, 'hero', 'Weakness state was correctly set');
   t.ok( lastLogHasStr(result, 'success'), 'log acknowledges success' );

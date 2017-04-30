@@ -11,10 +11,10 @@ export interface ReplySpec {
 export function exec_reply(battle: BattleState, {option}: ReplySpec): BattleState{
   if (!battle.question){
     console.log("dwokefirgjk", battle.question, JSON.parse(JSON.stringify(battle)))
-    throw "Attempted to reply '"+option+"' but battle had no question!";
+    throw new Error("Attempted to reply '"+option+"' but battle had no question!");
   }
   if (!battle.question.options.hasOwnProperty(option)){
-    throw "Attempted to reply with unknown option "+option+", available ones were: "+Object.keys(battle.question.options).join(",");
+    throw new Error("Attempted to reply with unknown option "+option+", available ones were: "+Object.keys(battle.question.options).join(","));
   }
   return {
     ...battle,

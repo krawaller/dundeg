@@ -31,12 +31,14 @@ test('flow hero target choice', t => {
   q = <Question>result[2];
   t.deepEqual(Object.keys(q.options), ['slitherFish', 'megaRat', 'ghoulTroll']);
 
+  /*
   delete battle.monsters.alsoDisturbing;
   result = flow_hero_target_choice(battle, {heroId: 'disturbed',line:[]});
   t.equal(result[0], 'apply');
   t.equal(result[1], 'heroTargetChoice');
   t.equal(result[2].heroId, 'disturbed');
   t.equal(result[2].monsterId, 'disturbing', 'when just 1 monster we automatically select that');
+  */
 
   t.end();
 });
