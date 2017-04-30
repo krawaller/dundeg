@@ -24,9 +24,28 @@ For example, if you are in Guard 󰀔 stance & fail a Defence Test with {d4}{d6}
 
 
 
+// DAVID QUESTIONS
+
+Excellent feedback Eric, thank you ever so much for taking the time to write that up! I'll get right on working through the mistakes. 
+
+There are a few points where I could use some further guidance, for when you have a moment to spare:
+
+1) Spending luck to reroll, is that allowed for the "battle dice" too? Including the power dice?
+2) Exactly when are Quick Actions (like Flash) allowed? Do we have a PER-ordered cycle for Quick actions, and then one for Combat Actions?
+3) Is there a default attack action? I've coded the Luncheon Truncheon, but since the hero can throw it away, he ended up with no available actions afterwards and things got weird. :)
+
+Forgot one, sorry:
+
+4) If I escape or try to escape, is DEF always 0?
+
+
 // DAVID SUGGESTION:
 
-Each monster targeting you inflicts damage on you equal to its ATT value (which may be modified by abilties, status conditions, etc.). This is reduced by your ARM value, and then by your DEF value. The DEF value is basically an AGI test with the defence dice, but with a few twists when in guard stance. Here's how to calculate DEF in detail: 
+Also - apologies if this is too presumptuous - I took the liberty of writing up a suggestion for an alternate structure of the rulebook extract on defence that you gave me. Basically I introduced DEF as a concept, and extracted the 4 different ways of calculating it into bullet points:
+
+---
+
+Each monster targeting you inflicts damage on you equal to its ATT value (which may be modified by abilties, status conditions, etc.). This is reduced by your ARM value, and then also by your DEF value. The DEF value is basically an AGI test with the defence dice, but with a few twists when in guard stance. Here's how to calculate DEF in detail: 
 
 * In assault stance, if the test passed (defence dice total is less or equal to AGI), DEF is the highest defence die.
 * In assault stance, if the test failed (defence dice total is more than AGI), DEF is 0.

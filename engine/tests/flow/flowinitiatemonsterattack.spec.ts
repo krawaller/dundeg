@@ -19,17 +19,17 @@ test('flow initiate monster attack', t => {
   attack = {type:'regular'};
 
   battle.heroes.hero.vars.defenceDice = [1,2];
-  battle.heroes.hero.vars.powerDie = 3;
+  battle.heroes.hero.vars.powerDice = [4,3];
   battle.heroes.hero.vars.stance = 'guard';
   result = execUntil(battle, <FlowInitiateMonsterAttack>['flow','initiateMonsterAttack',{monsterId,attack}]);
   t.equal(
     result.heroes.hero.vars.HP,
-    startingHP - (DMG - 3),
-    'defending hero uses power dice for defence'
+    startingHP - (DMG - 4),
+    'defending hero uses highest power dice for defence'
   );
 
   battle.heroes.hero.vars.defenceDice = [1,3];
-  battle.heroes.hero.vars.powerDie = 2;
+  battle.heroes.hero.vars.powerDice = [2,1];
   battle.heroes.hero.vars.stance = 'guard';
   result = execUntil(battle, <FlowInitiateMonsterAttack>['flow','initiateMonsterAttack',{monsterId,attack}]);
   t.equal(
@@ -38,7 +38,7 @@ test('flow initiate monster attack', t => {
     'defending hero ignores power die if def die is higher'
   );
 
-  battle.heroes.hero.vars.powerDie = 5;
+  battle.heroes.hero.vars.powerDice = [5];
   battle.heroes.hero.vars.stance = 'assault';
   result = execUntil(battle, <FlowInitiateMonsterAttack>['flow','initiateMonsterAttack',{monsterId,attack}]);
   t.equal(
@@ -47,7 +47,7 @@ test('flow initiate monster attack', t => {
     'assaulting hero ignores power die for defence, just uses defence die'
   );
 
-  battle.heroes.hero.vars.powerDie = 2;
+  battle.heroes.hero.vars.powerDice = [2];
   battle.heroes.hero.vars.failedDefence = true;
   battle.heroes.hero.vars.stance = 'guard';
   result = execUntil(battle, <FlowInitiateMonsterAttack>['flow','initiateMonsterAttack',{monsterId,attack}]);
@@ -59,7 +59,7 @@ test('flow initiate monster attack', t => {
   );
 
   result = execUntil(battle, <FlowInitiateMonsterAttack>['flow','initiateMonsterAttack',{monsterId,attack}]);
-  result = reply(result, 'yes');
+  result = reply(result, 'POW die 2');
   t.equal(
     result.heroes.hero.vars.HP,
     startingHP - (DMG - 2),
@@ -70,11 +70,11 @@ test('flow initiate monster attack', t => {
     'usePowForDefence was removed afterwards'
   );
   t.ok(
-    result.heroes.hero.vars.hasUsedPowForDefence,
+    result.heroes.hero.vars.usedPowerDice[0],
     'hasUsedPowForDefence was set to prevent it from being used again'
   );
 
-  battle.heroes.hero.vars.hasUsedPowForDefence = true;
+  battle.heroes.hero.vars.usedPowerDice = [true];
   result = execUntil(battle, <FlowInitiateMonsterAttack>['flow','initiateMonsterAttack',{monsterId,attack}]);
   t.equal(
     result.heroes.hero.vars.HP,

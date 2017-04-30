@@ -25,13 +25,13 @@ export type HeroStance = 'assault' | 'guard';
 export interface HeroVars {
   stance?: HeroStance
   ATK?: number
-  powerDie?: number
+  powerDice?: number[]
   attackDice?: number[]
   defenceDice?: number[]
   failedDefence?: true
   failedEscape?: true
-  usePowForDefence?: true
-  hasUsedPowForDefence?: true
+  usePowForDefence?: number
+  usedPowerDice?: boolean[]
   knockedOutBy?: MonsterId
   hasActed?: true
   escaped?: true

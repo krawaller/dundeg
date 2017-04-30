@@ -14,7 +14,7 @@ test('the stunned hero state', t => {
   battle.heroes.hero.vars.action = <FlowInstruction>['flow','performHeroAttack'];
   let result: BattleState = execUntil(battle, <FlowInstruction>['flow','battleDice',{heroId:'hero'}]);
   result = reply(result, makeRoll);
-  t.ok(!result.heroes.hero.vars.powerDie, 'didnt roll power die since we are stunned');
+  t.ok(!result.heroes.hero.vars.powerDice, 'didnt roll power die since we are stunned');
 
   battle = apply_end_of_round_to_hero(battle, {heroId: 'hero'});
   t.ok(!battle.heroes.hero.states.stunned, 'stunned was removed')

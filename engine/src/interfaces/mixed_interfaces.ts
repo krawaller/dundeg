@@ -84,10 +84,9 @@ export type RegionName = 'red' | 'yellow' | 'blue' | 'green';
 export type DiceType = 'attack' | 'defence' | 'power';
 
 export interface DiceSpec {
-  attack?: true
-  defence?: true
-  power?: true
-  singleAttack?: true
+  attack?: 1 | 2
+  defence?: 1 | 2
+  power?: 1 | 2
 }
 
 

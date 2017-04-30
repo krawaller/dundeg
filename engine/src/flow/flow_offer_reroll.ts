@@ -15,19 +15,15 @@ export function flow_offer_reroll(battle: BattleState, {heroId,diceTypes}:OfferR
     let opts = {
       accept: undefined
     };
-    if (diceTypes.attack || diceTypes.singleAttack){
-      opts['atk die with '+hero.vars.attackDice[0]] = withAccept(<FlowTarget>['apply','reroll',{heroId,diceType:'attack'}]);
-      if (!diceTypes.singleAttack) {
-        opts['atk die with '+hero.vars.attackDice[1]] = withAccept(<FlowTarget>['apply','reroll',{heroId,diceType:'attack',second:true}]);
-      }
-    }
-    if (diceTypes.defence){
-      opts['def die with '+hero.vars.defenceDice[0]] = withAccept(<FlowTarget>['apply','reroll',{heroId,diceType:'defence'}]);
-      opts['def die with '+hero.vars.defenceDice[1]] = withAccept(<FlowTarget>['apply','reroll',{heroId,diceType:'defence',second:true}]);
-    }
-    if (diceTypes.power){
-      opts['pow die with '+hero.vars.powerDie] = withAccept(<FlowTarget>['apply','reroll',{heroId,diceType:'power'}]);
-    }
+    (hero.vars.attackDice||[]).forEach((die,n)=>{
+      opts['atk die with '+hero.vars.attackDice[n]] = withAccept(<FlowTarget>['apply','reroll',{heroId,diceType:'attack',index:n}]);
+    });
+    (hero.vars.defenceDice||[]).forEach((die,n)=>{
+      opts['def die with '+hero.vars.defenceDice[n]] = withAccept(<FlowTarget>['apply','reroll',{heroId,diceType:'defence',index:n}]);
+    });
+    (hero.vars.powerDice||[]).forEach((die,n)=>{
+      opts['pow die with '+hero.vars.powerDice[n]] = withAccept(<FlowTarget>['apply','reroll',{heroId,diceType:'power',index:n}]);
+    });
     return <ApplyQuestion>['apply','question', {
       line: ['Will',{heroRef:heroId},'accept the result or spend luck to reroll a die?'],
       options: opts

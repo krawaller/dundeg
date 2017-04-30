@@ -21,7 +21,7 @@ test('blood curse hero skill', t => {
 
   // ---------------- TEST THROWING
 
-  battle.heroes.curseLinkedHero.vars.stance = 'defence';
+  battle.heroes.curseLinkedHero.vars.stance = 'guard';
   t.ok(
     !find_hero_actions(battle,{heroId:'curseLinkedHero'})[heroSkills.bloodCurse.actions.castBloodCurse],
     'bloodcurse not available in defence stance'

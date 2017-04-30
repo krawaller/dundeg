@@ -10,12 +10,12 @@ export function flow_battle_dice(battle: BattleState, {heroId}:BattleDiceSpec): 
   let chargingMonsters = find_monsters(battle,{targetting: heroId});
   let hero = battle.heroes[heroId];
   if (chargingMonsters.length){
-    need.defence = true;
-    need.power = true;
+    need.defence = 2;
+    need.power = 1; // TODO - how many?
   }
   if (hero.vars.action && hero.vars.action[1] === 'performHeroAttack'){
-    need.attack = true;
-    need.power = true;
+    need.attack = 2;
+    need.power = 1; // TODO - how many?
   }
 
   if (hero.states.stunned){

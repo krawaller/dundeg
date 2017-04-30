@@ -12,31 +12,33 @@ export interface DiceRollSpec {
 
 
 export function apply_dice_roll (battle:BattleState, {heroId,diceTypes}: DiceRollSpec): BattleState {
-  let ret = deepCopy(battle);
+  let ret:BattleState = deepCopy(battle);
   let hero = ret.heroes[heroId];
   let msg = [];
-  if (diceTypes['attack']){
-    hero.vars.attackDice = [
-      die(battle.seed),
-      die(battle.seed)
-    ];
-    msg.push('ATK{' + hero.vars.attackDice[0] + '}');
-    msg.push('ATK{' + hero.vars.attackDice[1] + '}');
-  } else if (diceTypes['singleAttack']){
-    hero.vars.attackDice = [die(battle.seed)];
-    msg.push('ATK{' + hero.vars.attackDice[0] + '}');
+  let temp;
+  if ((temp=diceTypes['attack'])){
+    hero.vars.attackDice = [];
+    while (temp){
+      hero.vars.attackDice.push(die(battle.seed));
+      msg.push('ATK{' + hero.vars.attackDice[hero.vars.attackDice.length-1] + '}');
+      temp--;
+    }
   }
-  if (diceTypes['defence']){
-    hero.vars.defenceDice = [
-      die(battle.seed),
-      die(battle.seed)
-    ];
-    msg.push('DEF{' + hero.vars.defenceDice[0] + '}');
-    msg.push('DEF{' + hero.vars.defenceDice[1] + '}');
+  if ((temp=diceTypes['defence'])){
+    hero.vars.defenceDice = [];
+    while (temp){
+      hero.vars.defenceDice.push(die(battle.seed));
+      msg.push('DEF{' + hero.vars.defenceDice[hero.vars.defenceDice.length-1] + '}');
+      temp--;
+    }
   }
-  if (diceTypes['power']){
-    hero.vars.powerDie = die(battle.seed);
-    msg.push('POW{' + hero.vars.powerDie + '}');
+  if ((temp=diceTypes['power'])){
+    hero.vars.powerDice = [];
+    while (temp){
+      hero.vars.powerDice.push(die(battle.seed));
+      msg.push('POW{' + hero.vars.powerDice[hero.vars.powerDice.length-1] + '}');
+      temp--;
+    }
   }
   ret = apply_log(ret, {line: [{heroRef:heroId},'rolled'].concat(msg), type: 'action' });
   return ret;

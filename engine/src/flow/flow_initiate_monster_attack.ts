@@ -13,18 +13,31 @@ export function flow_initiate_monster_attack(battle: BattleState, {monsterId, at
   let monster = battle.monsters[monsterId];
   let heroId = monster.vars.target;
   let hero = battle.heroes[heroId];
-  if (hero.vars.powerDie && hero.vars.stance === 'guard' && hero.vars.failedDefence && !hero.vars.hasUsedPowForDefence){
-    return <ApplyQuestion>['apply','question',{
-      line: ['Will',{heroRef:heroId},'use POW to defend (can do once per round when fail defence) against',{monsterRef:monsterId},'?'],
-      options: {
-        yes: ['flow','all',[
-          <FlowInstruction>['apply','oneTimePowDefence',{heroId, when: 'before'}],
+  if (hero.vars.powerDice && hero.vars.powerDice.length && hero.vars.stance === 'guard' && hero.vars.failedDefence){
+    if (!hero.vars.usedPowerDice){ hero.vars.usedPowerDice = hero.vars.powerDice.map(d=>false); } // TODO - elsewhere
+    let availableDiceIndexes = hero.vars.usedPowerDice.reduce(
+      (mem,bool,n)=> {
+        if (!bool){
+          mem.push(n);
+        }
+        return mem;
+      },
+      []
+    );
+    if (availableDiceIndexes.length){
+      let opts = availableDiceIndexes.reduce((mem,idx)=>{
+        mem['POW die '+hero.vars.powerDice[idx]] = ['flow','all',[
+          <FlowInstruction>['apply','oneTimePowDefence',{heroId, when: 'before', index: idx}],
           ['flow','performMonsterAttack',{monsterId, attack}],
           <FlowInstruction>['apply','oneTimePowDefence',{heroId, when: 'after'}]
-        ]],
-        no: ['flow','performMonsterAttack',{monsterId, attack}]
-      }
-    }];
+        ]];
+        return mem;
+      },{no: ['flow','performMonsterAttack',{monsterId, attack}]});
+      return <ApplyQuestion>['apply','question',{
+        line: ['Will',{heroRef:heroId},'use a POW to defend (can do once per dice per round in guard stance when fail defence) against',{monsterRef:monsterId},'?'],
+        options: opts
+      }];
+    }
   }
   return ['flow','performMonsterAttack',{monsterId, attack}];
 }

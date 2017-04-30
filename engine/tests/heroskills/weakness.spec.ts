@@ -18,7 +18,7 @@ test('the hero weakness skill', t => {
     'find weakness not available in assault stance'
   );
 
-  battle.heroes.hero.vars.stance = 'defence';
+  battle.heroes.hero.vars.stance = 'guard';
   
   battle = execUntil(battle, ['flow','selectAction',{heroId:'hero'}]);
   battle = reply(battle, heroSkills.findWeakness.actions.findWeakness);

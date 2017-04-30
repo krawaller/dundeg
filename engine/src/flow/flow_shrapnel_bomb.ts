@@ -14,7 +14,7 @@ export function flow_throw_shrapnel_bomb(battle: BattleState, {heroId}:ThrowShra
       type: 'action'
     }],
     ['flow','eachMonster', monsterId => ['flow','all',[
-      <FlowDiceRoll>['flow','diceRoll',{heroId, diceTypes: {singleAttack: true},line:['Roll for Shrapnel Bomb damage vs',{monsterRef:monsterId}]}],
+      <FlowDiceRoll>['flow','diceRoll',{heroId, diceTypes: {attack: 1},line:['Roll for Shrapnel Bomb damage vs',{monsterRef:monsterId}]}],
       <FlowDetonateShrapnelBomb>['flow','detonateShrapnelBomb',{heroId,monsterId}]
     ]]],
     <ApplyRemoveItem>['apply', 'removeItem', {heroId, item: 'shrapnelBomb'}]
