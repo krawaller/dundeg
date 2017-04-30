@@ -18,7 +18,7 @@ export function calculate_hero_defence (battle: BattleState, instr: CalculateHer
   if (!hero.vars.failedDefence){
     let highest = Math.max.apply(Math,hero.vars.defenceDice||[0]);
     ret = addCalcStep(ret, 'Successful defenders use highest defence die', n=>highest);
-    if (hero.vars.stance === 'defence' && hero.vars.powerDie > highest){
+    if (hero.vars.stance === 'guard' && hero.vars.powerDie > highest){
       ret = addCalcStep(ret, 'Successful defenders in defence stance use POW die when higher', n=> hero.vars.powerDie);
     }
   } else if (hero.vars.usePowForDefence){

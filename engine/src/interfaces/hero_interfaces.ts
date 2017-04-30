@@ -20,7 +20,7 @@ export interface HeroDefinition {
   stats: HeroStats
 }
 
-export type HeroStance = 'assault' | 'defence';
+export type HeroStance = 'assault' | 'guard';
 
 export interface HeroVars {
   stance?: HeroStance

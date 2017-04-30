@@ -23,7 +23,7 @@ test('spiked gauntlets', t => {
     'STR attack in assault mode'
   );
 
-  battle.heroes.hero.vars.stance = 'defence';
+  battle.heroes.hero.vars.stance = 'guard';
   delete battle.question; // why need to do this?!
   battle = execUntil(battle, ['flow','selectAction',{heroId:'hero'}]);
   t.ok(!battle.question.options[items.spikedGauntlet.actions.spikedGauntletAttackAssault],'assault opt not available in defence');

@@ -20,7 +20,7 @@ test('flow initiate monster attack', t => {
 
   battle.heroes.hero.vars.defenceDice = [1,2];
   battle.heroes.hero.vars.powerDie = 3;
-  battle.heroes.hero.vars.stance = 'defence';
+  battle.heroes.hero.vars.stance = 'guard';
   result = execUntil(battle, <FlowInitiateMonsterAttack>['flow','initiateMonsterAttack',{monsterId,attack}]);
   t.equal(
     result.heroes.hero.vars.HP,
@@ -30,7 +30,7 @@ test('flow initiate monster attack', t => {
 
   battle.heroes.hero.vars.defenceDice = [1,3];
   battle.heroes.hero.vars.powerDie = 2;
-  battle.heroes.hero.vars.stance = 'defence';
+  battle.heroes.hero.vars.stance = 'guard';
   result = execUntil(battle, <FlowInitiateMonsterAttack>['flow','initiateMonsterAttack',{monsterId,attack}]);
   t.equal(
     result.heroes.hero.vars.HP,
@@ -49,7 +49,7 @@ test('flow initiate monster attack', t => {
 
   battle.heroes.hero.vars.powerDie = 2;
   battle.heroes.hero.vars.failedDefence = true;
-
+  battle.heroes.hero.vars.stance = 'guard';
   result = execUntil(battle, <FlowInitiateMonsterAttack>['flow','initiateMonsterAttack',{monsterId,attack}]);
   result = reply(result, 'no');
   t.equal(

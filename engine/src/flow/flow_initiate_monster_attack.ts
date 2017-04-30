@@ -13,7 +13,7 @@ export function flow_initiate_monster_attack(battle: BattleState, {monsterId, at
   let monster = battle.monsters[monsterId];
   let heroId = monster.vars.target;
   let hero = battle.heroes[heroId];
-  if (hero.vars.powerDie && hero.vars.failedDefence && !hero.vars.hasUsedPowForDefence){
+  if (hero.vars.powerDie && hero.vars.stance === 'guard' && hero.vars.failedDefence && !hero.vars.hasUsedPowForDefence){
     return <ApplyQuestion>['apply','question',{
       line: ['Will',{heroRef:heroId},'use POW to defend (can do once per round when fail defence) against',{monsterRef:monsterId},'?'],
       options: {
