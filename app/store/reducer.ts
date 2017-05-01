@@ -6,6 +6,11 @@ import { exec_step } from '../../engine/src/exec/exec_step';
 
 export function reducer(currentState: AppState, action): AppState{
   switch(action.type){
+    case 'beginBattle':
+      return {
+        ...currentState,
+        active: true
+      }
     case 'step':
       return {
         ...currentState,

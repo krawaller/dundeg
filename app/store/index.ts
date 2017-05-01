@@ -50,12 +50,12 @@ const stepper = ({dispatch,getState}) => next => action => {
         dispatch({type:'step'});
       }
     }
+  } else if (action.type === 'beginBattle'){
+    next(action);
+    dispatch({type:'step'}); // set it off! :D
   } else {
     next(action);
   }
 }
 
-export const store = applyMiddleware(stepper,logger)(createStore)( reducer, <any>{battle,calculation:[]} );
-
-store.dispatch({type:'step'}); // set it off!
-
+export const store = applyMiddleware(stepper,logger)(createStore)( reducer, <any>{battle,calculation:[],active:false} );

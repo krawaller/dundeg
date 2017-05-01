@@ -19,5 +19,10 @@ export const actions = {
     return {
       type: 'backcalc'
     };
+  },
+  beginBattle(){
+    return {
+      type: 'beginBattle'
+    }
   }
 };
