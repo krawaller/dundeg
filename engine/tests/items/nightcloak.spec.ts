@@ -1,6 +1,6 @@
 import * as test from "tape";
 import { makeHero, makeMonster, logMessageContains, execUntil, reply, lastLogHasStr } from '../testutils';
-import { items } from '../../src/library';
+import { items, misc } from '../../src/library';
 import { BattleState, LogMessagePart, Question, FlowInstruction } from '../../src/interfaces';
 
 test('night cloak item', t => {
@@ -20,7 +20,7 @@ test('night cloak item', t => {
 
   battle.heroes.hero.vars.stance = 'guard';
   result = execUntil(battle, ['flow','selectAction',{heroId:'hero'}]);
-  t.ok(!result.question.options['escape'], 'Hero doesnt get normal escape option');
+  t.ok(!result.question.options[misc.basicActions.escape], 'Hero doesnt get normal escape option');
   t.ok(result.question.options[cloak.actions.nightCloakEscapeAGI], 'Hero can escape with AGI, even though Pursuer');
   t.ok(result.question.options[cloak.actions.nightCloakEscapeMAG], 'Hero can escape with MAG, even though Pursuer');
 

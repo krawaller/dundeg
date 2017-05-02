@@ -25,7 +25,7 @@
   "scripts": {
     "build": "webpack --display-error-details",
     "test": "ts-node node_modules/tape/bin/tape engine/tests/**/*.ts | node_modules/.bin/tap-spec",
-    "testthis": "ts-node node_modules/tape/bin/tape engine/tests/items/nightcloak.spec.ts | node_modules/.bin/tap-spec",
+    "testthis": "ts-node node_modules/tape/bin/tape engine/tests/flow/flowunarmed.spec.ts | node_modules/.bin/tap-spec",
     "tryseed": "ts-node engine/tests/tryseed.ts"
   },
   "dependencies": {

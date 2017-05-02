@@ -1,5 +1,5 @@
 import { BattleState, FlowEscape } from '../interfaces';
-import { items, heroSkills } from '../library';
+import { items, heroSkills, misc } from '../library';
 import { registerAndTarget } from '../utils/helpers';
 import { find_monsters } from '../find/find_monsters';
 interface InstrJustHeroId { heroId: string }
@@ -10,7 +10,7 @@ export function find_hero_actions (battle: BattleState, {heroId}: InstrJustHeroI
 
   let hero = battle.heroes[heroId];
   if (hero.vars.stance === 'guard' && !hero.items.nightCloak && !find_monsters(battle,{targetting:heroId,pursuer:true}).length){
-    ret['escape'] = ['apply','registerActionSelection',{heroId, action:['flow','escape',{heroId}]}];
+    ret[misc.basicActions.escape] = ['apply','registerActionSelection',{heroId, action:['flow','escape',{heroId}]}];
   }
   if (hero.vars.stance === 'guard' && hero.items.nightCloak){
     ret[items.nightCloak.actions.nightCloakEscapeAGI] = ['apply','registerActionSelection',{heroId, action:['flow','escape',{heroId,how:'cloakAGI'}]}];

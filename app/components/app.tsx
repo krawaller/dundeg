@@ -17,8 +17,8 @@ export const App = withBattle(props=>{
           <p>Updated <strong>17-05-02</strong>.</p>
           <ul>
             <li>add Quick Actions</li>
-            <li>add default unarmed attack</li>
             <li>add Pain enemy skill</li>
+            <li className="done">add default unarmed attack</li>
             <li className="done">limit Find Weakness to 1 enemy at a time</li>
             <li className="done">change Escape to new rules</li>
             <li className="done">only allow reroll of stat tests</li>
@@ -42,7 +42,7 @@ export const App = withBattle(props=>{
           <ul>
             <li>Daemon's blood</li>
             <li>Flash bomb (but requires fixing quick actions)</li>
-            <li>Luncheon Truncheon (but requires quick actions + defaults)</li>
+            <li>Luncheon Truncheon (but requires quick actions)</li>
             <li>Nasty Cleaver</li>
             <li>Night cloak</li>
             <li>Shrapnel bomb</li>

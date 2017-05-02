@@ -1,6 +1,6 @@
 import * as test from "tape";
 import { makeHero, makeMonster, execUntil } from '../testutils';
-
+import { misc } from '../../src/library';
 import { BattleState } from '../../src/interfaces';
 
 test('monster pursuer skill', t => {
@@ -11,7 +11,7 @@ test('monster pursuer skill', t => {
   };
 
   result = execUntil(battle, ['flow','selectAction',{heroId:'hero'}]);
-  t.ok(!result.question.options['escape'], 'Hero cannot escape because Pursuer!');
+  t.ok(!result.question.options[misc.basicActions.escape], 'Hero cannot escape because Pursuer!');
 
   t.end();
 });

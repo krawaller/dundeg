@@ -1,10 +1,13 @@
 import { BattleState, HeroStatName, Attack, AttackOptions, ItemName, CalculationResult, HeroId } from '../interfaces';
-import { items } from '../library';
+import { items, misc } from '../library';
 
 interface InstrJustHeroId { heroId: HeroId }
 
 export const find_hero_attack_options = (battle: BattleState, {heroId}: InstrJustHeroId) => {
-  let ret: AttackOptions = {};
+  let ret: AttackOptions = {
+    [misc.basicActions.unarmedAGI]: { type: 'unarmed', stat: 'AGI' },
+    [misc.basicActions.unarmedSTR]: { type: 'unarmed', stat: 'STR' }
+  };
   let hero = battle.heroes[heroId];
   if (hero.items.spikedGauntlet){
     if (hero.vars.stance === 'assault'){

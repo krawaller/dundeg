@@ -16,6 +16,7 @@ export interface PerformHeroAttackSpec {
 
 export function flow_perform_hero_attack(battle: BattleState, {heroId, attack}:PerformHeroAttackSpec): FlowInstruction {
   let hero = battle.heroes[heroId];
+
   if (!hero.vars.escaped){
 
     let monsterId = hero.vars.target;

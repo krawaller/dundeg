@@ -1,6 +1,6 @@
 import * as test from "tape";
 import { makeHero, makeMonster, logMessageContains, lastLogHasStr, reply, execUntil } from '../testutils';
-
+import { misc } from '../../src/library';
 import { BattleState, LogMessagePart, Question, FlowInstruction } from '../../src/interfaces';
 
 test('flow hero escape', t => {
@@ -12,11 +12,11 @@ test('flow hero escape', t => {
 
   battle.heroes.hero.vars.stance = 'assault';
   result = execUntil(battle, ['flow','selectAction',{heroId:'hero'}]);
-  t.ok(!result.question.options['escape'], 'Hero cannot escape because assaulting');
+  t.ok(!result.question.options[misc.basicActions.escape], 'Hero cannot escape because assaulting');
 
   battle.heroes.hero.vars.stance = 'guard';
   battle = execUntil(battle, ['flow','selectAction',{heroId:'hero'}]);
-  battle = reply(battle, 'escape'); // make Battle from now on have escape selected
+  battle = reply(battle, misc.basicActions.escape); // make Battle from now on have escape selected
 
   result = execUntil(battle, ['flow','executeAction',{heroId:'hero'}]);
   t.ok(result.heroes.hero.vars.escaped, 'Hero escaped directly since no monsters were targetting him');

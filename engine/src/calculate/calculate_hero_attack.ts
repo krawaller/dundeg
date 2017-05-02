@@ -18,13 +18,22 @@ export function calculate_hero_attack (battle: BattleState, {heroId,attack}: Cal
   let monster = battle.monsters[hero.vars.target];
   let monsterBlueprint = monsters[monster.blueprint];
   let highest = Math.max.apply(Math,hero.vars.attackDice);
+  let lowest = Math.min.apply(Math,hero.vars.attackDice);
   let highestPow = Math.max.apply(Math,hero.vars.powerDice||[]);
+  let halfPow = Math.ceil(highestPow / 2)
 
-  let ret = newCalc('Hero ATK', 'Base ATK is highest attack die', highest);
+  let ret = attack.type === 'unarmed'
+    ? newCalc('Hero ATK', 'Base ATK for unarmed strike is lowest attack die', lowest)
+    : newCalc('Hero ATK', 'Base ATK is highest attack die', highest);
 
-  if (hero.vars.stance === 'assault' && highestPow > highest){
+  if (hero.vars.stance === 'assault' && attack.type !== 'unarmed' && highestPow > highest){
     ret = addCalcStep(ret, 'Assaulting heroes use power die when higher', n=>highestPow);
   }
+
+  if (hero.vars.stance === 'assault' && attack.type === 'unarmed' && halfPow > lowest){
+    ret = addCalcStep(ret, 'Assaulting heroes use half power die when higher for unarmed strike', n=>halfPow);
+  }
+
   if (highestPow === 6 && attack && attack.using === 'nastyCleaver' && hero.vars.stance === 'assault'){
     ret = addCalcStep(ret, 'Nasty Cleaver has +1 ATK when assaulting and a POW die is 6', n=>n+1);
   }

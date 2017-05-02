@@ -15,7 +15,7 @@ export interface AttackOptions {
 }
 
 // DMG versus monstesr
-export type AttackType = 'meelee' | 'ranged' | 'special'
+export type AttackType = 'meelee' | 'ranged' | 'special' | 'unarmed'
 export interface Attack {
   type: AttackType
   using?: ItemName,
