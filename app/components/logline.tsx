@@ -17,7 +17,7 @@ export const LogLine = withBattle<GivenProps>((props)=>{
       return <span key={n} className='heroref'>{heroes[props.battle.heroes[(item as LogMessageHeroRef).heroRef].blueprint].name}</span>;
     } else if ((item as LogMessageMonsterRef).monsterRef){
       return <span key={n} className='monsterref'>{props.battle.monsters[(item as LogMessageMonsterRef).monsterRef].name}</span>;
-    } else if ((item as LogMessageItemRef).itemRef){
+    } else if ((item as LogMessageItemRef).hasOwnProperty('itemRef')){
       return <span key={n}>{(item as LogMessageItemRef).itemRef}</span>;
     } else {
       console.log("WHat is this?!", item);

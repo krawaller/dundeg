@@ -27,12 +27,12 @@ export function flow_perform_hero_attack(battle: BattleState, {heroId, attack}:P
     
     if(rolled > atkStat.value){
       return <ApplyLogMessage>['apply', 'log', {
-        line: [{heroRef:heroId},'attacks',{monsterRef:monsterId},'with',{itemRef:attack.using},'but rolled '+rolled+' against '+attack.stat,atkStat,'so missed'],
+        line: [{heroRef:heroId},'attacks',{monsterRef:monsterId},'with',{itemRef:attack.using || 'unarmed strike'},'but rolled '+rolled+' against '+attack.stat,atkStat,'so missed'],
         type: 'fail'
       }];
     } else if (blueprint.skills.evade && (hero.vars.attackDice[0] === hero.vars.attackDice[1]) && attack.type === 'meelee') {
       return <ApplyLogMessage>['apply', 'log', {
-        line: [{monsterRef:monsterId},'evades (rolled double) the',{itemRef:attack.using},'attack by',{heroRef:heroId}],
+        line: [{monsterRef:monsterId},'evades (rolled double) the',{itemRef:attack.using || 'unarmed strike'},'attack by',{heroRef:heroId}],
         type: 'fail'
       }];
     } else {
@@ -40,7 +40,7 @@ export function flow_perform_hero_attack(battle: BattleState, {heroId, attack}:P
       let wounds = calculate_wounds_vs_monster(battle, {monsterId,heroId,attack,damage}); // will deduct armour
       return ['flow','all',[
         <ApplyLogMessage>['apply','log',{
-          line: [{heroRef:heroId},'attacks',{monsterRef:monsterId},'with',{itemRef:attack.using},'and rolled '+rolled+' vs '+attack.stat,atkStat,'so hit'],
+          line: [{heroRef:heroId},'attacks',{monsterRef:monsterId},'with',{itemRef:attack.using || 'unarmed strike'},'and rolled '+rolled+' vs '+attack.stat,atkStat,'so hit'],
           type: 'success'
         }],
         <FlowWoundMonster>['flow','woundMonster',{heroId, monsterId, wounds, attack }]
