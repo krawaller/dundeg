@@ -19,7 +19,7 @@ export function find_hero_actions (battle: BattleState, {heroId}: InstrJustHeroI
   if (hero.vars.stance === 'assault' && hero.skills.bloodCurse){
     ret[heroSkills.bloodCurse.actions.castBloodCurse] = registerAndTarget(heroId,['flow','bloodCurse',{heroId}],['Who should',{heroRef:heroId},'cast a Blood Curse at?']);
   }
-  if (hero.vars.stance === 'guard' && hero.skills.findWeakness){
+  if (hero.vars.stance === 'guard' && hero.skills.findWeakness && !find_monsters(battle,{weakenedBy:heroId}).length){
     ret[heroSkills.findWeakness.actions.findWeakness] = registerAndTarget(heroId,['flow','weakness',{heroId}],['Who should',{heroRef:heroId},'look for a weakness in?']);
   }
   if (hero.items.daemonsBlood){

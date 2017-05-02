@@ -1,8 +1,6 @@
 import * as test from "tape";
 import { makeMonster, makeHero, lastLogHasStr, makeRoll, execUntil, reply, justReply } from '../testutils';
 import { BattleState, FlowInstruction, FlowPerformHeroAttack } from '../../src/interfaces';
-import { apply_weakness_invocation_result } from '../../src/apply/apply_weakness_invocation_result';
-import { find_hero_actions } from '../../src/find/find_hero_actions';
 import { heroSkills, monsters } from '../../src/library';
 
 test('the hero weakness skill', t => {
@@ -13,8 +11,9 @@ test('the hero weakness skill', t => {
     seed: 'weaknessomgomgomg' // will roll 4 3 2 2
   };
 
+  result = execUntil(battle, ['flow','selectAction',{heroId:'hero'}]);
   t.ok(
-    !find_hero_actions(battle,{heroId:'hero'})[heroSkills.findWeakness.actions.findWeakness],
+    !result.question.options[heroSkills.findWeakness.actions.findWeakness],
     'find weakness not available in assault stance'
   );
 
@@ -50,6 +49,12 @@ test('the hero weakness skill', t => {
     result.monsters.monster.vars.HP,
     monsters.slitherFish.stats.HP - (3 + 1 - monsters.slitherFish.stats.ARM),
     'weakness gives 1 additional damage'
+  );
+
+  result = execUntil(result, ['flow','selectAction',{heroId:'hero'}]);
+  t.ok(
+    !result.question.options[heroSkills.findWeakness.actions.findWeakness],
+    'find weakness not available when it has already been set'
   );
 
   t.end();

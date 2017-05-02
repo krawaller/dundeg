@@ -16,10 +16,10 @@ export const App = withBattle(props=>{
           <h4>ToDo</h4>
           <p>Updated <strong>17-05-02</strong>.</p>
           <ul>
-            <li>limit Find Weakness to 1 enemy at a time</li>
             <li>add Quick Actions</li>
             <li>add default unarmed attack</li>
             <li>add Pain enemy skill</li>
+            <li className="done">limit Find Weakness to 1 enemy at a time</li>
             <li className="done">change Escape to new rules</li>
             <li className="done">only allow reroll of stat tests</li>
             <li className="done">Hide unimplemented monster skills</li>
