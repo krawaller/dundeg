@@ -1,7 +1,7 @@
 import { BattleState, FlowFurther, FlowInstruction, Test } from '../interfaces';
 
 import { flow_dice_roll, MakeRollSpec } from '../flow/flow_dice_roll';
-import { flow_hero_offer_escape_choice, HeroOfferEscapeChoiceSpec } from '../flow/flow_hero_escape_choice';
+import { flow_hero_escape, HeroEscapeSpec } from '../flow/flow_hero_escape';
 import { flow_each_hero, EachHeroSpec } from '../flow/flow_each_hero';
 import { flow_each_monster, EachMonsterSpec } from '../flow/flow_each_monster';
 import { flow_hero_target_choice, HeroTargetChoiceSpec } from '../flow/flow_hero_target_choice';
@@ -55,7 +55,7 @@ export function exec_flow(battle:BattleState, [,what,spec]:FlowFurther):BattleSt
     case 'eachEscapedHero': newInstr = flow_each_escaped_hero(battle, <EachEscapedHeroSpec>spec); break;
     case 'eachHero': newInstr = flow_each_hero(battle, <EachHeroSpec>spec); break;
     case 'eachMonster': newInstr = flow_each_monster(battle, <EachMonsterSpec>spec); break;
-    case 'escapeChoice': newInstr = flow_hero_offer_escape_choice(battle, <HeroOfferEscapeChoiceSpec>spec); break;
+    case 'escape': newInstr = flow_hero_escape(battle, <HeroEscapeSpec>spec); break;
     case 'executeAction': newInstr = flow_execute_action(battle, <ExecuteActionSpec>spec); break;
     case 'flashBomb': newInstr = flow_flash_bomb(battle, <FlashBombSpec>spec); break;
     case 'heroTargetChoice': newInstr = flow_hero_target_choice(battle, <HeroTargetChoiceSpec>spec); break;

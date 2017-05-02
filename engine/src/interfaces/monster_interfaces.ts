@@ -41,11 +41,12 @@ export interface MonsterStates {
   weakness?: HeroId
   dazed?: true
   bloodCurse?: HeroId
+  hexed?: true
   hungOver?: true
   ragingMad?: true
 }
 
-export type MonsterBase = '_fierceTestMonster' | 'backAlleyBruiser' | 'chickenWitch' | 'drunkenYokel' | 'footPad' | 'ghoulTroll' | 'harpy' | 'imperialHuntsman' | 'manAtArms' | 'megaRat' | 'nachtDrekSlicer' | 'nugBear' | 'ratThing' | 'slimeCorpse' | 'shambler' | 'swampTroll' | 'slitherFish';
+export type MonsterBase = '_fierceTestMonster' | 'backAlleyBruiser' | 'chickenWitch' | 'carnivorousHut' | 'drunkenYokel' | 'footPad' | 'ghoulTroll' | 'harpy' | 'imperialHuntsman' | 'manAtArms' | 'megaRat' | 'nachtDrekSlicer' | 'nugBear' | 'ratThing' | 'slimeCorpse' | 'shambler' | 'swampTroll' | 'slitherFish';
 
 export interface MonsterEntrySkills {
   ambush?: MonsterId[]

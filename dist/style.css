@@ -72,7 +72,9 @@ span.lognum {
 .loglist .logline {
     flex: 1;
 }
-
+li.done {
+  text-decoration: line-through;
+}
 .index > div {
   width: 46%;
   float: left;

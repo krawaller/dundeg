@@ -13,7 +13,6 @@ export function flow_player_round(battle: BattleState, {heroId}:PlayerRoundSpec)
     <FlowInstruction>['flow','stanceChoice',{heroId}],
     <FlowInstruction>['flow','selectAction',{heroId}],
     <FlowInstruction>['flow','battleDice',{heroId}],
-    <FlowInstruction>['flow','escapeChoice',{heroId}],
     <FlowInstruction>['flow','bashPlayer',{heroId}],
     <FlowInstruction>['flow','executeAction',{heroId}],
     <FlowInstruction>['flow','nextPlayer',{}]

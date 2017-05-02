@@ -19,6 +19,7 @@ export const Monster = withBattle<GivenProps>((props)=>{
   return (
     <div className={"monster" + (props.highlight ? ' highlight' : '')}>
       <strong>Monster: {blueprint.name}</strong>
+      <div>traits: {Object.keys(blueprint.traits).join(',')}</div>
       <div>HP: {monster.vars.HP}/{blueprint.stats.HP}, status: {status}</div>
       <div>skills: {Object.keys(blueprint.skills).join(',')}</div>
       {Object.keys(monster.states).length>0 && <div>states: {Object.keys(monster.states).join(',')}</div>}

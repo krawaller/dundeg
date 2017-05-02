@@ -1,25 +1,28 @@
 import * as test from "tape";
-import { makeHero, makeMonster, logMessageContains } from '../testutils';
-
+import { makeHero, makeMonster, logMessageContains, execUntil, reply, lastLogHasStr } from '../testutils';
+import { items } from '../../src/library';
 import { BattleState, LogMessagePart, Question, FlowInstruction } from '../../src/interfaces';
-import { flow_hero_offer_escape_choice, HeroOfferEscapeChoiceSpec } from '../../src/flow/flow_hero_escape_choice';
 
 test('night cloak item', t => {
+  let cloak = items.nightCloak;
+
   let result, battle: BattleState = {
     heroes: { hero: makeHero('bloodsportBrawler',{},{},{},['nightCloak']) },
     monsters: {
-      pursuer: makeMonster('imperialHuntsman'), // has Pursue
+      pursuer: makeMonster('imperialHuntsman',{target:'hero'}), // has Pursue
     }
   };
 
-  battle.heroes.hero.vars.defenceDice = [2,2];
-  result = flow_hero_offer_escape_choice(battle, {heroId: 'hero'});
-  t.equal(result[1], 'question', 'we get question as usual');
-  t.deepEqual(Object.keys(result[2].options), ['escape (PER)','escape (MAG)','remain'], 'we get extra option');
+  battle.heroes.hero.vars.stance = 'assault';
+  result = execUntil(battle, ['flow','selectAction',{heroId:'hero'}]);
+  t.ok(!result.question.options[cloak.actions.nightCloakEscapeAGI], 'Hero cannot escape with AGI because assaulting');
+  t.ok(!result.question.options[cloak.actions.nightCloakEscapeMAG], 'Hero cannot escape with MAG because assaulting');
 
-  battle.monsters.pursuer.vars.target = 'hero';
-  result = flow_hero_offer_escape_choice(battle, {heroId: 'hero'});
-  t.equal(result[1], 'question', 'we get question even when there is a pursuer');
+  battle.heroes.hero.vars.stance = 'guard';
+  result = execUntil(battle, ['flow','selectAction',{heroId:'hero'}]);
+  t.ok(!result.question.options['escape'], 'Hero doesnt get normal escape option');
+  t.ok(result.question.options[cloak.actions.nightCloakEscapeAGI], 'Hero can escape with AGI, even though Pursuer');
+  t.ok(result.question.options[cloak.actions.nightCloakEscapeMAG], 'Hero can escape with MAG, even though Pursuer');
 
   t.end();
 });

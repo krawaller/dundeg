@@ -1,7 +1,7 @@
-import { BattleState, FlowInstruction } from '../interfaces';
+import { BattleState, FlowEscape } from '../interfaces';
 import { items, heroSkills } from '../library';
 import { registerAndTarget } from '../utils/helpers';
-
+import { find_monsters } from '../find/find_monsters';
 interface InstrJustHeroId { heroId: string }
 
 
@@ -9,6 +9,13 @@ export function find_hero_actions (battle: BattleState, {heroId}: InstrJustHeroI
   let ret = <any>{};
 
   let hero = battle.heroes[heroId];
+  if (hero.vars.stance === 'guard' && !hero.items.nightCloak && !find_monsters(battle,{targetting:heroId,pursuer:true}).length){
+    ret['escape'] = ['apply','registerActionSelection',{heroId, action:['flow','escape',{heroId}]}];
+  }
+  if (hero.vars.stance === 'guard' && hero.items.nightCloak){
+    ret[items.nightCloak.actions.nightCloakEscapeAGI] = ['apply','registerActionSelection',{heroId, action:['flow','escape',{heroId,how:'cloakAGI'}]}];
+    ret[items.nightCloak.actions.nightCloakEscapeMAG] = ['apply','registerActionSelection',{heroId, action:['flow','escape',{heroId,how:'cloakMAG'}]}];
+  }
   if (hero.vars.stance === 'assault' && hero.skills.bloodCurse){
     ret[heroSkills.bloodCurse.actions.castBloodCurse] = registerAndTarget(heroId,['flow','bloodCurse',{heroId}],['Who should',{heroRef:heroId},'cast a Blood Curse at?']);
   }

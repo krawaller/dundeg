@@ -3,17 +3,18 @@ import { BattleState, MonsterId, FlowInstruction, FlowTarget, DiceSpec, LogMessa
 export interface MakeRollSpec {
   heroId,
   diceTypes: DiceSpec,
-  line: LogMessageLine
+  line: LogMessageLine,
+  rerollable?: boolean
 }
 
-export function flow_dice_roll(battle: BattleState, {heroId,diceTypes,line}:MakeRollSpec): FlowInstruction {
+export function flow_dice_roll(battle: BattleState, {heroId,diceTypes,line,rerollable}:MakeRollSpec): FlowInstruction {
   return <ApplyQuestion>['apply','question',{
     line: line,
     options: {
-      roll: ['flow','all',[
+      roll: rerollable ? ['flow','all',[
         <ApplyDiceRoll>['apply','diceRoll',{heroId,diceTypes}],
         <FlowOfferReroll>['flow','offerReroll',{heroId,diceTypes}]
-      ]]
+      ]] : <ApplyDiceRoll>['apply','diceRoll',{heroId,diceTypes}]
     }
   }];
 }

@@ -1,8 +1,11 @@
 {
   "devDependencies": {
-    "@types/bluebird": "^3.5.0",
-    "@types/core-js": "^0.9.35",
+    "@types/node": "^7.0.15",
     "@types/tape": "^4.2.29",
+    "@types/react": "^15.0.23",
+    "@types/react-dom": "^15.5.0",
+    "@types/react-redux": "^4.4.40",
+    "@types/redux": "^3.6.0",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
@@ -22,14 +25,10 @@
   "scripts": {
     "build": "webpack --display-error-details",
     "test": "ts-node node_modules/tape/bin/tape engine/tests/**/*.ts | node_modules/.bin/tap-spec",
-    "testthis": "ts-node node_modules/tape/bin/tape engine/tests/flow/flowofferreroll.spec.ts | node_modules/.bin/tap-spec",
+    "testthis": "ts-node node_modules/tape/bin/tape engine/tests/items/nightcloak.spec.ts | node_modules/.bin/tap-spec",
     "tryseed": "ts-node engine/tests/tryseed.ts"
   },
   "dependencies": {
-    "@types/react": "^15.0.23",
-    "@types/react-dom": "^15.5.0",
-    "@types/react-redux": "^4.4.40",
-    "@types/redux": "^3.6.0",
     "lodash": "^4.17.4",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",

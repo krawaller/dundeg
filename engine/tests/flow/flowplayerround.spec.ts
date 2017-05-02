@@ -28,10 +28,10 @@ test('flow player round', t => {
   battle = reply(battle, battle.monsters.monster.name);
 
   // Roll battle dice
-  battle = reply(battle, makeRoll);
+  battle = replyTo(battle, makeRoll, ['nextPlayer']);
 
-  // Escape choice (since double def roll)
-  battle = replyTo(battle, 'remain', ['nextPlayer']);
+  // Escape choice (since double def roll) --- NO MORE
+  // battle = replyTo(battle, 'remain', ['nextPlayer']);
 
   // Take hit from both monsters // TODO - test defence choice too? where?
   battle;

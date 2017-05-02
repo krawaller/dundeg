@@ -13,21 +13,16 @@ export const App = withBattle(props=>{
           <button onClick={e=>props.beginBattle()}>Start this scenario</button>
         </div>
         <div>
-          <h4>Changelog</h4>
-          <ul>
-            <li><strong>17-05-01</strong>: changelog started</li>
-          </ul>
-        </div>
-        <div>
           <h4>ToDo</h4>
+          <p>Updated <strong>17-05-02</strong>.</p>
           <ul>
             <li>limit Find Weakness to 1 enemy at a time</li>
-            <li>change Escape to new rules</li>
-            <li>Hide unimplemented monster skills</li>
             <li>add Quick Actions</li>
             <li>add default unarmed attack</li>
             <li>add Pain enemy skill</li>
-            <li>only allow reroll of stat tests</li>
+            <li className="done">change Escape to new rules</li>
+            <li className="done">only allow reroll of stat tests</li>
+            <li className="done">Hide unimplemented monster skills</li>
           </ul>
         </div>
         <div>
@@ -49,7 +44,7 @@ export const App = withBattle(props=>{
             <li>Flash bomb (but requires fixing quick actions)</li>
             <li>Luncheon Truncheon (but requires quick actions + defaults)</li>
             <li>Nasty Cleaver</li>
-            <li>Night cloak (but requires fixing escape rules)</li>
+            <li>Night cloak</li>
             <li>Shrapnel bomb</li>
             <li>Skinning Knife</li>
             <li>Spiked gauntlets</li>
@@ -77,7 +72,7 @@ export const App = withBattle(props=>{
             <li>Horde</li>
             <li>Infect</li>
             <li>Pierce</li>
-            <li>Pursue (but requires fixing escape rules)</li>
+            <li>Pursue</li>
             <li>Skirmish</li>
             <li>Thief</li>
           </ul>  

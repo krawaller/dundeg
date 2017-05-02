@@ -95,7 +95,7 @@ export type FlowApply = // When add stuff here, must also add to exec/exec_apply
 import { OfferRerollSpec } from '../flow/flow_offer_reroll';
 import { EachHeroSpec } from '../flow/flow_each_hero';
 import { EachMonsterSpec } from '../flow/flow_each_monster';
-import { HeroOfferEscapeChoiceSpec } from '../flow/flow_hero_escape_choice';
+import { HeroEscapeSpec } from '../flow/flow_hero_escape';
 import { HeroOfferReturnChoiceSpec } from '../flow/flow_hero_return_choice';
 import { HeroOfferStanceChoiceSpec } from '../flow/flow_hero_stance_choice';
 import { HeroTargetChoiceSpec } from '../flow/flow_hero_target_choice';
@@ -130,7 +130,7 @@ export type FlowDaemonsBlood = ['flow','daemonsBlood', ThrowDaemonsBloodSpec];
 export type FlowDetonateShrapnelBomb = ['flow', 'detonateShrapnelBomb', DetonateShrapnelBombSpec];
 export type FlowDiceRoll = ['flow','diceRoll', MakeRollSpec];
 export type FlowDimwit = ['flow','dimwit', InitiateDimwitSpec];
-export type FlowEscapeChoice = ['flow', 'escapeChoice', HeroOfferEscapeChoiceSpec];
+export type FlowEscape = ['flow', 'escape', HeroEscapeSpec];
 export type FlowEachEscapedHero = ['flow', 'eachEscapedHero', EachEscapedHeroSpec];
 export type FlowEachHero = ['flow', 'eachHero', EachHeroSpec];
 export type FlowEachMonster = ['flow', 'eachMonster', EachMonsterSpec];
@@ -173,7 +173,7 @@ export type FlowFurther = // When add stuff here, must also add to exec/exec_flo
   FlowEachEscapedHero |
   FlowEachHero |
   FlowEachMonster |
-  FlowEscapeChoice |
+  FlowEscape |
   FlowExecuteAction |
   FlowFlashBomb |
   FlowHeroTargetChoice |

@@ -7,15 +7,9 @@ export interface EscapeOutcomeSpec {
 }
 
 export function apply_escape_outcome_to_hero(battle: BattleState, {heroId}:EscapeOutcomeSpec): BattleState {
-  let ret = deepCopy(battle);
-  ret = apply_dice_removal(ret, {heroId: heroId, diceType: {attack:true, power: true, defence: true}});
-  let hero = ret.heroes[heroId];
-  if (hero.vars.testOutcome){
-    addLog(ret, [{heroRef: heroId}, 'successfully escapes the battle!'], 'action');
-    hero.vars.escaped = true;
-  } else {
-    addLog(ret, [{heroRef: heroId}, 'fails to escape, and is now defenceless.'], 'action');
-    hero.vars.failedEscape = true;
-  }
+  let ret:BattleState = deepCopy(battle);
+  ret = apply_dice_removal(ret, {heroId: heroId, diceType: {attack:true, power: true, defence: true}}); // TODO - really?
+  ret.heroes.hero.vars.escaped = true;
+  ret = addLog(ret, [{heroRef:heroId},'manages to escape the battle!']);
   return ret;
 }

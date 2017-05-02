@@ -20,6 +20,14 @@ export const monsters: MonsterBook = {
     value: 1,
     skills: {}
   },
+  carnivorousHut: {
+    name: 'Carnivorous Hut',
+    traits: { construct: true, weird: true },
+    stats: { ATK: 6, ARM: 2, HP: 8 },
+    targets: 'PER-',
+    value: 2,
+    skills: { ambush: true }
+  },
   chickenWitch: {
     name: 'Chicken Witch',
     traits: { goblin: true, witch: true },

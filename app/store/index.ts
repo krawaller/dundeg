@@ -14,8 +14,8 @@ let battle: BattleState = {
     hero2: makeHero('bloodsportBrawler',{HP: 18, luck: 3, gold: 10},{},{backStab:true,sixthSense:true,exterminator:true},['spikedGauntlet'])
   },
   monsters: {
-    mon1: makeMonster('slitherFish'),
-    mon2: makeMonster('footPad'),
+    mon1: makeMonster('nachtDrekSlicer'),
+    mon2: makeMonster('carnivorousHut'),
     mon3: makeMonster('ratThing'),
     mon4: makeMonster('harpy')
   },

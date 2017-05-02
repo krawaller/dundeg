@@ -33,6 +33,8 @@ export interface ItemActions {
   throwFlashBomb?: string
   throwShrapnelBomb?: string
   throwLuncheonTruncheon?: string
+  nightCloakEscapeAGI?: string
+  nightCloakEscapeMAG?: string
 }
 
 export interface ItemDef {

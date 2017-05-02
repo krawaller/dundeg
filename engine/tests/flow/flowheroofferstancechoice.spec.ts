@@ -13,7 +13,7 @@ test('flow hero stance choice', t => {
   result = <FlowInstruction>flow_hero_offer_stance_choice(battle, {heroId: 'hero'});
   t.equal(result[1],'question','We got back a question');
   let q = <Question>result[2];
-  t.deepEqual(Object.keys(q.options), ['assault','defence'], 'we got these two options');
+  t.deepEqual(Object.keys(q.options), ['assault','guard'], 'we got these two options');
 
   battle.heroes.hero.vars.knockedOutBy = 'someone';
   t.ok(

@@ -1,30 +1,18 @@
 import * as test from "tape";
-import { makeHero, makeMonster, logHasStr, execUntil } from '../testutils';
+import { makeHero, makeMonster, execUntil } from '../testutils';
 
-import { BattleState, LogMessagePart, Question, FlowInstruction } from '../../src/interfaces';
-import { flow_hero_offer_escape_choice, HeroOfferEscapeChoiceSpec } from '../../src/flow/flow_hero_escape_choice';
+import { BattleState } from '../../src/interfaces';
 
-test('monster pursue skill', t => {
-  let result, battle: BattleState = {
-    heroes: { hero: makeHero('bloodsportBrawler') },
-    monsters: {
-      pursuer: makeMonster('imperialHuntsman'), // has Pursue
-    },
+test('monster pursuer skill', t => {
+  let result:BattleState, battle: BattleState = {
+    heroes: { hero: makeHero('bloodsportBrawler',{stance:'guard'}) },
+    monsters: { monster: makeMonster('imperialHuntsman',{target:'hero'}) },
     log: []
   };
 
-  battle.heroes.hero.vars.defenceDice = [2,2];
-  battle.monsters.pursuer.vars.target = 'hero';
-  result = execUntil(battle,['flow','escapeChoice',{heroId:'hero'}]);
-  t.ok(!result.question, 'we did not get offer to escape');
-  t.ok(logHasStr(result, 'ursue'), 'log msg tells about pursue');
-
-  delete battle.monsters.pursuer.vars.target;
-  result = execUntil(battle,['flow','escapeChoice',{heroId:'hero'}]);
-  t.ok(result.question, 'we did get offer to escape');
+  result = execUntil(battle, ['flow','selectAction',{heroId:'hero'}]);
+  t.ok(!result.question.options['escape'], 'Hero cannot escape because Pursuer!');
 
   t.end();
 });
-
-// TODO - does pursue take targetting into account?
 

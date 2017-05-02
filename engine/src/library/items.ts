@@ -52,7 +52,11 @@ export const items:ItemBook = {
   },
   nightCloak: {
     name: 'Night Cloak',
-    traits: {}
+    traits: {},
+    actions: {
+      nightCloakEscapeAGI: 'escape (AGI)',
+      nightCloakEscapeMAG: 'escape (MAG)'
+    }
   },
   shoddyShield: {
     name: 'Shoddy Shield',
