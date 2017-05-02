@@ -20,6 +20,7 @@ export function flow_round_end(battle: BattleState,spec:any): FlowInstruction {
   return ['flow','all',[
     ['flow','eachMonster',monsterId=> <FlowInstruction>['apply','endRoundMonster',{monsterId}]],
     ['flow','eachHero',heroId=> <FlowInstruction>['apply','endRoundHero',{heroId}]],
+    ['flow','eachEscapedHero',heroId=> <FlowInstruction>['apply','endRoundHero',{heroId}]],
     andThen
   ]];
 }
