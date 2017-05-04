@@ -29,7 +29,6 @@ export interface HeroVars {
   attackDice?: number[]
   defenceDice?: number[]
   failedDefence?: true
-  failedEscape?: true
   usePowForDefence?: number
   usedPowerDice?: boolean[]
   knockedOutBy?: MonsterId
@@ -42,6 +41,7 @@ export interface HeroVars {
   luck?: number
   testOutcome?: number
   action?: FlowInstruction
+  unarmed?: true
 }
 
 export interface HeroState {

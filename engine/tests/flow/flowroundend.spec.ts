@@ -17,16 +17,16 @@ test('flow round end', t => {
   battle.heroes.hero.vars.hasActed = true;
   battle.heroes.hero.vars.usedPowerDice = [true,false,true];
   battle.heroes.hero.vars.failedDefence = true;
-  battle.heroes.hero.vars.failedEscape = true;
   battle.heroes.hero2.vars.action = ['flow','throwShrapnelBomb',{heroId:'hero2'}];
+  battle.heroes.hero2.vars.unarmed = true;
   battle.monsters.monster.vars.hasAttacked = true;
-
 
   result = execTo(battle, ['flow','roundEnd',{}], ['winGame','loseGame','newRound']);
   t.ok(!result.heroes.hero.vars.hasActed, 'hasActed was removed from heroes');
   t.ok(!result.heroes.hero.vars.usedPowerDice, 'hasUsedPowForDefence was removed from heroes');
   t.ok(!result.heroes.hero.vars.failedDefence, 'failedDefence was removed from heroes');
   t.ok(!result.heroes.hero2.vars.action, 'action was removed from heroes');
+  t.ok(!result.heroes.hero2.vars.unarmed, 'unarmed was removed from heroes');
   t.ok(!result.monsters.monster.vars.hasAttacked, 'hasAttacked was removed from monsters');
   t.equal(result.stack[0][1], 'newRound', 'we were sent to a new round');
 

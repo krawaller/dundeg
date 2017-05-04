@@ -11,8 +11,8 @@ export function apply_end_of_round_to_hero (battle: BattleState, {heroId}: EndOf
   delete hero.vars.hasActed;
   delete hero.vars.action;
   delete hero.vars.failedDefence;
-  delete hero.vars.failedEscape;
   delete hero.vars.usedPowerDice;
+  delete hero.vars.unarmed;
   if (hero.states.stunned){
     delete hero.states.stunned;
     addLog(ret, [{heroRef: heroId},'is no longer stunned'] );

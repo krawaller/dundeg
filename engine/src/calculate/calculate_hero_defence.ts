@@ -9,9 +9,6 @@ interface CalculateHeroDefenceInstr {
 
 export function calculate_hero_defence (battle: BattleState, instr: CalculateHeroDefenceInstr): CalculationResult {
   let hero = battle.heroes[instr.heroId];
-  if (hero.vars.failedEscape){
-    return newCalc('Hero DEF', 'Failed escape attempt means no DEF', 0); // TODO - does it? :D
-  }
 
   let ret = newCalc('Hero DEF', 'Heroes have no natural defence', 0);
 

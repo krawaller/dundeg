@@ -82,14 +82,6 @@ test('flow initiate monster attack', t => {
     'failed defence and already used pow means no question and no defence val'
   );
 
-  battle.heroes.hero.vars.failedEscape = true;
-  result = execUntil(battle, <FlowInitiateMonsterAttack>['flow','initiateMonsterAttack',{monsterId,attack}]);
-  t.equal(
-    result.heroes.hero.vars.HP,
-    startingHP - DMG,
-    'failed escaper has no defence'
-  );
-
   t.end();
 });
 

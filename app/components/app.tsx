@@ -22,6 +22,7 @@ export const App = withBattle(props=>{
             <li>add Provoke skill</li>
             <li>add Ferocious charge</li>
             <li>add Sneak attack</li>
+            <li>make power half for DEF too when attacking unarmed</li>
             <li className="done">add default unarmed attack</li>
             <li className="done">limit Find Weakness to 1 enemy at a time</li>
             <li className="done">change Escape to new rules</li>
