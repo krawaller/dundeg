@@ -3,5 +3,8 @@ export const misc = {
     escape: 'escape',
     unarmedAGI: 'unarmed strike (AGI)',
     unarmedSTR: 'unarmed strike (STR)'
+  },
+  replies: {
+    
   }
 };

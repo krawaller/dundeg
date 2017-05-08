@@ -1,16 +1,18 @@
 import * as test from "tape";
 import { makeHero, makeMonster, execUntil, justReply, reply } from '../testutils';
-import { BattleState, FlowExecuteAction, Attack } from '../../src/interfaces';
+import { BattleState, FlowExecuteAction, Attack, FlowPerformMonsterAttack, FlowInitiateMonsterAttack } from '../../src/interfaces';
 import { monsters, misc } from '../../src/library';
 
 test('unarmed hero attacks', t => {
+  let startingHP = 10;
   let battle: BattleState = {
-    heroes: { hero: makeHero('infamousButcher', {target: 'monster'}) }, // AGI 8, STR 8
-    monsters: { monster: makeMonster('slimeCorpse') }, // ARM 1, HP 8
+    heroes: { hero: makeHero('infamousButcher', {target: 'monster',HP:startingHP}) }, // AGI 8, STR 8
+    monsters: { monster: makeMonster('slimeCorpse', {target:'hero'}) }, // ATK 4, ARM 1, HP 8
     log: []
   };
   let blueprint = monsters.slimeCorpse;
   let result: BattleState;
+  let DMG = blueprint.stats.ATK;
 
   result = execUntil(battle, ['flow','selectAction',{heroId:'hero'}]);
   t.ok(result.question.options[misc.basicActions.unarmedAGI], 'Hero gets unarmed AGI attack');
@@ -58,6 +60,31 @@ test('unarmed hero attacks', t => {
     blueprint.stats.HP - 1,
     'dealt 2 damage (lowest attack, ignore power since not in assault), -1 armour'
   );
+
+  // Ok, now also test halving defence
+
+  delete battle.question
+  battle.heroes.hero.vars.defenceDice = [1,2];
+  battle.heroes.hero.vars.powerDice = [5,3];
+  battle.heroes.hero.vars.stance = 'guard';
+  result = execUntil(battle, <FlowPerformMonsterAttack>['flow','performMonsterAttack',{monsterId:'monster'}]);
+  t.equal(
+    result.heroes.hero.vars.HP,
+    startingHP - (DMG - 3),
+    'defending hero uses highest power dice for defence, but halved because unarmed'
+  );
+
+  battle.heroes.hero.vars.defenceDice = [1,3];
+  battle.heroes.hero.vars.powerDice = [3];
+  battle.heroes.hero.vars.failedDefence = true;
+  result = execUntil(battle, <FlowInitiateMonsterAttack>['flow','initiateMonsterAttack',{monsterId:'monster'}]);
+  result = reply(result, 'POW die 3');
+  t.equal(
+    result.heroes.hero.vars.HP,
+    startingHP - (DMG - 2),
+    'unless they choose to use POW die for defence (although still halved)'
+  );
+
 
   t.end();
 });

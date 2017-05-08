@@ -13,6 +13,7 @@ export function apply_action_selection(battle: BattleState, {heroId, action}:Act
   ret.heroes[heroId].vars.hasActed = true; // TODO - maybe not here?
   if (action[1] === 'performHeroAttack' && (<PerformHeroAttackSpec>action[2]).attack.type === 'unarmed'){
     ret.heroes[heroId].vars.unarmed = true;
+    ret = addLog(ret, ['Because',{heroRef:heroId},'uses an unarmed attack, POW will count as halved this round'],'info');
   }
   return ret;
 }

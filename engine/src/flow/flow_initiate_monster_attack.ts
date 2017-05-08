@@ -37,7 +37,9 @@ export function flow_initiate_monster_attack(battle: BattleState, {monsterId, at
       },{no: ['flow','performMonsterAttack',{monsterId, attack}]});
       let atk = calculate_monster_attack(battle,{monsterId});
       return <ApplyQuestion>['apply','question',{
-        line: ['Will',{heroRef:heroId},'use a POW to defend (can do once per dice per round in guard stance when fail defence) against',{monsterRef:monsterId},'with ATK',atk,'?'],
+        line: hero.vars.unarmed
+          ? ['Will',{heroRef:heroId},'use a POW to defend (halved because using unarmed strike)?']
+          : ['Will',{heroRef:heroId},'use a POW to defend (can do once per dice per round in guard stance when fail defence) against',{monsterRef:monsterId},'with ATK',atk,'?'],
         options: opts
       }];
     }

@@ -14,7 +14,7 @@ export const App = withBattle(props=>{
         </div>
         <div>
           <h4>ToDo</h4>
-          <p>Updated <strong>17-05-03</strong>.</p>
+          <p>Updated <strong>17-05-04</strong>.</p>
           <ul>
             <li>add Quick Actions</li>
             <li>add Pain enemy skill</li>
@@ -22,7 +22,7 @@ export const App = withBattle(props=>{
             <li>add Provoke skill</li>
             <li>add Ferocious charge</li>
             <li>add Sneak attack</li>
-            <li>make power half for DEF too when attacking unarmed</li>
+            <li className="done">make power half for DEF too when attacking unarmed</li>
             <li className="done">add default unarmed attack</li>
             <li className="done">limit Find Weakness to 1 enemy at a time</li>
             <li className="done">change Escape to new rules</li>
