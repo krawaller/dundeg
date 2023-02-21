@@ -1,2 +1,5 @@
-node_modules
+.DS_Store
 npm-debug.log
+node_modules
+out/app.js
+out/app.js.map
